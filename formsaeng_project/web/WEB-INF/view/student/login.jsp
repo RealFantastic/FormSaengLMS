@@ -7,6 +7,6 @@
 <title>student login</title>
 </head>
 <body>
-student login
+student login 커밋테스트 합니다
 </body>
 </html>
