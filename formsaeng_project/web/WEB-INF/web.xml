@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
+  <display-name>formsaeng_semi_project</display-name>
+  <welcome-file-list>
+    <welcome-file>/WEB-INF/view/index.jsp</welcome-file>
+  </welcome-file-list>
+  
+   <servlet-mapping>
+      <servlet-name>default</servlet-name>
+      <url-pattern>*.css</url-pattern>
+      <url-pattern>*.js</url-pattern>
+      <url-pattern>*.png</url-pattern>
+      <url-pattern>*.jpg</url-pattern>
+      <url-pattern>*.ico</url-pattern>
+      <url-pattern>*.swf</url-pattern>
+   </servlet-mapping>
+
+   <filter>
+      <filter-name>EncodingFilter</filter-name>
+      <filter-class>kh.semi.common.filter.EncodingFilter</filter-class>
+   </filter>
+   <filter-mapping>
+      <filter-name>EncodingFilter</filter-name>
+      <url-pattern>/*</url-pattern>
+   </filter-mapping>
+   
+   
+  <resource-ref>
+  	<description>LMS PClass</description>
+  	<res-ref-name>jdbc/formsaeng1Pclass</res-ref-name>
+  	<res-type>javax.sql.Datasource</res-type>
+  	<res-auth>Container</res-auth>
+  </resource-ref>
+  
+  <resource-ref>
+	<description>LMS PClass</description>
+	<res-ref-name>jdbc/formsaeng1Local</res-ref-name>
+	<res-type>javax.sql.DataSource</res-type>
+	<res-auth>Container</res-auth>
+  </resource-ref>
+  
+</web-app>
