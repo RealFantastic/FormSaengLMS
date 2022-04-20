@@ -1,5 +1,27 @@
+#sideBar{
+  position: fixed;
+}
+
+
+#template{
+  margin-left: 200px;
+}
+.template-title{
+  padding: 10px 15px;
+}
+.template-content{
+  padding: 10px 15px;
+}
+.grid_content{
+  display: grid;
+}
+
+section hr{
+  border: 1px solid black;
+}
 
 .side_container{
+    width: 200px;
     background-color: rgba(33, 37, 43, 1);
     display: flex;
     flex-direction: column;
@@ -8,7 +30,6 @@
     padding: 10px;
     box-sizing: border-box;
     height: 100vh;
-    position: fixed;
   }
   .side_container #logo>img{
     width: 180px;
@@ -46,7 +67,7 @@
     box-sizing: border-box;
     width: 100%;
   }
-  hr:not([size]){
+  .side_container hr{
     border: 0.5px solid white;
     margin-top: 20px; 
     margin-bottom: 20px; 

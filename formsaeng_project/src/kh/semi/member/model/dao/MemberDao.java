@@ -20,6 +20,7 @@ public class MemberDao {
 		MemberVo result = null;
 		
 		String sql = "select * from member where id=? and pwd=?";
+		
 		System.out.println(vo);
 		try {
 			pstmt = conn.prepareStatement(sql);
