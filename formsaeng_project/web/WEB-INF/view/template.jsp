@@ -37,7 +37,7 @@
       </div>
       <div class="template-content ">
         <!-- 대시보드 -->
-        <div class="grid_content row">
+        <div class="row">
           <div class="card" style="width: 18rem;">
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">

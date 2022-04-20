@@ -12,9 +12,6 @@
 .template-content{
   padding: 10px 15px;
 }
-.grid_content{
-  display: grid;
-}
 
 section hr{
   border: 1px solid black;
