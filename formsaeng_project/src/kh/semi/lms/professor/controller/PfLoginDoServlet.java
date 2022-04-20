@@ -49,7 +49,7 @@ public class PfLoginDoServlet extends HttpServlet {
 		}else {
 			System.out.println("로그인에 성공했습니다.");
 			//TODO session 등록
-			response.sendRedirect("mgmain");
+			response.sendRedirect("pfmain");
 		}
 		
 		
