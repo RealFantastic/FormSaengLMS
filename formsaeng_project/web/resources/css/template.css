@@ -2,17 +2,17 @@
   position: fixed;
 }
 
-
-#template{
+.template_container{
   margin-left: 200px;
+  min-height: 100vh;
 }
+
 .template-title{
   padding: 10px 15px;
 }
-.template-content{
+.content_container{
   padding: 10px 15px;
 }
-
 section hr{
   border: 1px solid black;
 }
@@ -32,7 +32,7 @@ section hr{
     width: 180px;
   }
   .side_container #uni_name>img{
-    width: 200px;
+    width: 180px;
   }
   .list_button{
     padding: 0;
@@ -45,7 +45,7 @@ section hr{
     background-color: rgba(0, 88, 204, 0.836);
   }
   .list_button li:focus{
-    background-color: darkblue;
+    background-color: rgba(0, 88, 204, 0.836);
   }
   .list_button li a{
     color: white;
@@ -69,4 +69,10 @@ section hr{
     margin-top: 20px; 
     margin-bottom: 20px; 
     width: 100%;
+  }
+  .card{
+    margin: 0px 10px 10px 0;
+  }
+  svg{
+    margin-right: 5px;
   }
