@@ -11,3 +11,26 @@ a {
 li{
     list-style-type: none;
 }
+
+
+.font1{
+   /* 부가설명, 작은글씨 */
+    font-size: 0.789rem;
+}
+.font2{
+    /* 기본글씨 크기 */
+    font-size: 1rem;
+}
+.font3{
+    /* 버튼 글씨 크기 사용 */
+    font-size: 1.111rem;
+}
+.font4{
+   /* 게시글 제목용 */
+    font-size: 1.278rem;
+}
+
+.font5{
+    /* 페이지 제목용 */
+    font-size: 2rem;
+}
