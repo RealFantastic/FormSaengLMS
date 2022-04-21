@@ -1,0 +1,38 @@
+#container {
+	background-image: url('./resources/images/pflogin.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 100vh;
+}
+
+#plogin {
+    padding-top: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+.minilogo img {
+    height: 100px;
+    margin-left: 30px;
+}
+
+.logo img {
+    height: 100px;
+    margin-left: 30px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+#login {
+    padding: 30px;
+    background-color: #EAEAEA;
+}
+.form-group{
+    margin-bottom: 10px;
+}
+
+.loginmenu input{
+    width: 100%;
+    margin-top: 15px;
+    padding: 15px;
+}
+

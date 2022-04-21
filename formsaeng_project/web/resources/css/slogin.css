@@ -1,0 +1,40 @@
+#container {
+	background-image: url('./resources/images/semi_main_page.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 100vh;
+}
+
+#slogin {
+    padding-top: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+.minilogo img {
+    height: 100px;
+    margin-left: 30px;
+}
+.logo img {
+    height: 100px;
+    margin-left: 30px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+#login {
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.405);
+}
+
+.logincenter{
+	margin-right: 70px;
+}
+.form-group{
+    margin-bottom: 10px;
+}
+
+.loginmenu input{
+    width: 49%;
+    margin-top: 15px;
+    padding: 15px;
+}
