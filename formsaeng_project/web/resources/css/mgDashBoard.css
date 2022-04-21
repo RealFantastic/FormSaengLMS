@@ -1,0 +1,78 @@
+#sideBar{
+  position: fixed;
+}
+
+.template_container{
+  margin-left: 200px;
+  min-height: 100vh;
+}
+
+.template-title{
+  padding: 10px 15px;
+}
+.content_container{
+  padding: 10px 15px;
+}
+section hr{
+  border: 1px solid black;
+}
+
+.side_container{
+    width: 200px;
+    background-color: rgba(33, 37, 43, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    padding: 10px;
+    box-sizing: border-box;
+    height: 100vh;
+  }
+  .side_container #logo>img{
+    width: 180px;
+  }
+  .side_container #uni_name>img{
+    width: 180px;
+  }
+  .list_button{
+    padding: 0;
+  }
+  .list_button li{
+    border-radius: 0.25rem;
+    
+  }
+  .list_button li:hover{
+    background-color: rgba(0, 88, 204, 0.836);
+  }
+  .list_button li:focus{
+    background-color: rgba(0, 88, 204, 0.836);
+  }
+  .list_button li a{
+    color: white;
+    display: block;
+    padding: 2rem 1rem;
+    font-size: 1.2rem;
+    text-decoration: none;
+    
+  }
+  .list_button{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: auto;
+    box-sizing: border-box;
+    width: 100%;
+  }
+  .side_container hr{
+    border: 0.5px solid white;
+    margin-top: 20px; 
+    margin-bottom: 20px; 
+    width: 100%;
+  }
+  .card{
+    margin: 0px 10px 10px 0;
+  }
+  svg{
+    margin-right: 5px;
+  }
