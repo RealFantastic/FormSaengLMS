@@ -9,7 +9,7 @@ public class BoardVo {
 	public int BANo;
 	public String BATitle;
 	public String BAWriter;
-	public Timestamp BADate;
+	public String BADate;
 	public String BAContent;
 	public String Id;
 	private int reCommentCnt;
@@ -25,7 +25,7 @@ public class BoardVo {
 		BAContent = bAContent;
 	}
 
-	public BoardVo(int bANo, String bATitle, String bAWriter, Timestamp bADate, String bAContent, String id,
+	public BoardVo(int bANo, String bATitle, String bAWriter, String bADate, String bAContent, String id,
 			int reCommentCnt) {
 		super();
 		BANo = bANo;
@@ -35,7 +35,6 @@ public class BoardVo {
 		BAContent = bAContent;
 		Id = id;
 		this.reCommentCnt = reCommentCnt;
-		
 	}
 
 	@Override
@@ -69,11 +68,11 @@ public class BoardVo {
 		BAWriter = bAWriter;
 	}
 
-	public Timestamp getBADate() {
+	public String getBADate() {
 		return BADate;
 	}
 
-	public void setBADate(Timestamp bADate) {
+	public void setBADate(String bADate) {
 		BADate = bADate;
 	}
 
@@ -108,6 +107,8 @@ public class BoardVo {
 	public void setReVolist(ArrayList<CommentVo> reVolist) {
 		this.reVolist = reVolist;
 	}
+
+	
 	
 	
 	

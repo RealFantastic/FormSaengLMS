@@ -44,7 +44,7 @@ public class BoardDao {
                 + "board_assignment_title, "
                 + "board_assignment_content, "
                 + "board_assignment_writer,"
-                + " TO_CHAR(board_notice_date, 'YYYY-MM-DD') board_assignment_date"
+                + " TO_CHAR(board_assignment_date, 'YYYY-MM-DD') board_assignment_date"
                 + " from assignment_list";
 		
 		try {
@@ -57,7 +57,7 @@ public class BoardDao {
 				vo.setBANo(rs.getInt("BOARD_ASSIGNMENT_NO"));
 				vo.setBATitle(rs.getString("BOARD_ASSIGNMENT_TITLE"));
 				vo.setBAContent(rs.getString("BOARD_ASSIGNMENT_CONTENT"));				
-				vo.setBADate(rs.getTimestamp("BOARD_ASSIGNMENT_DATE"));
+				vo.setBADate(rs.getString("BOARD_ASSIGNMENT_DATE"));
 				vo.setBAWriter(rs.getString("BOARD_ASSIGNMENT_WRITER"));
 				System.out.println(vo);
 				
@@ -89,7 +89,7 @@ public class BoardDao {
 				vo.setBANo(rs.getInt("BOARD_ASSIGNMENT_NO"));
 				vo.setBATitle(rs.getString("BOARD_ASSIGNMENT_TITLE"));
 				vo.setBAWriter(rs.getString("BOARD_ASSIGNMENT_WRITER"));
-				vo.setBADate(rs.getTimestamp("BOARD_ASSIGNMENT_DATE"));
+				vo.setBADate(rs.getString("BOARD_ASSIGNMENT_DATE"));
 				vo.setBAContent(rs.getString("BOARD_ASSIGNMENT_CONTENT"));
 				vo.setId(rs.getString("ID"));
 				vo.setReCommentCnt(rs.getInt("re_CommentCnt"));
