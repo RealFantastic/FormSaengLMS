@@ -468,6 +468,8 @@ INSERT INTO MEMBER VALUES ('S2022954112','윤영원','0','950722-1111111','22you
 --교수 
 INSERT INTO MEMBER VALUES ('P2022923210','홍샛별','0','920724-2222222','sbszhs@gmail.com','서울시 송파구','M001','010-3333-3210');
 INSERT INTO MEMBER VALUES ('P2022958123','김혜린','0','951203-2222222','hhyrin03@gmail.com','경기도 고양시 일산동구','C001','010-4444-8123'); 
+--관리자 김혜린 2022-04-21
+INSERT INTO MEMBER VALUES ('M2022001550','오세현','0','000909-1111111','osh090909@gmail.com','경기도 의정부시','ADMIN','010-5555-1550'); 
 
 
 -- 공지사항 값 입력시 INSERT 쿼리문
