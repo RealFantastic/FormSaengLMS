@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/reset.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/index.css">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,43 +17,7 @@
             background-repeat: no-repeat;
             height: 100vh;
         }
-        .univlogo>a{
-            overflow: hidden;
-        }
-        .univlogo img{
-            width: 200px;
-            height: 80px;
-            position: absolute;
-            top: 15px;
-            left: 30px;
-            opacity: .7;
-            /* margin-left: 30px;
-            margin-top: 15px;
-            box-sizing: border-box; */
-        }
-        header{
-            height: 20%;
-        }
-        .login_container{
-            max-width: 1250px;
-            height: 600px;
-            margin: 0 auto;
-            padding: 0 15px;
-            box-sizing: border-box;
-        }
-
-        .login_wrapper{
-            /* background-color: #ccc; */
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            /* justify-content: center; */
-            align-items: center;
-        }
-        .move_button{
-            padding: 10px;
-            border-radius: 10px;
-        }
+        
     </style>
 </head>
 <body>
