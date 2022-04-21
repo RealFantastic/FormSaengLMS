@@ -1,9 +1,4 @@
-#container {
-	background-image: url('./resources/images/mglogin.jpg');
-	background-size: cover;
-	background-repeat: no-repeat;
-	height: 100vh;
-}
+
 #mlogin {
     padding-top: 50px;
     display: flex;

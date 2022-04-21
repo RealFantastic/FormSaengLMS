@@ -1,4 +1,4 @@
-package kh.semi.lms.professor.controller;
+package kh.semi.lms.student.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -11,16 +11,16 @@ import kh.semi.member.model.service.MemberService;
 import kh.semi.member.model.vo.MemberVo;
 
 /**
- * Servlet implementation class PfLoginDoServlet
+ * Servlet implementation class StLoginDoServlet
  */
-@WebServlet("/pflogin.do")
-public class PfLoginDoServlet extends HttpServlet {
+@WebServlet("/stlogin.do")
+public class StLoginDoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PfLoginDoServlet() {
+    public StLoginDoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,7 +45,7 @@ public class PfLoginDoServlet extends HttpServlet {
 		
 		MemberVo result = new MemberService().login(vo);
 		if(result == null) {
-			response.sendRedirect("pflogin"); //로그인 실패시 다시 입력 처음으로 돌아가기
+			response.sendRedirect("stlogin"); //로그인 실패시 다시 입력 처음으로 돌아가기
 			System.out.println("로그인에 실패했습니다.");
 		}else {
 			System.out.println("로그인에 성공했습니다.");
@@ -54,8 +54,7 @@ public class PfLoginDoServlet extends HttpServlet {
 			response.sendRedirect("pfmain");
 		}
 		
-		
-		
+	
 	}
 
 }

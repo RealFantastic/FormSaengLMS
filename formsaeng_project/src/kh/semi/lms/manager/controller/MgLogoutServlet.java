@@ -1,4 +1,4 @@
-package kh.semi.lms.professor.controller;
+package kh.semi.lms.manager.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class PfLogoutServlet
+ * Servlet implementation class MgLogoutServlet
  */
-@WebServlet("/pflogout")
-public class PfLogoutServlet extends HttpServlet {
+@WebServlet("/mglogout")
+public class MgLogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PfLogoutServlet() {
+    public MgLogoutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +26,7 @@ public class PfLogoutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		System.out.println("/pflogout");
+		System.out.println("/mglogout");
 		request.getSession().removeAttribute("ssMemberVo");
 		response.sendRedirect(request.getContextPath()+"/");
 	}

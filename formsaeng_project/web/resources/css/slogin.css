@@ -1,9 +1,3 @@
-#container {
-	background-image: url('./resources/images/semi_main_page.jpg');
-	background-size: cover;
-	background-repeat: no-repeat;
-	height: 100vh;
-}
 
 #slogin {
     padding-top: 50px;
