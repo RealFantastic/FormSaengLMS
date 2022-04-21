@@ -483,5 +483,5 @@ INSERT INTO ASSIGNMENT_LIST VALUES ((SEQ_ASG_NO.NEXTVAL), '과제 게시판 제�
 --강의 자료실 값 입력시 INSERT 쿼리문
 INSERT INTO REFERENCE VALUES ((SEQ_REFERENCE_NO.nextval), '강의자료', '하이','아무개', SYSTIMESTAMP, 'C0101');
 
-
+--주석주석주석
 COMMIT;
