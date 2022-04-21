@@ -480,4 +480,8 @@ INSERT INTO NOTICE VALUES ((SEQ_NOTICE_NO.NEXTVAL), '테스트 공지사항 제�
 INSERT INTO ASSIGNMENT_LIST VALUES ((SEQ_ASG_NO.NEXTVAL), '과제 게시판 제목', (SELECT NAME FROM MEMBER WHERE NAME='아무개'),
 	SYSTIMESTAMP, '과제 게시판 내용', (SELECT ID FROM MEMBER WHERE ID = 'S1111'));
 
+--강의 자료실 값 입력시 INSERT 쿼리문
+INSERT INTO REFERENCE VALUES ((SEQ_REFERENCE_NO.nextval), '강의자료', '하이','아무개', SYSTIMESTAMP, 'C0101');
+
+
 COMMIT;
