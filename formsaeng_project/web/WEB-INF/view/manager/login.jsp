@@ -37,8 +37,8 @@
                                     <input type="password" name="pwd" class="form-control" placeholder="비밀번호를 입력해주세요">
                                 </div>
                                 <div class="form-group">
-                                    <input type="button" name="findid" id="findid" class="btn btn-light" value="아이디 찾기" onclick="이동페이지">
-                                    <input type="button" name="findpwd" id="findpwd" class="btn btn-light"value="비밀번호 찾기" onclick="이동페이지">
+                                    <button type="button" name="findid" id="findid" class="btn btn-light">아이디 찾기</button>
+                                    <button type="button" name="findpwd" id="findpwd" class="btn btn-light">비밀번호 찾기</button>
                                     <input type="submit" name="submit" class="btn btn-primary" value="로그인">
                                 </div>
                             </form>
@@ -49,7 +49,7 @@
                     </div>
                     </div>
             <div></div>
-    </div>
+		</div>
    </div>
    <script>
    
