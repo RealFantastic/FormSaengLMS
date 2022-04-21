@@ -13,6 +13,7 @@
       <url-pattern>*.jpg</url-pattern>
       <url-pattern>*.ico</url-pattern>
       <url-pattern>*.swf</url-pattern>
+      <url-pattern>*.svg</url-pattern>
    </servlet-mapping>
 
    <filter>
