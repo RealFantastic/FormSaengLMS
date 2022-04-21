@@ -18,10 +18,9 @@ import kh.semi.board.model.vo.BoardVo;
 @WebServlet("/StLmsAssignmentboard")
 public class StLmsAssignmentboardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
     /**
      * @see HttpServlet#HttpServlet()
-     */
+ */
     public StLmsAssignmentboardServlet() {
         super();
         // TODO Auto-generated constructor stub
@@ -31,8 +30,8 @@ public class StLmsAssignmentboardServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doget /boardlist");
-		// DB에서 board list의 데이터를 읽어와야함.
+		System.out.println("doget /StLmsAssignmentboard");
+		// DB에서 StLmsAssignmentboard list의 데이터를 읽어와야함.
 		
 			int currentPage = 1;
 			final int pageSize = 12;
@@ -62,20 +61,16 @@ public class StLmsAssignmentboardServlet extends HttpServlet {
 			if(endRnum > totalCnt) {
 				endRnum = totalCnt;
 			}
-			ArrayList<BoardVo> volist = new BoardService().AssignmentBoardlist(startRnum,endRnum);
+			ArrayList<BoardVo> volist = new BoardService().AssignmentBoardlist();
+//			ArrayList<BoardVo> volist = new BoardService().AssignmentBoardlist(startRnum,endRnum);
 			System.out.println(volist);
 		
 			request.setAttribute("boardVolist", volist);
-			request.getRequestDispatcher("WEB-INF/view/board/boardlist.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/view/student/st_boardlist.jsp").forward(request, response);
 	}
 	
 	public int countListBoard() {
 		int result = new BoardService().countListBoard();
-		return result;
-	}
-	
-	public BoardVo readBoardAndComment(int bNo) {
-		BoardVo result = new BoardService().readBoardAndComment(bNo);
 		return result;
 	}
 	
