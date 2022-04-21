@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>NoticeView</title>
 <!--부트스트랩-->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -26,14 +26,7 @@
 	crossorigin="anonymous"></script>
 	<!-- 글자 -->
 <link href="https://hangeul.pstatic.net/hangeul_static/css/NanumBarunGothicYetHangul.css" rel="stylesheet">
-
-
-<style>
-
-
-</style>
 </head>
-
 
 <body>
 <div class="body_div">
@@ -74,21 +67,23 @@
 		</div>
 	</div>
 	<div class="table_div">
-	<table class="table table-hover">
-		<thead>
-    		<tr>
-		      <th scope="col">NO</th>
-		      <th scope="col">제목</th>
-		      <th scope="col">내용</th>
-		      <th scope="col">작성자</th>
-		      <th scope="col">작성일자</th>
-    		</tr>
-  		</thead>
-  		<tbody>
+		<table class="table table-hover">
+			<thead>
+	    		<tr>
+	    		  <th><input type="checkbox"></th>
+			      <th scope="col">NO</th>
+			      <th scope="col">제목</th>
+			      <th scope="col">내용</th>
+			      <th scope="col">작성자</th>
+			      <th scope="col">작성일자</th>
+	    		</tr>
+	  		</thead>
+	  		<tbody>
 <%-- 		    <tr onclick="detailview(' no ')" data-속성(넣고싶은 이름) ex(data-boardno = '+<%=noticeList.get(0).getBoardNoticeTitle() %>')> --%>
 		   
 		   <c:forEach var="notice" items="${boardVolist}">
 		   <tr>
+		      <td><input type="checkbox"></td>
 			  <th scope="row">${notice.boardNoticeNo }</th>
 			  <td>${notice.boardNoticeTitle }</td>
 		      <td>${notice.boardNoticeContent }</td>
@@ -139,6 +134,7 @@
 
 	<div class="add_delete">
 		<button type="button" class="btn btn-secondary">공지사항 추가</button>
+		<button type="button" class="btn btn-secondary">공지사항 수정</button>
 		<button type="button" class="btn btn-secondary">공지사항 삭제</button>
 
 	</div>

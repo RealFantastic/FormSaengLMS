@@ -1,5 +1,4 @@
-
-
+/* noticeView */
 .body_div{
 	width:1250px;
 	margin: 10px auto 0 auto;
@@ -13,10 +12,8 @@
 }
 
 .logoimg {
-	
 	align-items: center;
 }
-
 
 .fromsaenglogo {
 	width: 100px;
@@ -30,30 +27,32 @@
 	float: right;
 	position: absolute;
     bottom: 0;
-    right: 0;
-	
+    right: 0;	
 }
+
 .btn{
 	font-size: 1.111rem; 
 	font-family: 'NanumBarunGothicYetHangul';
 }
+
 .notice_input{
 	font-size: 1.111rem; 
 	font-family: 'NanumBarunGothicYetHangul';
-	
 }
 
 .title_search{
     display: flex;
     justify-content: space-between;
     margin: -3px;
+    
 }
+
 .title {
 	font-family: 'NanumBarunGothicYetHangul';
 	font-size: 2rem;
 	position: relative;
-	
 }
+
 .drop_search{
 	float: right;
 }
@@ -71,14 +70,15 @@
 	width: 280px;
 	height: 34px;
 }
+
 .table_div{
     margin-top: 50px;
     min-height: 500px;
-    }
+}
+
 .table{
 	font-size: 1rem; 
  	font-family: 'NanumBarunGothicYetHangul';
-
 	/* width: 1600px; */
     /* margin:auto; */
 }
@@ -87,16 +87,24 @@
 	font-size: 1.111rem; 
  	font-family: 'NanumBarunGothicYetHangul';
 	color: black;
-
 }
+
 .pagination{
     width: 300px;
     margin-left: auto;
     margin-right: auto;
 }    
 
-
 .add_delete {
 	position: relative;
 	margin: 10px 0 10px 0;
+}
+
+/* noticeEnroll */
+.logoimg_enroll{
+	margin: 10px 0px 30px;
+}
+
+.room{
+	margin: 20px 0;
 }
