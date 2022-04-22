@@ -48,7 +48,7 @@
 				제목
 			</div>
 			<div class="form-floating">
-  				<textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+  				<textarea class="form-control enroll_box" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
   				<label for="floatingTextarea">제목을 입력하세요.</label>
 			</div>
 		</div>
@@ -57,7 +57,7 @@
 				내용
 			</div>
 		  	<div class="form-floating">
-  				<textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 300px"></textarea>
+  				<textarea class="form-control enroll_box" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 300px"></textarea>
   				<label for="floatingTextarea2">내용을 입력하세요.</label>
 			</div>	
 		</div>
@@ -69,8 +69,6 @@
 				<input type="file" multiple>
 			</div>
 
-  				
-  				
 			
 		</div>
 	</div>

@@ -1,8 +1,6 @@
-package kh.semi.notice.vo;
+package kh.semi.board.model.vo;
 
-import java.sql.Timestamp;
-
-public class NoticeVo {
+public class MgBoardListVo {
 	private int boardNoticeNo; //공지사항 번호
 	private String boardNoticeTitle; //공지사항 제목
 	private String boardNoticeContent; //공지사항 내용
@@ -11,11 +9,11 @@ public class NoticeVo {
 	
 	
 	
-	public NoticeVo() {
+	public MgBoardListVo() {
 		super();
 	}
 
-	public NoticeVo(int boardNoticeNo,String boardNoticeTitle,String boardNoticeContent,String boardNoticeWriter,String boardNoticeDate) {
+	public MgBoardListVo(int boardNoticeNo,String boardNoticeTitle,String boardNoticeContent,String boardNoticeWriter,String boardNoticeDate) {
 		super();
 		this.boardNoticeNo=boardNoticeNo;
 		this.boardNoticeTitle=boardNoticeTitle;
