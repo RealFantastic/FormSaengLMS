@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.board.model.service.MgBoardEnrollService;
+import kh.semi.board.model.vo.MgBoardListVo;
+
 /**
  * Servlet implementation class MgBoardEnrollServlet
  */
@@ -36,8 +39,33 @@ public class MgBoardEnrollServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		System.out.println("여기 들어오는지 확인용");
+		
+		
+		
+		String title=request.getParameter("title");
+		String content=request.getParameter("content");
+		
+		MgBoardListVo vo=new MgBoardListVo();
+		vo.setBoardNoticeTitle(title);
+		vo.setBoardNoticeContent(content);
+		System.out.println("controller vo : " + vo);
+		
+		int result=new MgBoardEnrollService().insertBoard(vo);
+		
+		System.out.println("controller result : "+result);
+		
+		if(result==0) {
+			System.out.println("글쓰기 실패ㅠㅠㅠㅠㅠㅠㅠㅠㅠ");
+		}else {
+			System.out.println("글쓰기 성공!!!!");
+			response.sendRedirect("mgblist");
+		}
+		
+		
+		
+		
+//		doGet(request, response);
 	}
 
 }

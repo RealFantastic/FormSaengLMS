@@ -26,7 +26,7 @@ import kh.semi.board.model.vo.MgBoardListVo;
 					+ "board_notice_content, "
 					+ "board_notice_writer,"
 					+ " TO_CHAR(board_notice_date, 'YYYY-MM-DD') board_notice_date"
-					+ " from notice";
+					+ " from notice ORDER BY BOARD_NOTICE_NO DESC";
 
 			try {
 				pstmt = conn.prepareStatement(sql);
