@@ -1,4 +1,4 @@
-package kh.semi.lms.student.controller;
+package kh.semi.lms.professor.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,15 +13,15 @@ import kh.semi.board.model.service.BoardService;
 import kh.semi.board.model.vo.BoardVo;
 
 /**
- * Servlet implementation class StLmsAssignmentboardSevlet
+ * Servlet implementation class PfLmsAssignmentboardSevlet
  */
-@WebServlet("/stlmsasgboard")
-public class StLmsAssignmentBoardServlet extends HttpServlet {
+@WebServlet("/pflmsasgboard")
+public class PfLmsAssignmentBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     /**
      * @see HttpServlet#HttpServlet()
  */
-    public StLmsAssignmentBoardServlet() {
+    public PfLmsAssignmentBoardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

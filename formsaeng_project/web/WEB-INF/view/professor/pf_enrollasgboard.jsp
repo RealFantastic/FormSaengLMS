@@ -80,30 +80,45 @@
       </div>
       <div class="content_container">
         <!-- 템플릿 -->
-        	<%
-ArrayList<BoardVo> volist = (ArrayList<BoardVo>)request.getAttribute("boardVolist");
-%>
 
 	<div>
-		<table border="1">
-			<tr>
-				<td>번호</td>
-				<td>제목 [댓글수]</td>
-				<td>작성자</td>
-				<td>작성일</td>
-			</tr>
-	<% for(BoardVo vo : volist){ %>
-			<tr>
-				<td><%=vo.getbANo() %></td>
-				<td><%=vo.getbATitle() %></td>
-				<td><%=vo.getbAWriter() %></td>
-				<td><%=vo.getbADate() %></td>
-				
-			</tr>
-	<%} %>
-		</table>
+<form id="pfAsgBoardform"
+			action="<%= request.getContextPath() %>/board/insertdo" method="post">
+			<div class=title_notice>
+				<div class="title">공지사항 등록하기</div>
+				<div class="button_enroll">
+					<button type="submit" class="btn btn-primary" id="insertBtn">등록하기</button>
+					<button type="button" class="btn btn-primary">취소하기</button>
+				</div>
+			</div>
+
+			<div class="mb-3 room">
+				<div class="font4">제목</div>
+				<div class="form-floating">
+					<textarea class="form-control enroll_box"
+						name="title" placeholder="Leave a comment here"
+						id="floatingTextarea"></textarea>
+					<label for="floatingTextarea">제목을 입력하세요.</label>
+				</div>
+			</div>
+			<div class="mb-3 room">
+				<div class="font4">내용</div>
+				<div class="form-floating">
+					<textarea class="form-control enroll_box"
+						name="content" placeholder="Leave a comment here"
+						id="floatingTextarea2" style="height: 300px"></textarea>
+					<label for="floatingTextarea2">내용을 입력하세요.</label>
+				</div>
+			</div>
+		</form>
 	</div>
       </div>
   </section>
 </body>
+
+<script>
+window.alert('<%= request.getAttribute("msg") %>');
+
+							
+</script>
 </html>

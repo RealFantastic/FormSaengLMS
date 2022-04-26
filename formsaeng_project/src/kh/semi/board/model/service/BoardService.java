@@ -13,9 +13,24 @@ import kh.semi.board.model.vo.CommentVo;
 import static kh.semi.lms.common.jdbc.JdbcDbcp.*;
 
 public class BoardService {
+	
 	public int insertBoard(BoardVo vo) {
 		Connection conn = getConnection();
 		int result =  new BoardDao().insertBoard(conn, vo);
+		close(conn);
+		return result;
+	}
+	
+	public int updateBoard(BoardVo vo) {
+		Connection conn = getConnection();
+		int result = new BoardDao().updateBoard(conn, vo);
+		close(conn);
+		return result;
+	}
+
+	public int deleteBoard(BoardVo vo) {
+		Connection conn = getConnection();
+		int result = new BoardDao().deleteBoard(conn, vo);
 		close(conn);
 		return result;
 	}

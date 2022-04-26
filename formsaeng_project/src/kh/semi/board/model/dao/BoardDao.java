@@ -19,58 +19,63 @@ public class BoardDao {
 	
 	public int insertBoard(Connection conn,BoardVo vo) {
 		int result = 0;
-		String Id = vo.getId(); //
+		String Id = "S1111"; //todo : 로그인 세션 정보 받아와야함
 
-		String sql = "insert into ASSIGNMENT_LIST values ((select nvl(max(BOARD_ASSIGNMENT_NO),0)+1 from ASSIGNMENT_LIST),"+"'"+vo.getbATitle()+"','"+vo.getbAContent()+"'"+ ", default, default, "+ "(select name from member where m_id='" + Id + "'),'" + Id + "')";
-		
-//		String sql = "insert INTO assignment_list values ((select nvl(max(BOARD_ASSIGNMENT_NO),0)+1 from ASSIGNMENT_LIST),"+"'"+vo.getBATitle()+"','BOARD_ASSIGNMENT_WRITER',SYSTIMESTAMP,'BOARD_ASSIGNMENT_CONTENT',(select name from member where id='id'))";
-		
+		String sql = "insert into ASSIGNMENT_LIST values ((select nvl(max(BOARD_ASSIGNMENT_NO),0)+1 from ASSIGNMENT_LIST),?,?,default,?,?)";
 		try {
-			stmt = conn.createStatement();
-			result = stmt.executeUpdate(sql);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getbATitle());
+			pstmt.setString(2, vo.getbAWriter());
+			pstmt.setString(3, vo.getbAContent());
+			pstmt.setString(4, Id);
+			
+			
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rs);
-			close(stmt);
+			close(pstmt);
 		}
 		return result;		
 	}
 	
 	public int updateBoard(Connection conn, BoardVo vo) {
+		int result = 0;
 		
 		String sql = "update ASSIGNMENT_LIST SET BOARD_ASSIGNMENT_TITLE=?, BOARD_ASSIGNMENT_CONTENT=? WHERE ID=?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-				pstmt.setString(1, "BOARD_ASSIGNMENT_TITLE");
-				pstmt.setString(2, "BOARD_ASSIGNMENT_CONTENT");
-				pstmt.setString(3, "ID");
-				return pstmt.executeUpdate();
+				pstmt.setString(1, vo.getbATitle());
+				pstmt.setString(2, vo.getbAContent());
+				pstmt.setString(3, vo.getId());
+			result = pstmt.executeUpdate();
 							
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return -1;
+		return result;
 	}
 	
 	public int deleteBoard(Connection conn, BoardVo vo) {
-		
+		int result = 0;
 		String sql = "DELETE ASSIGNMENT_LIST WHERE BOARD_ASSIGNMENT_NO=?";
 		
 			try {
 				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, vo.getbANo());
 				
-				pstmt.setInt(1, "BOARD_ASSIGNMENT_NO");
-				return pstmt.executeUpdate();
+				result = pstmt.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				close(pstmt);
 			}
 		
-		
-		return -1;
+		return result;
 	}
 	
 	public ArrayList<BoardVo> AssignmentBoardlist(Connection conn) {
