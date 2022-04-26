@@ -7,10 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>교수 로그인</title>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<link href="https://hangeul.pstatic.net/hangeul_static/css/NanumBarunGothicYetHangul.css" rel="stylesheet">
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <style>
 #container {
 	background-image: url('./resources/images/pflogin.jpg');
@@ -39,12 +39,12 @@
                             <div class="form-group">
                                 <button type="button" name="findid" id="findid" class="btn btn-light">아이디 찾기</button>
                                 <button type="button" name="findpwd" id="findpwd" class="btn btn-light">비밀번호 찾기</button>
-                                <input type="submit" name="submit" class="btn btn-primary" value="로그인">
+                                <input type="submit" id="submit" name="submit" class="btn btn-primary" value="로그인">
                             </div>
                         </form>
                     </div>
                     <div class="loginmenu">
-                        <input type="button" id="notice" name="notice" class="btn btn-success"  value="공지사항">
+                        <input type="button" id="notice" name="notice" class="btn btn-success" value="공지사항">
                     </div>
 				<div class="findid_modal">
 					<div class="modal_content">
@@ -109,6 +109,15 @@
    			}
    		}
 		
+   	   $("#submit").click(function(){
+   		   var id = $("#id").val().trim();
+   		   var checkId = /^[P][0-9]{10}$/;
+   		   if(!checkId.test(id)){
+   			   alert("아이디는 P로 시작 10자리 숫자");
+   			   $("#id").focus();
+   			   return false;
+   		   }   
+   		   });
 	</script>
 
 
