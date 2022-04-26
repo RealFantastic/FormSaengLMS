@@ -15,15 +15,15 @@ public class MemberVo {
 //	--------- -------- ------------- 
 //	ID        NOT NULL VARCHAR2(12)  
 //	NAME      NOT NULL VARCHAR2(30)  
-//	PWD       NOT NULL VARCHAR2(100) 주민등록번호
+//	PWD       NOT NULL VARCHAR2(100) 
 //	RNUM      NOT NULL VARCHAR2(20)  
 //	EMAIL     NOT NULL VARCHAR2(300) 
 //	ADDRESS   NOT NULL VARCHAR2(600) 
 //	DEPT_CODE NOT NULL VARCHAR2(20)  
-//	PNUM      NOT NULL VARCHAR2(20)  연락처 
-	
-	
-	public MemberVo() {}
+//	PNUM      NOT NULL VARCHAR2(20)  	
+	public MemberVo() {
+		
+	}
 	
 	public MemberVo(String id, String pwd) {
 		super();
@@ -31,6 +31,9 @@ public class MemberVo {
 		this.pwd = pwd;
 	}
 	
+	
+
+
 
 	public MemberVo(String id, String name, String pwd) {
 		super();

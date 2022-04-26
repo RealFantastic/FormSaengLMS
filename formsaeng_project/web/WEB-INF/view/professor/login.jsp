@@ -7,10 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>교수 로그인</title>
-	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<link href="https://hangeul.pstatic.net/hangeul_static/css/NanumBarunGothicYetHangul.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <style>
 #container {
 	background-image: url('./resources/images/pflogin.jpg');
@@ -44,26 +44,27 @@
                         </form>
                     </div>
                     <div class="loginmenu">
-                        <input type="button" id="notice" name="notice" class="btn btn-success" value="공지사항">
+                        <input type="button" id="notice" name="notice" class="btn btn-success"  value="공지사항">
                     </div>
 				<div class="findid_modal">
 					<div class="modal_content">
+						<div>
+						<form action="cemail" method="post">
+							<table>
+									<tr>
+										<td class="font-3">이름을 입력하세요</td>
+										<td><input type="text" name="name" id="inputName"></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td class="font-3">이메일을 입력하세요</td>
+										<td><input type="email" name="email" id="inputEmail"></td>
+										<td><button type="submit">이메일 인증</button></td>
+									</tr>
+								</table>
+							</form>	
+						</div>
 						<button class="btn_modal_close">닫기</button>
-						<div>Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry. Lorem Ipsum has been the industry's
-							standard dummy text ever since the 1500s, when an unknown printer
-							took a galley of type and scrambled it to make a type specimen
-							book.</div>
-						<div>Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry. Lorem Ipsum has been the industry's
-							standard dummy text ever since the 1500s, when an unknown printer
-							took a galley of type and scrambled it to make a type specimen
-							book.</div>
-						<div>Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry. Lorem Ipsum has been the industry's
-							standard dummy text ever since the 1500s, when an unknown printer
-							took a galley of type and scrambled it to make a type specimen
-							book.</div>
 					</div>
 				</div>
 			</div>
