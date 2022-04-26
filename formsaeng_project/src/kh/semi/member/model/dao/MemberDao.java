@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import static kh.semi.lms.common.jdbc.JdbcDbcp.close;
-import static kh.test.first.common.jdbc.JdbcTemplate.close;
 
 import kh.semi.member.model.vo.MemberVo;
 
