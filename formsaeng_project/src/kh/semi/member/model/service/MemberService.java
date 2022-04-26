@@ -40,4 +40,16 @@ public class MemberService {
 		return result;
 	}
 	
+	
+	
+	public MemberVo findId(MemberVo vo) {
+		Connection conn = getConnection();
+		
+		MemberVo result = null;
+		
+		result = new MemberDao().findId(conn, vo);
+		
+		return result;
+	}
+	
 }

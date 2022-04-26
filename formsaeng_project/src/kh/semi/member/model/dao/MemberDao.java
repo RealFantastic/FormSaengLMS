@@ -8,6 +8,7 @@ import java.sql.Statement;
 
 import static kh.semi.lms.common.jdbc.JdbcDbcp.close;
 
+
 import kh.semi.member.model.vo.MemberVo;
 
 public class MemberDao {
@@ -94,4 +95,38 @@ public class MemberDao {
 		}
 		return result;
 	}
+	
+	//학번 찾기
+		public MemberVo findId(Connection conn, MemberVo vo) {
+			MemberVo result = null;
+			
+			String sql = "SELECT ID FROM MEMBER WHERE NAME = ? AND EMAIL=?";
+			
+			System.out.println(vo);
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, vo.getName());
+				pstmt.setString(2, vo.getEmail());
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					vo.setId(rs.getString("id"));
+				}
+				
+				result = vo;		
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			System.out.println(result);
+			
+			return result;
+		}
+	
+	
+	
+	
+	
 }
