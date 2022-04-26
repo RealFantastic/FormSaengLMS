@@ -28,7 +28,7 @@ public class PfLogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("/pflogout");
-		request.getSession().removeAttribute("ssMemberVo");
+		request.getSession().invalidate();
 		response.sendRedirect(request.getContextPath()+"/");
 	}
 

@@ -27,7 +27,7 @@ public class MgLogoutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("/mglogout");
-		request.getSession().removeAttribute("ssMemberVo");
+		request.getSession().invalidate();
 		response.sendRedirect(request.getContextPath()+"/");
 	}
 
