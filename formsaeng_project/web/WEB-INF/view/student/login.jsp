@@ -28,18 +28,18 @@
             <div class="logincenter">
                 <div class="logo"><img src="<%= request.getContextPath() %>/resources/images/logo.png" alt="폼생대학교"></div>
                     <div id="login">
-                            <form id="loginform" action="mglogin.do" method="post">
+                            <form id="loginform" action="stlogin.do" method="post">
                                 <h3>로그인</h3>
                                 <div class="form-group">
-                                    <input type="text" name="id" class="form-control" placeholder="아이디를 입력해주세요">
+                                    <input type="text" id="id" name="id" class="form-control" placeholder="아이디를 입력해주세요">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="pwd" class="form-control" placeholder="비밀번호를 입력해주세요">
+                                    <input type="password" id="pwd" name="pwd" class="form-control" placeholder="비밀번호를 입력해주세요">
                                 </div>
                                 <div class="form-group">
-                                    <button type="button" name="findid" class="btn btn-light">학번 찾기</button>
-                                    <button type="button" name="findpwd" class="btn btn-light">비밀번호 찾기</button>
-                                    <input type="submit" name="submit" class="btn btn-primary" value="로그인">
+                                    <button type="button" id="findid" name="findid" class="btn btn-light">학번 찾기</button>
+                                    <button type="button" id="findpwd" name="findpwd" class="btn btn-light">비밀번호 찾기</button>
+                                    <input type="submit" id="submit" name="submit" class="btn btn-primary" value="로그인">
                                 </div>
                             </form>
                         </div>
@@ -51,6 +51,11 @@
     </div>
    </div>
    <script>
+   var msgVal = '${msg}';
+	if(msgVal != '' || msgVal != false){
+	 	alert(msgVal);
+	 }// 로그인 실패 시 뜨는 메시지
+	 	
    $("#submit").click(function(){
 	   var id = $("#id").val().trim();
 	   var checkId = /^[S][0-9]{10}$/;
@@ -60,6 +65,8 @@
 		   return false;
 	   }   
 	   });
+   
    </script>
+    <% session.removeAttribute("msg"); %>
 </body>
 </html>

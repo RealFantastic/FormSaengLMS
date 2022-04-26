@@ -39,11 +39,13 @@ public class MgLoginDoServlet extends HttpServlet {
 		
 		MemberVo result = new MemberService().login(vo);
 		if(result == null) {
+			request.getSession().setAttribute("msg", "사번 혹은 비밀번호를 다시 확인해주세요");
 			response.sendRedirect("mglogin"); //로그인 실패시 다시 입력 처음으로 돌아가기
 			System.out.println("로그인에 실패했습니다.");
 		}else {
 			System.out.println("로그인에 성공했습니다.");
 			//TODO session 등록
+			request.getSession().setAttribute("msg", vo.getName()+"님 반갑습니다"); // 로그인 성공 메시지
 			request.getSession().setAttribute("ssMemberVo", vo); // 로그인 유지
 			response.sendRedirect("mgmain"); // 메인 페이지로 이동
 		}

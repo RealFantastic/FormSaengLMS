@@ -7,10 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>교수 로그인</title>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<link href="https://hangeul.pstatic.net/hangeul_static/css/NanumBarunGothicYetHangul.css" rel="stylesheet">
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <style>
 #container {
 	background-image: url('./resources/images/pflogin.jpg');
@@ -31,10 +31,10 @@
                         <form id="login-form" class="form" action="pflogin.do" method="post">
                             <h3>교수 전용 로그인</h3>
                             <div class="form-group">
-                                <input type="text" name="id" class="form-control" placeholder="아이디를 입력해주세요">
+                                <input type="text" id="id" name="id" class="form-control" placeholder="아이디를 입력해주세요">
                             </div>
                             <div class="form-group">
-                                <input type="password" name="pwd" class="form-control" placeholder="비밀번호를 입력해주세요">
+                                <input type="password" id="pwd" name="pwd" class="form-control" placeholder="비밀번호를 입력해주세요">
                             </div>
                             <div class="form-group">
                                 <button type="button" name="findid" id="findid" class="btn btn-light">아이디 찾기</button>
@@ -110,6 +110,11 @@
    			}
    		}
 		
+   		var msgVal = '${msg}';
+   	 	if(msgVal != '' || msgVal != false){
+   	 		alert(msgVal);
+   	 	}// 로그인 실패 시 뜨는 메시지
+   	 	
    	   $("#submit").click(function(){
    		   var id = $("#id").val().trim();
    		   var checkId = /^[P][0-9]{10}$/;
@@ -120,7 +125,6 @@
    		   }   
    		   });
 	</script>
-
-
+ 	<% session.removeAttribute("msg"); %>
 </body>
 </html>

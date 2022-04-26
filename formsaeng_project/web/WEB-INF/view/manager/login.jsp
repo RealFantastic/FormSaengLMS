@@ -50,6 +50,11 @@
 		</div>
    </div>
    <script>
+   var msgVal = '${msg}';
+	if(msgVal != '' || msgVal != false){
+		alert(msgVal);
+	} // 로그인 실패 시 뜨는 메시지
+   
    $("#submit").click(function(){
    var id = $("#id").val().trim();
    var checkId = /^[M][0-9]{10}$/;
@@ -60,6 +65,6 @@
    }   
    });
    </script>
-   
+   <% session.removeAttribute("msg"); %>
 </body>
 </html>
