@@ -21,7 +21,7 @@ public class BoardDao {
 		int result = 0;
 		String Id = vo.getId(); //
 
-		String sql = "insert into ASSIGNMENT_LIST values ((select nvl(max(BOARD_ASSIGNMENT_NO),0)+1 from ASSIGNMENT_LIST),"+"'"+vo.getBATitle()+"','"+vo.getBAContent()+"'"+ ", default, default, "+ "(select name from member where m_id='" + Id + "'),'" + Id + "')";
+		String sql = "insert into ASSIGNMENT_LIST values ((select nvl(max(BOARD_ASSIGNMENT_NO),0)+1 from ASSIGNMENT_LIST),"+"'"+vo.getbATitle()+"','"+vo.getbAContent()+"'"+ ", default, default, "+ "(select name from member where m_id='" + Id + "'),'" + Id + "')";
 		
 //		String sql = "insert INTO assignment_list values ((select nvl(max(BOARD_ASSIGNMENT_NO),0)+1 from ASSIGNMENT_LIST),"+"'"+vo.getBATitle()+"','BOARD_ASSIGNMENT_WRITER',SYSTIMESTAMP,'BOARD_ASSIGNMENT_CONTENT',(select name from member where id='id'))";
 		
@@ -37,12 +37,47 @@ public class BoardDao {
 		return result;		
 	}
 	
+	public int updateBoard(Connection conn, BoardVo vo) {
+		
+		String sql = "update ASSIGNMENT_LIST SET BOARD_ASSIGNMENT_TITLE=?, BOARD_ASSIGNMENT_CONTENT=? WHERE ID=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+				pstmt.setString(1, "BOARD_ASSIGNMENT_TITLE");
+				pstmt.setString(2, "BOARD_ASSIGNMENT_CONTENT");
+				pstmt.setString(3, "ID");
+				return pstmt.executeUpdate();
+							
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return -1;
+	}
+	
+	public int deleteBoard(Connection conn, BoardVo vo) {
+		
+		String sql = "DELETE ASSIGNMENT_LIST WHERE BOARD_ASSIGNMENT_NO=?";
+		
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, "BOARD_ASSIGNMENT_NO");
+				return pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		
+		
+		return -1;
+	}
+	
 	public ArrayList<BoardVo> AssignmentBoardlist(Connection conn) {
 		ArrayList<BoardVo> volist = null;
 		
 		String sql = "select board_assignment_no, "
                 + "board_assignment_title, "
-                + "board_assignment_content, "
                 + "board_assignment_writer,"
                 + " TO_CHAR(board_assignment_date, 'YYYY-MM-DD') board_assignment_date"
                 + " from assignment_list";
@@ -54,11 +89,10 @@ public class BoardDao {
 				volist = new ArrayList<BoardVo>();
 				while(rs.next()) {
 				BoardVo vo = new BoardVo();
-				vo.setBANo(rs.getInt("BOARD_ASSIGNMENT_NO"));
-				vo.setBATitle(rs.getString("BOARD_ASSIGNMENT_TITLE"));
-				vo.setBAContent(rs.getString("BOARD_ASSIGNMENT_CONTENT"));				
-				vo.setBADate(rs.getString("BOARD_ASSIGNMENT_DATE"));
-				vo.setBAWriter(rs.getString("BOARD_ASSIGNMENT_WRITER"));
+				vo.setbANo(rs.getInt("BOARD_ASSIGNMENT_NO"));
+				vo.setbATitle(rs.getString("BOARD_ASSIGNMENT_TITLE"));
+				vo.setbADate(rs.getString("BOARD_ASSIGNMENT_DATE"));
+				vo.setbAWriter(rs.getString("BOARD_ASSIGNMENT_WRITER"));
 				System.out.println(vo);
 				
 				volist.add(vo);		
@@ -86,11 +120,11 @@ public class BoardDao {
 				volist = new ArrayList<BoardVo>();
 				while(rs.next()) {
 				BoardVo vo = new BoardVo();
-				vo.setBANo(rs.getInt("BOARD_ASSIGNMENT_NO"));
-				vo.setBATitle(rs.getString("BOARD_ASSIGNMENT_TITLE"));
-				vo.setBAWriter(rs.getString("BOARD_ASSIGNMENT_WRITER"));
-				vo.setBADate(rs.getString("BOARD_ASSIGNMENT_DATE"));
-				vo.setBAContent(rs.getString("BOARD_ASSIGNMENT_CONTENT"));
+				vo.setbANo(rs.getInt("BOARD_ASSIGNMENT_NO"));
+				vo.setbATitle(rs.getString("BOARD_ASSIGNMENT_TITLE"));
+				vo.setbAWriter(rs.getString("BOARD_ASSIGNMENT_WRITER"));
+				vo.setbADate(rs.getString("BOARD_ASSIGNMENT_DATE"));
+				vo.setbAContent(rs.getString("BOARD_ASSIGNMENT_CONTENT"));
 				vo.setId(rs.getString("ID"));
 				vo.setReCommentCnt(rs.getInt("re_CommentCnt"));
 				volist.add(vo);		

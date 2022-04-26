@@ -6,90 +6,97 @@ import java.util.ArrayList;
 
 
 public class BoardVo {
-	public int BANo;
-	public String BATitle;
-	public String BAWriter;
-	public String BADate;
-	public String BAContent;
-	public String Id;
+	private int bANo;
+	private String bATitle;
+	private String bAWriter;
+	private String bADate;
+	private String bAContent;
+	private String id;
 	private int reCommentCnt;
 	private ArrayList<CommentVo> reVolist;
 	
 	public BoardVo() {
 		super();
 	}
+	
+	
 
 	public BoardVo(String bATitle, String bAContent) {
 		super();
-		BATitle = bATitle;
-		BAContent = bAContent;
+		this.bATitle = bATitle;
+		this.bAContent = bAContent;
 	}
+
+	
+
 
 	public BoardVo(int bANo, String bATitle, String bAWriter, String bADate, String bAContent, String id,
 			int reCommentCnt) {
 		super();
-		BANo = bANo;
-		BATitle = bATitle;
-		BAWriter = bAWriter;
-		BADate = bADate;
-		BAContent = bAContent;
-		Id = id;
+		this.bANo = bANo;
+		this.bATitle = bATitle;
+		this.bAWriter = bAWriter;
+		this.bADate = bADate;
+		this.bAContent = bAContent;
+		this.id = id;
 		this.reCommentCnt = reCommentCnt;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "BoardVo [BANo=" + BANo + ", BATitle=" + BATitle + ", BAWriter=" + BAWriter + ", BADate=" + BADate
-				+ ", BAContent=" + BAContent + ", Id=" + Id + ", reCommentCnt=" + reCommentCnt + ", reVolist="
+		return "BoardVo [bANo=" + bANo + ", bATitle=" + bATitle + ", bAWriter=" + bAWriter + ", bADate=" + bADate
+				+ ", bAContent=" + bAContent + ", id=" + id + ", reCommentCnt=" + reCommentCnt + ", reVolist="
 				+ reVolist + "]";
 	}
 
-	public int getBANo() {
-		return BANo;
+	public int getbANo() {
+		return bANo;
 	}
 
-	public void setBANo(int bANo) {
-		BANo = bANo;
+	public void setbANo(int bANo) {
+		this.bANo = bANo;
 	}
 
-	public String getBATitle() {
-		return BATitle;
+	public String getbATitle() {
+		return bATitle;
 	}
 
-	public void setBATitle(String bATitle) {
-		BATitle = bATitle;
+	public void setbATitle(String bATitle) {
+		this.bATitle = bATitle;
 	}
 
-	public String getBAWriter() {
-		return BAWriter;
+	public String getbAWriter() {
+		return bAWriter;
 	}
 
-	public void setBAWriter(String bAWriter) {
-		BAWriter = bAWriter;
+	public void setbAWriter(String bAWriter) {
+		this.bAWriter = bAWriter;
 	}
 
-	public String getBADate() {
-		return BADate;
+	public String getbADate() {
+		return bADate;
 	}
 
-	public void setBADate(String bADate) {
-		BADate = bADate;
+	public void setbADate(String bADate) {
+		this.bADate = bADate;
 	}
 
-	public String getBAContent() {
-		return BAContent;
+	public String getbAContent() {
+		return bAContent;
 	}
 
-	public void setBAContent(String bAContent) {
-		BAContent = bAContent;
+	public void setbAContent(String bAContent) {
+		this.bAContent = bAContent;
 	}
 
 	public String getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(String id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public int getReCommentCnt() {
@@ -107,8 +114,6 @@ public class BoardVo {
 	public void setReVolist(ArrayList<CommentVo> reVolist) {
 		this.reVolist = reVolist;
 	}
-
-	
 	
 	
 	

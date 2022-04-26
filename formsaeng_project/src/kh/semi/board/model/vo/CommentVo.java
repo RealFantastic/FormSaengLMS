@@ -3,67 +3,67 @@ package kh.semi.board.model.vo;
 import java.sql.Timestamp;
 
 public class CommentVo {
-	public int CNo;
-	public String CWriter;
-	public Timestamp CDate;
-	public String CContent;
-	public String Id;
-	public int BANo;
+	public int cNo;
+	public String cWriter;
+	public Timestamp cDate;
+	public String cContent;
+	public String id;
+	public int bANo;
 	
 	@Override
 	public String toString() {
-		return "CommentVo [CNo=" + CNo + ", CWriter=" + CWriter + ", CDate=" + CDate + ", CContent=" + CContent
-				+ ", Id=" + Id + ", BANo=" + BANo + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+		return "CommentVo [cNo=" + cNo + ", cWriter=" + cWriter + ", cDate=" + cDate + ", cContent=" + cContent
+				+ ", id=" + id + ", bANo=" + bANo + "]";
 	}
 
-	public int getCNo() {
-		return CNo;
+	public int getcNo() {
+		return cNo;
 	}
 
-	public void setCNo(int cNo) {
-		CNo = cNo;
+	public void setcNo(int cNo) {
+		this.cNo = cNo;
 	}
 
-	public String getCWriter() {
-		return CWriter;
+	public String getcWriter() {
+		return cWriter;
 	}
 
-	public void setCWriter(String cWriter) {
-		CWriter = cWriter;
+	public void setcWriter(String cWriter) {
+		this.cWriter = cWriter;
 	}
 
-	public Timestamp getCDate() {
-		return CDate;
+	public Timestamp getcDate() {
+		return cDate;
 	}
 
-	public void setCDate(Timestamp cDate) {
-		CDate = cDate;
+	public void setcDate(Timestamp cDate) {
+		this.cDate = cDate;
 	}
 
-	public String getCContent() {
-		return CContent;
+	public String getcContent() {
+		return cContent;
 	}
 
-	public void setCContent(String cContent) {
-		CContent = cContent;
+	public void setcContent(String cContent) {
+		this.cContent = cContent;
 	}
 
 	public String getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(String id) {
-		Id = id;
+		this.id = id;
 	}
 
-	public int getBANo() {
-		return BANo;
+	public int getbANo() {
+		return bANo;
 	}
 
-	public void setBANo(int bANo) {
-		BANo = bANo;
-	} 
+	public void setbANo(int bANo) {
+		this.bANo = bANo;
+	}
+	
 	
 	
 	

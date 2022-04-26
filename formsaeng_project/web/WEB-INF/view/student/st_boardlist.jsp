@@ -91,14 +91,13 @@ ArrayList<BoardVo> volist = (ArrayList<BoardVo>)request.getAttribute("boardVolis
 				<td>제목 [댓글수]</td>
 				<td>작성자</td>
 				<td>작성일</td>
-				<td>조회수</td>
 			</tr>
 	<% for(BoardVo vo : volist){ %>
 			<tr>
-				<td><%=vo.getBANo() %></td>
-				<td><%=vo.getBATitle() %></td>
-				<td><%=vo.getBAWriter() %></td>
-				<td><%=vo.getBADate() %></td>
+				<td><%=vo.getbANo() %></td>
+				<td><%=vo.getbATitle() %></td>
+				<td><%=vo.getbAWriter() %></td>
+				<td><%=vo.getbADate() %></td>
 				
 			</tr>
 	<%} %>
