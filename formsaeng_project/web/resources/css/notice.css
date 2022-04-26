@@ -1,14 +1,14 @@
 /* noticeView */
-.body_div{
-	width:1250px;
+.body_div {
+	width: 1250px;
 	margin: 10px auto 0 auto;
 }
 
-.logo_button{
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-    margin: 10px 0px 30px;
+.logo_button {
+	display: flex;
+	justify-content: space-between;
+	position: relative;
+	margin: 10px 0px 30px;
 }
 
 .logoimg {
@@ -26,25 +26,24 @@
 .button {
 	float: right;
 	position: absolute;
-    bottom: 0;
-    right: 0;	
+	bottom: 0;
+	right: 0;
 }
 
-.btn{
-	font-size: 1.111rem; 
+.btn {
+	font-size: 1.111rem;
 	font-family: 'NanumBarunGothicYetHangul';
 }
 
-.notice_input{
-	font-size: 1.111rem; 
+.notice_input {
+	font-size: 1.111rem;
 	font-family: 'NanumBarunGothicYetHangul';
 }
 
-.title_search{
-    display: flex;
-    justify-content: space-between;
-    margin: -3px;
-    
+.title_search {
+	display: flex;
+	justify-content: space-between;
+	margin: -3px;
 }
 
 .title {
@@ -53,7 +52,7 @@
 	position: relative;
 }
 
-.drop_search{
+.drop_search {
 	float: right;
 }
 
@@ -71,45 +70,59 @@
 	height: 34px;
 }
 
-.table_div{
-    margin-top: 50px;
-    min-height: 500px;
+.table_div {
+	margin-top: 50px;
+	min-height: 300px;
 }
 
-.table{
-	font-size: 1rem; 
- 	font-family: 'NanumBarunGothicYetHangul';
+.table {
+	font-size: 1rem;
+	font-family: 'NanumBarunGothicYetHangul';
 	/* width: 1600px; */
-    /* margin:auto; */
+	/* margin:auto; */
 }
 
-.Page_order{
-	font-size: 1.111rem; 
- 	font-family: 'NanumBarunGothicYetHangul';
+.Page_order {
+	font-size: 1.111rem;
+	font-family: 'NanumBarunGothicYetHangul';
 	color: black;
 }
 
-.pagination{
-    width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-}    
+.pagination {
+	width: 300px;
+	margin-left: auto;
+	margin-right: auto;
+}
 
 .add_delete {
 	position: relative;
 	margin: 10px 0 10px 0;
 }
 
-/* noticeEnroll */
-.logoimg_enroll{
+/* 공지사항 등록하기 - noticeEnroll */
+.logoimg_enroll {
 	margin: 10px 0px 30px;
 }
 
-.room{
+.room {
 	margin: 20px 0;
 }
-.enroll_box{
+
+.enroll_box {
 	resize: none;
 }
 
+/* 공지사항 상세보기 - noticeDetail */
+.notice_detail_title {
+	border: 1px solid #ced4da;
+	border-radius: 0.25rem;
+	min-height: 58px;
+	padding: 1rem 0.75rem;
+}
 
+.notice_detail_content {
+	border: 1px solid #ced4da;
+	border-radius: 0.25rem;
+	min-height: 300px;
+	padding: 1rem 0.75rem;
+}

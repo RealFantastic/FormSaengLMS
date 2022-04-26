@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>NoticeEnroll</title>
+<title>NoticeDetail</title>
 <!--부트스트랩-->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -31,44 +31,39 @@
 </head>
 
 <body>
+	<!-- 폼태그는 가지고 갈 데이터 바로 앞에서 name이 꼭 필요함-->
+	<form id="mgNoticeFrom"
+		action="<%=request.getContextPath()%>/mgbinsert" method="post">
+		<div class="body_div">
+			<div class="logoimg_enroll">
+				<img src="./resources/images/fromsaenglogo.png"
+					class="fromsaenglogo"> <img src="./resources/images/logo.png"
+					class="logo">
+			</div>
 
-	<div class="body_div">
-		<div class="logoimg_enroll">
-			<img src="./resources/images/fromsaenglogo.png" class="fromsaenglogo">
-			<img src="./resources/images/logo.png" class="logo">
-		</div>
 
-		<!-- 폼태그는 가지고 갈 데이터 바로 앞에서 name이 꼭 필요함-->
-		<form id="mgNoticeFrom"
-			action="<%=request.getContextPath()%>/mgbinsert" method="post">
 			<div class=title_search>
-				<div class="title">공지사항 등록하기</div>
+				<div class="title">공지사항 상세보기</div>
 				<div class="button_enroll">
 					<button type="submit" class="btn btn-primary" id="insertBtn">공지사항
-						등록</button>
+						수정</button>
 					<button type="reset" class="btn btn-primary">공지사항 목록</button>
-					<button type="reset" class="btn btn-primary">전체내용 삭제</button>
 				</div>
 			</div>
 
 			<div class="mb-3 room">
 				<div class="font4">제목</div>
 				<div class="form-floating">
-					<textarea class="form-control enroll_box" name="title"
-						placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-					<label for="floatingTextarea">제목을 입력하세요.</label>
+					<div class="notice_detail_title" name="title"></div>
 				</div>
 			</div>
 			<div class="mb-3 room">
 				<div class="font4">내용</div>
 				<div class="form-floating">
-					<textarea class="form-control enroll_box" name="content"
-						placeholder="Leave a comment here" id="floatingTextarea2"
-						style="height: 300px"></textarea>
-					<label for="floatingTextarea2">내용을 입력하세요.</label>
+					<div class="notice_detail_content" name="content"></div>
 				</div>
 			</div>
-		</form>
+	</form>
 	</div>
 </body>
 </html>

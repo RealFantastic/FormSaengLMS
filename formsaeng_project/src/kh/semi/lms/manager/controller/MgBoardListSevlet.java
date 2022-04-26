@@ -25,4 +25,3 @@ public class MgBoardListSevlet extends HttpServlet {
 		request.getRequestDispatcher("WEB-INF/view/manager/mgNoticeView.jsp").forward(request, response);
 	}
 }
-

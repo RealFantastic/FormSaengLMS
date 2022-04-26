@@ -41,15 +41,13 @@ public class MgBoardEnrollServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("여기 들어오는지 확인용");
 		
-		
-		
 		String title=request.getParameter("title");
 		String content=request.getParameter("content");
 		
 		MgBoardListVo vo=new MgBoardListVo();
 		vo.setBoardNoticeTitle(title);
 		vo.setBoardNoticeContent(content);
-		System.out.println("controller vo : " + vo);
+		System.out.println("controller vo : " + vo); //vo에 담겼는지 확인
 		
 		int result=new MgBoardEnrollService().insertBoard(vo);
 		
@@ -59,6 +57,7 @@ public class MgBoardEnrollServlet extends HttpServlet {
 			System.out.println("글쓰기 실패ㅠㅠㅠㅠㅠㅠㅠㅠㅠ");
 		}else {
 			System.out.println("글쓰기 성공!!!!");
+//			등록하기 버튼을 클릭하여 DB에 저장되면 공지사항 리스트페이지로 이동
 			response.sendRedirect("mgblist");
 		}
 		

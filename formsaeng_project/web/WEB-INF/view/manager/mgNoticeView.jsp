@@ -114,11 +114,14 @@
 			</ul>
 		</nav>
 		<div class="add_delete">
-			<button type="button" id="nt_add_btn" class="btn btn-secondary">공지사항 추가</button>
+			<button type="button" id="nt_add_btn" class="btn btn-secondary">공지사항
+				추가</button>
 			<button type="button" class="btn btn-secondary">공지사항 수정</button>
 			<button type="button" class="btn btn-secondary">공지사항 삭제</button>
 		</div>
 	</div>
+
+	<!-- 공지사항 추가 버튼을 누르면 등록하기 페이지로 이동 -->
 	<script>
 		$("#nt_add_btn").click(function() {
 			location.href = "mgbinsert";
