@@ -16,13 +16,13 @@ import kh.semi.lms.lectureboard.vo.LectureBoardVo;
  * Servlet implementation class LectureBoardListSerlvet
  */
 @WebServlet("/lecblist")
-public class LectureBoardListSerlvet extends HttpServlet {
+public class LectureBoardListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LectureBoardListSerlvet() {
+    public LectureBoardListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
