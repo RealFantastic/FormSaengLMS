@@ -69,7 +69,7 @@ public class CheckEmailController extends HttpServlet {
 			String host = "smtp.gmail.com";
 			int port = 587;
 			String from = "wjdghks5698@gmail.com";
-			String recipient = result.getEmail();
+			String recipient = result.getId();
 			String subject = "아이디 찾기를 위한 이메일입니다.";
 			String content = result.getName() + "님의 아이디는 " + result.getEmail() + "입니다.";
 			
@@ -79,7 +79,7 @@ public class CheckEmailController extends HttpServlet {
 			props.put("mail.smtp.port", port);
 			props.put("mail.transport.protocol", "smtp");
 			props.put("mail.smtp.auth", "true");
-			props.put("mail.smtp.strttls.enable", "true");
+			props.put("mail.smtp.starttls.enable", "true");
 			
 			try {
 				Authenticator auth = new Gmail();
