@@ -85,7 +85,7 @@
 <form id="pfAsgBoardform"
 			action="<%= request.getContextPath() %>/board/insertdo" method="post">
 			<div class=title_notice>
-				<div class="title">공지사항 등록하기</div>
+				<div class="title">과제게시판 등록하기</div>
 				<div class="button_enroll">
 					<button type="submit" class="btn btn-primary" id="insertBtn">등록하기</button>
 					<button type="button" class="btn btn-primary">취소하기</button>
@@ -115,10 +115,11 @@
       </div>
   </section>
 </body>
-
+<% if(request.getAttribute("msg") != null) {%>
 <script>
 window.alert('<%= request.getAttribute("msg") %>');
 
 							
 </script>
+<% } %>
 </html>

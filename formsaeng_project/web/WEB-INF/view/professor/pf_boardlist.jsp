@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src=" https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <title>템플릿만들기</title>
+    <title>과제게시판</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <link href="https://hangeul.pstatic.net/hangeul_static/css/NanumBarunGothicYetHangul.css" rel="stylesheet">
@@ -75,7 +75,7 @@
   <section id="template_content">
     <div class="template_container">
       <div class="template-title">
-        <h1>공지사항</h1>
+        <h1>과제게시판</h1>
         <hr>
       </div>
       <div class="content_container">
@@ -85,8 +85,12 @@ ArrayList<BoardVo> volist = (ArrayList<BoardVo>)request.getAttribute("boardVolis
 %>
 
 	<div>
+	<button>수정</button>
+	<button>삭제</button>
+	<button id="insertBoard" name="insertBoard">글등록</button>
 		<table border="1">
 			<tr>
+				<td><input id="allCheck" type="checkbox"></td>
 				<td>번호</td>
 				<td>제목 [댓글수]</td>
 				<td>작성자</td>
@@ -94,16 +98,25 @@ ArrayList<BoardVo> volist = (ArrayList<BoardVo>)request.getAttribute("boardVolis
 			</tr>
 	<% for(BoardVo vo : volist){ %>
 			<tr>
+				<td><input id="rowCheck" type="checkbox"></td>
 				<td><%=vo.getbANo() %></td>
 				<td><%=vo.getbATitle() %></td>
 				<td><%=vo.getbAWriter() %></td>
 				<td><%=vo.getbADate() %></td>
-				
 			</tr>
 	<%} %>
 		</table>
 	</div>
       </div>
   </section>
+  <script>
+  	 /* function insertBrd() {
+  			location.href = "/pfasgboard/insert";
+  		}  */
+	  $("#insertBoard").click(function(){
+        location.href ="pfasgboard/insert";
+    });  
+  	
+  </script>
 </body>
 </html>

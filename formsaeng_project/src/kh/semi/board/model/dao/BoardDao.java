@@ -50,7 +50,6 @@ public class BoardDao {
 			
 				pstmt.setString(1, vo.getbATitle());
 				pstmt.setString(2, vo.getbAContent());
-				pstmt.setString(3, vo.getId());
 			result = pstmt.executeUpdate();
 							
 		} catch (SQLException e) {

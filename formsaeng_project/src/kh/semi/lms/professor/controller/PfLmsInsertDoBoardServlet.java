@@ -58,7 +58,7 @@ public class PfLmsInsertDoBoardServlet extends HttpServlet {
 		} else {
 			request.setAttribute("msg", "글등록 성공");
 			request.getSession().setAttribute("inf", vo);
-			request.getRequestDispatcher("/WEB-INF/view/professor/pf_enrollasgboard.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/view/professor/pf_boardlist.jsp").forward(request, response);
 		}
 	}
 

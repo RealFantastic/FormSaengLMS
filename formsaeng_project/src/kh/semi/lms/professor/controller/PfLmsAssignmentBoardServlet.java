@@ -66,7 +66,7 @@ public class PfLmsAssignmentBoardServlet extends HttpServlet {
 			System.out.println(volist);
 		
 			request.setAttribute("boardVolist", volist);
-			request.getRequestDispatcher("/WEB-INF/view/student/st_boardlist.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/view/professor/pf_boardlist.jsp").forward(request, response);
 	}
 	
 	public int countListBoard() {
