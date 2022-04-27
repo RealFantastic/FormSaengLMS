@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/reset.css">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/template.css">
-<%@page import="kh.semi.board.model.vo.BoardVo"%>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reset.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/template.css">
+<%@page import="kh.semi.lms.asg.model.vo.AsgListVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -23,8 +23,8 @@
 <body>
   <header id="sideBar">
     <div class="side_container">
-      <a href="./semitest.html" id="logo"><img src="<%= request.getContextPath() %>/resources/images/fromsaenglogo.png" alt="폼생대로고"></a>
-      <a href="./semitest.html" id="uni_name"><img src="<%= request.getContextPath() %>/resources/images/logo.png" alt="폼생대학교"></a>
+      <a href="./semitest.html" id="logo"><img src="<%=request.getContextPath()%>/resources/images/fromsaenglogo.png" alt="폼생대로고"></a>
+      <a href="./semitest.html" id="uni_name"><img src="<%=request.getContextPath()%>/resources/images/logo.png" alt="폼생대학교"></a>
       <hr>
       <ul class="list_button">
         <li>
@@ -81,8 +81,8 @@
       <div class="content_container">
         <!-- 템플릿 -->
         	<%
-ArrayList<BoardVo> volist = (ArrayList<BoardVo>)request.getAttribute("boardVolist");
-%>
+        		ArrayList<AsgListVo> volist = (ArrayList<AsgListVo>)request.getAttribute("boardVolist");
+        	%>
 
 	<div>
 		<table border="1">
@@ -92,7 +92,9 @@ ArrayList<BoardVo> volist = (ArrayList<BoardVo>)request.getAttribute("boardVolis
 				<td>작성자</td>
 				<td>작성일</td>
 			</tr>
-	<% for(BoardVo vo : volist){ %>
+	<%
+		for(AsgListVo vo : volist){
+	%>
 			<tr>
 				<td><%=vo.getbANo() %></td>
 				<td><%=vo.getbATitle() %></td>

@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/reset.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/template.css">
-<%@page import="kh.semi.board.model.vo.BoardVo"%>
+<%@page import="kh.semi.lms.asg.model.vo.AsgListVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

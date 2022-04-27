@@ -2,7 +2,7 @@
 	href="<%=request.getContextPath()%>/resources/css/reset.css">
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/css/notice.css">
-<%@page import="kh.semi.board.model.vo.MgBoardListVo"%>
+<%@page import="kh.semi.notice.model.vo.NoticeVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
