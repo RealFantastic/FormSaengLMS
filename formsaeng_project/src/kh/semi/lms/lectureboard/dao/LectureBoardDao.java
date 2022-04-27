@@ -71,6 +71,22 @@ public class LectureBoardDao {
 		}
 		return volist;
 	}
+	public int deletLectureBoard (Connection conn, LectureBoardVo vo) {
+		int result = 0;
+		String sql =""; //sql문 추가해야함
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, vo.getLbAno());
+			return pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
 //	public ArrayList<LectrueBoardVo> LectureBoardlist(Connection conn,int startRnum,int endRnum) {
 ///		ArrayList<LectrueBoardVo> volist = null;
 //		
