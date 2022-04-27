@@ -45,25 +45,35 @@
 			<div class=title_search>
 				<div class="title">공지사항 상세보기</div>
 				<div class="button_enroll">
-					<button type="submit" class="btn btn-primary" id="insertBtn">공지사항
-						수정</button>
-					<button type="reset" class="btn btn-primary">공지사항 목록</button>
+					<button type="submit" class="btn btn-primary" id="insertBtn">공지사항 수정</button>
+					<button type="reset" id="nt_list_btn" class="btn btn-primary">공지사항 목록</button>
 				</div>
 			</div>
 
 			<div class="mb-3 room">
 				<div class="font4">제목</div>
 				<div class="form-floating">
-					<div class="notice_detail_title" name="title"></div>
+					<div class="notice_detail_title" name="title">
+						<%=request.getAttribute("detailtitle") %>
+					</div>
 				</div>
 			</div>
 			<div class="mb-3 room">
 				<div class="font4">내용</div>
 				<div class="form-floating">
-					<div class="notice_detail_content" name="content"></div>
+					<div class="notice_detail_content" name="content">
+						<%=request.getAttribute("detailcontent") %>
+					</div> 
 				</div>
 			</div>
 	</form>
 	</div>
+	
+	<script>
+	/* 공지사항 목록 버튼 클릭 시 공지사항 리스트 페이지로 이동 */
+	$("#nt_list_btn").click(function(){
+		location.href="mgblist";
+	})
+	</script>
 </body>
 </html>

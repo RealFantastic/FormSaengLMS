@@ -46,7 +46,7 @@
 				<div class="button_enroll">
 					<button type="submit" class="btn btn-primary" id="insertBtn">공지사항
 						등록</button>
-					<button type="reset" class="btn btn-primary">공지사항 목록</button>
+					<button type="button" id="nt_list_btn" class="btn btn-primary">공지사항 목록</button>
 					<button type="reset" class="btn btn-primary">전체내용 삭제</button>
 				</div>
 			</div>
@@ -70,5 +70,11 @@
 			</div>
 		</form>
 	</div>
+		<script>
+		/* 공지사항 목록 버튼 클릭 시 공지사항 리스트 페이지로 이동 */
+		$("#nt_list_btn").click(function() {
+			location.href = "mgblist";
+		})
+		</script>
 </body>
 </html>

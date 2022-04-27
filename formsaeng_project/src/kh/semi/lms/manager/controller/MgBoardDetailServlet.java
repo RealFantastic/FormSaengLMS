@@ -22,10 +22,26 @@ public class MgBoardDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("doGet/mgnoticedetail");
+		
+		String nnoStr=request.getParameter("nno");
 
-		String vo = new MgBoardDetailService().detailBoardView();
+		System.out.println(nnoStr);
+		
+		int nno=Integer.parseInt(nnoStr);
+		
+		MgBoardListVo vo = new MgBoardDetailService().detailBoardView(nno);
+		
+		if(vo!=null) {
+			request.setAttribute("detailtitle", vo.getBoardNoticeTitle());
+			request.setAttribute("detailcontent", vo.getBoardNoticeContent());
+			request.getRequestDispatcher("WEB-INF/view/manager/mgNoticeDetail.jsp").forward(request, response);
+		}
+
 		System.out.println(vo);
-		request.setAttribute("boarddetail", vo);
-		request.getRequestDispatcher("WEB-INF/view/manager/mgNoticeDetail.jsp").forward(request, response);
+		
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 	}
 }

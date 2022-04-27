@@ -16,20 +16,23 @@ public class MgBoardDetailDao {
 	private Statement stmt = null;
 	private ResultSet rs = null;
 
-	public String detailBoardView(Connection conn) {
-		String result = null;
+	public MgBoardListVo detailBoardView(Connection conn, int nno) {
+		MgBoardListVo result = null;
 
-		String sql = "board_notice_title, board_notice_content from notice";
+		String sql = "select board_notice_title, board_notice_content from notice where board_notice_no=?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, nno);
+			
 			rs = pstmt.executeQuery();
-
+			if(rs.next()) {
 			MgBoardListVo vo = new MgBoardListVo();
 			vo.setBoardNoticeTitle(rs.getString("board_Notice_Title"));
 			vo.setBoardNoticeContent(rs.getString("board_Notice_Content"));
 
-//			result.add(vo);
+			result=vo;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

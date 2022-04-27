@@ -10,14 +10,14 @@ import kh.semi.board.model.vo.MgBoardListVo;
 
 public class MgBoardDetailService {
 
-	public String detailBoardView() {
+	private MgBoardDetailDao dao=new MgBoardDetailDao();
+	
+	public MgBoardListVo detailBoardView(int nno) {
 		Connection conn = getConnection();
 
-		String result = null;
-
-		result = new MgBoardDetailDao().detailBoardView(conn);
-
+		MgBoardListVo vo = new MgBoardDetailDao().detailBoardView(conn, nno);
+		
 		close(conn);
-		return result;
+		return vo;
 	}
 }

@@ -75,7 +75,9 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th><input type="checkbox"></th>
+						<th>
+							<input type="checkbox">
+						</th>
 						<th scope="col">NO</th>
 						<th scope="col">제목</th>
 						<th scope="col">내용</th>
@@ -86,9 +88,9 @@
 				<tbody>
 					<%--<tr onclick="detailview(' no ')" data-속성(넣고싶은 이름) ex(data-boardno = '+<%=noticeList.get(0).getBoardNoticeTitle() %>')> --%>
 					<c:forEach var="notice" items="${boardVolist}">
-						<tr>
+						<tr Class="nt_detail_list">
 							<td><input type="checkbox"></td>
-							<th scope="row">${notice.boardNoticeNo }</th>
+							<th scope="row" class="nno">${notice.boardNoticeNo }</th>
 							<td>${notice.boardNoticeTitle }</td>
 							<td>${notice.boardNoticeContent }</td>
 							<td>${notice.boardNoticeWriter }</td>
@@ -114,17 +116,26 @@
 			</ul>
 		</nav>
 		<div class="add_delete">
-			<button type="button" id="nt_add_btn" class="btn btn-secondary">공지사항
-				추가</button>
-			<button type="button" class="btn btn-secondary">공지사항 수정</button>
+			<button type="button" id="nt_add_btn" class="btn btn-secondary">공지사항 추가</button>
 			<button type="button" class="btn btn-secondary">공지사항 삭제</button>
 		</div>
 	</div>
 
-	<!-- 공지사항 추가 버튼을 누르면 등록하기 페이지로 이동 -->
 	<script>
+		/* 공지사항 추가 버튼 클릭 시 공지사항 등록하기 페이지로 이동 */
 		$("#nt_add_btn").click(function() {
 			location.href = "mgbinsert";
+		})
+		
+		/* 공지사항 1건 클릭 시 공지사항 상세 페이지로 이동 */
+		/* 강사님 도움 */
+		$(".nt_detail_list").click(function() {
+			console.log(this);
+			console.log($(this));
+			console.log($(this).children(".nno"));
+			console.log($(this).children(".nno").text());
+			var noticeNo = $(this).children(".nno").text();
+		location.href = "mgbdetail?nno="+noticeNo;
 		})
 	</script>
 </body>
