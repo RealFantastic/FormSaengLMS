@@ -1,0 +1,64 @@
+/* header css start */
+.header_container{
+    margin: 0 auto;
+    max-width: 1250px;
+}
+.header_wrapper{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+.univ_logo{
+    display: flex;
+}
+
+.univ_logo a{
+    display: block;
+    margin-right: 10px;
+}
+.univ_logo a .logo1{
+    height: 100px;
+    width: 170px;
+}
+
+.univ_logo a .logo2{
+    width: 100px;
+    height: 94px;
+}
+/* header css end */
+/* section css start */
+#subjects{
+    max-width: 1250px;
+    margin: 0 auto;
+}
+.content_title{
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 0;
+}
+.select_design{
+    padding: 7.5px;
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: #fff;
+    border-radius: 4.8px;
+}
+.option_design{
+    background-color: #fff;
+    color: black;
+}
+.form-control{
+    width: 200px  !important;
+    
+}
+.search{
+    display: flex;
+}
+.search select{
+    margin-right: 10px;
+}
+.search input{
+    margin-right: 10px;
+}
+
