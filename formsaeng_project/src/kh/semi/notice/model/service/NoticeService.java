@@ -5,12 +5,14 @@ import static kh.semi.lms.common.jdbc.JdbcDbcp.getConnection;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 
 import kh.semi.notice.model.dao.NoticeDao;
 import kh.semi.notice.model.vo.NoticeVo;
 
 public class NoticeService {
 
+		// 공지사항 리스트
 		public ArrayList<NoticeVo> view(){
 			Connection conn = getConnection();
 			
@@ -21,6 +23,9 @@ public class NoticeService {
 			close(conn);
 			return result;
 		}
+		
+		
+		// 공지사항 상세
 		public NoticeVo detailBoardView(int nno) {
 			Connection conn = getConnection();
 
@@ -29,6 +34,9 @@ public class NoticeService {
 			close(conn);
 			return vo;
 		}
+		
+		
+		// 공지사항 등록(Enroll)
 		public int insertBoard(NoticeVo vo) {
 			int result=0;
 			
@@ -38,4 +46,36 @@ public class NoticeService {
 			
 			return result;
 		}
+		
+		
+		// 공지사항 삭제★★★ 메이데이.. 메이.. 데..이
+		public NoticeVo deleteBoard(int nno) {
+			Connection conn=getConnection();
+			
+			NoticeVo vo=new NoticeDao().deleteBoard(conn,nno);
+			close(conn);
+			return vo;
+		}
+		
+		
+		// 공지사항 검색
+		public List<NoticeVo> selectNotice(String searchCondition, String searchValue) {
+			Connection conn=getConnection();
+			List<NoticeVo> listNotice=new NoticeDao().selecNotice(conn, searchCondition, searchValue);
+			close(conn);
+			
+			return listNotice;
+		}
+
+		public List<NoticeVo> selectNotice() {
+			Connection conn=getConnection();
+			List<NoticeVo> listNotice=new NoticeDao().selecNotice(conn);
+			close(conn);
+			
+			return listNotice;
+		}
+		
+		
+		
+		
 }

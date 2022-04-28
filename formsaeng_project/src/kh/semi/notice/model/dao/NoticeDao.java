@@ -1,6 +1,6 @@
 package kh.semi.notice.model.dao;
 
-import static kh.semi.lms.common.jdbc.JdbcDbcp.close;
+import static kh.semi.lms.common.jdbc.JdbcDbcp.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.jdt.internal.compiler.util.SimpleSetOfCharArray;
 
 import kh.semi.notice.model.vo.NoticeVo;
 
@@ -17,6 +20,8 @@ public class NoticeDao {
 	private Statement stmt = null;
 	private ResultSet rs = null;
 
+	
+	//공지사항 리스트
 	public ArrayList<NoticeVo> view(Connection conn) {
 		ArrayList<NoticeVo> result = null;
 
@@ -52,8 +57,17 @@ public class NoticeDao {
 	}
 	
 	
-	
+	//공지사항 등록
 	public int insertBoard(Connection conn, NoticeVo vo) {
+//		이름                   널?       유형             
+//		-------------------- -------- -------------- 
+//		BOARD_NOTICE_NO      NOT NULL NUMBER         
+//		BOARD_NOTICE_TITLE   NOT NULL VARCHAR2(150)  
+//		BOARD_NOTICE_CONTENT NOT NULL VARCHAR2(2000) 
+//		BOARD_NOTICE_WRITER  NOT NULL VARCHAR2(30)   
+//		BOARD_NOTICE_DATE    NOT NULL TIMESTAMP(6)   
+//		ID                   NOT NULL VARCHAR2(12) 
+		
 		int result=0;
 		String id = "S1111";
 		String name = "홍샛별";
@@ -87,6 +101,7 @@ public class NoticeDao {
 	}
 	
 	
+	// 공지사항 상세
 	public NoticeVo detailBoardView(Connection conn, int nno) {
 		NoticeVo result = null;
 
@@ -115,4 +130,85 @@ public class NoticeDao {
 		return result;
 
 	}
-}
+	
+	// 공지사항 삭제 ★★★체크박스... 어렵다 ... 메이데이메이데이...
+		public NoticeVo deleteBoard(Connection conn, int nno) {
+			NoticeVo result= null;
+			
+			String sql="DELETE from notice where board_notice_no=?";
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, nno);
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					NoticeVo vo = new NoticeVo();
+					
+					vo.setBoardNoticeNo(rs.getInt("board_Notice_No"));
+					vo.setBoardNoticeTitle(rs.getString("board_Notice_Title"));
+					vo.setBoardNoticeContent(rs.getString("board_Notice_Content"));
+					vo.setBoardNoticeWriter(rs.getString("board_Notice_Writer"));
+					vo.setBoardNoticeDate(rs.getString("board_Notice_Date"));
+					result=vo;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			System.out.println(result);
+			return result;
+		}
+		
+		// 공지사항 검색
+		public List<NoticeVo> selecNotice(Connection conn, String searchCondition, String searchValue){
+			List<NoticeVo> noticeList=new ArrayList<>();
+			//TODO-sb
+//			String sql= query.getProperty("selectNotice");
+//			
+//			if(searchCondition.equals("title")) {
+//				//검색조건이 제목인 경우
+//				sql=query.getProperty("selectTitleNotice");
+//			}else if(searchCondition.equals("content")) {
+//				//검색 조건이 내용인 경우
+//				sql=query.getProperty("selectContentNotice");
+//			}
+//			
+//			try {
+//				pstmt=conn.prepareStatement(sql);
+//				if(searchCondition.equals("title")||searchCondition.equals("content")) {
+//					pstmt.setString(1, searchValue);
+//				}
+//				rset=pstmt.executeQuery();
+//				while(rset.next()) {
+//					noticeList.add(new Notice(
+//							NoticeVo vo = new NoticeVo();
+//							vo.getBoardNoticeNo(rs.getInt("board_Notice_No"));
+//							vo.getBoardNoticeTitle(rs.getString("board_Notice_Title"));
+//							vo.getBoardNoticeContent(rs.getString("board_Notice_Content"));
+//							vo.getBoardNoticeWriter(rs.getString("board_Notice_Writer"));
+//							vo.getBoardNoticeDate(rs.getString("board_Notice_Date"));
+//							System.out.println(vo); // Console - sql값 확인용
+//
+//							));
+//				}
+//			}catch(SQLException e) {
+//				e.printStackTrace();
+//			}finally {
+//				close(rs);
+//				clone(pstmt);
+//			}
+			return noticeList;
+		}
+		public List<NoticeVo> selecNotice(Connection conn){
+			List<NoticeVo> noticeList=new ArrayList<>();
+			// TODO-sb
+			return noticeList;
+		}	
+		
+		
+	}
+

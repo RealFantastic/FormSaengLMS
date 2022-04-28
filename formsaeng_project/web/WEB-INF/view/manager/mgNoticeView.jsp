@@ -76,7 +76,7 @@
 				<thead>
 					<tr>
 						<th>
-							<input type="checkbox">
+							<input type="checkbox" name="allCheck" onclick="allChk(this.checked);"/>
 						</th>
 						<th scope="col">NO</th>
 						<th scope="col">제목</th>
@@ -89,7 +89,7 @@
 					<%--<tr onclick="detailview(' no ')" data-속성(넣고싶은 이름) ex(data-boardno = '+<%=noticeList.get(0).getBoardNoticeTitle() %>')> --%>
 					<c:forEach var="notice" items="${boardVolist}">
 						<tr Class="nt_detail_list">
-							<td><input type="checkbox"></td>
+							<td><input type="checkbox" name="chk" value=${notice.boardNoticeNo}></td>
 							<th scope="row" class="nno">${notice.boardNoticeNo }</th>
 							<td>${notice.boardNoticeTitle }</td>
 							<td>${notice.boardNoticeContent }</td>
@@ -117,9 +117,10 @@
 		</nav>
 		<div class="add_delete">
 			<button type="button" id="nt_add_btn" class="btn btn-secondary">공지사항 추가</button>
-			<button type="button" class="btn btn-secondary">공지사항 삭제</button>
+			<button type="submit" id="nt_del_btn" class="btn btn-secondary">공지사항 삭제</button>
 		</div>
 	</div>
+
 
 	<script>
 		/* 공지사항 추가 버튼 클릭 시 공지사항 등록하기 페이지로 이동 */
@@ -137,6 +138,56 @@
 			var noticeNo = $(this).children(".nno").text();
 		location.href = "mgbdetail?nno="+noticeNo;
 		})
+		
+		/* 공지사항 삭제 버튼 클릭 시 공지사항 삭제하기(앞 체크박스 체크) ★ 메이데이 메이데이*/
+			//모두 체크 
+		/* function allChk(obj){
+			var chkObj=document.getElementsByName("RowCheck");
+			var rowCnt=chkObj.length-1;
+			var check=obj.checked;
+			if(check){
+				for(var i=0; i<=rowCnt; i++){
+					if(chkObj[i].type=="checkbox")
+						chkObj[i].checked=true;
+				}else{
+					for(var i=0; i<=rowCnt; i++){
+						if(chkObj[i].type=="checkbox"){
+							chkObj[i].checked=false;
+						}
+					}
+				}
+			}
+		}
+		// N개 체크
+		function fn_userDel(){
+			var userid="";
+			var memberChk=document.getElementsByName("RowCheck");
+			var chked=false;
+			var indexid=false;
+			for(i=0; i<memberChk.length; i++){
+				if(memberChk[i].checked){
+					if(indexid){
+						userid=userid+'-';
+					}
+					userid=userid+memberChk[i].vlue;
+					indexid=true;
+				}
+			}
+		}if(!indexid){
+			alert("삭제할꺼 선택해");
+			return;
+		}
+		document.userForm.delUserid.value=userid;
+		var agree=confirm("삭제??");
+		if(agree){
+			document.userForm.execute.value="userDel";
+			document.userForm.submit();
+		} */
+		
+		
+		
+		
+		
 	</script>
 </body>
 </html>
