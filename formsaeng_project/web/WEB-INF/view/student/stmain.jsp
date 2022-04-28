@@ -52,7 +52,7 @@
 	});
  	
 	$("#myPage").click(function(){
-		location.href = ""; // 마이페이지
+		location.href = "stmypage"; // 마이페이지
 	});
 	
    $("#notice").click(function(){
