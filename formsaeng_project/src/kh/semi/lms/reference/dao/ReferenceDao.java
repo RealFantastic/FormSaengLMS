@@ -2,6 +2,7 @@ package kh.semi.lms.reference.dao;
 
 import static kh.semi.lms.common.jdbc.JdbcDbcp.close;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,17 +10,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+
 import kh.semi.lms.reference.vo.ReferenceVo;
+
 
 public class ReferenceDao {
 	private PreparedStatement pstmt = null;
 	private Statement stmt = null;
 	private ResultSet rs = null;
 	
-	public int insertLectureBoard(Connection conn, ReferenceVo vo) {
+	public int ReferenceinsertBoard(Connection conn, ReferenceVo vo) {
 		int result = 0;
-		String Code = vo.getLbACode();
-		String sql = "insert into board values()"; //sql인설트문 추가해야함
+		String code = vo.getLbACode();
+		String sql = "INSERT INTO REFERENCE(REF_NO, REF_TITLE, REF_CONTENT, REF_WRITE, REF_WRITE_DATE, SUBJECT_CODE"
+				+ "VALUES(SEQ_REF_NO.NEXTVAL,?, ?, ?, DEFAULT, ?)"; 
 //		Connection conn = JdbcDbcp.getConnection();
 		try {
 			stmt = conn.createStatement();
@@ -32,7 +36,7 @@ public class ReferenceDao {
 			}
 				return result;
 	}
-	public ArrayList<ReferenceVo> LectureBoardlist(Connection conn){
+	public ArrayList<ReferenceVo> ReferenceBoardlist(Connection conn){
 		ArrayList<ReferenceVo> volist = null;
 		
 		String sql = "select REF_NO,"
@@ -64,6 +68,50 @@ public class ReferenceDao {
 		}
 		return volist;
 	}
+	public int ReferencedeleteBoard(Connection conn, ReferenceVo vo) {
+		int result = 0;
+		String sql = "DELETE REFERENCE WHERE REF_NO=?";
+		
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, vo.getLbAno());
+				
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+		
+		return result;
+	}
+	public ReferenceVo detailBoard(Connection conn, int lbAno) {
+		ReferenceVo result = null;
+
+		String sql = "select REF_TITLE, REF_CONTENT from REFERENCE where REF_NO=?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, lbAno);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+			ReferenceVo vo = new ReferenceVo();
+			vo.setLbATitle(rs.getString("REF_Title"));
+			vo.setLbACotent(rs.getString("REF_Content"));
+			result=vo;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		System.out.println(result);
+		return result;
+
+	}
 //	public ArrayList<LectrueBoardVo> LectureBoardlist(Connection conn,int startRnum,int endRnum) {
 ///		ArrayList<LectrueBoardVo> volist = null;
 //		
@@ -94,4 +142,5 @@ public class ReferenceDao {
 //		}
 //		return volist;
 //	}
+	
 }
