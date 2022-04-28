@@ -1,4 +1,4 @@
-package kh.semi.manager.model.vo;
+package kh.semi.subject.model.vo;
 
 public class SubjectVo {
 	private String subCode;
