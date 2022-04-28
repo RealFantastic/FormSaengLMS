@@ -31,6 +31,7 @@ public class MemberDao {
 			if(rs.next()) {
 				vo.setName(rs.getString("name"));
 				System.out.println("메세지 하나");
+				
 				result = vo;
 			}
 			
@@ -47,7 +48,7 @@ public class MemberDao {
 	// 멤버 정보 조회 (마이페이지) 교수/학생
 	public MemberVo readMember(Connection conn, MemberVo vo) {
 		MemberVo result = null;
-		String sql = "select * from member where id=? and pwd=?";
+		String sql = "select m.name, m.email, m.address, m.pnum, d.dept_name from member m join department d using (dept_code) where id=? and pwd=?";
 		try { 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getId());
@@ -58,8 +59,9 @@ public class MemberDao {
 				vo.setName(rs.getString("name"));
 				vo.setEmail(rs.getString("email"));
 				vo.setAddress(rs.getString("address"));
-				vo.setDeptCode(rs.getString("deptCode"));
 				vo.setPnum(rs.getString("pnum"));
+				vo.setDeptName(rs.getString("dept_name"));
+				System.out.println(vo);
 				
 				result = vo;
 			}
@@ -70,6 +72,7 @@ public class MemberDao {
 			close(rs);
 			close(pstmt);
 		}
+		System.out.println(result);
 		return result;
 		
 	}

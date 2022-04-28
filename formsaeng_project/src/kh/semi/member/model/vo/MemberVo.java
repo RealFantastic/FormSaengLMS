@@ -9,6 +9,7 @@ public class MemberVo {
 	private String address;
 	private String deptCode;
 	private String pnum;
+	private String deptName; // DEPARTMENT table 학과 이름
 
 
 //	이름        널?       유형            
@@ -38,15 +39,23 @@ public class MemberVo {
 		this.name = name;
 		this.pwd = pwd;
 	}
-	
+	 
 
-	
+	public MemberVo(String id, String name, String email, String address, String pnum, String deptName) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.address = address;
+		this.pnum = pnum;
+		this.deptName = deptName;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberVo [id=" + id + ", name=" + name + ", pwd=" + pwd + ", rnum=" + rnum + ", email=" + email
-				+ ", address=" + address + ", deptCode=" + deptCode + ", pnum=" + pnum + "]";
+				+ ", address=" + address + ", deptCode=" + deptCode + ", pnum=" + pnum + ", deptName=" + deptName + "]";
 	}
-
 
 	//getter & setter
 	public String getId() {
@@ -112,13 +121,20 @@ public class MemberVo {
 	public String getDeptCode() {
 		return deptCode;
 	}
-	
-	
+
 	public void setDeptCode(String deptCode) {
 		this.deptCode = deptCode;
 	}
 	
 	
+	public String getDeptName() {
+		return deptName;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+
 	public String getPnum() {
 		return pnum;
 	}
