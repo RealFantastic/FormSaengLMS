@@ -30,7 +30,8 @@ public class MemberDao {
 			
 			if(rs.next()) {
 				vo.setName(rs.getString("name"));
-				System.out.println("메세지 하나");
+				vo.setDeptCode(rs.getString("dept_code"));
+				System.out.println("login:" + vo);
 				
 				result = vo;
 			}
@@ -54,7 +55,7 @@ public class MemberDao {
 			pstmt.setString(1, vo.getId());
 			pstmt.setString(2, vo.getPwd());
 			rs = pstmt.executeQuery();
-
+			
 			if(rs.next()) {
 				vo.setName(rs.getString("name"));
 				vo.setEmail(rs.getString("email"));
@@ -81,12 +82,13 @@ public class MemberDao {
 	public int updateMember(Connection conn, MemberVo vo) {
 		int result = 0;
 		
-		String sql = "update member set address=?, pnum=? where id=?";
+		String sql = "update member set address=?, pnum=? where id=? and pwd=?";
 		try { 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getAddress());
 			pstmt.setString(2, vo.getPnum());
 			pstmt.setString(3, vo.getId());
+			pstmt.setString(4, vo.getPwd());
 			
 			result = pstmt.executeUpdate();
 			
@@ -98,6 +100,31 @@ public class MemberDao {
 		}
 		return result;
 	}
+	
+	// 멤버 비밀번호 수정 (마이페이지) 교수/학생
+	public int updatePwd(Connection conn, MemberVo vo) {
+		int result = 0;
+		
+		String sql = "update member set pwd=? where id=? and pwd=?";
+		try { 
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, vo.getPwd());
+			pstmt.setString(2, vo.getId());
+			pstmt.setString(3, vo.getPwd());
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally { 
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
 	
 	//학번 찾기
 		public MemberVo findId(Connection conn, MemberVo vo) {
@@ -132,3 +159,4 @@ public class MemberDao {
 	
 	
 }
+

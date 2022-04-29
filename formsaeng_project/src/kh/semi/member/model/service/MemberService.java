@@ -40,6 +40,15 @@ public class MemberService {
 		return result;
 	}
 	
+	public int updatePwd(MemberVo vo) {
+		int result = 0;
+		Connection conn = getConnection();
+		result = dao.updatePwd(conn, vo);
+		
+		close(conn);
+		return result;
+	}
+	
 	
 	
 	public MemberVo findId(MemberVo vo) {
