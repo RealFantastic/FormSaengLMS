@@ -50,6 +50,7 @@ public class CheckEmailController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doPost : /cemail");
+		PrintWriter out = response.getWriter();
 		
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
@@ -63,15 +64,19 @@ public class CheckEmailController extends HttpServlet {
 		
 		if(result ==null) {
 			System.out.println("입력하신 정보가 없는 정보이거나 잘못된 이메일입니다. 로그인창으로 돌아갑니다.");
-			//TODO alert 메세지
-			response.sendRedirect("/pflogin");
-		}else {
+//			response.sendRedirect("/pflogin");
+			out.print(0);  // 0: email, name과 일치하는 회원정보가 없음
+			out.flush();
+			out.close();
+			return;
+		}
+		{
 			String host = "smtp.gmail.com";
 			int port = 587;
 			String from = "wjdghks5698@gmail.com";
-			String recipient = result.getEmail();
+			String recipient = vo.getEmail();
 			String subject = "아이디 찾기를 위한 이메일입니다.";
-			String content = result.getName() + "님의 아이디는 " + result.getId() + "입니다.";
+			String content = vo.getName() + "님의 아이디는 " + result.getId() + "입니다.";
 			
 			
 			Properties props = new Properties();
@@ -93,14 +98,17 @@ public class CheckEmailController extends HttpServlet {
 				msg.addRecipient(Message.RecipientType.TO, toAddr);
 				msg.setContent(content,"text/html; charset=UTF-8");
 				Transport.send(msg);
+				out.print(1);  // 1: email 보내기 성공
 			} catch (MessagingException e) {
-				PrintWriter script = response.getWriter();
-				script.println("<script>");
-				script.println("alert('이메일 전송에 실패했습니다.')");
-				script.println("history.back();");
-				script.println("<script>");
+				out.print(-1);  // -1: email 보내기 실패
+//				PrintWriter script = response.getWriter();
+//				script.println("<script>");
+//				script.println("alert('이메일 전송에 실패했습니다.')");
+//				script.println("history.back();");
+//				script.println("<script>");
 			}
-			
+			out.flush();
+			out.close();
 		}
 		
 	}

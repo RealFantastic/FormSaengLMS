@@ -114,10 +114,9 @@ public class MemberDao {
 				rs = pstmt.executeQuery();
 				
 				if(rs.next()) {
-					vo.setId(rs.getString("id"));
+					result = new MemberVo();
+					result.setId(rs.getString("id"));
 				}
-				
-				result = vo;		
 				
 			} catch (SQLException e) {
 				e.printStackTrace();

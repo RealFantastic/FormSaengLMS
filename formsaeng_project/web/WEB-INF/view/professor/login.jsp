@@ -49,7 +49,7 @@
 				<div class="findid_modal">
 					<div class="modal_content">
 						<div>
-						<form action="cemail" method="post">
+						<form id="frmEmail">
 							<table>
 									<tr>
 										<td class="font-3">이름을 입력하세요</td>
@@ -59,7 +59,7 @@
 									<tr>
 										<td class="font-3">이메일을 입력하세요</td>
 										<td><input type="email" name="email" id="inputEmail"></td>
-										<td><button type="submit">이메일 인증</button></td>
+										<td><button type="button" id="btnSendEmail">이메일 인증</button></td>
 									</tr>
 								</table>
 							</form>	
@@ -72,6 +72,34 @@
     </div>
    	</div>
 	<script>
+		$("#btnSendEmail").click(function(){
+			var inputName = $("#inputName").val().trim();
+			var inputEmail = $("#inputEmail").val().trim();
+			if(inputName == "" || inputEmail=="" ){
+				alert("이메일을 입력해주세요.");
+				$("#inputEmail").focus();
+				return;
+			}
+			$.ajax({
+				url:"cemail",
+				type:"post",
+				data: {name: inputName, email:inputEmail },
+				success:function(result){
+					console.log(result);
+					if(result == 0)  // 0: email, name과 일치하는 회원정보가 없음
+						alert("name, email이 일치하는 회원정보가 없습니다. 다시 입력해주세요.");
+					else if(result == 1)// 1: email 보내기 성공
+						alert("email인증메일 전송되었습니다. 메일 확인해주세요");
+					else // -1: email 보내기 실패
+						alert("email인증메일 전송에 실패했습니다. 다시 시도해주세요");
+				},
+				error: function(){
+					
+				}
+			});
+			
+		});
+		
 		$("#notice").click(function() {
 			location.href = "";
 		});
