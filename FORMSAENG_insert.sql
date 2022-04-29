@@ -455,10 +455,11 @@ NOCACHE
 
 INSERT INTO DEPARTMENT VALUES ('C001','컴퓨터공학과',40);
 INSERT INTO MEMBER VALUES ('S1111','아무개','0','960722-1111111','AAA@NAVER.COM','천안시 서북구','C001','010-1111-2222');
-INSERT INTO SUBJECT VALUES('C0101','JAVA기초','1','2201','3','폼생관 202호','40','Y','C001','전공필수','월','1교시');
-INSERT INTO SUBJECT VALUES('C0102','JAVA심화','1','2201','3','폼생관 202호','40','Y','C001','전공필수','월','2교시');
-INSERT INTO SUBJECT VALUES('M0101','시창청음','1','2201','3','폼생관 302호','40','Y','C001','전공필수','월','1교시');
-INSERT INTO SUBJECT VALUES('M0102','전공실기','1','2201','3','폼생관 304호','40','Y','C001','전공필수','월','2교시');
+INSERT INTO SUBJECT VALUES('C0101','JAVA기초','1','2201','3','폼생관 202호','40','Y','C001','전공필수','월','1교시','P2022958123');
+INSERT INTO SUBJECT VALUES('C0102','JAVA심화','1','2201','3','폼생관 202호','40','Y','C001','전공필수','월','2교시','P2022958123');
+INSERT INTO SUBJECT VALUES('M0101','시창청음','1','2201','3','폼생관 302호','40','Y','M001','전공필수','월','1교시','P2022923210');
+INSERT INTO SUBJECT VALUES('M0102','전공실기','1','2201','3','폼생관 304호','40','Y','M001','전공필수','월','2교시','P2022923210');
+
 -- DEPARTMENT INSERT 부서코드 부서이름 정원 김혜린 2022-04-20
 INSERT INTO DEPARTMENT VALUES ('M001','실용음악과',40);
 INSERT INTO DEPARTMENT VALUES ('ADMIN','관리자',5);
@@ -487,5 +488,7 @@ INSERT INTO ASSIGNMENT_LIST VALUES ((SEQ_ASG_NO.NEXTVAL), '과제 게시판 제�
 --강의 자료실 값 입력시 INSERT 쿼리문
 INSERT INTO REFERENCE VALUES ((SEQ_REFERENCE_NO.nextval), '강의자료', '하이','아무개', SYSTIMESTAMP, 'C0101');
 
+
 --주석주석주석
+
 COMMIT;
