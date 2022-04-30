@@ -13,20 +13,24 @@ public class SubjectVo {
 	private String classType;
 	private String courseDay;
 	private String coursePeriod;
-	
-	
+	private String deptName;
+	private String pfName;
 	@Override
 	public String toString() {
 		return "SubjectVo [subCode=" + subCode + ", subName=" + subName + ", courseGrade=" + courseGrade
 				+ ", courseSemester=" + courseSemester + ", courseCredit=" + courseCredit + ", courseClass="
 				+ courseClass + ", courseCapacity=" + courseCapacity + ", openYN=" + openYN + ", deptCode=" + deptCode
-				+ ", classType=" + classType + ", courseDay=" + courseDay + ", coursePeriod=" + coursePeriod + "]";
+				+ ", classType=" + classType + ", courseDay=" + courseDay + ", coursePeriod=" + coursePeriod
+				+ ", deptName=" + deptName + ", pfName=" + pfName + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + ", toString()=" + super.toString() + "]";
 	}
-	
-	
 	public SubjectVo() {
 		
 	}
+	
+	
+	
+	
 	public String getSubCode() {
 		return subCode;
 	}
@@ -62,6 +66,12 @@ public class SubjectVo {
 	}
 	public String getCoursePeriod() {
 		return coursePeriod;
+	}
+	public String getDeptName() {
+		return deptName;
+	}
+	public String getPfName() {
+		return pfName;
 	}
 	public void setSubCode(String subCode) {
 		this.subCode = subCode;
@@ -99,6 +109,16 @@ public class SubjectVo {
 	public void setCoursePeriod(String coursePeriod) {
 		this.coursePeriod = coursePeriod;
 	}
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+	public void setPfName(String pfName) {
+		this.pfName = pfName;
+	}
+	
+	
+	
+	
 	
 	
 	

@@ -49,58 +49,48 @@
 	<section id="subjects">
 		<div class="content_title">
 			<div class="title_name">
-				<h2 class="font5">추가한 과목 목록</h2>
-			</div>
-			<div class="search">
-				<select class="select_design font2" name="search" id="requirement">
-					<option class="option_design font2" value="dept">학과 검색</option>
-					<option class="option_design font2" value="name">과목 검색</option>
-					<option class="option_design font2" value="type">이수구분 검색</option>
-					<option class="option_design font2" value="grade">학년 검색</option>
-				</select> <input type="text" class="form-control search_input"
-					id="search_word" name="search_word" placeholder="검색어를 입력하세요">
-				<button type="button" class="btn btn-secondary">검색</button>
+				<h2 class="font5">수강신청 과목 추가</h2>
 			</div>
 		</div>
-		<div class="subject_list_container">
-			<table class="table">
-				<thead>
-					<tr>
-						<th scope="col"><input type="checkbox" name="allCheck"
-							id="all"></th>
-						<th scope="col">학과명</th>
-						<th scope="col">과목명</th>
-						<th scope="col">학점</th>
-						<th scope="col">과목 구분</th>
-						<th scope="col">담당 교수</th>
-						<th scope="col">강의실명</th>
-						<th scope="col">강의 교시</th>
-					</tr>
-				</thead>
-				<tbody>
-
-					<c:forEach var="subject" items="${subList}">
-						<tr>
-							<th scope="row"><input type="checkbox" name="checkRow"
-								id="checkRow"></th>
-							<th scope="row">${subject.deptName }</th>
-							<th scope="row">${subject.subName }</th>
-							<td>${subject.courseCredit }</td>
-							<td>${subject.classType }</td>
-							<td>${subject.pfName }</td>
-							<td>${subject.courseClass }</td>
-							<td>${subject.coursePeriod }</td>
-						</tr>
-					</c:forEach>
-			</table>
-			<button type="button" id="addSubject" class="btn btn-primary">과목
-				추가하기</button>
+		<div class="add_field">
+			<select class="select_design font2" name="department" id="department">
+			</select>
+			<input type="text" name="deptCode" id="deptCode" readonly="readonly">
 		</div>
 	</section>
+	
+	
+	
 	<script>
-		$("#addSubject").click(function() {
-			location.href = "";
+		$(function(){
+			console.log("페이지 로드 - jQuery 실행확인");
+			deptOption();
+			
 		});
+		function deptOption(){
+			$.ajax({
+				url:"deptLoad.ajx",
+				type:"post",
+				dataType:"json",
+				success:function(result){
+					console.log(result[0].deptName);
+					var html ="<option class='option_design font2' value='' selected>학과 선택</option>";
+					for(var i = 0; i < result.length; i++){						
+					html+= "<option class='option_design font2' value='"+ result[i].deptCode +"'>" +result[i].deptName +"</option>";
+					}
+					$("#department").append(html);
+					
+
+				},
+				error : function(request,status,error){
+					console.log(request);
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+
+							"\n"+"error:"+error);
+					console.log("code:"+request.status+"\n"+"message:"+request.responseText+
+							"\n"+"error:"+error);
+				}
+			});
+		}
 	</script>
 </body>
 </html>
