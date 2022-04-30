@@ -1,5 +1,3 @@
-<%@page import="kh.semi.notice.model.vo.NoticeVo"%>
-
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/css/reset.css">
 <link rel="stylesheet" type="text/css"
@@ -7,11 +5,14 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%@page import="kh.semi.notice.model.vo.NoticeVo"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>NoticeDetail</title>
+<title>NoticeEnroll</title>
 <!--부트스트랩-->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -33,20 +34,26 @@
 </head>
 
 <body>
-	<!-- 폼태그는 가지고 갈 데이터(값) 바로 앞에서 name이 꼭 필요함-->
-	<form id="mgNoticeFrom" action="mgbupdate" method="post">
-		<div class="body_div">
-			<div class="logoimg_enroll">
-				<img src="./resources/images/fromsaenglogo.png"
-					class="fromsaenglogo"> <img src="./resources/images/logo.png"
-					class="logo">
-			</div>
+
+	<div class="body_div">
+		<div class="logoimg_enroll">
+			<img src="./resources/images/fromsaenglogo.png" class="fromsaenglogo">
+			<img src="./resources/images/logo.png" class="logo">
+		</div>
+
+		<!-- 폼태그는 가지고 갈 데이터(값) 바로 앞에서 "name"이 꼭 필요함-->
+		<form id="mgNoticeFrom"
+			action="<%=request.getContextPath()%>/mgbdetail" method="post">
+			<%
+				NoticeVo nnvo = (NoticeVo) request.getAttribute("ddvo");
+			%>
+			<!-- //업데이트 서블릿에서 가져온이름 -->
 
 
 			<div class=title_search>
-				<div class="title font5">공지사항 상세보기</div>
+				<div class="title font5">공지사항 수정하기</div>
 				<div class="button_enroll">
-					<button type="button" class="btn btn-primary" id="updateBtn">공지사항
+					<button type="submit" class="btn btn-primary" id="insertBtn">공지사항
 						수정</button>
 					<button type="button" id="nt_list_btn" class="btn btn-primary">공지사항
 						목록</button>
@@ -54,43 +61,27 @@
 			</div>
 
 			<div class="mb-3 room">
-				<%
-					NoticeVo list = (NoticeVo) request.getAttribute("ssnoticeVo");
-				%>
-				<!-- 서블릿에 저장된 ssnoticevo 를 가져옴 -->
-				<input type="hidden" id="nno" value="<%=list.getBoardNoticeNo()%>">
-				<!-- hidden:숨겨놓은창 -->
 				<div class="font4">제목</div>
 				<div class="form-floating">
-					<div class="notice_detail_title" name="title">
-						<%=request.getAttribute("detailtitle")%>
+					<div class="update_title_box">
+						<label for="floatingTextarea"><%=nnvo.getBoardNoticeTitle()%></label>
 					</div>
 				</div>
 			</div>
 			<div class="mb-3 room">
 				<div class="font4">내용</div>
 				<div class="form-floating">
-					<div class="notice_detail_content" name="content">
-						<%=request.getAttribute("detailcontent")%>
+					<div class="update_content_box">
+						<label for="floatingTextarea2"><%=nnvo.getBoardNoticeContent()%></label>
 					</div>
 				</div>
 			</div>
-	</form>
-
+		</form>
 	</div>
-
-
-
 	<script>
 		/* 공지사항 목록 버튼 클릭 시 공지사항 리스트 페이지로 이동 */
 		$("#nt_list_btn").click(function() {
 			location.href = "mgblist";
-		})
-		/* 공지사항 수정 버튼 클릭 시 공지사항 수정 페이지로 이동 */
-		$("#updateBtn").click(function() {
-			var nno = $("#nno").val(); /* var nno에 input id=nno에 값(val)을 가져옴 */
-			console.log(nno);
-			location.href = "mgbupdate?nno=" + nno; // mgbupdate로 갈때 위 var nno를 같이 데리고 감
 		})
 	</script>
 </body>

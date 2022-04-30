@@ -17,13 +17,13 @@ import kh.semi.notice.model.vo.NoticeVo;
  * Servlet implementation class MgNoticeSelectSevlet
  */
 @WebServlet("/MgNoticeSelectSevlet")
-public class MgNoticeSelectSevlet extends HttpServlet {
+public class MgNoticeSelectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MgNoticeSelectSevlet() {
+    public MgNoticeSelectServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

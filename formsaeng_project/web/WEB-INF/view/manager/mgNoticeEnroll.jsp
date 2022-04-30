@@ -42,7 +42,7 @@
 		<form id="mgNoticeFrom"
 			action="<%=request.getContextPath()%>/mgbinsert" method="post">
 			<div class=title_search>
-				<div class="title">공지사항 등록하기</div>
+				<div class="title font5">공지사항 등록하기</div>
 				<div class="button_enroll">
 					<button type="submit" class="btn btn-primary" id="insertBtn">공지사항
 						등록</button>
@@ -52,29 +52,39 @@
 			</div>
 
 			<div class="mb-3 room">
-				<div class="font4">제목</div>
-				<div class="form-floating">
-					<textarea class="form-control enroll_box" name="title"
-						placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-					<label for="floatingTextarea">제목을 입력하세요.</label>
+				<div class="form-group">
+				    <label for="title">제목</label>
+				    <input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력하세요.">
 				</div>
 			</div>
 			<div class="mb-3 room">
-				<div class="font4">내용</div>
-				<div class="form-floating">
-					<textarea class="form-control enroll_box" name="content"
-						placeholder="Leave a comment here" id="floatingTextarea2"
-						style="height: 300px"></textarea>
-					<label for="floatingTextarea2">내용을 입력하세요.</label>
+				<div class="form-group">
+				    <label for="content">내용</label>
+					<textarea class="form-control" name="content" rows="20" id="content" placeholder="내용을 입력하세요."></textarea>
 				</div>
 			</div>
 		</form>
 	</div>
 		<script>
-		/* 공지사항 목록 버튼 클릭 시 공지사항 리스트 페이지로 이동 */
+		/* 공지사항 목록 버튼 클릭 시 발생하는 이벤트 =공지사항 리스트 페이지로 이동 */
 		$("#nt_list_btn").click(function() {
 			location.href = "mgblist";
 		})
+		
+		// 공지사항 등록 버튼을 클릭하면 발생하는 이벤트 = class"enroll_box"경우 제목과 내용 두군데라서 리스트 형식으로 나와서 안됨
+		// id"floatingTextarea"(제목)"floatingTextarea2"(내용)은 각자 여서 가능함
+		/* $("#insertBtn").click(function() {
+			$("#floatingTextarea").val( $("#floatingTextarea").val().replace(/\r\n|\n/,"<br>") );
+			//#floatingTextarea에 있는. 값을. 치환(이걸,이걸로)하여 #floatingTextarea에. 값으로 저장한다.
+			$("#floatingTextarea2").val( $("#floatingTextarea2").val().replaceAll(/\r\n|\n/,"<br>") );
+			
+			//submit 하고 싶을때 작성한다.
+			//여기에서는 버튼 스타일이 submit이 아니고 button여서 작성해줬다.
+			$("#mgNoticeFrom").submit();
+			//form id에. submit한다.
+		}) */
+	
+		
 		</script>
 </body>
 </html>

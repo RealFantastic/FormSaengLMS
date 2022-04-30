@@ -13,7 +13,7 @@ import kh.semi.notice.model.service.NoticeService;
 import kh.semi.notice.model.vo.NoticeVo;
 
 @WebServlet("/mgblist")
-public class MgNoticeListSevlet extends HttpServlet {
+public class MgNoticeListServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doGet /mgnotice");

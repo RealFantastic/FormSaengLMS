@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MgMessageSevlet
+ * Servlet implementation class MgCalenderServlet
  */
-@WebServlet("/mgmsg")
-public class MgMessageSevlet extends HttpServlet {
+@WebServlet("/mgcal")
+public class MgCalendarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MgMessageSevlet() {
+    public MgCalendarServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +26,10 @@ public class MgMessageSevlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/view/manager/mgMSG.jsp").forward(request, response);
+		System.out.println("doGet : mgcal" );
+		request.getRequestDispatcher("/WEB-INF/view/manager/mgCalendar.jsp").forward(request, response);
+		// getRequestDispatcher=페이지 이동 getContextPath()=(root : /lms)+경로
+		
 	}
 
 	/**

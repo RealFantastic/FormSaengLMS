@@ -7,12 +7,16 @@ public class NoticeVo {
 	private String boardNoticeWriter; // 공지사항 작성자
 	private String boardNoticeDate; // 공지사항 작성일자
 	private String id; // 작성자 아이디
+	
+	private String rn;
+
+
 
 	@Override
 	public String toString() {
-		return "MgBoardListVo [boardNoticeNo=" + boardNoticeNo + ", boardNoticeTitle=" + boardNoticeTitle
+		return "NoticeVo [boardNoticeNo=" + boardNoticeNo + ", boardNoticeTitle=" + boardNoticeTitle
 				+ ", boardNoticeContent=" + boardNoticeContent + ", boardNoticeWriter=" + boardNoticeWriter
-				+ ", boardNoticeDate=" + boardNoticeDate + ", id=" + id + "]";
+				+ ", boardNoticeDate=" + boardNoticeDate + ", id=" + id + ", rn=" + rn + "]";
 	}
 
 	public int getBoardNoticeNo() {
@@ -61,6 +65,14 @@ public class NoticeVo {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getRn() {
+		return rn;
+	}
+
+	public void setRn(String rn) {
+		this.rn = rn;
 	}
 
 }

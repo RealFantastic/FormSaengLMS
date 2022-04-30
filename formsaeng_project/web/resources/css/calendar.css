@@ -1,3 +1,6 @@
-.cal{
-	/* 입력 모달창 이후 ..... */
+.btn{
+	    float: right !important;
+	    width: 180px !important; 
+	    margin:-50px 0 20px 1200px;
+	    
 }

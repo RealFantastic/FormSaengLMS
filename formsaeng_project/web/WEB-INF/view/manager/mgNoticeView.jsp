@@ -1,12 +1,11 @@
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/resources/css/reset.css">
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/resources/css/notice.css">
+<link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/resources/css/reset.css">
+<link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/resources/css/notice.css">
 <%@page import="kh.semi.notice.model.vo.NoticeVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,10 +49,10 @@
 			</div>
 		</header>
 		<div class=title_search>
-			<div class="title">공지사항</div>
+			<div class="title font5">공지사항</div>
 			<div class="dropdown notice_search">
 				<div class=drop_search>
-					<a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+					<a class="btn btn-secondary dropdown-toggle font3" href="#" role="button"
 						id="dropdownMenuLink" data-bs-toggle="dropdown"
 						aria-expanded="false"> 전체 </a>
 
@@ -63,7 +62,7 @@
 					</ul>
 				</div class=drop_search>
 				<div>
-					<input class="form-control notice_input" list="datalistOptions"
+					<input class="form-control font3 notice_input" list="datalistOptions"
 						id="exampleDataList" placeholder="공지사항 검색">
 				</div>
 				<div class=drop_search>
@@ -72,11 +71,11 @@
 			</div>
 		</div>
 		<div class="table_div">
-			<table class="table table-hover">
+			<table class="table font2 table-hover">
 				<thead>
 					<tr>
 						<th>
-							<input type="checkbox" name="allCheck" onclick="allChk(this.checked);"/>
+							<input type="checkbox" name="allCheck" onclick="allChk(event);"/>
 						</th>
 						<th scope="col">NO</th>
 						<th scope="col">제목</th>
@@ -87,10 +86,15 @@
 				</thead>
 				<tbody>
 					<%--<tr onclick="detailview(' no ')" data-속성(넣고싶은 이름) ex(data-boardno = '+<%=noticeList.get(0).getBoardNoticeTitle() %>')> --%>
+					<c:if test="${fn:length(boardVolist) == 0 }">
+						<tr Class="no_list">
+							<td colspan="6"> 조회된 내용이 없습니다. </td>
+						</tr>
+					</c:if>
 					<c:forEach var="notice" items="${boardVolist}">
-						<tr Class="nt_detail_list">
+						<tr Class="nt_detail_list" data-nno="${notice.boardNoticeNo}">
 							<td><input type="checkbox" name="chk" value=${notice.boardNoticeNo}></td>
-							<th scope="row" class="nno">${notice.boardNoticeNo }</th>
+							<th scope="row" class="nno">${notice.rn }</th>
 							<td>${notice.boardNoticeTitle }</td>
 							<td>${notice.boardNoticeContent }</td>
 							<td>${notice.boardNoticeWriter }</td>
@@ -105,19 +109,19 @@
 			<ul class="pagination">
 				<li class="page-item"><a class="page-link" href="#"
 					aria-label="Previous"> <span aria-hidden="true"
-						class="Page_order">&laquo;</span>
+						class="font3 Page_order">&laquo;</span>
 				</a></li>
-				<li class="page-item"><a class="page-link Page_order" href="#">1</a></li>
-				<li class="page-item"><a class="page-link Page_order" href="#">2</a></li>
-				<li class="page-item"><a class="page-link Page_order" href="#">3</a></li>
+				<li class="page-item"><a class="page-link font3 Page_order" href="#">1</a></li>
+				<li class="page-item"><a class="page-link font3 Page_order" href="#">2</a></li>
+				<li class="page-item"><a class="page-link font3 Page_order" href="#">3</a></li>
 				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Next"> <span aria-hidden="true" class="Page_order">&raquo;</span>
+					aria-label="Next"> <span aria-hidden="true" class=" font3 Page_order">&raquo;</span>
 				</a></li>
 			</ul>
 		</nav>
 		<div class="add_delete">
 			<button type="button" id="nt_add_btn" class="btn btn-secondary">공지사항 추가</button>
-			<button type="submit" id="nt_del_btn" class="btn btn-secondary">공지사항 삭제</button>
+			<button type="button" id="nt_del_btn" class="btn btn-secondary">공지사항 삭제</button>
 		</div>
 	</div>
 
@@ -127,66 +131,89 @@
 		$("#nt_add_btn").click(function() {
 			location.href = "mgbinsert";
 		})
+
 		
 		/* 공지사항 1건 클릭 시 공지사항 상세 페이지로 이동 */
 		/* 강사님 도움 */
-		$(".nt_detail_list").click(function() {
-			console.log(this);
-			console.log($(this));
-			console.log($(this).children(".nno"));
-			console.log($(this).children(".nno").text());
-			var noticeNo = $(this).children(".nno").text();
-		location.href = "mgbdetail?nno="+noticeNo;
+		$(".nt_detail_list").click(function(e) {
+			if(e.target.type  == 'checkbox'){
+				
+				return;
+				
+			}else{
+				var noticeNo =$(this).data("nno");
+				location.href = "mgbdetail?nno="+noticeNo;
+			}
+// 			debugger
 		})
 		
 		/* 공지사항 삭제 버튼 클릭 시 공지사항 삭제하기(앞 체크박스 체크) ★ 메이데이 메이데이*/
 			//모두 체크 
-		/* function allChk(obj){
-			var chkObj=document.getElementsByName("RowCheck");
-			var rowCnt=chkObj.length-1;
-			var check=obj.checked;
-			if(check){
-				for(var i=0; i<=rowCnt; i++){
-					if(chkObj[i].type=="checkbox")
-						chkObj[i].checked=true;
-				}else{
-					for(var i=0; i<=rowCnt; i++){
-						if(chkObj[i].type=="checkbox"){
-							chkObj[i].checked=false;
-						}
+		function allChk(e){
+			// onclick=이벤트가 발생한 정보를 담고있다 여기서는 onclick=allChk(event) 이부분을 얘기함.
+			if(e.target.checked){
+			// 만약에 e에. target이. checked상태면
+				$("input:checkbox[name=chk]").each(function(i,iVal) {
+				// input에서 type에서 checkbox이고 name이 chk인것을 each개별로 돌린다.
+					if(iVal.checked){
+					// 만약 iVal이.checked되어 있으면 
+						return;
+						//아무것도 안해요
+					}else{
+					//iVal이.checked <안>되어 있으면
+						iVal.click()
+						//iVal을.click하세요.
 					}
-				}
+				});
+				
+			}else{
+				$("input:checkbox[name=chk]").each(function(i,iVal) {
+					if(iVal.checked){
+						iVal.click()
+					}else{
+						return;
+					}
+				});
 			}
 		}
-		// N개 체크
-		function fn_userDel(){
-			var userid="";
-			var memberChk=document.getElementsByName("RowCheck");
-			var chked=false;
-			var indexid=false;
-			for(i=0; i<memberChk.length; i++){
-				if(memberChk[i].checked){
-					if(indexid){
-						userid=userid+'-';
-					}
-					userid=userid+memberChk[i].vlue;
-					indexid=true;
+		// 공지사항 삭제
+		$("#nt_del_btn").click(function() {
+			
+			var delList = [];
+			// 체크된 board no 가져와돼 
+			$("input:checkbox[name=chk]").each(function(i,iVal) {
+				if(iVal.checked){
+					delList.push(iVal.value);
 				}
-			}
-		}if(!indexid){
-			alert("삭제할꺼 선택해");
-			return;
-		}
-		document.userForm.delUserid.value=userid;
-		var agree=confirm("삭제??");
-		if(agree){
-			document.userForm.execute.value="userDel";
-			document.userForm.submit();
-		} */
-		
-		
-		
-		
+			});
+			// 체크된 board no list 로 저장
+			// list 를 controller 보냄 
+			$.ajax({
+				url:"delete.ax",
+				type: "post",
+				// json형태로 데이터를 전송하는 경우 key명을 VO/DTO의 멤버변수명과 동일하게 해야 함. - 주로 장바구니, 결재, 체크박스 목록 중 일부 선택 등		
+				contentType:"application/json; charset:UTF-8",
+				dataType:"text", 
+				data: JSON.stringify(delList),
+				success: function(data){
+					console.log("data : "+ data)
+					// 예시 1 - 단순값 전달받음. "성공","실패", 1, 0 - 주로 login성공여부, 글작성성공여부
+					if(data == "succeess"){
+						alert("삭제 되었습니다.");
+						
+						location.reload();
+					} else {
+						alert("삭제실패");
+					}
+				},
+				error : function(request,status,error) {
+					console.log(request);
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+
+					"\n"+"error:"+error);
+			 	}
+			});
+			
+		});
 		
 	</script>
 </body>

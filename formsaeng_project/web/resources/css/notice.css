@@ -30,16 +30,6 @@
 	right: 0;
 }
 
-.btn {
-	font-size: 1.111rem;
-	font-family: 'NanumBarunGothicYetHangul';
-}
-
-.notice_input {
-	font-size: 1.111rem;
-	font-family: 'NanumBarunGothicYetHangul';
-}
-
 .title_search {
 	display: flex;
 	justify-content: space-between;
@@ -47,8 +37,6 @@
 }
 
 .title {
-	font-family: 'NanumBarunGothicYetHangul';
-	font-size: 2rem;
 	position: relative;
 }
 
@@ -75,16 +63,8 @@
 	min-height: 300px;
 }
 
-.table {
-	font-size: 1rem;
-	font-family: 'NanumBarunGothicYetHangul';
-	/* width: 1600px; */
-	/* margin:auto; */
-}
-
 .Page_order {
-	font-size: 1.111rem;
-	font-family: 'NanumBarunGothicYetHangul';
+
 	color: black;
 }
 
@@ -125,4 +105,36 @@
 	border-radius: 0.25rem;
 	min-height: 300px;
 	padding: 1rem 0.75rem;
+	/* 줄바꾸기, 띄어쓰기 여러번...가능 */
+	white-space: pre-line;
 }
+
+/* 공지사항 수정하기 - noticeUpdate */
+.update_title_box{
+	border: 1px solid #ced4da;
+	border-radius: 0.25rem;
+	min-height: 58px;
+	padding: 1rem 0.75rem;
+
+	
+}
+.update_content_box{
+    height: 300px;
+	border: 1px solid #ced4da;
+	border-radius: 0.25rem;
+	min-height: 58px;
+	padding: 1rem 0.75rem;
+	
+}
+
+.no_list {
+	text-align: center;
+}
+
+
+
+
+
+
+
+

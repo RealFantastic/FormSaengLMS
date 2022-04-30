@@ -2,6 +2,7 @@ package kh.semi.notice.model.dao;
 
 import static kh.semi.lms.common.jdbc.JdbcDbcp.*;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +14,7 @@ import java.util.List;
 import org.eclipse.jdt.internal.compiler.util.SimpleSetOfCharArray;
 
 import kh.semi.notice.model.vo.NoticeVo;
+import oracle.sql.ArrayDescriptor;
 
 public class NoticeDao {
 
@@ -25,9 +27,9 @@ public class NoticeDao {
 	public ArrayList<NoticeVo> view(Connection conn) {
 		ArrayList<NoticeVo> result = null;
 
-		String sql = "select board_notice_no, " + "board_notice_title, " + "board_notice_content, "
+		String sql = " select rownum rn , a.* from ( select board_notice_no, " + "board_notice_title, " + "board_notice_content, "
 				+ "board_notice_writer," + " TO_CHAR(board_notice_date, 'YYYY-MM-DD') board_notice_date"
-				+ " from notice ORDER BY BOARD_NOTICE_NO DESC";
+				+ " from notice ORDER BY BOARD_NOTICE_NO DESC ) a";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -41,6 +43,7 @@ public class NoticeDao {
 				vo.setBoardNoticeContent(rs.getString("board_Notice_Content"));
 				vo.setBoardNoticeWriter(rs.getString("board_Notice_Writer"));
 				vo.setBoardNoticeDate(rs.getString("board_Notice_Date"));
+				vo.setRn(rs.getString("rn"));
 				System.out.println(vo); // Console - sql값 확인용
 
 				result.add(vo);
@@ -105,7 +108,7 @@ public class NoticeDao {
 	public NoticeVo detailBoardView(Connection conn, int nno) {
 		NoticeVo result = null;
 
-		String sql = "select board_notice_title, board_notice_content from notice where board_notice_no=?";
+		String sql = "select board_notice_no,board_notice_title, board_notice_content from notice where board_notice_no=?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -114,9 +117,10 @@ public class NoticeDao {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 			NoticeVo vo = new NoticeVo();
+			vo.setBoardNoticeNo(rs.getInt("board_notice_no"));
 			vo.setBoardNoticeTitle(rs.getString("board_Notice_Title"));
 			vo.setBoardNoticeContent(rs.getString("board_Notice_Content"));
-
+			
 			result=vo;
 			}
 		} catch (SQLException e) {
@@ -132,26 +136,18 @@ public class NoticeDao {
 	}
 	
 	// 공지사항 삭제 ★★★체크박스... 어렵다 ... 메이데이메이데이...
-		public NoticeVo deleteBoard(Connection conn, int nno) {
-			NoticeVo result= null;
+		public int deleteBoard(Connection conn, int[] dellist) {
 			
-			String sql="DELETE from notice where board_notice_no=?";
-			
+			String sql="DELETE from notice where board_notice_no = ?";
+			int cnt = 0;
 			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, nno);
+			    // then obtain an Array filled with the content below
 				
-				rs = pstmt.executeQuery();
-				
-				if(rs.next()) {
-					NoticeVo vo = new NoticeVo();
+				for(int i =0; i<dellist.length ; i++) {
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setInt(1, dellist[i]);
+					cnt = pstmt.executeUpdate();
 					
-					vo.setBoardNoticeNo(rs.getInt("board_Notice_No"));
-					vo.setBoardNoticeTitle(rs.getString("board_Notice_Title"));
-					vo.setBoardNoticeContent(rs.getString("board_Notice_Content"));
-					vo.setBoardNoticeWriter(rs.getString("board_Notice_Writer"));
-					vo.setBoardNoticeDate(rs.getString("board_Notice_Date"));
-					result=vo;
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -159,8 +155,7 @@ public class NoticeDao {
 				close(rs);
 				close(pstmt);
 			}
-			System.out.println(result);
-			return result;
+			return cnt;
 		}
 		
 		// 공지사항 검색

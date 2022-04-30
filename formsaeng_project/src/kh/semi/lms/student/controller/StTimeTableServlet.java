@@ -1,4 +1,4 @@
-package kh.semi.lms.manager.controller;
+package kh.semi.lms.student.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MgCalenderServlet
+ * Servlet implementation class StTimeTableServlet
  */
-@WebServlet("/mgcal")
-public class MgCalenderServlet extends HttpServlet {
+@WebServlet("/sttime")
+public class StTimeTableServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MgCalenderServlet() {
+    public StTimeTableServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,10 +26,9 @@ public class MgCalenderServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doget : mgcal" );
-		request.getRequestDispatcher("/WEB-INF/view/manager/mgCalendar.jsp").forward(request, response);
-		// getRequestDispatcher=페이지 이동 getContextPath()=(root : /lms)+경로
-		
+		System.out.println("doGet : StTime");
+		request.getRequestDispatcher("WEB-INF/view/student/stTimeTable.jsp").forward(request, response);;
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

@@ -49,12 +49,12 @@ public class NoticeService {
 		
 		
 		// 공지사항 삭제★★★ 메이데이.. 메이.. 데..이
-		public NoticeVo deleteBoard(int nno) {
+		public int deleteBoard(int[] dellist) {
 			Connection conn=getConnection();
 			
-			NoticeVo vo=new NoticeDao().deleteBoard(conn,nno);
+			int cnt =new NoticeDao().deleteBoard(conn,dellist);
 			close(conn);
-			return vo;
+			return cnt;
 		}
 		
 		

@@ -34,6 +34,7 @@ public class MgNoticeDetailServlet extends HttpServlet {
 		if(vo!=null) {
 			request.setAttribute("detailtitle", vo.getBoardNoticeTitle());
 			request.setAttribute("detailcontent", vo.getBoardNoticeContent());
+			request.setAttribute("ssnoticeVo", vo); //SSnoticeVo에 vo를 저장했음
 			request.getRequestDispatcher("WEB-INF/view/manager/mgNoticeDetail.jsp").forward(request, response);
 		}
 
