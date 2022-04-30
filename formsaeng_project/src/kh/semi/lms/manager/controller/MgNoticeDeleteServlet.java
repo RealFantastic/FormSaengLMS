@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
 import kh.semi.notice.model.service.NoticeService;
@@ -45,22 +43,27 @@ public class MgNoticeDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		BufferedReader br = request.getReader();
+//		버퍼리더 호출
 		String reqData = br.readLine();
-		
+//		화면에서 받아온 값을 버퍼리더를 통해서 변수에 담음
 		Gson gson = new Gson();
+//		gson 라이브러리 호출
 		ArrayList<Integer> nolist= gson.fromJson(reqData.toString(), new TypeToken<ArrayList<Integer>>(){}.getType());
+//		인트형 객체배열인 nolist, 담아온 값을 json으로 형변환, TypeToken<ArrayList<Integer>> => 제네릭
 		int[] dellist = nolist.stream().mapToInt(Integer::intValue).toArray();
+//		인트형 배열인 dellist에 
 		System.out.println("reqData :"+nolist.toString());
-		int cnt = new NoticeService().deleteBoard(dellist);
 		
+		int cnt = new NoticeService().deleteBoard(dellist);
+//		인트형 cnt에 dao에서 받아온 걸 서비스가 dellist를 챙겨서 넘겨준다.
 		if(cnt > 0) {
-
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
+//			화면에 뿌려주는 객체 = PrintWriter 짝꿍getWriter
 			out.print("succeess");
-			out.flush();		
+			out.flush(); //비워준다.
+			out.close(); //PrintWriter 닫아준다.
 		}
 		doGet(request, response);
 	}

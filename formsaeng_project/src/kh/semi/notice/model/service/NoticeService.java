@@ -48,7 +48,7 @@ public class NoticeService {
 		}
 		
 		
-		// 공지사항 삭제★★★ 메이데이.. 메이.. 데..이
+		// 공지사항 삭제(Delete)
 		public int deleteBoard(int[] dellist) {
 			Connection conn=getConnection();
 			

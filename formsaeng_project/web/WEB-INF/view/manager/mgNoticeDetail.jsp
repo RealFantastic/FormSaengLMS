@@ -1,9 +1,7 @@
 <%@page import="kh.semi.notice.model.vo.NoticeVo"%>
 
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/resources/css/reset.css">
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/resources/css/notice.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/reset.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/notice.css">
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -42,7 +40,6 @@
 					class="logo">
 			</div>
 
-
 			<div class=title_search>
 				<div class="title font5">공지사항 상세보기</div>
 				<div class="button_enroll">
@@ -69,9 +66,9 @@
 			</div>
 			<div class="mb-3 room">
 				<div class="font4">내용</div>
-				<div class="form-floating">
+				<div>
 					<div class="notice_detail_content" name="content">
-						<%=request.getAttribute("detailcontent")%>
+						<pre class="font2"><%=request.getAttribute("detailcontent")%></pre>
 					</div>
 				</div>
 			</div>

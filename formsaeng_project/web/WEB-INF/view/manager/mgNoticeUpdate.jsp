@@ -1,7 +1,5 @@
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/resources/css/reset.css">
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/resources/css/notice.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/reset.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/notice.css">
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -53,10 +51,8 @@
 			<div class=title_search>
 				<div class="title font5">공지사항 수정하기</div>
 				<div class="button_enroll">
-					<button type="submit" class="btn btn-primary" id="insertBtn">공지사항
-						수정</button>
-					<button type="button" id="nt_list_btn" class="btn btn-primary">공지사항
-						목록</button>
+					<button type="submit" class="btn btn-primary" id="insertBtn">수정완료</button>
+					<button type="button" id="nt_list_btn" class="btn btn-primary">공지사항 목록</button>
 				</div>
 			</div>
 
@@ -70,11 +66,13 @@
 			</div>
 			<div class="mb-3 room">
 				<div class="font4">내용</div>
-				<div class="form-floating">
+				
 					<div class="update_content_box">
-						<label for="floatingTextarea2"><%=nnvo.getBoardNoticeContent()%></label>
+						<label for="floatingTextarea2">
+							<pre class="font2"><%=nnvo.getBoardNoticeContent()%></pre>
+						</label>
 					</div>
-				</div>
+				
 			</div>
 		</form>
 	</div>

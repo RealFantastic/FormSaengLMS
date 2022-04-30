@@ -2,8 +2,7 @@
 <link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/resources/css/notice.css">
 <%@page import="kh.semi.notice.model.vo.NoticeVo"%>
 <%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
@@ -26,14 +25,11 @@
 	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 	crossorigin="anonymous"></script>
 <!-- 글자 -->
-<link
-	href="https://hangeul.pstatic.net/hangeul_static/css/NanumBarunGothicYetHangul.css"
-	rel="stylesheet">
+<link href="https://hangeul.pstatic.net/hangeul_static/css/NanumBarunGothicYetHangul.css" rel="stylesheet">
 </head>
 
 <body>
-	<form id="boardFrm" action="<%=request.getContextPath()%>/board/insert"
-		method="post"></form>
+	<form id="boardFrm" action="<%=request.getContextPath()%>/board/insert" method="post"></form>
 
 	<div class="body_div">
 		<header class="logo_button">
@@ -75,7 +71,8 @@
 				<thead>
 					<tr>
 						<th>
-							<input type="checkbox" name="allCheck" onclick="allChk(event);"/>
+							<input type="checkbox" name="allCheck" onclick="allChk(event);"/><!-- onclick 이벤트 -->
+
 						</th>
 						<th scope="col">NO</th>
 						<th scope="col">제목</th>
@@ -88,6 +85,7 @@
 					<%--<tr onclick="detailview(' no ')" data-속성(넣고싶은 이름) ex(data-boardno = '+<%=noticeList.get(0).getBoardNoticeTitle() %>')> --%>
 					<c:if test="${fn:length(boardVolist) == 0 }">
 						<tr Class="no_list">
+							<!-- 보여질 공지사항이 없을 경우 -->
 							<td colspan="6"> 조회된 내용이 없습니다. </td>
 						</tr>
 					</c:if>
@@ -105,6 +103,8 @@
 			</table>
 		</div>
 		<br>
+
+		<!-- 페이징처리 -->
 		<nav aria-label="Page navigation example">
 			<ul class="pagination">
 				<li class="page-item"><a class="page-link" href="#"
@@ -119,6 +119,7 @@
 				</a></li>
 			</ul>
 		</nav>
+
 		<div class="add_delete">
 			<button type="button" id="nt_add_btn" class="btn btn-secondary">공지사항 추가</button>
 			<button type="button" id="nt_del_btn" class="btn btn-secondary">공지사항 삭제</button>
@@ -132,7 +133,7 @@
 			location.href = "mgbinsert";
 		})
 
-		
+
 		/* 공지사항 1건 클릭 시 공지사항 상세 페이지로 이동 */
 		/* 강사님 도움 */
 		$(".nt_detail_list").click(function(e) {
@@ -146,9 +147,10 @@
 			}
 // 			debugger
 		})
-		
-		/* 공지사항 삭제 버튼 클릭 시 공지사항 삭제하기(앞 체크박스 체크) ★ 메이데이 메이데이*/
-			//모두 체크 
+
+
+		/* 공지사항 삭제 버튼 클릭 시 공지사항 삭제하기(앞 체크박스 체크) */
+// 		모두 체크 
 		function allChk(e){
 			// onclick=이벤트가 발생한 정보를 담고있다 여기서는 onclick=allChk(event) 이부분을 얘기함.
 			if(e.target.checked){
@@ -176,32 +178,40 @@
 				});
 			}
 		}
+
 		// 공지사항 삭제
 		$("#nt_del_btn").click(function() {
-			
 			var delList = [];
-			// 체크된 board no 가져와돼 
+// 			delList에 배열로 저장된다
 			$("input:checkbox[name=chk]").each(function(i,iVal) {
+// 			input에서 type이 checkboxdl인것에 name이 chk인것을 개별로 돌린다.
 				if(iVal.checked){
+// 				만약에 iVal가 checked면
 					delList.push(iVal.value);
+// 					delList에 push한다. iVal에 value(값)을
 				}
 			});
-			// 체크된 board no list 로 저장
-			// list 를 controller 보냄 
+
 			$.ajax({
 				url:"delete.ax",
+// 				MgNoticeDeleteServlet.java에 delete.ax로 URL보냄
 				type: "post",
-				// json형태로 데이터를 전송하는 경우 key명을 VO/DTO의 멤버변수명과 동일하게 해야 함. - 주로 장바구니, 결재, 체크박스 목록 중 일부 선택 등		
+// 				타입은 post임
 				contentType:"application/json; charset:UTF-8",
+// 				json형식으로 바꿔준다
 				dataType:"text", 
+// 				데이터 타입은 text임
 				data: JSON.stringify(delList),
+// 				데이터 delList를 json형식으로 바꿔준다. stringfy
 				success: function(data){
+// 				성공했으면 data를 가지고 함수 실행한다.
 					console.log("data : "+ data)
-					// 예시 1 - 단순값 전달받음. "성공","실패", 1, 0 - 주로 login성공여부, 글작성성공여부
+					// 단순값 전달받음. "성공","실패", 1, 0 - 주로 login성공여부, 글작성성공여부
 					if(data == "succeess"){
 						alert("삭제 되었습니다.");
 						
 						location.reload();
+// 						페이지를 다시 로드한다.
 					} else {
 						alert("삭제실패");
 					}

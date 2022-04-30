@@ -22,7 +22,7 @@ public class NoticeDao {
 	private Statement stmt = null;
 	private ResultSet rs = null;
 
-	
+
 	//공지사항 리스트
 	public ArrayList<NoticeVo> view(Connection conn) {
 		ArrayList<NoticeVo> result = null;
@@ -58,8 +58,8 @@ public class NoticeDao {
 		System.out.println(result);
 		return result;
 	}
-	
-	
+
+
 	//공지사항 등록
 	public int insertBoard(Connection conn, NoticeVo vo) {
 //		이름                   널?       유형             
@@ -102,8 +102,8 @@ public class NoticeDao {
 		System.out.println("Dao result : " + result);
 		return result;
 	}
-	
-	
+
+
 	// 공지사항 상세
 	public NoticeVo detailBoardView(Connection conn, int nno) {
 		NoticeVo result = null;
@@ -132,10 +132,9 @@ public class NoticeDao {
 
 		System.out.println(result);
 		return result;
-
 	}
-	
-	// 공지사항 삭제 ★★★체크박스... 어렵다 ... 메이데이메이데이...
+
+	// 공지사항 삭제
 		public int deleteBoard(Connection conn, int[] dellist) {
 			
 			String sql="DELETE from notice where board_notice_no = ?";
@@ -146,7 +145,8 @@ public class NoticeDao {
 				for(int i =0; i<dellist.length ; i++) {
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setInt(1, dellist[i]);
-					cnt = pstmt.executeUpdate();
+					cnt += pstmt.executeUpdate();
+					// cnt에 누적(+=) 
 					
 				}
 			} catch (SQLException e) {
@@ -155,9 +155,11 @@ public class NoticeDao {
 				close(rs);
 				close(pstmt);
 			}
+			System.out.println("cnt"+cnt);
 			return cnt;
 		}
-		
+
+
 		// 공지사항 검색
 		public List<NoticeVo> selecNotice(Connection conn, String searchCondition, String searchValue){
 			List<NoticeVo> noticeList=new ArrayList<>();

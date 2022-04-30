@@ -106,7 +106,7 @@
 	min-height: 300px;
 	padding: 1rem 0.75rem;
 	/* 줄바꾸기, 띄어쓰기 여러번...가능 */
-	white-space: pre-line;
+/* 	white-space: pre-line; */
 }
 
 /* 공지사항 수정하기 - noticeUpdate */
@@ -119,16 +119,20 @@
 	
 }
 .update_content_box{
-    height: 300px;
+    height: auto;
 	border: 1px solid #ced4da;
 	border-radius: 0.25rem;
-	min-height: 58px;
+	min-height: 300px;
 	padding: 1rem 0.75rem;
 	
 }
 
 .no_list {
 	text-align: center;
+}
+
+pre{
+	 font-family: 'NanumBarunGothicYetHangul' !important;
 }
 
 
