@@ -39,11 +39,18 @@ public class ReferenceDao {
 	public ArrayList<ReferenceVo> ReferenceBoardlist(Connection conn){
 		ArrayList<ReferenceVo> volist = null;
 		
-		String sql = "select REF_NO,"
-				+"REF_TITLE,"
-				+"REF_WRITER,"
-				+"TO_CHAR(REF_WRITE_DATE,'YYYY_MM_DD') REF_WRITE_DATE"
-				+"SUBJECT_CODE";
+		String sql = "select * from reference";
+				
+				
+				
+				
+				
+//				"select REF_NO,"
+//				+"REF_TITLE,"
+//				+"REF_WRITER,"
+//				+"TO_CHAR(REF_WRITE_DATE,'YYYY_MM_DD') REF_WRITE_DATE,"
+//				+"SUBJECT_CODE"
+//				+"FROM REFERENCE";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -54,7 +61,7 @@ public class ReferenceDao {
 				vo.setLbATitle(rs.getString("REF_TITLE"));
 				vo.setLbAWriter(rs.getString("REF_WRITER"));
 				vo.setLbADate(rs.getString("REF_WRITE_DATE"));
-				vo.setLbACode(rs.getString("SEBJECT_CODE"));
+				vo.setLbACode(rs.getString("SUBJECT_CODE"));
 				System.out.println(vo);
 				volist.add(vo);
 				
@@ -98,7 +105,7 @@ public class ReferenceDao {
 			if(rs.next()) {
 			ReferenceVo vo = new ReferenceVo();
 			vo.setLbATitle(rs.getString("REF_Title"));
-			vo.setLbACotent(rs.getString("REF_Content"));
+			vo.setLbAContent(rs.getString("REF_Content"));
 			result=vo;
 			}
 		} catch (SQLException e) {

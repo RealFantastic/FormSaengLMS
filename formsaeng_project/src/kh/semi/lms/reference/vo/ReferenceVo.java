@@ -3,7 +3,7 @@ package kh.semi.lms.reference.vo;
 public class ReferenceVo {
 	private int lbAno; //강의자료실 번호임
 	private String lbATitle; //강의자료실 제목임
-	private String lbACotent; //강의자료실 내용
+	private String lbAContent; //강의자료실 내용
 	private String lbAWriter; //강의자료실 글쓴이
 	private String lbADate; //강의자료실 날짜
 	private String lbACode; //강의자료실 강의코드
@@ -15,7 +15,7 @@ public class ReferenceVo {
 		super();
 		this.lbAno = lbAno;
 		this.lbATitle = lbATitle;
-		this.lbACotent = lbAContent;
+		this.lbAContent = lbAContent;
 		this.lbAWriter = lbAWriter;
 		this.lbADate = lbADate;
 		this.lbACode = lbACode;
@@ -23,7 +23,7 @@ public class ReferenceVo {
 	}
 	@Override
 	public String toString() {
-		return "LectrueBoardVo [lbAno=" + lbAno + ", lbATitle=" + lbATitle + ", lbACotent=" + lbACotent + ", lbAWriter="
+		return "LectrueBoardVo [lbAno=" + lbAno + ", lbATitle=" + lbATitle + ", lbAContent=" + lbAContent + ", lbAWriter="
 				+ lbAWriter + ", lbADate=" + lbADate + ", lbACode=" + lbACode + "]";
 	}
 	public int getLbAno() {
@@ -38,11 +38,11 @@ public class ReferenceVo {
 	public void setLbATitle(String lbATitle) {
 		this.lbATitle = lbATitle;
 	}
-	public String getLbACotent() {
-		return lbACotent;
+	public String getLbAContent() {
+		return lbAContent;
 	}
-	public void setLbACotent(String lbACotent) {
-		this.lbACotent = lbACotent;
+	public void setLbAContent(String lbACotent) {
+		this.lbAContent = lbACotent;
 	}
 	public String getLbAWriter() {
 		return lbAWriter;

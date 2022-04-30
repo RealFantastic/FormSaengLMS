@@ -14,7 +14,7 @@ import kh.semi.lms.reference.vo.ReferenceVo;
 
 
 public class ReferenceService {
-	public ArrayList<ReferenceVo> LectureBoardlist(){
+	public ArrayList<ReferenceVo> referenceboardlist(){
 		
 		ArrayList<ReferenceVo> result = null;
 		Connection conn = getConnection();

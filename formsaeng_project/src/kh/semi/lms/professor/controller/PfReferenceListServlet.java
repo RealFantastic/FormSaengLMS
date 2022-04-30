@@ -15,7 +15,7 @@ import kh.semi.lms.reference.vo.ReferenceVo;
 /**
  * Servlet implementation class LectureBoardListSerlvet
  */
-@WebServlet("/lecblist")
+@WebServlet("/reflist")
 public class PfReferenceListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -27,25 +27,31 @@ public class PfReferenceListServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-//	/**
-//	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-//	 */
-//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-//	}
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		ArrayList<ReferenceVo> volist = null;
+//		ArrayList<BoardVo> volist = service.listBoard(startRnum, endRnum);
+		
+		volist = new ReferenceService().referenceboardlist();
+		System.out.println(volist);	
+		request.setAttribute("referenceboardlist", volist);
+		request.getRequestDispatcher("/WEB-INF/view/professor/Referenceboardlist.jsp").forward(request, response);
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<ReferenceVo> volist = null;
+//		ArrayList<ReferenceVo> volist = null;
 //		ArrayList<BoardVo> volist = service.listBoard(startRnum, endRnum);
-		
-		volist = new ReferenceService().LectureBoardlist();
-		System.out.println(volist);	
-		request.setAttribute("lectureVolist", volist);
-		request.getRequestDispatcher("WEB-INF/view/notice/NoticeView.jsp").forward(request, response);
+//		
+//		volist = new ReferenceService().referenceboardlist();
+//		System.out.println(volist);	
+//		request.setAttribute("referenceboardlist", volist);
+//		request.getRequestDispatcher("/WEB-INF/view/professor/Referenceboardlist.jsp").forward(request, response);
 	}
 
 }
