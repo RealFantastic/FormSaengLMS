@@ -21,6 +21,12 @@ public class AsgListService {
 		return result;
 	}
 	
+	public AsgListVo readBoard(int bANo) {
+		Connection conn = getConnection();
+		AsgListVo vo = new AsgListDao().readBoard(conn, bANo);
+		return vo;
+	}
+	
 	public int updateBoard(AsgListVo vo) {
 		Connection conn = getConnection();
 		int result = new AsgListDao().updateBoard(conn, vo);
@@ -58,11 +64,6 @@ public class AsgListService {
 		return result;
 	}
 	
-	public AsgListVo readBoard(int bNo) {
-		Connection conn = getConnection();
-		AsgListVo vo = new AsgListDao().readBoard(conn, bNo);
-		return vo;
-	}
 
 	
 	public AsgListVo readBoardAndComment(int bNo) {

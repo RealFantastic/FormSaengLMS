@@ -40,22 +40,56 @@ public class AsgListDao {
 		return result;		
 	}
 	
-	public int updateBoard(Connection conn, AsgListVo vo) {
-		int result = 0;
+	public AsgListVo readBoard(Connection conn, int bANo) {
+		AsgListVo vo = null;
 		
-		String sql = "update ASSIGNMENT_LIST SET BOARD_ASSIGNMENT_TITLE=?, BOARD_ASSIGNMENT_CONTENT=? WHERE ID=?";
+		String sql = "select board_assignment_no, board_assignment_title, board_assignment_content from assignment_list "
+				+ "where board_assignment_no=?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bANo);
+			rs = pstmt.executeQuery();
 			
-				pstmt.setString(1, vo.getbATitle());
-				pstmt.setString(2, vo.getbAContent());
-			result = pstmt.executeUpdate();
-							
+			if(rs.next()) {
+				vo= new AsgListVo();
+				vo.setbANo(rs.getInt(1));
+				vo.setbATitle(rs.getString(2));
+				vo.setbAContent(rs.getString(3));
+				System.out.println("뿌려졌니? : " + vo);
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
 		}
 		
+		return vo;
+	}
+	
+		
+	public int updateBoard(Connection conn, AsgListVo vo) {
+		int result = 0;
+		System.out.println(1);
+		String sql = "update ASSIGNMENT_LIST SET BOARD_ASSIGNMENT_TITLE=?, BOARD_ASSIGNMENT_CONTENT=? WHERE BOARD_ASSIGNMENT_NO=?";
+		try {
+			System.out.println(2);
+			pstmt = conn.prepareStatement(sql);			
+			pstmt.setString(1, vo.getbATitle());
+			pstmt.setString(2, vo.getbAContent());
+			pstmt.setInt(3, vo.getbANo());
+			System.out.println(3);
+			result = pstmt.executeUpdate();
+			System.out.println(4);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			System.out.println(5);
+			close(pstmt);
+		}
+		System.out.println(6);
 		return result;
 	}
 	
@@ -164,36 +198,7 @@ public class AsgListDao {
 		return result;
 	}
 	
-	public AsgListVo readBoard(Connection conn,int bNo) {
-		AsgListVo vo= null;
-		String sql = "select b.*, (select count(*) from re_Comment r where b_No=?) reCommentCnt from board b where b_No=?";
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, bNo);
-			pstmt.setInt(2, bNo);
-			rs = pstmt.executeQuery();
-			
-			vo= new AsgListVo();
-			if(rs.next()) {
-//				vo.setbNo(rs.getInt("b_No"));
-//				vo.setbTitle(rs.getString("b_Title"));
-//				vo.setbContent(rs.getString("b_Content"));
-//				vo.setbCount(rs.getInt("b_Count"));
-//				vo.setbWriteDate(rs.getTimestamp("b_Write_Date"));
-//				vo.setbWriter(rs.getString("b_Writer"));
-//				vo.setmId(rs.getString("m_Id"));
-//				vo.setReCommentCnt(rs.getInt("reCommentCnt"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		
-		return vo;
-	}
+
 	
 	public ArrayList<AsgListVo> searchListBoard(Connection conn,int bNo) {
 		ArrayList<AsgListVo> volist = null;

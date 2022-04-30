@@ -9,19 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.lms.asg.model.service.AsgListService;
 import kh.semi.lms.asg.model.vo.AsgListVo;
-import kh.semi.member.model.vo.MemberVo;
 
 /**
- * Servlet implementation class PfAsgListInsertDoServlet
+ * Servlet implementation class PfAsgListModifyDoServlet
  */
-@WebServlet("/board/insertdo")
-public class PfAsgListInsertDoServlet extends HttpServlet {
+@WebServlet("/asgmodifydo")
+public class PfAsgListModifyDoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PfAsgListInsertDoServlet() {
+    public PfAsgListModifyDoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,34 +30,35 @@ public class PfAsgListInsertDoServlet extends HttpServlet {
 	 */
 //	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		// TODO Auto-generated method stub
-//		
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
 //	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		//
 		String title = request.getParameter("title");
-		MemberVo mvo = (MemberVo)request.getSession().getAttribute("ssMemberVo");
-		String writer = "아무개";
 		String content = request.getParameter("content");
-		
-		AsgListVo vo = new AsgListVo(); 
+		 String bANoStr = request.getParameter("bANo");
+		 System.out.println("banostr ? : " + bANoStr);
+		System.out.println("title ? : " + title);
+		System.out.println("content ? : " + content);
+		 int bANo = Integer.parseInt(bANoStr);
+		AsgListVo vo = new AsgListVo();
 		vo.setbATitle(title);
-		vo.setbAWriter(writer);
 		vo.setbAContent(content);
-		
-		int result = new AsgListService().insertBoard(vo);
-		
-		if(result == 0) {
-			System.out.println("글등록 실패");
-			request.setAttribute("msg","글등록 실패");
-			request.getRequestDispatcher("/WEB-INF/view/professor/pf_enrollasgboard.jsp").forward(request, response);
+		vo.setbANo(bANo);
+		int result = new AsgListService().updateBoard(vo);
+		if(result < 1) {
+			System.out.println("글수정 실패");
+			request.getSession().setAttribute("msg", "글수정 실패");
+			response.sendRedirect("board/asgmodify?bANo="+bANo);
+//			request.getRequestDispatcher("/WEB-INF/view/professor/pf_modifyasgboard.jsp").forward(request, response);
 		} else {
-			request.setAttribute("msg", "글등록 성공");
-			request.setAttribute("inf", vo);
-			request.getRequestDispatcher("/WEB-INF/view/professor/pf_boardlist.jsp").forward(request, response);
+			System.out.println("글수정 성공");
+			request.getSession().setAttribute("msg", "글수정 성공");
+			response.sendRedirect("pfreadasg?bANo="+bANo);
 		}
 	}
 

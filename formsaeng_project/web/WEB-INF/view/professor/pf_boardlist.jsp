@@ -85,9 +85,8 @@
         	%>
 
 	<div>
-	<button>수정</button>
-	<button>삭제</button>
 	<button id="insertBoard" name="insertBoard">글등록</button>
+	<button>삭제</button>
 		<table border="1">
 			<tr>
 				<td><input id="allCheck" type="checkbox"></td>
@@ -99,9 +98,9 @@
 	<%
 		for(AsgListVo vo : volist){
 	%>
-			<tr>
+			<tr class="read_list" style="cursor: pointer;">
 				<td><input id="rowCheck" type="checkbox"></td>
-				<td><%=vo.getbANo() %></td>
+				<td class="bANo"><%=vo.getbANo() %></td>
 				<td><%=vo.getbATitle() %></td>
 				<td><%=vo.getbAWriter() %></td>
 				<td><%=vo.getbADate() %></td>
@@ -112,13 +111,30 @@
       </div>
   </section>
   <script>
-  	 /* function insertBrd() {
-  			location.href = "/pfasgboard/insert";
-  		}  */
+  	
 	  $("#insertBoard").click(function(){
         location.href ="pfasgboard/insert";
     });  
   	
+  	$(".read_list").click(function(){
+  		// var readlist = $(".read_list").children(".rno").text();
+  		// console.log("readlist : " + readlist);
+  		// 배열 선언
+  		var trArr = new Array();
+  		
+  		// 현재 클릭된 행
+  		var tr = $(this);
+  		console.log(tr);
+  		var td = tr.children();
+  		
+  		// 반복문을 통해 배열에 값을 담음
+  		td.each(function(i) {
+  			trArr.push(td.eq(i).text());
+  		})
+  		
+  		console.log("배열에 담긴 값 : " + trArr[1]);
+  		location.href = "pfreadasg?bANo=" + trArr[1];
+  	});
   </script>
 </body>
 </html>

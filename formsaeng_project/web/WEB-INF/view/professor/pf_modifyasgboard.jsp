@@ -18,7 +18,8 @@
 	<!-- 폰트어썸 -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
         integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-	<script src="https://kit.fontawesome.com/ef09f998fc.js" crossorigin="anonymous"></script>  
+	<script src="https://kit.fontawesome.com/ef09f998fc.js" crossorigin="anonymous"></script>
+	
   </head>
 <body>
   <header id="sideBar">
@@ -80,46 +81,68 @@
       </div>
       <div class="content_container">
         <!-- 템플릿 -->
+<%--        <% 
+     //세션에 값이 담겨있는지 체크
+     String id = null;
+        if(Session.getAttribute("id"))
+      
+       %>  --%>
+        
+        
+        
 
 	<div>
 <form id="pfAsgBoardform"
-			action="<%= request.getContextPath() %>/board/insertdo" method="post">
-			<div class=title_notice>
+			action="<%=request.getContextPath()%>/asgmodifydo" method="post">
+			<div class=title_asg>
 				<div class="title">과제게시판 등록하기</div>
-				<div class="button_enroll">
-					<button type="submit" class="btn btn-primary" id="insertBtn">등록하기</button>
-					<button type="button" class="btn btn-primary">취소하기</button>
-				</div>
 			</div>
-
+<% AsgListVo volist = (AsgListVo)request.getAttribute("ssAsgListVo"); %>
 			<div class="mb-3 room">
 				<div class="font4">제목</div>
 				<div class="form-floating">
-					<textarea class="form-control enroll_box"
+			<input id="bANo" type="hidden" name="bANo" value="<%= volist.getbANo() %>">
+					<textarea class="form-control"
 						name="title" placeholder="Leave a comment here"
-						id="floatingTextarea"></textarea>
+						id="floatingTextarea"><%= volist.getbATitle() %></textarea>
 					<label for="floatingTextarea">제목을 입력하세요.</label>
 				</div>
 			</div>
 			<div class="mb-3 room">
 				<div class="font4">내용</div>
 				<div class="form-floating">
-					<textarea class="form-control enroll_box"
+					<textarea class="form-control"
 						name="content" placeholder="Leave a comment here"
-						id="floatingTextarea2" style="height: 300px"></textarea>
+						id="floatingTextarea2" style="height: 300px" ><%= volist.getbAContent() %></textarea>
 					<label for="floatingTextarea2">내용을 입력하세요.</label>
 				</div>
-			</div>
+			</div>	
+					<button type="submit" class="btn btn-primary" id="modifyBtn">수정하기</button>
+					<button type="button" class="btn btn-primary" id="cancelBtn">취소하기</button>
 		</form>
 	</div>
       </div>
   </section>
 </body>
-<% if(request.getAttribute("msg") != null) {%>
+<% if(request.getAttribute("msg") != null) { %>
+
 <script>
 window.alert('<%= request.getAttribute("msg") %>');
 
-							
+				
 </script>
 <% } %>
+<!-- <script>
+$("#modifyBtn").click(function(){
+	console.log("눌렸나 ");
+	var frm = $("#pfAsgBoardform");
+	frm.attr("action", "asgmodifydo");
+	frm.attr("method", "post");
+	frm.submit();
+});	
+
+$("#cancelBtn").click(function() {
+	console.log("안눌러져? ");
+});
+</script>   -->
 </html>

@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src=" https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <title>게시글 작성</title>
+    <title>템플릿만들기</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <link href="https://hangeul.pstatic.net/hangeul_static/css/NanumBarunGothicYetHangul.css" rel="stylesheet">
@@ -81,45 +81,55 @@
       <div class="content_container">
         <!-- 템플릿 -->
 
-	<div>
-<form id="pfAsgBoardform"
-			action="<%= request.getContextPath() %>/board/insertdo" method="post">
-			<div class=title_notice>
-				<div class="title">과제게시판 등록하기</div>
+		<form id="pf_readform"'
+		action="<%=request.getContextPath()%>/pfreadasg" method="post">
+		<input type="hidden">
+		<div class="body_div">
+			
+			<div class=title_search>
+				<div class="title">과제게시판 상세보기</div>
 				<div class="button_enroll">
-					<button type="submit" class="btn btn-primary" id="insertBtn">등록하기</button>
-					<button type="button" class="btn btn-primary">취소하기</button>
+					
 				</div>
 			</div>
 
+			<% AsgListVo volist = (AsgListVo)request.getAttribute("readBoard"); %>
+			<input id="bANo" type="hidden" value="<%= volist.getbANo() %>">
 			<div class="mb-3 room">
 				<div class="font4">제목</div>
 				<div class="form-floating">
-					<textarea class="form-control enroll_box"
-						name="title" placeholder="Leave a comment here"
-						id="floatingTextarea"></textarea>
-					<label for="floatingTextarea">제목을 입력하세요.</label>
+					<div class="asg_title" name="asg_title">
+						<%= volist.getbATitle() %>
+					</div>
 				</div>
 			</div>
 			<div class="mb-3 room">
 				<div class="font4">내용</div>
 				<div class="form-floating">
-					<textarea class="form-control enroll_box"
-						name="content" placeholder="Leave a comment here"
-						id="floatingTextarea2" style="height: 300px"></textarea>
-					<label for="floatingTextarea2">내용을 입력하세요.</label>
+					<div class="asg_content" name="asg_content">
+						<%= volist.getbAContent() %>
+					</div> 
 				</div>
 			</div>
-		</form>
 	</div>
+	</form>
+	<button class="btn_modify" id="asg_modify" >게시판 수정</button>
+	<button id="nt_list_btn" class="btn btn-primary">게시판 목록</button>
+<!-- onclick="javascript:fn_click();" -->
       </div>
   </section>
+  <script>
+  	 $("#asg_modify").click(function(){
+  		 var bANo = $("#bANo").val();
+	  	console.log(bANo);
+	    location.href = "board/asgmodify?bANo="+bANo;
+	  
+  }); 
+  
+/*   function fn_click(){
+	 var no = $("#bANo").val();
+	 location.href = "board/asgmodify?bANo="+no;
+  } */
+  </script>
 </body>
-<% if(request.getAttribute("msg") != null) {%>
-<script>
-window.alert('<%= request.getAttribute("msg") %>');
-
-							
-</script>
-<% } %>
 </html>
