@@ -74,6 +74,13 @@ public class NoticeService {
 			
 			return listNotice;
 		}
+
+
+		public int updateBoard(NoticeVo vo) {
+			Connection conn=getConnection();
+			int result=new NoticeDao().updateBoard(conn, vo);
+			return result;
+		}
 		
 		
 		

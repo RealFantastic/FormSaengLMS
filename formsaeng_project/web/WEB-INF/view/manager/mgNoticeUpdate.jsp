@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>NoticeEnroll</title>
+<title>NoticeUpdate</title>
 <!--부트스트랩-->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -40,13 +40,8 @@
 		</div>
 
 		<!-- 폼태그는 가지고 갈 데이터(값) 바로 앞에서 "name"이 꼭 필요함-->
-		<form id="mgNoticeFrom"
-			action="<%=request.getContextPath()%>/mgbdetail" method="post">
-			<%
-				NoticeVo nnvo = (NoticeVo) request.getAttribute("ddvo");
-			%>
+		<form id="mgNoticeFrom" action="<%=request.getContextPath()%>/mgbupdate.do" method="post"> <%NoticeVo nnvo = (NoticeVo) request.getAttribute("ddvo");%>
 			<!-- //업데이트 서블릿에서 가져온이름 -->
-
 
 			<div class=title_search>
 				<div class="title font5">공지사항 수정하기</div>
@@ -56,22 +51,21 @@
 				</div>
 			</div>
 
+			<input type="hidden" id="bNno" name="bNno" value="<%=nnvo.getBoardNoticeNo()%>">
+			
+
 			<div class="mb-3 room">
 				<div class="font4">제목</div>
 				<div class="form-floating">
-					<div class="update_title_box">
-						<label for="floatingTextarea"><%=nnvo.getBoardNoticeTitle()%></label>
-					</div>
+						<input type="text" class="form-control title_update" name="title" id="title" value="<%=nnvo.getBoardNoticeTitle()%>">
 				</div>
 			</div>
 			<div class="mb-3 room">
 				<div class="font4">내용</div>
-				
-					<div class="update_content_box">
+						<textarea class="form-control update_content_box" name="content" rows="20" id="content"><%=nnvo.getBoardNoticeContent()%></textarea>
 						<label for="floatingTextarea2">
-							<pre class="font2"><%=nnvo.getBoardNoticeContent()%></pre>
+							<pre class="font2"></pre>
 						</label>
-					</div>
 				
 			</div>
 		</form>
@@ -81,6 +75,8 @@
 		$("#nt_list_btn").click(function() {
 			location.href = "mgblist";
 		})
+		
+		
 	</script>
 </body>
 </html>

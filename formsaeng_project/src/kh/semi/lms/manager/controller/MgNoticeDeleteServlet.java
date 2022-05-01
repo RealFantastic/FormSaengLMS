@@ -50,13 +50,13 @@ public class MgNoticeDeleteServlet extends HttpServlet {
 		Gson gson = new Gson();
 //		gson 라이브러리 호출
 		ArrayList<Integer> nolist= gson.fromJson(reqData.toString(), new TypeToken<ArrayList<Integer>>(){}.getType());
-//		인트형 객체배열인 nolist, 담아온 값을 json으로 형변환, TypeToken<ArrayList<Integer>> => 제네릭
+//		json데이터를 gson라이브러리 사용해서 arraylist로 바꾼다. TypeToken<ArrayList<Integer>> => 제네릭
 		int[] dellist = nolist.stream().mapToInt(Integer::intValue).toArray();
-//		인트형 배열인 dellist에 
+//		nolist를 배열타입으로 바꿈
 		System.out.println("reqData :"+nolist.toString());
 		
 		int cnt = new NoticeService().deleteBoard(dellist);
-//		인트형 cnt에 dao에서 받아온 걸 서비스가 dellist를 챙겨서 넘겨준다.
+//		int형 cnt에 NoticeService에 deleteBoard 결과값을 저장한다.
 		if(cnt > 0) {
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
@@ -65,7 +65,6 @@ public class MgNoticeDeleteServlet extends HttpServlet {
 			out.flush(); //비워준다.
 			out.close(); //PrintWriter 닫아준다.
 		}
-		doGet(request, response);
 	}
 
 }

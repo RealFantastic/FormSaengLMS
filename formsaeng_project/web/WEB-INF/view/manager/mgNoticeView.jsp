@@ -184,7 +184,7 @@
 			var delList = [];
 // 			delList에 배열로 저장된다
 			$("input:checkbox[name=chk]").each(function(i,iVal) {
-// 			input에서 type이 checkboxdl인것에 name이 chk인것을 개별로 돌린다.
+// 			input에서 type이 checkbox인것에 name이 chk인것을 개별로 돌린다.
 				if(iVal.checked){
 // 				만약에 iVal가 checked면
 					delList.push(iVal.value);
@@ -217,6 +217,7 @@
 					}
 				},
 				error : function(request,status,error) {
+				//에러가 나면 함수실행 (ajax를 실행하고 받을 수 있는 값들 request, status, error)
 					console.log(request);
 					alert("code:"+request.status+"\n"+"message:"+request.responseText+
 					"\n"+"error:"+error);

@@ -1,9 +1,7 @@
 <link
-	href="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/core/main.css"
-	rel="stylesheet" type="text/css">
+	href="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/core/main.css" rel="stylesheet" type="text/css">
 <link
-	href="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/daygrid/main.css"
-	rel="stylesheet" type="text/css">
+	href="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/daygrid/main.css" rel="stylesheet" type="text/css">
 <script
 	src="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/core/main.js"></script>
 <script
@@ -46,17 +44,9 @@
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			plugins : [ 'interaction', 'dayGrid' ]
 		
-		
-
-		
-		
-						
 		});
 		
 		calendar.render();
-		
-		
-		
 		
 	});
 	

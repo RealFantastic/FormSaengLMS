@@ -51,16 +51,16 @@
 				</div>
 			</div>
 
+
 			<div class="mb-3 room">
-				<div class="form-group">
-				    <label for="title">제목</label>
-				    <input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력하세요.">
-				</div>
+				<div class="font4">제목</div>
+					<input type="text" class="form-control title_box" id="formGroupExampleInput" name="title" placeholder="제목을 입력하세요.">
 			</div>
+
 			<div class="mb-3 room">
 				<div class="form-group">
-				    <label for="content">내용</label>
-					<textarea class="form-control" name="content" rows="20" id="content" placeholder="내용을 입력하세요."></textarea>
+					<div class="font4">내용</div>
+					<textarea class="form-control" name="content" rows="20" id="content" name="content" placeholder="내용을 입력하세요."></textarea>
 				</div>
 			</div>
 		</form>

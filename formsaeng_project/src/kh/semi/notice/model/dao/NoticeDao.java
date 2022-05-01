@@ -140,8 +140,6 @@ public class NoticeDao {
 			String sql="DELETE from notice where board_notice_no = ?";
 			int cnt = 0;
 			try {
-			    // then obtain an Array filled with the content below
-				
 				for(int i =0; i<dellist.length ; i++) {
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setInt(1, dellist[i]);
@@ -204,6 +202,32 @@ public class NoticeDao {
 			List<NoticeVo> noticeList=new ArrayList<>();
 			// TODO-sb
 			return noticeList;
+		}
+
+
+		public int updateBoard(Connection conn, NoticeVo vo) {
+			int result=0;
+			
+			String sql="update notice set BOARD_NOTICE_TITLE=?, BOARD_NOTICE_CONTENT=? where BOARD_NOTICE_NO=?";
+			
+			
+			try {
+				pstmt=conn.prepareStatement(sql);
+				//get 가져온다, set 저장시킨다.
+				//1번 ?에 vo에 저장되어있는 getBoardNoticeTitle을 가져온다. pstmt에 setString형식으로 저장시킨다.
+				pstmt.setString(1, vo.getBoardNoticeTitle());
+				pstmt.setString(2, vo.getBoardNoticeContent());
+				pstmt.setInt(3, vo.getBoardNoticeNo());
+				
+				result=pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			
+			return result;
 		}	
 		
 		
