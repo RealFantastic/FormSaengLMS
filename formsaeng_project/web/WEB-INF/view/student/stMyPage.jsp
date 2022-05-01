@@ -50,7 +50,7 @@
      <div class="form-group row">
     <label for="address" class="col-sm-2 col-form-label">주소</label>
     <div class="col-sm-10">
-      <input type="text" readonly class="form-control-plaintext" id="address" value=<%=vo.getAddress()%>> <!-- 띄어쓰기 뒤에 안 나옴 -->
+      <input type="text" readonly class="form-control-plaintext" id="address" value="<%=vo.getAddress()%>">
     </div>
   </div>
   <div class="form-group row">
@@ -59,13 +59,8 @@
       <input type="text" readonly class="form-control-plaintext" id="email" value=<%=vo.getEmail()%>> 
     </div>
   </div>
-<!--   <div class="form-group row">
-    <label for="inputPassword" class="col-sm-2 col-form-label">비밀번호</label>
-    <div class="col-sm-10">
-      <input type="password" class="form-control" id="inputPassword" placeholder="">
-    </div>
-  </div> -->
 </form>
+<button type="button" id="modify">수정하기</button>
 <script>
 
 $("#lms").click(function(){
@@ -74,6 +69,10 @@ $("#lms").click(function(){
 	
 $("#stmain").click(function(){
 	location.href = "stmain"; // 메인페이지
+});
+
+$("#modify").click(function(){
+	location.href = "stmypagem"; // 수정하기 
 });
 
 </script>

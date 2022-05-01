@@ -82,13 +82,15 @@ public class MemberDao {
 	public int updateMember(Connection conn, MemberVo vo) {
 		int result = 0;
 		
-		String sql = "update member set address=?, pnum=? where id=? and pwd=?";
+		String sql = "update member set address=?, pnum=?, email=? where id=? and pwd=?";
 		try { 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getAddress());
 			pstmt.setString(2, vo.getPnum());
-			pstmt.setString(3, vo.getId());
-			pstmt.setString(4, vo.getPwd());
+			pstmt.setString(3, vo.getEmail());
+			pstmt.setString(4, vo.getId());
+			pstmt.setString(5, vo.getPwd());
+			System.out.println(vo);
 			
 			result = pstmt.executeUpdate();
 			

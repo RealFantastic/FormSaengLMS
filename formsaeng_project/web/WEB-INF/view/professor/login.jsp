@@ -39,7 +39,7 @@
                             <div class="form-group">
                                 <button type="button" name="findid" id="findid" class="btn btn-light">아이디 찾기</button>
                                 <button type="button" name="findpwd" id="findpwd" class="btn btn-light">비밀번호 찾기</button>
-                                <input type="submit" id="submit" name="submit" class="btn btn-primary" value="로그인">
+                                <input type="button" id="submit" name="submit" class="btn btn-primary" value="로그인">
                             </div>
                         </form>
                     </div>
@@ -138,10 +138,6 @@
    			}
    		}
 		
-   		var msgVal = '${msg}';
-   	 	if(msgVal != '' || msgVal != false){
-   	 		alert(msgVal);
-   	 	}// 로그인 실패 시 뜨는 메시지
    	 	
    	   $("#submit").click(function(){
    		   var id = $("#id").val().trim();
@@ -153,6 +149,31 @@
    		   }   
    		   });
 	</script>
- 	<% session.removeAttribute("msg"); %>
+	   <script> // ajax
+   $(function() {
+		 $("#submit").on('click', function() {
+		 $.ajax({ // JQuery 를 통한 ajax 호출 방식 사용
+		 type : "POST",
+		 url : "pflogin.do",
+		 data : {
+		 id : $("#id").val(),
+		 pwd : $("#pwd").val(),
+		 },
+		 success : function(result) {
+		 if(result == "성공"){
+			 console.log(result);
+			alert("반갑습니다");
+	 		location.href = "pfmain"; // 메인으로 이동
+			
+		 } else if(result == "실패"){
+			alert("잘못된 사번 또는 비밀번호입니다");
+			$("#id").val("").focus();
+			$("#pwd").val("");
+		 }
+		 }
+		 });
+		 })
+	});
+   </script>
 </body>
 </html>

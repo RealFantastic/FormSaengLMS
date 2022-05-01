@@ -22,6 +22,18 @@
 </style>
 </head>
 <body>
+   <script>
+  	 $("#submit").click(function(){
+	   var id = $("#id").val().trim();
+	   var checkId = /^[S][0-9]{10}$/;
+	   if(!checkId.test(id)){
+		   alert("아이디는 S로 시작 10자리 숫자");
+		   $("#id").focus();		   
+		   return false;
+	   }   
+	   }); // 안 먹음
+   
+   </script>
 <div id="container">
   <div id="slogin">
             <div class="minilogo"><img src="<%= request.getContextPath() %>/resources/images/fromsaenglogo.png" alt="logo"></div>
@@ -39,7 +51,7 @@
                                 <div class="form-group">
                                     <button type="button" id="findid" name="findid" class="btn btn-light">학번 찾기</button>
                                     <button type="button" id="findpwd" name="findpwd" class="btn btn-light">비밀번호 찾기</button>
-                                    <input type="submit" id="submit" name="submit" class="btn btn-primary" value="로그인">
+                                    <input type="button" id="submit" name="submit" class="btn btn-primary" value="로그인">
                                 </div>
                             </form>
                         </div>
@@ -50,23 +62,31 @@
                     </div>
     </div>
    </div>
-   <script>
-   var msgVal = '${msg}';
-	if(msgVal != '' || msgVal != false){
-	 	alert(msgVal);
-	 }// 로그인 실패 시 뜨는 메시지
-	 	
-   $("#submit").click(function(){
-	   var id = $("#id").val().trim();
-	   var checkId = /^[S][0-9]{10}$/;
-	   if(!checkId.test(id)){
-		   alert("아이디는 S로 시작 10자리 숫자");
-		   $("#id").focus();
-		   return false;
-	   }   
-	   });
-   
+   <script> // ajax
+   $(function() {
+		 $("#submit").on('click', function() {
+		 $.ajax({ // JQuery 를 통한 ajax 호출 방식 사용
+		 type : "POST",
+		 url : "stlogin.do",
+		 data : {
+		 id : $("#id").val(),
+		 pwd : $("#pwd").val(),
+		 },
+		 success : function(result) {
+		 if(result == "성공"){
+			 console.log(result);
+			alert("반갑습니다");
+	 		location.href = "stmain";
+			
+		 } else if(result == "실패"){
+			alert("잘못된 학번 또는 비밀번호입니다");
+			$("#id").val("").focus();
+			$("#pwd").val("");
+		 }
+		 }
+		 });
+		 })
+	});
    </script>
-    <% session.removeAttribute("msg"); %>
 </body>
 </html>
