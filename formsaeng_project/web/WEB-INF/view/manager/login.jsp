@@ -49,20 +49,17 @@
             <div></div>
 		</div>
    </div>
-   <script>
-  
+
+   	   <script> // ajax
+   $(function() {
    $("#submit").click(function(){
    var id = $("#id").val().trim();
    var checkId = /^[M][0-9]{10}$/;
    if(!checkId.test(id)){
-	   alert("아이디는 M으로 시작 10자리 숫자");
+	   alert("아이디는 M으로 시작하는 10자리 숫자입니다");
 	   $("#id").focus();
 	   return false;
    }   
-   });
-   </script>
-   	   <script> // ajax
-   $(function() {
 		 $("#submit").on('click', function() {
 		 $.ajax({ // JQuery 를 통한 ajax 호출 방식 사용
 		 type : "POST",
@@ -85,6 +82,7 @@
 		 }
 		 });
 		 })
+   });
 	});
    </script>
 </body>
