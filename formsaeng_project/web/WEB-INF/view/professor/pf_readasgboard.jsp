@@ -83,7 +83,6 @@
 
 		<form id="pf_readform"'
 		action="<%=request.getContextPath()%>/pfreadasg" method="post">
-		<input type="hidden">
 		<div class="body_div">
 			
 			<div class=title_search>
@@ -112,9 +111,11 @@
 				</div>
 			</div>
 	</div>
+	<button type=button id="asg_modify" class="btn_modify">수정</button>
+	<button type=button id="asg_list" class="btn_list">목록</button>
+	<!-- <button type=button id="asg_delete" class="btn_delete">삭제</button> -->
 	</form>
-	<button class="btn_modify" id="asg_modify" >게시판 수정</button>
-	<button id="nt_list_btn" class="btn btn-primary">게시판 목록</button>
+
 <!-- onclick="javascript:fn_click();" -->
       </div>
   </section>
@@ -125,7 +126,8 @@
 	    location.href = "board/asgmodify?bANo="+bANo;
 	  
   }); 
-  
+  	 
+
 /*   function fn_click(){
 	 var no = $("#bANo").val();
 	 location.href = "board/asgmodify?bANo="+no;
