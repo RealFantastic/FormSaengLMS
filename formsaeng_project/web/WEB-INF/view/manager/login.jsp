@@ -59,14 +59,13 @@
 	   alert("아이디는 M으로 시작하는 10자리 숫자입니다");
 	   $("#id").focus();
 	   return false;
-   }   
-		 $("#submit").on('click', function() {
+   } else{
 		 $.ajax({ // JQuery 를 통한 ajax 호출 방식 사용
 		 type : "POST",
 		 url : "mglogin.do",
 		 data : {
-		 id : $("#id").val(),
-		 pwd : $("#pwd").val(),
+		 id : $("#id").val().trim(),
+		 pwd : $("#pwd").val().trim(),
 		 },
 		 success : function(result) {
 		 if(result == "성공"){
@@ -81,7 +80,8 @@
 		 }
 		 }
 		 });
-		 })
+	   
+   } 
    });
 	});
    </script>

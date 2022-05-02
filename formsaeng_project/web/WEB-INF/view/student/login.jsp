@@ -22,7 +22,6 @@
 </style>
 </head>
 <body>
-
 <div id="container">
   <div id="slogin">
             <div class="minilogo"><img src="<%= request.getContextPath() %>/resources/images/fromsaenglogo.png" alt="logo"></div>
@@ -60,14 +59,13 @@
 			   alert("아이디는 S로 시작하는 10자리 숫자입니다");
 			   $("#id").focus();		   
 			   return false;
-		   }   
-		 $("#submit").on('click', function() {
+		   } else{
 		 $.ajax({ // JQuery 를 통한 ajax 호출 방식 사용
 		 type : "POST",
 		 url : "stlogin.do",
 		 data : {
-		 id : $("#id").val(),
-		 pwd : $("#pwd").val(),
+		 id : $("#id").val().trim(),
+		 pwd : $("#pwd").val().trim(),
 		 },
 		 success : function(result) {
 		 if(result == "성공"){
@@ -82,7 +80,8 @@
 		 }
 		 }
 		 });
-		 })
+			   
+		   }
 		   }); 
 
 	});

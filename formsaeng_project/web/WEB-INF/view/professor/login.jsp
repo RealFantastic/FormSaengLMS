@@ -70,6 +70,8 @@ $(function(){
                     <div class="loginmenu">
                         <input type="button" id="notice" name="notice" class="btn btn-success"  value="공지사항">
                     </div>
+                    
+                    <!-- 아이디 찾기 모달창 -->
 				<div class="findid_modal">
 					<div class="modal_content">
 						<div>
@@ -129,8 +131,8 @@ $(function(){
 		});
 
 		
-   	
-   </script>
+   	 	
+	</script>
 	   <script> // ajax
    $(function() {
    	   $("#submit").click(function(){
@@ -140,14 +142,13 @@ $(function(){
    			   alert("아이디는 P로 시작하는 10자리 숫자입니다");
    			   $("#id").focus();
    			   return false;
-   		   }   
-		 $("#submit").on('click', function() {
+   		   } else{
 		 $.ajax({ // JQuery 를 통한 ajax 호출 방식 사용
 		 type : "POST",
 		 url : "pflogin.do",
 		 data : {
-		 id : $("#id").val(),
-		 pwd : $("#pwd").val(),
+		 id : $("#id").val().trim(),
+		 pwd : $("#pwd").val().trim(),
 		 },
 		 success : function(result) {
 		 if(result == "성공"){
@@ -162,7 +163,8 @@ $(function(){
 		 }
 		 }
 		 });
-		 })
+   			   
+   		   }
    		   });
 	});
    </script>

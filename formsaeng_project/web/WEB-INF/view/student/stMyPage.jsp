@@ -15,7 +15,8 @@
 </head>
 <body>
 <%MemberVo vo = (MemberVo)request.getAttribute("MyPageVo"); %>
-<header>
+<div class="container justify-content-center">
+<header class="d-flex">
 <div class="font5">마이페이지</div>
 <div class="font3">
 <button type="button" id="lms" name="lms" class="btn btn-success">LMS 바로가기</button>
@@ -23,44 +24,67 @@
 </div>
 </header>
 <form> 
-  <div class="form-group row">
-    <label for="name" class="col-sm-2 col-form-label">이름</label>
-    <div class="col-sm-10">
-      <input type="text" readonly class="form-control-plaintext" id="name" value=<%=vo.getName()%>>
+  <div class="d-flex row">
+    <label for="name" class="label col-2">이름</label>
+    <div class="inputgroup col-6">
+      <input type="text" readonly id="name" class="border-0"value=<%=vo.getName()%>>
     </div>
   </div>
-    <div class="form-group row">
-    <label for="id" class="col-sm-2 col-form-label">학번</label>
-    <div class="col-sm-10">
-      <input type="text" readonly class="form-control-plaintext" id="id" value=<%=vo.getId()%>>
+    <div class="d-flex row">
+    <label for="id" class="label col-2">학번</label>
+    <div class="inputgroup col-6">
+      <input type="text" readonly  id="id" class="border-0" value=<%=vo.getId()%>>
     </div>
   </div>
-     <div class="form-group row">
-	<label for="deptName" class="col-sm-2 col-form-label">학과</label>
-    <div class="col-sm-10">
-      <input type="text" readonly class="form-control-plaintext" id="deptName" value=<%=vo.getDeptName()%>>
+     <div class="d-flex row">
+	<label for="deptName" class="label col-2">학과</label>
+    <div class="inputgroup col-6">
+      <input type="text" readonly  id="deptName" class="border-0" value=<%=vo.getDeptName()%>>
     </div>
   </div>
-   <div class="form-group row">
-  	<label for="pnum" class="col-sm-2 col-form-label">연락처</label>
-    <div class="col-sm-10">
-      <input type="text" readonly class="form-control-plaintext" id="pnum" value=<%=vo.getPnum()%>>
+   <div class="d-flex row">
+  	<label for="pnum" class="label col-2">연락처</label>
+    <div class="inputgroup col-6">
+      <input type="text" readonly  id="pnum" class="border-0" value=<%=vo.getPnum()%>>
     </div>
   </div>
-     <div class="form-group row">
-    <label for="address" class="col-sm-2 col-form-label">주소</label>
-    <div class="col-sm-10">
-      <input type="text" readonly class="form-control-plaintext" id="address" value="<%=vo.getAddress()%>">
+     <div class="d-flex row">
+    <label for="address" class="label col-2">주소</label>
+    <div class="inputgroup col-6">
+      <input type="text" readonly  id="address" class="border-0" value="<%=vo.getAddress()%>">
     </div>
   </div>
-  <div class="form-group row">
-    <label for="email" class="col-sm-2 col-form-label">이메일</label>
-    <div class="col-sm-10">
-      <input type="text" readonly class="form-control-plaintext" id="email" value=<%=vo.getEmail()%>> 
+  <div class="d-flex row">
+    <label for="email" class="label col-2">이메일</label>
+    <div class="inputgroup col-6">
+      <input type="text" readonly  id="email" class="border-0" value=<%=vo.getEmail()%>> 
     </div>
   </div>
 </form>
-<button type="button" id="modify">수정하기</button>
+
+<!-- Button trigger modal -->
+<button type="button" id="myModal" class="btn btn-primary">
+  수정하기
+</button>
+</div>
+<!-- Modal -->
+<div class="modal" id="exampleModal" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">비밀번호 확인</h5>
+      </div>
+      <div class="modal-body">
+        <input type="password" id="pwdcheck" name="pwdcheck" placeholder="비밀번호를 입력하세요">
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="submit" class="btn btn-primary submit">확인</button>
+        <button type="button" class="btn btn-secondary close">취소</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 
 $("#lms").click(function(){
@@ -71,9 +95,53 @@ $("#stmain").click(function(){
 	location.href = "stmain"; // 메인페이지
 });
 
-$("#modify").click(function(){
-	location.href = "stmypagem"; // 수정하기 
-});
+
+// 모달
+$(function(){
+    $("#myModal").on("click",function(){
+       console.log("모달 안녕");
+       $(".modal").fadeIn(150);
+       $(".close").on("click",closeModal);
+       $(".modal").on("click",closeModalWindow);
+    });
+    
+    function closeModal(){
+       $(".modal").hide();
+    }
+    function closeModalWindow(){
+       if(event.target == $(".modal").get(0)){
+          console.log('모');
+           $(".modal").hide();
+           $(".modal").off("click",closeModalWindow); 
+       }
+          
+    }
+}); 
+
+// 정보 수정하기
+/* $(function() {
+	
+	 $("#submit").on('click', function() {
+		 
+	 $.ajax({ // JQuery 를 통한 ajax 호출 방식 사용
+	 type : "POST",
+	 url : "pwdcheck.do",
+	 data : {
+	 pwdcheck : $("#pwdcheck").val().trim(),
+	 },
+	 success : function(result) {
+	 if(result == "성공"){
+		 console.log(result);
+		alert("비밀번호가 확인되었습니다"); 
+		location.href = "stmypagem"; 
+		
+	 } else if(result == "실패"){
+		alert("비밀번호가 일치하지 않습니다. 다시 시도해");
+	 }
+	 }
+	 });
+	 })
+}); */
 
 </script>
 </body>
