@@ -27,6 +27,42 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
 	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 	crossorigin="anonymous"></script>
+	
+	
+<script>
+$(function(){
+	console.log("페이지 로드 - jQuery 실행확인");
+	deptOption();
+	
+});
+function deptOption(){
+	console.log("몇번돌고있니?");
+	$.ajax({
+		url:"deptLoad.ajx",
+		type:"post",
+		dataType:"json",
+		success:function(result){
+			console.log(result[0].deptName);
+			$("#department").empty();
+
+			var html ="<option class='option_design font2' value='' selected>학과 선택</option>";
+			for(var i = 0; i < result.length; i++){						
+			html+= "<option class='option_design font2' value='"+ result[i].deptCode +"'>" +result[i].deptName +"</option>";
+			}
+			$("#department").append(html);
+		},
+		error : function(request,status,error){
+			console.log(request);
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+
+					"\n"+"error:"+error);
+			console.log("code:"+request.status+"\n"+"message:"+request.responseText+
+					"\n"+"error:"+error);
+		}
+	});
+}
+
+
+</script>	
 </head>
 <body>
 	<header>
@@ -53,43 +89,150 @@
 			</div>
 		</div>
 		<div class="add_field">
-			<select class="select_design font2" name="department" id="department">
-			</select>
-			<input type="text" name="deptCode" id="deptCode" readonly="readonly">
+				<form id="frmAdd">
+				<!-- 학과명(value = 학과코드) -->
+				<select class="select_design font2" name="department" id="department" required onchange="itemChange()">
+				</select><br>
+				<!-- 생성할 과목명 -->
+				과목명 : <input type="text" name="subjectName" id="subjectName" required><br>
+				<!-- 과목코드명 -->
+				과목코드명 : <input type="text" name="subjectCode" id="subjectCode" required><br>
+				<!-- 학년 -->
+				<select class="select_design font2" name="grade" id="grade" required>
+					<option class='option_design font2' value='' selected>학년 선택</option>
+					<option class='option_design font2' value='1' >1학년</option>
+					<option class='option_design font2' value='2' >2학년</option>
+					<option class='option_design font2' value='3' >3학년</option>
+					<option class='option_design font2' value='4' >4학년</option>
+				</select><br>
+				<!-- 학기 -->
+				<select class="select_design font2" name="semester" id="semester" required>
+					<option class='option_design font2' value='' selected>학기 선택</option>
+					<option class='option_design font2' value='2201' >22학년도 1학기</option>
+					<option class='option_design font2' value='2202' >22학년도 2학기</option>
+				</select><br>
+				<!-- 학점 -->
+				<select class="select_design font2" name="credit" id="credit" required>
+					<option class='option_design font2' value='' selected>학점 선택</option>
+					<option class='option_design font2' value='2' >2학점</option>
+					<option class='option_design font2' value='3' >3학점</option>
+				</select><br>
+				<!-- 강의실 -->
+				강의실 : <input type="text" name="classroom" id="classroom" required><br>
+				<!-- 강의 정원 -->
+				강의 정원 : <input type="text" name="capacity" id="capacity" required><br>
+				<!-- 이수구분 전공필수 = 1, 전공 선택 = 0 -->
+				<select class="select_design font2" name="classType" id="classType" required>
+					<option class='option_design font2' value='' selected>이수구분 선택</option>
+					<option class='option_design font2' value='1' >전공필수</option>
+					<option class='option_design font2' value='0' >전공선택</option>
+				</select><br>
+				<!-- 강의요일 선택 -->
+				<select class="select_design font2" name="classDate" id="classDate" required>
+					<option class='option_design font2' value='' selected>강의요일 선택</option>
+					<option class='option_design font2' value='mon' >월요일</option>
+					<option class='option_design font2' value='tue' >화요일</option>
+					<option class='option_design font2' value='wed' >수요일</option>
+					<option class='option_design font2' value='thu' >목요일</option>
+					<option class='option_design font2' value='fri' >금요일</option>
+				</select><br>
+				<!-- 강의교시 선택 -->
+				강의교시 선택
+				<lable for="first">1교시<input type='checkbox' id="first" name='period' value='1'></lable>
+				<lable for="second">2교시<input type='checkbox' id="second" name='period' value='2'></lable>
+				<lable for="third">3교시<input type='checkbox' id="third" name='period' value='3'></lable>
+				<lable for="fourth">4교시<input type='checkbox' id="fourth" name='period' value='4'></lable>
+				<lable for="fifth">5교시<input type='checkbox' id="fifth" name='period' value='5'></lable>
+				<lable for="sixth">6교시<input type='checkbox' id="sixth" name='period' value='6'></lable>
+				<lable for="seventh">7교시<input type='checkbox' id="seventh" name='period' value='7'></lable><br>
+				<!-- 담당교수명(value = 교수ID) -->
+				<select class="select_design font2" name="professor" id="professor" required>
+				</select>
+			</form>
+				<button type="button" onclick="insertSubject()">추가하기</button>
 		</div>
 	</section>
 	
 	
 	
 	<script>
-		$(function(){
-			console.log("페이지 로드 - jQuery 실행확인");
-			deptOption();
-			
-		});
-		function deptOption(){
+	//학과 선택시 해당 학과 소속의 교수목록을 가져오는 ajax
+		function itemChange(){
+			console.log($("#department").val());
+			var selectDept = $("#department").val();
 			$.ajax({
-				url:"deptLoad.ajx",
-				type:"post",
-				dataType:"json",
-				success:function(result){
-					console.log(result[0].deptName);
-					var html ="<option class='option_design font2' value='' selected>학과 선택</option>";
-					for(var i = 0; i < result.length; i++){						
-					html+= "<option class='option_design font2' value='"+ result[i].deptCode +"'>" +result[i].deptName +"</option>";
-					}
-					$("#department").append(html);
-					
-
+				url:"selectPf.ajx",
+				type:"get",
+				data:{
+					"department":selectDept
 				},
-				error : function(request,status,error){
-					console.log(request);
-					alert("code:"+request.status+"\n"+"message:"+request.responseText+
-							"\n"+"error:"+error);
-					console.log("code:"+request.status+"\n"+"message:"+request.responseText+
-							"\n"+"error:"+error);
+				//contentType:"application/json; charset:UTF-8",
+				dataType:"json",
+				success:function(pflist){
+					console.log(pflist);
+					console.log(pflist[0].name);
+					$("#professor").empty();
+					var html = "";
+					html+="<option class='option_design font2' value='' selected>교수 선택</option>";
+					for(var i=0; i<pflist.length; i++){
+					html+="<option class='option_design font2' value='"+ pflist[i].id +"'>" + pflist[i].name +"</option>";						
+					}
+					$("#professor").append(html);
 				}
+			});	
+		}
+	//추가 버튼 누를 시 과목 추가하는 ajax
+		function insertSubject(){
+		 	var deptCode = $("#department").val();
+			var subName = $("#subjectName").val();
+			var subCode = $("#subjectCode").val();
+			var courseGrade = $("#grade").val();
+			var courseSemester = $("#semester").val();
+			var courseCredit = $("#credit").val();
+			var courseClass = $("#classroom").val();
+			var courseCapacity = $("#capacity").val();
+			var classType = $("#classType").val();
+			var courseDay = $("#classDate").val();
+			var coursePeriod = new Array();
+			var pfName = $("#professor").val();
+			var professor = $("#professor").val();
+			console.log($("input[name='period']:checked")[0]);
+			console.log(deptCode);
+			console.log(subName);
+			console.log(subCode);
+			console.log(courseGrade);
+			console.log(courseSemester);
+			console.log(courseCredit);
+			console.log(courseClass);
+			console.log(courseCapacity);
+			console.log(classType);
+			console.log(courseDay);
+			console.log(coursePeriod);
+			console.log(pfName);
+			
+			let queryString = $("#frmAdd").serialize();
+			console.log(queryString);
+
+			var timeChecked = $("input[name='period']:checked");
+			timeChecked.each(function(){
+				coursePeriod.push(this.value);
+				console.log(coursePeriod);
 			});
+			console.log(queryString);
+			  $.ajax({
+				url:"addSubject.ajx",
+				type:"post",
+				data:{
+					"department":deptCode
+				},
+				//contentType:"application/json; charset:UTF-8",
+				dataType:"text",
+				success:function(result){
+					console.log(result);
+				}
+				
+			});	
+			
 		}
 	</script>
 </body>

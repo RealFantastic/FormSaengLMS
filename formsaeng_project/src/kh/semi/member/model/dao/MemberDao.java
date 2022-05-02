@@ -1,13 +1,13 @@
 package kh.semi.member.model.dao;
 
+import static kh.semi.lms.common.jdbc.JdbcDbcp.close;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import static kh.semi.lms.common.jdbc.JdbcDbcp.close;
-
+import java.util.ArrayList;
 
 import kh.semi.member.model.vo.MemberVo;
 
@@ -152,6 +152,41 @@ public class MemberDao {
 			}
 			
 			System.out.println(result);
+			
+			return result;
+		}
+	//학과별 교수 알아내기
+		public ArrayList<MemberVo> selectPf(Connection conn, MemberVo vo) {
+			ArrayList<MemberVo> result = null;
+			
+			String sql = "SELECT * FROM MEMBER WHERE DEPT_CODE = ? AND ID LIKE 'P%'";
+			
+			try {
+				result = new ArrayList<MemberVo>();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, vo.getDeptCode());
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					do {
+						MemberVo mvo = new MemberVo();
+						mvo.setId(rs.getString("id"));
+						mvo.setName(rs.getString("name"));
+						
+						System.out.println(mvo);
+						result.add(mvo);
+						
+					}while(rs.next());
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			System.out.println(vo.getDeptCode() + "의 찾은 교수목록 : " + result);
+			
+			
 			
 			return result;
 		}

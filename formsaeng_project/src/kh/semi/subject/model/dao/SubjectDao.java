@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import static kh.semi.lms.common.jdbc.JdbcDbcp.close;
 import kh.semi.lms.department.model.vo.DepartmentVo;
 import kh.semi.subject.model.vo.SubjectVo;
 
@@ -43,6 +44,8 @@ public class SubjectDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			close(pstmt);
 		}
 		System.out.println(result);
 		
@@ -86,6 +89,8 @@ public class SubjectDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			close(pstmt);
 		}
 		
 		return result;
@@ -126,6 +131,8 @@ public class SubjectDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			close(stmt);
 		}
 		
 		System.out.println("dao에서 리턴 전 result값 : " + result);

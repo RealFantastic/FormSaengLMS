@@ -99,7 +99,7 @@
 	</section>
 	<script>
 		$("#addSubject").click(function() {
-			location.href = "";
+			location.href = "addSubject";
 		});
 	</script>
 </body>

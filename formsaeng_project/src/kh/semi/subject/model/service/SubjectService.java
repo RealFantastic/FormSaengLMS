@@ -5,6 +5,7 @@ import static kh.semi.lms.common.jdbc.JdbcDbcp.getConnection;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import static kh.semi.lms.common.jdbc.JdbcDbcp.*;
 import kh.semi.lms.department.model.vo.DepartmentVo;
 import kh.semi.subject.model.dao.SubjectDao;
 import kh.semi.subject.model.vo.SubjectVo;
@@ -17,6 +18,7 @@ public class SubjectService {
 		
 		result = new SubjectDao().selectDept(conn);
 		
+		close(conn);
 		return result;
 	}
 	//관리자 수강신청 과목 추가
@@ -25,7 +27,8 @@ public class SubjectService {
 		int result = 0;
 		
 		result = new SubjectDao().insertSubject(conn, vo);
-
+		
+		close(conn);
 		return result;
 	}
 	//관리자 수강신청관리 목록
@@ -36,6 +39,7 @@ public class SubjectService {
 		
 		result = new SubjectDao().mgSubjectList(conn);
 		
+		close(conn);
 		return result;
 	}
 	
@@ -46,7 +50,7 @@ public class SubjectService {
 		
 		result = new SubjectDao().stSubjectList(conn, vo);
 		
-		
+		close(conn);
 		return result;
 	}
 }

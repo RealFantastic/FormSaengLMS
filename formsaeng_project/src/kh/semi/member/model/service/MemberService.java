@@ -3,6 +3,7 @@ import static kh.semi.lms.common.jdbc.JdbcDbcp.*;
 
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import kh.semi.member.model.dao.MemberDao;
 import kh.semi.member.model.vo.MemberVo;
@@ -58,6 +59,18 @@ public class MemberService {
 		
 		result = new MemberDao().findId(conn, vo);
 		
+		close(conn);
+		return result;
+	}
+	//해당 학과 소속된 교수 찾기
+	public ArrayList<MemberVo> selectPf(MemberVo vo) {
+		Connection conn = getConnection();
+		
+		ArrayList<MemberVo> result = null;
+		
+		
+		result = new MemberDao().selectPf(conn, vo);
+		close(conn);
 		return result;
 	}
 	
