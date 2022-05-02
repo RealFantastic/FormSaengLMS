@@ -52,41 +52,46 @@ public class SubjectDao {
 		
 		return result;
 	}
-	
+	//관리자 수강신청 과목추가
 	public int insertSubject(Connection conn, SubjectVo vo) {
 		int result = 0;
 		
-//		private String subCode;
-//		private String subName;
-//		private int courseGrade;
-//		private int courseSemester;
-//		private int courseCredit;
-//		private String courseClass;
-//		private int courseCapacity;
-//		private String openYN;
-//		private String deptCode;
-//		private String classType;
-//		private String courseDay;
-//		private String coursePeriod;
-		String sql = "INSERT INTO subject VALUES (,,,,,,,,,,,)";
+//		SUBJECT_CODE    NOT NULL VARCHAR2(30) 
+//		SUBJECT_NAME    NOT NULL VARCHAR2(30) 
+//		COURSE_GRADE    NOT NULL NUMBER(1)    
+//		COURSE_SEMESTER NOT NULL NUMBER(4)    
+//		COURSE_CREDIT   NOT NULL NUMBER(1)    
+//		COURSE_CLASS    NOT NULL VARCHAR2(90) 
+//		COURSE_CAPACITY NOT NULL NUMBER       
+//		OPEN_YN         NOT NULL VARCHAR2(3)  
+//		DEPT_CODE       NOT NULL VARCHAR2(20) 
+//		CLASS_TYPE               VARCHAR2(12) 
+//		COURSE_DAY               VARCHAR2(3)  
+//		COURSE_PERIOD            VARCHAR2(20) 
+//		PF_ID                    VARCHAR2(12)
+		String sql = "INSERT INTO subject VALUES (?,?,?,?,?,?,?,default,?,?,?,?,?)";
 		
+		System.out.println("dao에 넘어온 insert용 vo값 : " + vo);
 		try {
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setString(1, x);
-//			pstmt.setString(2, x);
-//			pstmt.setInt(3, x);
-//			pstmt.setInt(4, x);
-//			pstmt.setInt(5, x);
-//			pstmt.setString(6, x);
-//			pstmt.setInt(7, x);
-//			pstmt.setString(8, x);
-//			pstmt.setString(9, x);
-//			pstmt.setString(10, x);
-//			pstmt.setString(11, x);
-//			pstmt.setString(12, x);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getSubCode());
+			pstmt.setString(2, vo.getSubName());
+			pstmt.setInt(3, vo.getCourseGrade());
+			pstmt.setInt(4, vo.getCourseSemester());
+			pstmt.setInt(5, vo.getCourseCredit());
+			pstmt.setString(6, vo.getCourseClass());
+			pstmt.setInt(7, vo.getCourseCapacity());
+			pstmt.setString(8, vo.getDeptCode());
+			pstmt.setString(9, vo.getClassType());
+			pstmt.setString(10, vo.getCourseDay());
+			pstmt.setString(11, vo.getCoursePeriod());
+			pstmt.setString(12, vo.getPfName());
 			
 			result = pstmt.executeUpdate();
 			
+			if(result >0) {
+				System.out.println("dao 입력성공");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -101,7 +106,7 @@ public class SubjectDao {
 		
 		String sql = "SELECT *"
 				+ " FROM(SELECT ROWNUM RNUM, SUB.*"
-				+ " FROM(SELECT DEPT_NAME, SUBJECT_NAME, COURSE_CREDIT,CLASS_TYPE, COURSE_CLASS, COURSE_DAY,COURSE_PERIOD,NAME"
+				+ " FROM(SELECT SUBJECT_CODE,DEPT_NAME, SUBJECT_NAME, COURSE_CREDIT,CLASS_TYPE, COURSE_CLASS, COURSE_DAY,COURSE_PERIOD,NAME"
 				+ "        FROM SUBJECT JOIN DEPARTMENT"
 				+ "        USING (DEPT_CODE)"
 				+ "        JOIN MEMBER ON SUBJECT.PF_ID = MEMBER.ID) SUB)"
@@ -115,6 +120,7 @@ public class SubjectDao {
 			if(rs.next()) {
 				do {
 					SubjectVo vo = new SubjectVo();
+					vo.setSubCode(rs.getString("SUBJECT_CODE"));
 					vo.setDeptName(rs.getString("dept_Name"));
 					vo.setSubName(rs.getString("subject_Name"));
 					vo.setCourseCredit(rs.getInt("course_Credit"));
@@ -140,6 +146,29 @@ public class SubjectDao {
 
 		return result;
 	}
+	
+	public int deleteSubejct(Connection conn, String [] delist) {
+		int result = 0;
+		
+		String sql = "DELETE FROM SUBJECT WHERE SUBJECT_CODE = ?";
+		
+		try {
+			for(int i = 0; i<delist.length; i++) {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, delist[i]);
+				result += pstmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+		}
+		
+		
+		return result;
+	}
+	
+	
 	//학생 수강신청 교과목 리스트용
 	public ArrayList<SubjectVo> stSubjectList(Connection conn, SubjectVo vo) {
 		ArrayList<SubjectVo> result = null;
@@ -152,7 +181,6 @@ public class SubjectDao {
 				+ "                JOIN MEMBER ON SUBJECT.PF_ID = MEMBER.ID "
 				+ "                WHERE SUBJECT.DEPT_CODE = ?) SUB)SUB_ROW "
 				+ "WHERE (RNUM BETWEEN ? AND ?)";
-		
 
 		return result;
 	}

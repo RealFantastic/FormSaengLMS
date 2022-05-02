@@ -73,7 +73,7 @@ public class CheckEmailController extends HttpServlet {
 		{
 			String host = "smtp.gmail.com";
 			int port = 587;
-			String from = "wjdghks5698@gmail.com";
+			String from = "vhatodeogkrry@gmail.com";
 			String recipient = vo.getEmail();
 			String subject = "아이디 찾기를 위한 이메일입니다.";
 			String content = vo.getName() + "님의 아이디는 " + result.getId() + "입니다.";

@@ -15,15 +15,19 @@ public class SubjectVo {
 	private String coursePeriod;
 	private String deptName;
 	private String pfName;
+	
 	@Override
 	public String toString() {
 		return "SubjectVo [subCode=" + subCode + ", subName=" + subName + ", courseGrade=" + courseGrade
 				+ ", courseSemester=" + courseSemester + ", courseCredit=" + courseCredit + ", courseClass="
 				+ courseClass + ", courseCapacity=" + courseCapacity + ", openYN=" + openYN + ", deptCode=" + deptCode
 				+ ", classType=" + classType + ", courseDay=" + courseDay + ", coursePeriod=" + coursePeriod
-				+ ", deptName=" + deptName + ", pfName=" + pfName + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + ", toString()=" + super.toString() + "]";
+				+ ", deptName=" + deptName + ", pfName=" + pfName + "]";
 	}
+
+
+
+
 	public SubjectVo() {
 		
 	}

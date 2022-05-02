@@ -53,4 +53,14 @@ public class SubjectService {
 		close(conn);
 		return result;
 	}
+	
+	public int deleteSubejct(String[] delist) {
+		int result = 0;
+		Connection conn = getConnection();
+		
+		result = new SubjectDao().deleteSubejct(conn, delist);
+		
+		
+		return result;
+	}
 }

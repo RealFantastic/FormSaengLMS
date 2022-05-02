@@ -20,6 +20,30 @@
 }
 
 </style>
+
+<script>
+$(function(){
+		$("#findid").on("click",function(){
+			console.log("함수야 안녕");
+			$(".findid_modal").fadeIn(150);
+			$(".btn_modal_close").on("click",closeModal);
+			$(".findid_modal").on("click",closeModalWindow);
+		});
+		
+		function closeModal(){
+			$(".findid_modal").hide();
+		}
+		function closeModalWindow(){
+			if(event.target == $(".findid_modal").get(0)){
+				console.log('넌 어디냐');
+				 $(".findid_modal").hide();
+				 $(".findid_modal").off("click",closeModalWindow); 
+			}
+				
+		}
+});
+
+</script>
 </head>
 <body>
 <div id="container">
@@ -103,43 +127,10 @@
 		$("#notice").click(function() {
 			location.href = "";
 		});
-		//모달창 구현 JavaScript
-   		window.onload = pageLoadedHandler;
-   		function pageLoadedHandler(){
-   			//버튼에 이벤트 등록
-   			document.querySelector("#findid").addEventListener("click",openFindIdModalHandler);
-   			document.querySelector(".btn_modal_close").addEventListener("click",closeFindIdModalHandler);
-   			
-   			//모달창 DOM을 담은 변수
-   			const findIdBox = document.querySelector(".findid_modal");
-   			
-   			//모달창 아무데나 눌러도 닫히도록
-   			findIdBox.onclick = closeModalWindowHandler;
-   			
-   			//모달창 열기 함수
-   			function openFindIdModalHandler(){
-   				console.log("아이디 찾기 버튼 클릭됨");
-   				findIdBox.style.display = "block";
-   			}
-   			
-   			//모달창 닫기 함수
-   			function closeFindIdModalHandler(){
-   				console.log("닫기버튼 클릭됨");
-   				findIdBox.style.display = "none";
-   			}
-   			
-   			//모달창 닫기(아무곳이나 눌러도) 함수
-   			function closeModalWindowHandler(){
-   				console.log("모달영역 바깥 클릭됨");
-   				//모달창 하위의 실제 입력해야되는 칸 클릭할때 안닫히도록함.
-   				if(event.target == document.getElementsByClassName("findid_modal")[0]){
-	   				findIdBox.style.display = "none";
-   				}
-   			}
-   		}
+
 		
-   	 	
-	</script>
+   	
+   </script>
 	   <script> // ajax
    $(function() {
    	   $("#submit").click(function(){

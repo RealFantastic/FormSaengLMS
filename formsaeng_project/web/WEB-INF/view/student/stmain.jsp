@@ -60,7 +60,7 @@
 	});
    
    $("#enroll").click(function(){
-		location.href = ""; // 수강신청
+		location.href = "stSubjectList"; // 수강신청
 	});
    
    $("#logout").click(function(){

@@ -130,11 +130,11 @@ function deptOption(){
 				<!-- 강의요일 선택 -->
 				<select class="select_design font2" name="classDate" id="classDate" required>
 					<option class='option_design font2' value='' selected>강의요일 선택</option>
-					<option class='option_design font2' value='mon' >월요일</option>
-					<option class='option_design font2' value='tue' >화요일</option>
-					<option class='option_design font2' value='wed' >수요일</option>
-					<option class='option_design font2' value='thu' >목요일</option>
-					<option class='option_design font2' value='fri' >금요일</option>
+					<option class='option_design font2' value='월' >월요일</option>
+					<option class='option_design font2' value='화' >화요일</option>
+					<option class='option_design font2' value='수' >수요일</option>
+					<option class='option_design font2' value='목' >목요일</option>
+					<option class='option_design font2' value='금' >금요일</option>
 				</select><br>
 				<!-- 강의교시 선택 -->
 				강의교시 선택
@@ -210,28 +210,31 @@ function deptOption(){
 			console.log(coursePeriod);
 			console.log(pfName);
 			
+			console.log($("#frmAdd").serialize());
+			
 			let queryString = $("#frmAdd").serialize();
-			console.log(queryString);
-
-			var timeChecked = $("input[name='period']:checked");
+			
+			
+			 var timeChecked = $("input[name='period']:checked");
 			timeChecked.each(function(){
 				coursePeriod.push(this.value);
 				console.log(coursePeriod);
 			});
-			console.log(queryString);
+			 
 			  $.ajax({
 				url:"addSubject.ajx",
 				type:"post",
-				data:{
-					"department":deptCode
-				},
-				//contentType:"application/json; charset:UTF-8",
+				data:queryString,
 				dataType:"text",
 				success:function(result){
-					console.log(result);
+					if(result == 0){
+						alert("과목 추가에 실패했습니다. 다시 입력해주세요.");
+					}else if(result ==1){
+						alert("과목 추가에 성공했습니다. 목록으로 돌아갑니다.");
+						location.href = "mgSubjects";
+					}
 				}
-				
-			});	
+			  });	
 			
 		}
 	</script>

@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>관리자 - 수강신청</title>
+<title>학생 - 수강신청</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -33,9 +33,9 @@
 		<div class="header_container">
 			<div class="header_wrapper">
 				<div class="univ_logo">
-					<a href="/WEB-INF/view/manager/mgmain.jsp"><img class="logo2"
+					<a href="#"><img class="logo2"
 						src="<%=request.getContextPath()%>/resources/images/fromsaenglogo.png"
-						alt="폼생대로고"></a> <a href="/WEB-INF/view/manager/mgmain.jsp"><img class="logo1"
+						alt="폼생대로고"></a> <a href=""><img class="logo1"
 						src="<%=request.getContextPath()%>/resources/images/name_logo.png"
 						alt="폼생대학교"></a>
 				</div>
@@ -49,14 +49,12 @@
 	<section id="subjects">
 		<div class="content_title">
 			<div class="title_name">
-				<h2 class="font5">추가한 과목 목록</h2>
+				<h2 class="font5">교과목 조회 및 신청</h2>
 			</div>
 			<div class="search">
 				<select class="select_design font2" name="search" id="requirement">
-					<option class="option_design font2" value="dept">학과 검색</option>
-					<option class="option_design font2" value="name">과목 검색</option>
+					<option class="option_design font2" value="date">요일 검색</option>
 					<option class="option_design font2" value="type">이수구분 검색</option>
-					<option class="option_design font2" value="grade">학년 검색</option>
 				</select> <input type="text" class="form-control search_input"
 					id="search_word" name="search_word" placeholder="검색어를 입력하세요">
 				<button type="button" class="btn btn-secondary">검색</button>
@@ -96,9 +94,9 @@
 				</table>
 			</form>
 			<button type="button" id="addSubject" class="btn btn-primary">과목
-				추가하기</button>
+				신청하기</button>
 			<button type="button" id="delSubject" class="btn btn-primary">선택 과목
-				삭제하기</button>
+				신청취소하기</button>
 		</div>
 	</section>
 	<script>
