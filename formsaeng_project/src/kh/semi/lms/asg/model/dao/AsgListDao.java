@@ -95,13 +95,56 @@ public class AsgListDao {
 	
 	public int deleteBoard(Connection conn, AsgListVo vo) {
 		int result = 0;
-		String sql = "DELETE ASSIGNMENT_LIST WHERE BOARD_ASSIGNMENT_NO=?";
+		String sql = "DELETE ASSIGNMENT_LIST WHERE BOARD_ASSIGNMENT_NO in (?)";
 		
 			try {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, vo.getbANo());
 				
 				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+		
+		return result;
+	}
+	
+	public int multiDeleteBoard(Connection conn, String[] param1) {
+		
+		int result = 0;
+		int[] cnt = null;
+		
+		String sql = "DELETE ASSIGNMENT_LIST WHERE BOARD_ASSIGNMENT_NO in (?)";
+		
+			try {
+				pstmt = conn.prepareStatement(sql);
+//				pstmt.setString(1, param1);
+				
+//				for(int i=0; i<param1.length; i++) {
+//					pstmt.setString(1, param1[i]);
+//				
+//					//쿼리문 pstmt에 모두 쌓아 한번에 처리
+//					pstmt.addBatch();
+//				}
+//				
+//				cnt = pstmt.executeBatch();
+//				
+//				//쿼리 성공 : -2
+//				for(int i=0; i<cnt.length; i++) {
+//					if(cnt[i]==-2) {
+//						result++;
+//					}
+//				}
+//				
+//				//모아둔 쿼리 실행 끝나면 커밋
+//				if(param1.length==result) {
+//					conn.commit();
+//				} else {
+//					conn.rollback();
+//				}
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
@@ -118,7 +161,8 @@ public class AsgListDao {
                 + "board_assignment_title, "
                 + "board_assignment_writer,"
                 + " TO_CHAR(board_assignment_date, 'YYYY-MM-DD') board_assignment_date"
-                + " from assignment_list";
+                + " from assignment_list"
+                + " order by board_assignment_date desc";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -147,7 +191,11 @@ public class AsgListDao {
 	public ArrayList<AsgListVo> AssignmentBoardlist(Connection conn,int startRnum,int endRnum) {
 		ArrayList<AsgListVo> volist = null;
 		
-		String sql = "select * from (select rownum rnum, t1.* from (select a.*,(select count(*) from COMMENT c where c.comment_no = a.board_assignment_no) re_CommentCnt from assignment_list a order by board_assignment_date desc, board_assignment_no desc) t1) where rnum between ? and ? ";
+		String sql = "select * from"
+                + "(SELECT rownum r, t1.* FROM "
+                + "(SELECT *"
+                + "FROM assignment_list a ORDER BY board_assignment_date DESC)t1)"
+                + " where r between ? and ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);

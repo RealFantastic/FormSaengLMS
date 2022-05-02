@@ -86,10 +86,7 @@
 			action="<%= request.getContextPath() %>/board/insertdo" method="post">
 			<div class=title_notice>
 				<div class="title">과제게시판 등록하기</div>
-				<div class="button_enroll">
-					<button type="submit" class="btn btn-primary" id="insertBtn">등록하기</button>
-					<button type="button" class="btn btn-primary">취소하기</button>
-				</div>
+				
 			</div>
 
 			<div class="mb-3 room">
@@ -110,6 +107,10 @@
 					<label for="floatingTextarea2">내용을 입력하세요.</label>
 				</div>
 			</div>
+			<div class="button_enroll">
+					<button type="submit" class="btn btn-primary" id="insertBtn">등록하기</button>
+					<button type="button" class="btn btn-primary">취소하기</button>
+				</div>
 		</form>
 	</div>
       </div>

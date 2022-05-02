@@ -41,6 +41,13 @@ public class AsgListService {
 		return result;
 	}
 	
+	public int multiDeleteBoard(String[] param1) {
+		Connection conn = getConnection();
+		int result = new AsgListDao().multiDeleteBoard(conn, param1);
+		close(conn);
+		return result;
+	}
+	
 	public ArrayList<AsgListVo> AssignmentBoardlist() {
 		Connection conn = getConnection();
 		ArrayList<AsgListVo> volist = new AsgListDao().AssignmentBoardlist(conn);
