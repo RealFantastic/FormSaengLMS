@@ -51,6 +51,8 @@ public class PfAsgListInsertDoServlet extends HttpServlet {
 		
 		int result = new AsgListService().insertBoard(vo);
 		
+		System.out.println("result :"+result);
+		
 		if(result == 0) {
 			System.out.println("글등록 실패");
 			request.setAttribute("msg","글등록 실패");

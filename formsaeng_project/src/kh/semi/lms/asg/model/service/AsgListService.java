@@ -34,16 +34,16 @@ public class AsgListService {
 		return result;
 	}
 
-	public int deleteBoard(AsgListVo vo) {
+	public int deleteBoard(int bANo) {
 		Connection conn = getConnection();
-		int result = new AsgListDao().deleteBoard(conn, vo);
+		int result = new AsgListDao().deleteBoard(conn, bANo);
 		close(conn);
 		return result;
 	}
 	
-	public int multiDeleteBoard(String[] param1) {
+	public int multiDeleteBoard(String[] delNo) {
 		Connection conn = getConnection();
-		int result = new AsgListDao().multiDeleteBoard(conn, param1);
+		int result = new AsgListDao().multiDeleteBoard(conn, delNo);
 		close(conn);
 		return result;
 	}

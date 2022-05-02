@@ -4,6 +4,10 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,61 +84,128 @@
       </div>
       <div class="content_container">
         <!-- 템플릿 -->
-        	<%
-        		ArrayList<AsgListVo> volist = (ArrayList<AsgListVo>)request.getAttribute("boardVolist");
-        	%>
 
 	<div>
-	<button id="insertBoard" name="insertBoard">글등록</button>
-	<button>삭제</button>
+	<form id="multiDelete">
+	<input type="button" id="insertBoard" name="insertBoard" value="글쓰기"></button>
+	<input type="button" id="deleteBoard" value="삭제">
 		<table border="1">
 			<tr>
-				<td><input id="allCheck" type="checkbox"></td>
+				<td><input id="allCheck" name="all" type="checkbox" onclick="allChk(this.checked);"></td>
 				<td>번호</td>
 				<td>제목 [댓글수]</td>
 				<td>작성자</td>
 				<td>작성일</td>
 			</tr>
-	<%
-		for(AsgListVo vo : volist){
-	%>
-			<tr class="read_list" style="cursor: pointer;">
-				<td><input id="rowCheck" type="checkbox"></td>
-				<td class="bANo"><%=vo.getbANo() %></td>
-				<td><%=vo.getbATitle() %></td>
-				<td><%=vo.getbAWriter() %></td>
-				<td><%=vo.getbADate() %></td>
+	<c:if test="${not empty boardVolist }">
+		<c:forEach items="${boardVolist}" var="vo">
+			<tr style="cursor: pointer;">
+				<td><input id="rowCheck" name="chk" type="checkbox" value="${vo.bANo }"></td>
+				<td class="bANo">${vo.bANo }</td>
+				<td id="readList" class="read_list">${vo.bATitle }</td>
+				<td>${vo.bAWriter }</td>
+				<td>${vo.bADate }</td>
 			</tr>
-	<%} %>
+		</c:forEach>
+	</form>
+	</c:if>
 		</table>
+			<%-- [[ ${startPage } ]] [[ ${endPage } ]] [[ ${pageCnt } ]] [[ ${pageNum } ]] --%>
+		<div id="pagingBox">
+			<ul class="pagination">
+			<!-- startPage에서 -1일 때 -->
+			<c:if test="${ startPage > 1 }">
+				<li class="page-item"><a class="page-link" href="pflmsasgboard?pageNum=${startPage-1}">Previous</a></li>
+			</c:if>
+			<c:if test="${ startPage <= 1 }">
+				<li class="page-item disabled"><a class="page-link" href="pflmsasgboard?pageNum=${startPage-1}">Previous</a></li>
+			</c:if>
+			<c:forEach step="1" begin="${startPage }" end="${ endPage}" var="idx">
+				<c:if test="${idx eq currentPage }">
+					<li class="page-item active"><a class="page-link" href="pflmsasgboard?pageNum=${idx }">${idx } </a></li>
+				</c:if>
+				<c:if test="${idx ne currentPage }">
+					<li class="page-item"><a class="page-link" href="pflmsasgboard?pageNum=${idx }">${idx } </a></li>
+				</c:if>
+			</c:forEach>
+			<!-- endPage에서 +1일 때 -->
+			<c:if test="${endPage < pageCnt }">
+				<li class="page-item"><a class="page-link" href="pflmsasgboard?pageNum=${endPage+1}">next</a></li>
+			</c:if>
+			<c:if test="${endPage >= pageCnt }">
+				<li class="page-item disabled"><a class="page-link" href="pflmsasgboard?pageNum=${endPage+1}">next</a></li>
+			</c:if>
+			</ul>
+		</div>
 	</div>
       </div>
   </section>
   <script>
-  	
-	  $("#insertBoard").click(function(){
-        location.href ="pfasgboard/insert";
-    });  
-  	
-  	$(".read_list").click(function(){
-  		// var readlist = $(".read_list").children(".rno").text();
-  		// console.log("readlist : " + readlist);
-  		// 배열 선언
-  		var trArr = new Array();
-  		
-  		// 현재 클릭된 행
-  		var tr = $(this);
-  		console.log(tr);
-  		var td = tr.children();
-  		
-  		// 반복문을 통해 배열에 값을 담음
-  		td.each(function(i) {
-  			trArr.push(td.eq(i).text());
-  		})
-  		
-  		console.log("배열에 담긴 값 : " + trArr[1]);
-  		location.href = "pfreadasg?bANo=" + trArr[1];
-  	});
-  </script>
+		
+  
+  
+  
+  //multi checkbox 삭제
+			$(function() {
+				$("#deleteBoard").click(function() {
+					console.log($("#multiDelete").serialize());
+					var queryStr = $("#multiDelete").serialize();
+					console.log(queryStr);
+					if(queryStr == ""){
+						alert("삭제할 게시물을 선택하세요.");
+					} else {
+						$.ajax({
+							url : "pflmsasgboard/delete.ax",
+							type : "post",
+							data : queryStr,
+							dataType : "text",
+							success : function(result){
+								console.log(queryStr);
+								console.log("컨트롤러 다녀옴.");
+								if(result == 0){
+									alert("삭제 실패했습니다.");
+								} else {
+									alert(result+"건을 삭제에 성공했습니다.");
+									location.reload();
+								}
+							}
+							
+							
+						});
+					}
+					// var id = $("#rowCheck").val();  // 무조건 맨처음 체크박스 value 가져옴 (실패작)
+				
+				});
+			});
+	//글쓰기 이동			
+			$("#insertBoard").click(function() {
+				location.href = "pfasgboard/insert";
+			});
+
+	//제목 클릭하여 상세페이지 이동
+			$(".read_list").click(function() {
+				// var readlist = $(".read_list").children(".rno").text();
+				// console.log("readlist : " + readlist);
+				// 배열 선언
+				var trArr = new Array();
+
+				// 현재 클릭된 행
+				/* var tr = $(this);
+				console.log(tr); 
+				var td = tr.children(); */
+				var ta = document.getElementById("readList").previousSibling.previousSibling;
+				var td = ta.innerText;
+
+				// 반복문을 통해 배열에 값을 담음
+				/* td.each(function(i) {
+					trArr.push(td.eq(i).text());
+				}) */
+
+				/* console.log("배열에 담긴 값 : " + trArr[1]);
+				location.href = "pfreadasg?bANo=" + trArr[1]; */
+				
+				location.href = "pfreadasg?bANo=" + td;
+			});
+		</script>
 </body>
 </html>

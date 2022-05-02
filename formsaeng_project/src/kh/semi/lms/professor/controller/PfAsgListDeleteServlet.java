@@ -37,42 +37,25 @@ public class PfAsgListDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doPost");
+		System.out.println("doPost/delete");
+		
+		String[] delNo = request.getParameterValues("chk");
+		System.out.println(delNo[0]);
+		
+		int result = new AsgListService().multiDeleteBoard(delNo);
+		
 		PrintWriter out = response.getWriter();
 		
-		String[] param1 = request.getParameterValues("id");
-		System.out.println( param1[0] );
-	
-//		for(int i=0; i<param1.length; i++) {
-//			System.out.println(param1[i]);
-//		}
-		
-		for(int i=0; i<param1.length; i++) {
-		 	if(i<param1.length-1) {
-			param1[i] += ","; 	
-		 	}
-		}
-		
-		
-		int result = new AsgListService().multiDeleteBoard(param1);
-		
-		
-		/* System.out.println(param1); */
-		
-		out.print(param1+"전달받았습니다.");
-		out.print("응답합니다.");
-		
-		out.flush();
-		out.close();
-		
-		if(result<1) {
-			System.out.println("삭제에 실패했습니다.");
+		if(result <= 0) {
+			out.print(0);
+			out.flush();
+			out.close();
+			return;
 		} else {
-			System.out.println("삭제에 성공했습니다.");
+			out.print(result);
+			out.flush();
+			out.close();
 		}
-		
-		
-		
 	}
 
 }

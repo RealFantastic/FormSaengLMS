@@ -93,13 +93,13 @@ public class AsgListDao {
 		return result;
 	}
 	
-	public int deleteBoard(Connection conn, AsgListVo vo) {
+	public int deleteBoard(Connection conn, int bANo) {
 		int result = 0;
-		String sql = "DELETE ASSIGNMENT_LIST WHERE BOARD_ASSIGNMENT_NO in (?)";
+		String sql = "DELETE ASSIGNMENT_LIST WHERE BOARD_ASSIGNMENT_NO = ?";
 		
 			try {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, vo.getbANo());
+				pstmt.setInt(1, bANo);
 				
 				result = pstmt.executeUpdate();
 			} catch (SQLException e) {
@@ -111,39 +111,29 @@ public class AsgListDao {
 		return result;
 	}
 	
-	public int multiDeleteBoard(Connection conn, String[] param1) {
+	public int multiDeleteBoard(Connection conn, String[] delNo) {
 		
 		int result = 0;
-		int[] cnt = null;
+		int cnt = 0;
 		
-		String sql = "DELETE ASSIGNMENT_LIST WHERE BOARD_ASSIGNMENT_NO in (?)";
+		String sql = "DELETE ASSIGNMENT_LIST WHERE BOARD_ASSIGNMENT_NO = ?";
 		
 			try {
 				pstmt = conn.prepareStatement(sql);
 //				pstmt.setString(1, param1);
 				
-//				for(int i=0; i<param1.length; i++) {
-//					pstmt.setString(1, param1[i]);
-//				
-//					//쿼리문 pstmt에 모두 쌓아 한번에 처리
-//					pstmt.addBatch();
-//				}
-//				
-//				cnt = pstmt.executeBatch();
-//				
-//				//쿼리 성공 : -2
-//				for(int i=0; i<cnt.length; i++) {
-//					if(cnt[i]==-2) {
-//						result++;
-//					}
-//				}
-//				
-//				//모아둔 쿼리 실행 끝나면 커밋
-//				if(param1.length==result) {
-//					conn.commit();
-//				} else {
-//					conn.rollback();
-//				}
+				for(int i=0; i<delNo.length; i++) {
+					pstmt.setString(1, delNo[i]);
+					
+					result += pstmt.executeUpdate();
+				}
+				
+				//모아둔 쿼리 실행 끝나면 커밋
+				if(delNo.length==result) {
+					conn.commit();
+				} else {
+					conn.rollback();
+				}
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -192,9 +182,9 @@ public class AsgListDao {
 		ArrayList<AsgListVo> volist = null;
 		
 		String sql = "select * from"
-                + "(SELECT rownum r, t1.* FROM "
-                + "(SELECT *"
-                + "FROM assignment_list a ORDER BY board_assignment_date DESC)t1)"
+                + " (SELECT rownum r, t1.* FROM "
+                + " (SELECT *"
+                + " FROM assignment_list a ORDER BY board_assignment_date DESC)t1)"
                 + " where r between ? and ?";
 		
 		try {
@@ -211,8 +201,6 @@ public class AsgListDao {
 				vo.setbAWriter(rs.getString("BOARD_ASSIGNMENT_WRITER"));
 				vo.setbADate(rs.getString("BOARD_ASSIGNMENT_DATE"));
 				vo.setbAContent(rs.getString("BOARD_ASSIGNMENT_CONTENT"));
-				vo.setId(rs.getString("ID"));
-				vo.setReCommentCnt(rs.getInt("re_CommentCnt"));
 				volist.add(vo);		
 				}
 		} catch (SQLException e) {

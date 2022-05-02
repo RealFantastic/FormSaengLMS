@@ -54,7 +54,6 @@ public class PfAsgListModifyDoServlet extends HttpServlet {
 			System.out.println("글수정 실패");
 			request.getSession().setAttribute("msg", "글수정 실패");
 			response.sendRedirect("board/asgmodify?bANo="+bANo);
-//			request.getRequestDispatcher("/WEB-INF/view/professor/pf_modifyasgboard.jsp").forward(request, response);
 		} else {
 			System.out.println("글수정 성공");
 			request.getSession().setAttribute("msg", "글수정 성공");
