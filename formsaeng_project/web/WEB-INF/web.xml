@@ -24,7 +24,34 @@
       <filter-name>EncodingFilter</filter-name>
       <url-pattern>/*</url-pattern>
    </filter-mapping>
-   
+  
+<!--  로그인 필터  -->
+ <filter>
+  	<filter-name>MgLoginFilter</filter-name>
+  	<filter-class>kh.semi.common.filter.MgLoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>MgLoginFilter</filter-name>
+  	<url-pattern>/mg/*</url-pattern>
+  </filter-mapping>
+
+  <filter>
+  	<filter-name>PfLoginFilter</filter-name>
+  	<filter-class>kh.semi.common.filter.PfLoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>PfLoginFilter</filter-name>
+  	<url-pattern>/pf/*</url-pattern>
+  </filter-mapping>
+
+  <filter>
+  	<filter-name>StLoginFilter</filter-name>
+  	<filter-class>kh.semi.common.filter.StLoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>StLoginFilter</filter-name>
+  	<url-pattern>/st/*</url-pattern>
+  </filter-mapping>
    
   <resource-ref>
   	<description>LMS PClass</description>
