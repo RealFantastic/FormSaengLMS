@@ -6,11 +6,13 @@
 <script src="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/core/main.min.js"></script>
 <script src="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/daygrid/main.min.js"></script>
 <script src="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/interaction/main.min.js"></script>
-<link href='node_modules/@fullcalendar/core/main.css' rel='stylesheet' />
-<link href='node_modules/@fullcalendar/timegrid/main.css' rel='stylesheet' />
-<script src='fullcalendar/timegrid/main.js'></script>
-<script src='fullcalendar/resource-common/main.js'></script>
-<script src='fullcalendar/resource-timegrid/main.js'></script>
+<!-- <link href='node_modules/@fullcalendar/core/main.css' rel='stylesheet' /> -->
+<!-- <link href='node_modules/@fullcalendar/timegrid/main.css' rel='stylesheet' /> -->
+<link href="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/timegrid/main.css" rel="stylesheet" type="text/css">
+<script src="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/timegrid/main.js"></script>
+<!-- <script src='fullcalendar/resource-common/main.js'></script> -->
+<!-- <script src='fullcalendar/resource-daygrid/main.js'></script> -->
+<!-- <script src='fullcalendar/resource-timegrid/main.js'></script> -->
 
 <script src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
 <script src="https://unpkg.com/tooltip.js/dist/umd/tooltip.min.js"></script>
@@ -31,22 +33,14 @@
 <!-- FullCalendar -->
 <script>
 	//시간표 띄움
-	let calendar = new Calendar(calendarEl, {
-		plugins: [ resourceTimeGridPlugin ],
-		defaultView: 'resourceTimeGridDay',
-		resources: [
-    // your list of resources
-		]
+	document.addEventListener('DOMContentLoaded', function() {
+	var calendar=document.getElementById('timetable');
+	var calendar = new FullCalendar.Calendar(calendar, {
+		 plugins: [ 'timeGrid' ],
+		 defaultView: 'timeGridWeek'
 	});
-
-	var calendar = new FullCalendar.Calendar(calendarEl, {
-		plugins: [ 'resourceTimeGrid' ],
-		defaultView: 'resourceTimeGridDay',
-		resources: [
-		    // your list of resources
-		]
-	});
-	
+	calendar.render();
+});
 	
 </script>
 
@@ -156,7 +150,7 @@
 				<!-- 템플릿 -->
 				<div class="row">
 					<!-- <button type="button" id="cal_add_btn" class="btn btn-primary">학사일정 등록</button> -->
-					<div id="calendar" class="cal"></div>
+					<div id="timetable" class="time"></div>
 
 					<div class="modal fade bs-example-modal-sm" tabindex="-1"
 						role="dialog" aria-labelledby="mySmallModalLabel"

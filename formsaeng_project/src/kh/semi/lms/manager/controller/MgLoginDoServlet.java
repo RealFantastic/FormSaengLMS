@@ -45,7 +45,7 @@ public class MgLoginDoServlet extends HttpServlet {
 			out.print("실패");
 			System.out.println("로그인에 실패했습니다.");
 		}else { // 로그인 성공
-			System.out.println("로그인에 성공했습니다.");
+			System.out.println("로그인 성공!!!!! 세션 ssMemberVo 저장 : " + vo);
 			out.print("성공");
 			request.getSession().setAttribute("ssMemberVo", vo); // 로그인 유지
 		}

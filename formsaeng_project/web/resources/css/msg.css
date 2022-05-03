@@ -3,7 +3,46 @@
 }
 
 .msg_select{
-    
-    width: min-content;
+	width: auto !important;
 
+}
+
+.msg_box{
+	height: min-content !important;
+	margin-top: 18px;
+}
+
+.msg_Write{
+	display: flex;
+	justify-content: space-between;
+}
+
+.msg_write_btn{
+	margin-top: 18px !important;
+	width: 200px;
+}
+
+.modal_title{
+	resize: none;
+	height: 20px;
+}
+
+.modal_content{
+	resize: none;
+	height: 250px;
+}
+
+.scroll_content{
+	overflow: scroll;
+	height: 120px;
+}
+.content_line{
+
+    white-space: pre-line;
+}
+#send_box{
+/* 	display:none; */
+}
+#receive_box{
+	display:none;
 }

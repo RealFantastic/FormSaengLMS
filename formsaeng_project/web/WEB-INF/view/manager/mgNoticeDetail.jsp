@@ -3,8 +3,7 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/reset.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/notice.css">
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,9 +24,7 @@
 	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 	crossorigin="anonymous"></script>
 <!-- 글자 -->
-<link
-	href="https://hangeul.pstatic.net/hangeul_static/css/NanumBarunGothicYetHangul.css"
-	rel="stylesheet">
+<link href="https://hangeul.pstatic.net/hangeul_static/css/NanumBarunGothicYetHangul.css" rel="stylesheet">
 </head>
 
 <body>
@@ -35,28 +32,25 @@
 	<form id="mgNoticeFrom" action="mgbupdate" method="post">
 		<div class="body_div">
 			<div class="logoimg_enroll">
-				<img src="./resources/images/fromsaenglogo.png"
-					class="fromsaenglogo"> <img src="./resources/images/logo.png"
-					class="logo">
+				<img src="./resources/images/fromsaenglogo.png" class="fromsaenglogo">
+				<img src="./resources/images/logo.png" class="logo">
 			</div>
 
 			<div class=title_search>
 				<div class="title font5">공지사항 상세보기</div>
 				<div class="button_enroll">
-					<button type="button" class="btn btn-primary" id="updateBtn">공지사항
-						수정</button>
-					<button type="button" id="nt_list_btn" class="btn btn-primary">공지사항
-						목록</button>
+					<button type="button" class="btn btn-primary" id="updateBtn">공지사항 수정</button>
+					<button type="button" id="nt_list_btn" class="btn btn-primary">공지사항 목록</button>
 				</div>
 			</div>
 
 			<div class="mb-3 room">
-				<%
-					NoticeVo list = (NoticeVo) request.getAttribute("ssnoticeVo");
-				%>
-				<!-- 서블릿에 저장된 ssnoticevo 를 가져옴 -->
+				<%NoticeVo list = (NoticeVo) request.getAttribute("ssnoticeVo");%>
+				<!-- MgNoticeDetailServlet에 저장된 ssnoticevo 를 가져옴 -->
+
 				<input type="hidden" id="nno" value="<%=list.getBoardNoticeNo()%>">
 				<!-- hidden:숨겨놓은창 -->
+
 				<div class="font4">제목</div>
 				<div class="form-floating">
 					<div class="notice_detail_title" name="title">

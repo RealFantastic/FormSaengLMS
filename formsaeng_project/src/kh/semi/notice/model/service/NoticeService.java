@@ -13,13 +13,27 @@ import kh.semi.notice.model.vo.NoticeVo;
 public class NoticeService {
 
 		// 공지사항 리스트
-		public ArrayList<NoticeVo> view(){
-			Connection conn = getConnection();
-			
-			ArrayList<NoticeVo> result=null;
-			
-			result=new NoticeDao().view(conn);
-			
+//		public ArrayList<NoticeVo> view(){
+//			Connection conn = getConnection();
+//			
+//			ArrayList<NoticeVo> volist=null;
+//			
+//			volist=new NoticeDao().view(conn);
+//			
+//			close(conn);
+//			return volist;
+//		}
+		
+		// 공지사항 페이징
+		public ArrayList<NoticeVo> view(int startRnum, int endRnum){
+			Connection conn=getConnection();
+			ArrayList<NoticeVo> volist=new NoticeDao().view(conn, startRnum,endRnum);
+			close(conn);
+			return volist;
+		}
+		public int countNotice() {
+			Connection conn=getConnection();
+			int result=new NoticeDao().countNotice(conn);
 			close(conn);
 			return result;
 		}
@@ -66,7 +80,6 @@ public class NoticeService {
 			
 			return listNotice;
 		}
-
 		public List<NoticeVo> selectNotice() {
 			Connection conn=getConnection();
 			List<NoticeVo> listNotice=new NoticeDao().selecNotice(conn);
@@ -76,13 +89,11 @@ public class NoticeService {
 		}
 
 
+		//공지사항 수정
 		public int updateBoard(NoticeVo vo) {
 			Connection conn=getConnection();
 			int result=new NoticeDao().updateBoard(conn, vo);
 			return result;
 		}
-		
-		
-		
-		
+	
 }

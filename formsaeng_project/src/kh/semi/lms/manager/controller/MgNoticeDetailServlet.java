@@ -30,6 +30,7 @@ public class MgNoticeDetailServlet extends HttpServlet {
 		int nno=Integer.parseInt(nnoStr);
 		
 		NoticeVo vo = new NoticeService().detailBoardView(nno);
+		//가따온거 쿼리문 돌린내용이 들어있음
 		
 		if(vo!=null) {
 			request.setAttribute("detailtitle", vo.getBoardNoticeTitle());

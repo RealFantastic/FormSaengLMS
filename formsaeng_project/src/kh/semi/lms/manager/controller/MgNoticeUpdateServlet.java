@@ -29,24 +29,26 @@ public class MgNoticeUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		업데이트 jsp에서 번호를 가져온걸 nnostr에 담아준다. 항상 string으로 가져온다 .int인지 알 수 없다. 
+		//href로 넘어오면 doGet
 		String nnoStr=request.getParameter("nno");
+//		mgNoticeUpdate.jsp에서 (nno)번호를 가져온걸 nnostr에 담아준다. 항상 string으로 가져온다 .int인지 알 수 없다. 
+
 		System.out.println("nnoStr"+nnoStr);
-//		인트형으로 변경
+
 		int nno=Integer.parseInt(nnoStr);
-		//확인용
+//		nnoStr를 int형으로 변경하여 int형 nno에 넣어준다.
+
 		System.out.println("nno 서블릿 : "+nno);
-		//서비스 딜테일보드뷰에 있는걸 vo에 호출
+
 		NoticeVo vo=new NoticeService().detailBoardView(nno);
-		
+		//NoticeService.detailBoardView에 있는걸 NoticeVo vo호출
+
 		request.setAttribute("ddvo", vo);
 
 		request.getRequestDispatcher("/WEB-INF/view/manager/mgNoticeUpdate.jsp").forward(request, response);
 		
 	}
 
-	//href로 넘어오면 doGet
-	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

@@ -1,28 +1,17 @@
-<link
-	href="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/core/main.css" rel="stylesheet" type="text/css">
-<link
-	href="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/daygrid/main.css" rel="stylesheet" type="text/css">
-<script
-	src="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/core/main.js"></script>
-<script
-	src="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/daygrid/main.js"></script>
-<script
-	src="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/interaction/main.js"></script>
-<script
-	src="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/core/main.min.js"></script>
-<script
-	src="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/daygrid/main.min.js"></script>
-<script
-	src="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/interaction/main.min.js"></script>
+<link href="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/core/main.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/daygrid/main.css" rel="stylesheet" type="text/css">
+<script src="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/core/main.js"></script>
+<script src="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/daygrid/main.js"></script>
+<script src="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/interaction/main.js"></script>
+<script src="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/core/main.min.js"></script>
+<script src="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/daygrid/main.min.js"></script>
+<script src="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/interaction/main.min.js"></script>
 <script src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
 <script src="https://unpkg.com/tooltip.js/dist/umd/tooltip.min.js"></script>
 
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/reset.css">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/template.css">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/calendar.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reset.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/template.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/calendar.css">
 
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -33,8 +22,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script type="text/javascript"
-	src=" https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src=" https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 <!-- FullCalendar -->
 <script>

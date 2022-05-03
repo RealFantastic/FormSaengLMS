@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/msg.css">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,76 +77,130 @@
 		<div class="template_container">
 
 			<div class="template-title">
-				<h1>메시지</h1>
-				
-				<select class="form-select msg_select" aria-label="Default select example">
-					<option selected>받은 메시지</option>
-					<option value="1">보낸 메시지</option>
-				</select>
-				
-				
+				<div class="msg_Write">
+					<h1>메시지</h1>
+					
+					<div class="btn-group msg_box" role="group" aria-label="Basic radio toggle button group">
+					  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" >
+					  <label class="btn btn-outline-primary" for="btnradio1">　　받은 메시지　　</label>
+					
+					  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" checked>
+					  <label class="btn btn-outline-primary" for="btnradio2">　　보낸 메시지　　</label>
+					</div>
+
+<!-- 				메시지 보내기 모달창 -->
+					<div>
+					
+					<form id="mgMessageFrom"action="<%=request.getContextPath()%>/mgmsgwrite" method="post">
+					
+						<button type="button" class="btn btn-primary msg_write_btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">메시지 보내기</button>
+						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">메시지 보내기</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<form>
+											<div class="mb-3">
+												<label for="recipient-name" class="col-form-label">받는 사람</label>
+												<input type="text" class="form-control" id="recipient-name" name="recevier">
+											</div>
+											<div class="mb-3">
+												<label for="message-text" class="col-form-label">제목</label>
+												<textarea class="form-control modal_title" id="message-text" name="title"></textarea>
+											</div>
+											<div class="mb-3">
+												<label for="message-text" class="col-form-label">내용</label>
+												<textarea class="form-control modal_content" id="message-text" name="content"></textarea>
+											</div>
+										</form>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+										<button type="submit" class="btn btn-primary">전송</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
 				<hr>
+
 			</div>
 			<div class="content_container">
 				<!-- 템플릿 -->
 				<div class="row">
-					<div class="card border-success mb-3 msg_card" style="max-width: 18rem;">
-						<div class="card-header bg-transparent border-success">
-							받는이. 보내는이 이름
-						</div>
-						<div class="card-body text-success">
-							<h5 class="card-title">제목</h5>
-							<p class="card-text"> 내용 Some quick example text to build on the
-								card title and make up the bulk of the card's content.</p>
-						</div>
-						<div class="card-footer bg-transparent border-success">받은.보낸 날짜</div>
-					</div>
-					<div class="card border-success mb-3 msg_card" style="max-width: 18rem;">
-						<div class="card-header bg-transparent border-success">
-							받는이. 보내는이 이름
-						</div>
-						<div class="card-body text-success">
-							<h5 class="card-title">제목</h5>
-							<p class="card-text"> 내용 Some quick example text to build on the
-								card title and make up the bulk of the card's content.</p>
-						</div>
-						<div class="card-footer bg-transparent border-success">받은.보낸 날짜</div>
-					</div>
-					<div class="card border-success mb-3 msg_card" style="max-width: 18rem;">
-						<div class="card-header bg-transparent border-success">
-							받는이. 보내는이 이름
-						</div>
-						<div class="card-body text-success">
-							<h5 class="card-title">제목</h5>
-							<p class="card-text"> 내용 Some quick example text to build on the
-								card title and make up the bulk of the card's content.</p>
-						</div>
-						<div class="card-footer bg-transparent border-success">받은.보낸 날짜</div>
-					</div>
-					<div class="card border-success mb-3 msg_card" style="max-width: 18rem;">
-						<div class="card-header bg-transparent border-success">
-							받는이. 보내는이 이름
-						</div>
-						<div class="card-body text-success">
-							<h5 class="card-title">제목</h5>
-							<p class="card-text"> 내용 Some quick example text to build on the
-								card title and make up the bulk of the card's content.</p>
-						</div>
-						<div class="card-footer bg-transparent border-success">받은.보낸 날짜</div>
-					</div>
+					
+	<!-- 			for문으로 돌려서... -->
+					<div id="receive_box">
+						<c:forEach var="msgreceive" items="${msgreceive}"> 
+		<!-- 				받은메시지함 -->
 						<div class="card border-success mb-3 msg_card" style="max-width: 18rem;">
-						<div class="card-header bg-transparent border-success">
-							받는이. 보내는이 이름
+							<div class="card-header bg-transparent border-success">
+								${msgreceive.SENDER}
+							</div>
+							<div class="card-body text-success">
+								<h5 class="card-title">${msgreceive.MSG_TITLE}</h5>
+								<p class="card-text"> ${msgreceive.MSG_CONTENT}</p>
+							</div>
+							<div class="card-footer bg-transparent border-success">${msgreceive.MSG_DATE}</div>
 						</div>
-						<div class="card-body text-success">
-							<h5 class="card-title">제목</h5>
-							<p class="card-text"> 내용 Some quick example text to build on the
-								card title and make up the bulk of the card's content.</p>
+						
+						</c:forEach>
+					</div>
+					<div id="send_box">
+						<c:forEach var ="mgmsgsend" items="${msgsend}">
+		<!-- 				보낸메시지함 -->
+						<div class="card border-success mb-3 msg_card" style="max-width: 18rem;">
+							<div class="card-header bg-transparent border-success">
+								${mgmsgsend.recevier}
+							</div>
+							<div class="card-body text-success">
+								<h5 class="card-title">${mgmsgsend.msgTitle}</h5>
+								<div class=scroll_content>
+									<p class="card-text content_line"> ${mgmsgsend.msgContent}</p>
+								</div>
+							</div>
+							<div class="card-footer bg-transparent border-success">${mgmsgsend.msgDate}</div>
 						</div>
-						<div class="card-footer bg-transparent border-success">받은.보낸 날짜</div>
+						
+						</c:forEach>
 					</div>
 				</div>
 			</div>
 	</section>
+	
+	<script>
+	
+	$(function(){
+		if($("#btnradio2").prop("checked")){
+			console.log("안녕");
+			showSendBox();
+		}
+		
+		$("#btnradio1").on("click",function(){
+			showReceiveBox();
+		})
+		$("#btnradio2").on("click",function(){
+			showSendBox();
+		})
+		
+		function showReceiveBox(){
+			console.log("쇼리시브 함수");
+			$("#send_box").hide();
+			$("#receive_box").show();
+		}
+		function showSendBox(){
+			console.log("쇼샌드박스함수");
+			$("#receive_box").hide();
+			$("#send_box").show();
+		}
+		
+	});
+
+	</script>
 </body>
 </html>

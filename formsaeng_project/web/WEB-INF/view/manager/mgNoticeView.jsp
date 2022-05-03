@@ -46,17 +46,18 @@
 		</header>
 		<div class=title_search>
 			<div class="title font5">공지사항</div>
+			
 			<div class="dropdown notice_search">
 				<div class=drop_search>
 					<a class="btn btn-secondary dropdown-toggle font3" href="#" role="button"
-						id="dropdownMenuLink" data-bs-toggle="dropdown"
-						aria-expanded="false"> 전체 </a>
+						id="dropdownMenuLink" data-bs-toggle="dropdown"	aria-expanded="false"> 전체 </a>
 
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 						<li><a class="dropdown-item" href="#">제목</a></li>
 						<li><a class="dropdown-item" href="#">내용</a></li>
 					</ul>
 				</div class=drop_search>
+				
 				<div>
 					<input class="form-control font3 notice_input" list="datalistOptions"
 						id="exampleDataList" placeholder="공지사항 검색">
@@ -92,7 +93,7 @@
 					<c:forEach var="notice" items="${boardVolist}">
 						<tr Class="nt_detail_list" data-nno="${notice.boardNoticeNo}">
 							<td><input type="checkbox" name="chk" value=${notice.boardNoticeNo}></td>
-							<th scope="row" class="nno">${notice.rn }</th>
+							<th scope="row" class="nno">${notice.boardNoticeNo }</th>
 							<td>${notice.boardNoticeTitle }</td>
 							<td>${notice.boardNoticeContent }</td>
 							<td>${notice.boardNoticeWriter }</td>
@@ -106,17 +107,45 @@
 
 		<!-- 페이징처리 -->
 		<nav aria-label="Page navigation example">
-			<ul class="pagination">
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Previous"> <span aria-hidden="true"
-						class="font3 Page_order">&laquo;</span>
-				</a></li>
-				<li class="page-item"><a class="page-link font3 Page_order" href="#">1</a></li>
-				<li class="page-item"><a class="page-link font3 Page_order" href="#">2</a></li>
-				<li class="page-item"><a class="page-link font3 Page_order" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Next"> <span aria-hidden="true" class=" font3 Page_order">&raquo;</span>
-				</a></li>
+			<ul class="pagination" id="noticelist_paging">
+				<c:if test="${startPage>1 }">
+					<li class="page-item">
+						<a class="page-link" href="mgblist?pageNum=${startPage-1 }" aria-label="Previous">
+							<span aria-hidden="true" class="font3 Page_order">&laquo;</span>
+						</a>
+					</li>
+				</c:if>
+				<c:if test="${startPage<=1}">
+					<li class="page-item disabled">
+						<a class="page-link" href="mgblist?pageNum=${startPage-1 }" aria-label="Previous">
+							<span aria-hidden="true" class="font3 Page_order">&laquo;</span>
+						</a>
+					</li>
+				</c:if>
+				
+				<c:forEach step="1" begin="${startPage }" end="${endPage }" var="idx">
+					<c:if test="${idx eq currentPage }">
+						<li class="page-item active"><a class="page-link font3 Page_order" href="mgblist?pageNum=${idx}">${idx }</a></li>
+					</c:if>
+					<c:if test="${idx ne currentPage }">
+						<li class="page-item"><a class="page-link font3 Page_order" href="mgblist?pageNum=${idx}">${idx }</a></li>
+					</c:if>
+				</c:forEach>
+				
+				<c:if test="${endPage<pageCnt }">
+					<li class="page-item">
+						<a class="page-link" href="mgblist?pageNum=${endPage+1}" aria-label="Next">
+							<span aria-hidden="true" class=" font3 Page_order">&raquo;</span>
+						</a>
+					</li>
+				</c:if>
+				<c:if test="${endPage>=pageCnt }">
+					<li class="page-item disabled">
+						<a class="page-link " href="mgblist?pageNum=${endPage+1}" aria-label="Next">
+							<span aria-hidden="true" class=" font3 Page_order">&raquo;</span>
+						</a>
+					</li>
+				</c:if>
 			</ul>
 		</nav>
 
@@ -225,6 +254,37 @@
 			});
 			
 		});
+		
+		// pagin처리
+// 		function 
+// 		$.ajax({
+// 			url:"mgblist",
+// 			type:"post",
+// 			data:{page:page},
+// 			dataType:"json",
+// 			success:function(result){
+// 				tempJson=result;
+// 				console.log(result);
+				
+// 				var pageHtml="";
+// 				$("#noticelist_paging").empty();
+// 				if(result.startPage>1){
+// 					pageHtml +='<a href="MgNoticeListPageServlet?page='+(result.startPage-1)+'"><span>이전</span></a>';
+// 				}for(var i=result.startPage; i<=result.endPage; i++){
+// 					pageHtml +='<a href="TempViewPageController?page='+i+'"><span>'+i+'</span></a>';
+// 				}
+// 				if(result.endPage<result.pageCnt){
+// 					pageHtml +='<a href="MgNoticeListPageServlet?page='+(result.endPage+1)+'"><span>다음</span></a>';
+// 				}
+// 				$("#boardList_paging").append(pageHtml);
+// 				$("body").show();
+				
+// 			},
+// 			error : function(request,status,error) {
+// 				console.log(request);
+// 				alert("code:"+request.status+"\n"+"message:"+request.responseText+
+// 				"\n"+"error:"+error);
+// 		});
 		
 	</script>
 </body>
