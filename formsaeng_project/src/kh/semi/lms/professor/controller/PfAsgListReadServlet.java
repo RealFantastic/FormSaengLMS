@@ -13,7 +13,7 @@ import kh.semi.lms.asg.model.vo.AsgListVo;
 /**
  * Servlet implementation class PfAsgListReadServlet
  */
-@WebServlet("/pfreadasg")
+@WebServlet("/pf/asgboard/read")
 public class PfAsgListReadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -39,7 +39,7 @@ public class PfAsgListReadServlet extends HttpServlet {
 
 		if(readBoard != null) {
 			request.setAttribute("readBoard", readBoard);
-			request.getRequestDispatcher("WEB-INF/view/professor/pf_readasgboard.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/view/professor/pf_readasgboard.jsp").forward(request, response);
 		}
 	}
 

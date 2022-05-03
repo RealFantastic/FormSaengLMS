@@ -13,7 +13,7 @@ import kh.semi.lms.asg.model.vo.AsgListVo;
 /**
  * Servlet implementation class PfLmsInsertBoardServlet
  */
-@WebServlet("/pfasgboard/insert")
+@WebServlet("/pf/asgboard/insert")
 public class PfAsgListInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

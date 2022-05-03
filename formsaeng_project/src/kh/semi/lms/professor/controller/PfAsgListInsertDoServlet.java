@@ -14,7 +14,7 @@ import kh.semi.member.model.vo.MemberVo;
 /**
  * Servlet implementation class PfAsgListInsertDoServlet
  */
-@WebServlet("/board/insertdo")
+@WebServlet("/pf/asgboard/insert.do")
 public class PfAsgListInsertDoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -53,14 +53,14 @@ public class PfAsgListInsertDoServlet extends HttpServlet {
 		
 		System.out.println("result :"+result);
 		
-		if(result == 0) {
+		if(result < 1) {
 			System.out.println("글등록 실패");
-			request.setAttribute("msg","글등록 실패");
-			request.getRequestDispatcher("/WEB-INF/view/professor/pf_enrollasgboard.jsp").forward(request, response);
+			request.getSession().setAttribute("emsg","글등록 실패");
+			response.sendRedirect(request.getContextPath()+"/pf/asgboard/insert");
 		} else {
-			request.setAttribute("msg", "글등록 성공");
+			request.getSession().setAttribute("emsg", "글등록 성공");
 			request.setAttribute("inf", vo);
-			request.getRequestDispatcher("/WEB-INF/view/professor/pf_boardlist.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath()+"/pf/asgboard");
 		}
 	}
 

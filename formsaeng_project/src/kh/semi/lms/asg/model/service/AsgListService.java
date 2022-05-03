@@ -24,6 +24,7 @@ public class AsgListService {
 	public AsgListVo readBoard(int bANo) {
 		Connection conn = getConnection();
 		AsgListVo vo = new AsgListDao().readBoard(conn, bANo);
+		close(conn);
 		return vo;
 	}
 	
