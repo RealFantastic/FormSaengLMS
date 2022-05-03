@@ -15,7 +15,7 @@ import kh.semi.lms.asg.model.vo.AsgListVo;
 /**
  * Servlet implementation class PfAsgListServlet
  */
-@WebServlet("/pflmsasgboard")
+@WebServlet("/pf/asgboard")
 public class PfAsgListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     /**
@@ -30,7 +30,7 @@ public class PfAsgListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doget /StLmsAssignmentboard");
+		System.out.println("doget /pf/asgboard");
 		// DB에서 StLmsAssignmentboard list의 데이터를 읽어와야함.
 		
 			System.out.println("pageNum 값은?"+request.getParameter("pageNum"));			

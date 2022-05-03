@@ -83,7 +83,7 @@
 
 	<div>
 <form id="pfAsgBoardform"
-			action="<%= request.getContextPath() %>/board/insertdo" method="post">
+			action="<%= request.getContextPath() %>/pf/asgboard/insert.do" method="post">
 			<div class=title_notice>
 				<div class="title">과제게시판 등록하기</div>
 				

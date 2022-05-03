@@ -13,7 +13,7 @@ import kh.semi.lms.asg.model.vo.AsgListVo;
 /**
  * Servlet implementation class PfAsgListModifyDoServlet
  */
-@WebServlet("/asgmodifydo")
+@WebServlet("/pf/asgboard/modify.do")
 public class PfAsgListModifyDoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -40,11 +40,11 @@ public class PfAsgListModifyDoServlet extends HttpServlet {
 		//
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		 String bANoStr = request.getParameter("bANo");
-		 System.out.println("banostr ? : " + bANoStr);
+		String bANoStr = request.getParameter("bANo");
+		System.out.println("banostr ? : " + bANoStr);
 		System.out.println("title ? : " + title);
 		System.out.println("content ? : " + content);
-		 int bANo = Integer.parseInt(bANoStr);
+		int bANo = Integer.parseInt(bANoStr);
 		AsgListVo vo = new AsgListVo();
 		vo.setbATitle(title);
 		vo.setbAContent(content);
@@ -53,11 +53,11 @@ public class PfAsgListModifyDoServlet extends HttpServlet {
 		if(result < 1) {
 			System.out.println("글수정 실패");
 			request.getSession().setAttribute("msg", "글수정 실패");
-			response.sendRedirect("board/asgmodify?bANo="+bANo);
+			response.sendRedirect(request.getContextPath()+"/pf/asgboard/modify?bANo="+bANo);
 		} else {
 			System.out.println("글수정 성공");
 			request.getSession().setAttribute("msg", "글수정 성공");
-			response.sendRedirect("pfreadasg?bANo="+bANo);
+			response.sendRedirect(request.getContextPath()+"/pf/asgboard/read?bANo="+bANo);
 		}
 	}
 

@@ -14,7 +14,7 @@ import kh.semi.lms.asg.model.service.AsgListService;
 /**
  * Servlet implementation class PfAsgListDeleteServlet
  */
-@WebServlet("/pflmsasgboard/delete.ax")
+@WebServlet("/pf/asgboard/delete.ax")
 public class PfAsgListDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -93,7 +93,7 @@
 
 	<div>
 <form id="pfAsgBoardform"
-			action="<%=request.getContextPath()%>/asgmodifydo" method="post">
+			action="<%=request.getContextPath()%>/pf/asgboard/modify.do" method="post">
 			<div class=title_asg>
 				<div class="title">과제게시판 등록하기</div>
 			</div>

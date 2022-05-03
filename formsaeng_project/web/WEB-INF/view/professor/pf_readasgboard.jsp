@@ -81,8 +81,8 @@
       <div class="content_container">
         <!-- 템플릿 -->
 
-		<form id="pf_readform"'
-		action="<%=request.getContextPath()%>/pfreadasg" method="post">
+		<%-- <form id="pf_readform"'
+		action="<%=request.getContextPath()%>/pf/asgboard" method="post"> --%>
 		<div class="body_div">
 			
 			<div class=title_search>
@@ -113,17 +113,26 @@
 	</div>
 	<button type=button id="asg_modify" class="btn_modify">수정</button>
 	<button type=button id="asg_list" class="btn_list">목록</button>
-	<!-- <button type=button id="asg_delete" class="btn_delete">삭제</button> -->
-	</form>
-
-<!-- onclick="javascript:fn_click();" -->
+	<!-- </form> -->
       </div>
   </section>
+   
   <script>
+  var msgVal = '${msg}';
+  if(msgVal != '' || msgVal != false){
+      alert(msgVal);
+  }
+  // asgboard 리스트 메인으로 이동
+  	$("#asg_list").click(function(){
+  		location.href = "<%=request.getContextPath()%>/pf/asgboard";
+  	})
+  
+  
+  // asgboard 수정servlet으로 이동
   	 $("#asg_modify").click(function(){
   		 var bANo = $("#bANo").val();
 	  	console.log(bANo);
-	    location.href = "board/asgmodify?bANo="+bANo;
+	    location.href = "<%=request.getContextPath()%>/pf/asgboard/modify?bANo="+bANo;
 	  
   }); 
   	 
@@ -133,5 +142,6 @@
 	 location.href = "board/asgmodify?bANo="+no;
   } */
   </script>
+  <% session.removeAttribute("msg"); %>
 </body>
 </html>

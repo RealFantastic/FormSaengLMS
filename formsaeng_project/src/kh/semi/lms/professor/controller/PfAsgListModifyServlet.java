@@ -13,7 +13,7 @@ import kh.semi.lms.asg.model.vo.AsgListVo;
 /**
  * Servlet implementation class PfAsgListModifyServlet
  */
-@WebServlet("/board/asgmodify")
+@WebServlet("/pf/asgboard/modify")
 public class PfAsgListModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

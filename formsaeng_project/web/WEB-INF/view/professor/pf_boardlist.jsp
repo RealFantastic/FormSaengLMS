@@ -102,7 +102,7 @@
 			<tr style="cursor: pointer;">
 				<td><input id="rowCheck" name="chk" type="checkbox" value="${vo.bANo }"></td>
 				<td class="bANo">${vo.bANo }</td>
-				<td id="readList" class="read_list">${vo.bATitle }</td>
+				<td class="read_list">${vo.bATitle }</td>
 				<td>${vo.bAWriter }</td>
 				<td>${vo.bADate }</td>
 			</tr>
@@ -115,37 +115,53 @@
 			<ul class="pagination">
 			<!-- startPage에서 -1일 때 -->
 			<c:if test="${ startPage > 1 }">
-				<li class="page-item"><a class="page-link" href="pflmsasgboard?pageNum=${startPage-1}">Previous</a></li>
+				<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/pf/asgboard?pageNum=${startPage-1}">Previous</a></li>
 			</c:if>
 			<c:if test="${ startPage <= 1 }">
-				<li class="page-item disabled"><a class="page-link" href="pflmsasgboard?pageNum=${startPage-1}">Previous</a></li>
+				<li class="page-item disabled"><a class="page-link" href="<%=request.getContextPath()%>/pf/asgboard?pageNum=${startPage-1}">Previous</a></li>
 			</c:if>
 			<c:forEach step="1" begin="${startPage }" end="${ endPage}" var="idx">
 				<c:if test="${idx eq currentPage }">
-					<li class="page-item active"><a class="page-link" href="pflmsasgboard?pageNum=${idx }">${idx } </a></li>
+					<li class="page-item active"><a class="page-link" href="<%=request.getContextPath()%>/pf/asgboard?pageNum=${idx }">${idx } </a></li>
 				</c:if>
 				<c:if test="${idx ne currentPage }">
-					<li class="page-item"><a class="page-link" href="pflmsasgboard?pageNum=${idx }">${idx } </a></li>
+					<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/pf/asgboard?pageNum=${idx }">${idx } </a></li>
 				</c:if>
 			</c:forEach>
 			<!-- endPage에서 +1일 때 -->
 			<c:if test="${endPage < pageCnt }">
-				<li class="page-item"><a class="page-link" href="pflmsasgboard?pageNum=${endPage+1}">next</a></li>
+				<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/pf/asgboard?pageNum=${endPage+1}">next</a></li>
 			</c:if>
 			<c:if test="${endPage >= pageCnt }">
-				<li class="page-item disabled"><a class="page-link" href="pflmsasgboard?pageNum=${endPage+1}">next</a></li>
+				<li class="page-item disabled"><a class="page-link" href="<%=request.getContextPath()%>/pf/asgboard?pageNum=${endPage+1}">next</a></li>
 			</c:if>
 			</ul>
 		</div>
 	</div>
       </div>
   </section>
+
   <script>
-		
   
+  var msgVal = '${emsg}';
+  if(msgVal != '' || msgVal != false){
+      alert(msgVal);
+  }
   
+	//checkbox 전체 선택,해제
+$(function(){
+  $("#allCheck").click(function(){
+	 if($("#allCheck").prop("checked")){
+		 $("input[name=chk]").prop("checked", true);
+	 } else {
+		 $("input[name=chk]").prop("checked", false);
+	 }
+	  
+  });
+});
+
   
-  //multi checkbox 삭제
+  //multi,전체 checkbox 삭제
 			$(function() {
 				$("#deleteBoard").click(function() {
 					console.log($("#multiDelete").serialize());
@@ -155,7 +171,7 @@
 						alert("삭제할 게시물을 선택하세요.");
 					} else {
 						$.ajax({
-							url : "pflmsasgboard/delete.ax",
+							url : "<%=request.getContextPath()%>/pf/asgboard/delete.ax",
 							type : "post",
 							data : queryStr,
 							dataType : "text",
@@ -179,33 +195,28 @@
 			});
 	//글쓰기 이동			
 			$("#insertBoard").click(function() {
-				location.href = "pfasgboard/insert";
+				location.href =  "<%=request.getContextPath()%>/pf/asgboard/insert";
 			});
 
 	//제목 클릭하여 상세페이지 이동
 			$(".read_list").click(function() {
-				// var readlist = $(".read_list").children(".rno").text();
-				// console.log("readlist : " + readlist);
+				console.log(this);
+				console.log($(this).parents("tr").children(".bANo").text());
+				console.log($(this).prev().text());
 				// 배열 선언
-				var trArr = new Array();
+				/* var trArr = new Array(); */
 
 				// 현재 클릭된 행
-				/* var tr = $(this);
-				console.log(tr); 
-				var td = tr.children(); */
-				var ta = document.getElementById("readList").previousSibling.previousSibling;
-				var td = ta.innerText;
 
-				// 반복문을 통해 배열에 값을 담음
-				/* td.each(function(i) {
-					trArr.push(td.eq(i).text());
-				}) */
-
-				/* console.log("배열에 담긴 값 : " + trArr[1]);
-				location.href = "pfreadasg?bANo=" + trArr[1]; */
+				//var ta = document.getElementById("readList").previousSibling.previousSibling;
+				//var tdVal = ta.innerText;
 				
-				location.href = "pfreadasg?bANo=" + td;
+				//var tdVal = $(this).prev().text();
+				var tdVal = $(this).parents("tr").children(".bANo").text();
+				console.log("클릭된 행의 값은?"+tdVal);
+				location.href = "<%=request.getContextPath()%>/pf/asgboard/read?bANo=" + tdVal;
 			});
 		</script>
+		<% session.removeAttribute("emsg"); %>
 </body>
 </html>
