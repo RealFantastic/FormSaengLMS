@@ -2,15 +2,16 @@ package kh.semi.lms.reference.service;
 
 import static kh.semi.lms.common.jdbc.JdbcDbcp.close;
 
+
 import static kh.semi.lms.common.jdbc.JdbcDbcp.getConnection;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
 
-
 import kh.semi.lms.reference.dao.ReferenceDao;
 import kh.semi.lms.reference.vo.ReferenceVo;
+
 
 
 public class ReferenceService {
@@ -31,17 +32,22 @@ public class ReferenceService {
 		close(conn);
 		return result;
 	}
-	public int deletReferenceBoard(ReferenceVo vo) {
-		Connection conn =getConnection();
-		int result = new ReferenceDao().ReferencedeleteBoard(conn, vo);
+	public int deleteReferenceBoard(int[] delist) {
+		Connection conn=getConnection();
+		int cnt =new ReferenceDao().refdeleteBoard(conn, delist);
 		close(conn);
-		return result;
+		return cnt;
 	}
-	public ReferenceVo detailBoardView(int nno) {
+	public ReferenceVo detailReferenceBoardView(int lbAno) {
 		Connection conn = getConnection();
-		ReferenceVo vo = new ReferenceDao().detailBoard(conn, nno);
-		close(conn);
+		ReferenceVo vo = new ReferenceDao().detailBoard(conn, lbAno);
 		return vo;
 	}
+	public int multiDeleteBoard(String[] refdelno) {
+	Connection conn = getConnection();
+	int result = new ReferenceDao().multeDelet(conn, refdelno);
+	close(conn);
+	return result;
+}
 
 }

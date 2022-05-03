@@ -1,6 +1,10 @@
 package kh.semi.lms.professor.controller;
 
+import java.io.BufferedReader;
+
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,20 +12,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import kh.semi.lms.asg.model.service.AsgListService;
 import kh.semi.lms.reference.service.ReferenceService;
-import kh.semi.lms.reference.vo.ReferenceVo;
 
 /**
- * Servlet implementation class pfReferenceInsert
+ * Servlet implementation class PfReferenceDelete
  */
-@WebServlet("/refinsert")
-public class PfReferenceInsert extends HttpServlet {
+@WebServlet("/refdelete.ajx")
+public class PfReferenceDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PfReferenceInsert() {
+    public PfReferenceDelete() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,32 +38,30 @@ public class PfReferenceInsert extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		request.getRequestDispatcher("WEB-INF/view/professor/pf_referenceinsertview.jsp").forward(request,response);
+		//esponse.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
-		System.out.println("ref");
+		System.out.println("doPost/delete");
 		
-		String lbAtitle=request.getParameter("title");
-		String lbAcontent=request.getParameter("content");
+		String[] refdelno = request.getParameterValues("chk");
+		System.out.println(refdelno[0]);
 		
-		ReferenceVo vo=new ReferenceVo();
-		vo.setLbATitle(lbAtitle);
-		vo.setLbAContent(lbAcontent);
+		int result = new ReferenceService().multiDeleteBoard(refdelno);		
+		PrintWriter out = response.getWriter();
 		
-		int result=new ReferenceService().insertReferenceBoard(vo);
-		
-		if(result==0) {
-			System.out.println("글이 등록 되었습니다");
-		}else {
-			System.out.println("글 등록을 실패하였습니다 다시 시도해주세요");
-			response.sendRedirect("reflist");
+		if(result <= 0) {
+			out.print(0);
+			out.flush();
+			out.close();
+			return;
+		} else {
+			out.print(result);
+			out.flush();
+			out.close();
 		}
 	}
 

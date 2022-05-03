@@ -3,13 +3,13 @@ package kh.semi.lms.reference.dao;
 import static kh.semi.lms.common.jdbc.JdbcDbcp.close;
 
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
 
 import kh.semi.lms.reference.vo.ReferenceVo;
 
@@ -21,19 +21,33 @@ public class ReferenceDao {
 	
 	public int ReferenceinsertBoard(Connection conn, ReferenceVo vo) {
 		int result = 0;
-		String code = vo.getLbACode();
-		String sql = "INSERT INTO REFERENCE(REF_NO, REF_TITLE, REF_CONTENT, REF_WRITE, REF_WRITE_DATE, SUBJECT_CODE"
-				+ "VALUES(SEQ_REF_NO.NEXTVAL,?, ?, ?, DEFAULT, ?)"; 
+		String write = "아무개";
+		String code = "c0101";//vo.getLbACode();
+		String sql = "INSERT INTO REFERENCE(REF_NO, REF_TITLE, REF_CONTENT, REF_WRITER, REF_WRITE_DATE, SUBJECT_CODE)"
+				+ "VALUES(SEQ_REFERENCE_NO.nextval,?, ?, ?, default, 'M0101')"; 
 //		Connection conn = JdbcDbcp.getConnection();
+//		try {
+//			stmt = conn.createStatement();
+//			result = stmt.executeUpdate(sql);
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}finally {
+//				close(rs);
+//				close(stmt);
+//			}
 		try {
-			stmt = conn.createStatement();
-			result = stmt.executeUpdate(sql);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}finally {
-				close(rs);
-				close(stmt);
-			}
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setString(1, vo.getLbATitle());
+			pstmt.setString(2, vo.getLbAContent());
+			pstmt.setString(3, write);
+			//pstmt.setString(4, code);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
 				return result;
 	}
 	public ArrayList<ReferenceVo> ReferenceBoardlist(Connection conn){
@@ -75,38 +89,18 @@ public class ReferenceDao {
 		}
 		return volist;
 	}
-	public int ReferencedeleteBoard(Connection conn, ReferenceVo vo) {
-		int result = 0;
-		String sql = "DELETE REFERENCE WHERE REF_NO=?";
+	public int refdeleteBoard(Connection conn, int[] delist) {
 		
-			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, vo.getLbAno());
-				
-				result = pstmt.executeUpdate();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				close(pstmt);
-			}
-		
-		return result;
-	}
-	public ReferenceVo detailBoard(Connection conn, int lbAno) {
-		ReferenceVo result = null;
-
-		String sql = "select REF_TITLE, REF_CONTENT from REFERENCE where REF_NO=?";
-
+		String sql="DELETE FROM REFERENCE WHERE REF_NO = ?";
+		int cnt = 0;
 		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, lbAno);
+		    // then obtain an Array filled with the content below
 			
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-			ReferenceVo vo = new ReferenceVo();
-			vo.setLbATitle(rs.getString("REF_Title"));
-			vo.setLbAContent(rs.getString("REF_Content"));
-			result=vo;
+			for(int i =0; i<delist.length ; i++) {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, delist[i]);
+				cnt += pstmt.executeUpdate();
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -114,11 +108,64 @@ public class ReferenceDao {
 			close(rs);
 			close(pstmt);
 		}
+		System.out.println("cnt"+cnt);
+		return cnt;
+	}
+	public ReferenceVo detailBoard(Connection conn, int lbAno) {
+		ReferenceVo vo = null;
 
-		System.out.println(result);
-		return result;
+		String sql = "select REF_NO, REF_TITLE, REF_CONTENT from REFERENCE"
+					+ " where REF_NO=?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, lbAno);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo= new ReferenceVo();
+				vo.setLbAno(rs.getInt(1));
+				vo.setLbATitle(rs.getString(2));
+				vo.setLbAContent(rs.getString(3));}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return vo;
 
 	}
+	public int multeDelet(Connection conn, String[] refdelno) {
+		int result = 0;
+		int cnt = 0;
+		String sql = "DELETE FROM REFERENCE WHERE REF_NO=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			for(int i=0; i<refdelno.length; i++) {
+				pstmt.setString(1, refdelno[i]);
+				
+				result += pstmt.executeUpdate();
+			}
+			
+			//모아둔 쿼리 실행 끝나면 커밋
+			if(refdelno.length==result) {
+				conn.commit();
+			} else {
+				conn.rollback();
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+	
+	return result;
+}
 //	public ArrayList<LectrueBoardVo> LectureBoardlist(Connection conn,int startRnum,int endRnum) {
 ///		ArrayList<LectrueBoardVo> volist = null;
 //		

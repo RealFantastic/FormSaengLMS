@@ -23,7 +23,7 @@ public class ReferenceVo {
 	}
 	@Override
 	public String toString() {
-		return "LectrueBoardVo [lbAno=" + lbAno + ", lbATitle=" + lbATitle + ", lbAContent=" + lbAContent + ", lbAWriter="
+		return "ReferenceVo [lbAno=" + lbAno + ", lbATitle=" + lbATitle + ", lbAContent=" + lbAContent + ", lbAWriter="
 				+ lbAWriter + ", lbADate=" + lbADate + ", lbACode=" + lbACode + "]";
 	}
 	public int getLbAno() {
@@ -42,7 +42,7 @@ public class ReferenceVo {
 		return lbAContent;
 	}
 	public void setLbAContent(String lbACotent) {
-		this.lbAContent = lbACotent;
+		this.lbAContent = lbAContent;
 	}
 	public String getLbAWriter() {
 		return lbAWriter;
