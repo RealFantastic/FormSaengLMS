@@ -15,7 +15,7 @@ import kh.semi.subject.model.vo.SubjectVo;
 /**
  * Servlet implementation class SubjectAddDoServlet
  */
-@WebServlet("/addSubject.ajx")
+@WebServlet("/mg/addSubject.ajx")
 public class SubjectAddDoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

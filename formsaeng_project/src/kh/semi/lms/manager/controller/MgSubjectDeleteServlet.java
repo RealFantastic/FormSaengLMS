@@ -14,7 +14,7 @@ import kh.semi.subject.model.service.SubjectService;
 /**
  * Servlet implementation class MgSubjectDeleteServlet
  */
-@WebServlet("/delSubject.ajx")
+@WebServlet("/mg/delSubject.ajx")
 public class MgSubjectDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

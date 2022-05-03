@@ -1,5 +1,7 @@
 package kh.semi.subject.model.dao;
 
+import static kh.semi.lms.common.jdbc.JdbcDbcp.close;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,8 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import static kh.semi.lms.common.jdbc.JdbcDbcp.close;
 import kh.semi.lms.department.model.vo.DepartmentVo;
+import kh.semi.member.model.vo.MemberVo;
 import kh.semi.subject.model.vo.SubjectVo;
 
 public class SubjectDao {
@@ -170,7 +172,7 @@ public class SubjectDao {
 	
 	
 	//학생 수강신청 교과목 리스트용
-	public ArrayList<SubjectVo> stSubjectList(Connection conn, SubjectVo vo) {
+	public ArrayList<SubjectVo> stSubjectList(Connection conn, MemberVo vo) {
 		ArrayList<SubjectVo> result = null;
 		
 		String sql = "SELECT SUB_ROW.* "
@@ -180,7 +182,7 @@ public class SubjectDao {
 				+ "                ON SUBJECT.DEPT_CODE = DEPARTMENT.DEPT_CODE "
 				+ "                JOIN MEMBER ON SUBJECT.PF_ID = MEMBER.ID "
 				+ "                WHERE SUBJECT.DEPT_CODE = ?) SUB)SUB_ROW "
-				+ "WHERE (RNUM BETWEEN ? AND ?)";
+				;
 
 		return result;
 	}

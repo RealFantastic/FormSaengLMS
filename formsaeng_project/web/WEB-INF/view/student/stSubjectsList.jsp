@@ -78,17 +78,17 @@
 					</thead>
 					<tbody>
 	
-						<c:forEach var="subject" items="${subList}">
+						<c:forEach var="subject" items="${subjects}">
 							<tr>
 								<th scope="row"><input type="checkbox" name="checkRow"
-									class="checkRow" value='${subject.subCode }'></th>
-								<th scope="row">${subject.deptName }</th>
-								<th scope="row">${subject.subName }</th>
-								<td>${subject.courseCredit }</td>
-								<td>${subject.classType }</td>
-								<td>${subject.pfName }</td>
-								<td>${subject.courseClass }</td>
-								<td>${subject.coursePeriod }</td>
+									class="checkRow" value='${subjects.subCode }'></th>
+								<th scope="row">${subjects.deptName }</th>
+								<th scope="row">${subjects.subName }</th>
+								<td>${subjects.courseCredit }</td>
+								<td>${subjects.classType }</td>
+								<td>${subjects.pfName }</td>
+								<td>${subjects.courseClass }</td>
+								<td>${subjects.coursePeriod }</td>
 							</tr>
 						</c:forEach>
 				</table>

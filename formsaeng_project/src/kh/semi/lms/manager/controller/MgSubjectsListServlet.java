@@ -15,7 +15,7 @@ import kh.semi.subject.model.vo.SubjectVo;
 /**
  * Servlet implementation class MgSubjectInsertServlet
  */
-@WebServlet("/mgSubjects")
+@WebServlet("/mg/mgSubjects")
 public class MgSubjectsListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

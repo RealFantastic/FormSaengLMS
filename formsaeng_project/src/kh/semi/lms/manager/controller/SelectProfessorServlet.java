@@ -19,7 +19,7 @@ import kh.semi.member.model.vo.MemberVo;
 /**
  * Servlet implementation class SelectProfessorServlet
  */
-@WebServlet("/selectPf.ajx")
+@WebServlet("/mg/selectPf.ajx")
 public class SelectProfessorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

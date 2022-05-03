@@ -38,7 +38,7 @@ $(function(){
 function deptOption(){
 	console.log("몇번돌고있니?");
 	$.ajax({
-		url:"deptLoad.ajx",
+		url:"<%=request.getContextPath()%>/deptLoad.ajx",
 		type:"post",
 		dataType:"json",
 		success:function(result){
@@ -60,8 +60,6 @@ function deptOption(){
 		}
 	});
 }
-
-
 </script>	
 </head>
 <body>
@@ -161,7 +159,7 @@ function deptOption(){
 			console.log($("#department").val());
 			var selectDept = $("#department").val();
 			$.ajax({
-				url:"selectPf.ajx",
+				url:"<%=request.getContextPath()%>/mg/selectPf.ajx",
 				type:"get",
 				data:{
 					"department":selectDept
@@ -222,7 +220,7 @@ function deptOption(){
 			});
 			 
 			  $.ajax({
-				url:"addSubject.ajx",
+				url:"<%=request.getContextPath()%>/mg/addSubject.ajx",
 				type:"post",
 				data:queryString,
 				dataType:"text",
@@ -231,7 +229,7 @@ function deptOption(){
 						alert("과목 추가에 실패했습니다. 다시 입력해주세요.");
 					}else if(result ==1){
 						alert("과목 추가에 성공했습니다. 목록으로 돌아갑니다.");
-						location.href = "mgSubjects";
+						location.href = "<%=request.getContextPath()%>/mg/mgSubjects";
 					}
 				}
 			  });	

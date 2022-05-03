@@ -1,12 +1,13 @@
 package kh.semi.subject.model.service;
 
+import static kh.semi.lms.common.jdbc.JdbcDbcp.close;
 import static kh.semi.lms.common.jdbc.JdbcDbcp.getConnection;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import static kh.semi.lms.common.jdbc.JdbcDbcp.*;
 import kh.semi.lms.department.model.vo.DepartmentVo;
+import kh.semi.member.model.vo.MemberVo;
 import kh.semi.subject.model.dao.SubjectDao;
 import kh.semi.subject.model.vo.SubjectVo;
 
@@ -44,11 +45,11 @@ public class SubjectService {
 	}
 	
 	//학생 수강신청 목록
-	public ArrayList<SubjectVo> stSubjectList(SubjectVo vo) {
+	public ArrayList<SubjectVo> stSubjectList(MemberVo vo) {
 		ArrayList<SubjectVo> result = null;
 		Connection conn = getConnection();
 		
-		result = new SubjectDao().stSubjectList(conn, vo);
+		result = new SubjectDao().stSubjectList(conn,vo);
 		
 		close(conn);
 		return result;
