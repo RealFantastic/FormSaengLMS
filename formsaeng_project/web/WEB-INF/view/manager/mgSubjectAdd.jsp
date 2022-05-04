@@ -229,7 +229,7 @@ function deptOption(){
 						alert("과목 추가에 실패했습니다. 다시 입력해주세요.");
 					}else if(result ==1){
 						alert("과목 추가에 성공했습니다. 목록으로 돌아갑니다.");
-						location.href = "<%=request.getContextPath()%>/mg/mgSubjects";
+						location.href = "<%=request.getContextPath()%>/mg/Subjects";
 					}
 				}
 			  });	

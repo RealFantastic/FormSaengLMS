@@ -15,7 +15,7 @@ import kh.semi.subject.model.vo.SubjectVo;
 /**
  * Servlet implementation class MgSubjectInsertServlet
  */
-@WebServlet("/mg/mgSubjects")
+@WebServlet("/mg/Subjects")
 public class MgSubjectsListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,7 +31,7 @@ public class MgSubjectsListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doGet : /mgSubjects");
+		System.out.println("doGet : /mg/Subjects");
 		ArrayList<SubjectVo> result = new SubjectService().mgSubjectList();
 		System.out.println("서블릿으로 돌아온 result : " + result);
 	

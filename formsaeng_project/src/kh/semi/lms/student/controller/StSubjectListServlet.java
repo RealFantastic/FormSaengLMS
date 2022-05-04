@@ -16,7 +16,7 @@ import kh.semi.subject.model.vo.SubjectVo;
 /**
  * Servlet implementation class StSubjectListServlet
  */
-@WebServlet("/stSubjectList")
+@WebServlet("/st/SubjectList")
 public class StSubjectListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
