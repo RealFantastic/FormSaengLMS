@@ -14,7 +14,7 @@ import kh.semi.message.model.vo.MessageVo;
 /**
  * Servlet implementation class MgMessageWriteServlet
  */
-@WebServlet("/mgmsgwrite")
+@WebServlet("/mg/msgwrite")
 public class MgMessageWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -63,7 +63,7 @@ public class MgMessageWriteServlet extends HttpServlet {
 			System.out.println("메시지 글쓰기 실패ㅜㅜㅜㅜㅜㅜ");
 		}else {
 			System.out.println("메시지 보내기 성공!!!!!");
-			response.sendRedirect("mgmsgsend");
+			response.sendRedirect(request.getContextPath()+"/mg/message");
 		}
 
 	}

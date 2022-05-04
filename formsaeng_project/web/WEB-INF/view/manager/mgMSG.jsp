@@ -91,7 +91,7 @@
 <!-- 				메시지 보내기 모달창 -->
 					<div>
 					
-					<form id="mgMessageFrom"action="<%=request.getContextPath()%>/mgmsgwrite" method="post">
+					<form id="mgMessageFrom"action="<%=request.getContextPath()%>/mg/msgwrite" method="post">
 					
 						<button type="button" class="btn btn-primary msg_write_btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">메시지 보내기</button>
 						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -138,7 +138,7 @@
 					<div id="receive_box">
 						<c:forEach var="msgreceive" items="${msgreceive}"> 
 		<!-- 				받은메시지함 -->
-						<div class="card border-success mb-3 msg_card" style="max-width: 18rem;">
+						<div class="card border-success mb-3 msg_card" ">
 							<div class="card-header bg-transparent border-success">
 								${msgreceive.SENDER}
 							</div>
