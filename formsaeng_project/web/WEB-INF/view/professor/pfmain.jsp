@@ -14,7 +14,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <style>
 #container {
-	background-image: url('./resources/images/pflogin.jpg');
+	background-image: url('<%=request.getContextPath()%>/resources/images/pflogin.jpg');
 	background-size: cover;
 	background-repeat: no-repeat;
 	height: 100vh;
@@ -48,19 +48,19 @@
  	} // 로그인 성공 시 메시지
  	 
  	$("#lms").click(function(){
- 		location.href = "pfdlist"; // lms 바로가기
+ 		location.href = "<%=request.getContextPath()%>/pf/dlist"; // lms 바로가기
  	});
  	
  	$("#myPage").click(function(){
-		location.href = ""; // 마이페이지
+		location.href = "<%=request.getContextPath()%>/pf/mypage"; // 마이페이지
 	});
  	
     $("#notice").click(function(){
- 		location.href = "pfblist"; // 공지사항
+ 		location.href = "<%=request.getContextPath()%>/pf/blist"; // 공지사항
  	});
     
    $("#logout").click(function(){
-		location.href = "pflogout";
+		location.href = "<%=request.getContextPath()%>/pflogout";
 	});
    
    </script>

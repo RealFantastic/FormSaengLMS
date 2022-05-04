@@ -154,7 +154,7 @@ $(function(){
 		 if(result == "성공"){
 			 console.log(result);
 			alert("반갑습니다");
-	 		location.href = "pfmain"; // 메인으로 이동
+	 		location.href = "<%=request.getContextPath()%>/pf/main"; // 메인으로 이동
 			
 		 } else if(result == "실패"){
 			alert("잘못된 사번 또는 비밀번호입니다");

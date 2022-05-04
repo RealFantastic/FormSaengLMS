@@ -13,7 +13,7 @@ import kh.semi.member.model.vo.MemberVo;
 /**
  * Servlet implementation class StMypageServlet
  */
-@WebServlet("/stmypage")
+@WebServlet("/st/mypage")
 public class StMypageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -28,7 +28,6 @@ public class StMypageServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	@SuppressWarnings("unused")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("do get: /stMyPage");
 		
@@ -44,7 +43,7 @@ public class StMypageServlet extends HttpServlet {
 		
 		try {
 		if(result == null) {
-		response.sendRedirect("stmain");
+		response.sendRedirect(request.getContextPath()+"/st/main");
 	}	else {
 		request.setAttribute("MyPageVo", result);
 		request.getRequestDispatcher("/WEB-INF/view/student/stMyPage.jsp").forward(request, response);

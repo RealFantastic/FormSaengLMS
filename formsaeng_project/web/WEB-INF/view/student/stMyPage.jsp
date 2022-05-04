@@ -12,6 +12,11 @@
 <link href="https://hangeul.pstatic.net/hangeul_static/css/NanumBarunGothicYetHangul.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+<style>
+input:focus{outline:none;} /* 인풋박스 클릭시 테두리 효과 없애기 */
+</style>
+
 </head>
 <body>
 <%MemberVo vo = (MemberVo)request.getAttribute("MyPageVo"); %>
@@ -25,39 +30,39 @@
 </header>
 <form> 
   <div class="d-flex row">
-    <label for="name" class="label col-2">이름</label>
+    <label for="name" class="label col-1">이름</label>
     <div class="inputgroup col-6">
-      <input type="text" readonly id="name" class="border-0"value=<%=vo.getName()%>>
+      <input type="text" readonly id="name" class="border-0" value=<%=vo.getName()%>>
     </div>
-  </div>
+  </div><br>
     <div class="d-flex row">
-    <label for="id" class="label col-2">학번</label>
+    <label for="id" class="label col-1">학번</label>
     <div class="inputgroup col-6">
       <input type="text" readonly  id="id" class="border-0" value=<%=vo.getId()%>>
     </div>
-  </div>
+  </div><br>
      <div class="d-flex row">
-	<label for="deptName" class="label col-2">학과</label>
+	<label for="deptName" class="label col-1">학과</label>
     <div class="inputgroup col-6">
       <input type="text" readonly  id="deptName" class="border-0" value=<%=vo.getDeptName()%>>
     </div>
-  </div>
+  </div><br>
    <div class="d-flex row">
-  	<label for="pnum" class="label col-2">연락처</label>
+  	<label for="pnum" class="label col-1">연락처</label>
     <div class="inputgroup col-6">
       <input type="text" readonly  id="pnum" class="border-0" value=<%=vo.getPnum()%>>
     </div>
-  </div>
+  </div><br>
      <div class="d-flex row">
-    <label for="address" class="label col-2">주소</label>
-    <div class="inputgroup col-6">
-      <input type="text" readonly  id="address" class="border-0" value="<%=vo.getAddress()%>">
+    <label for="address" class="label col-1">주소</label>
+    <div class="inputgroup col-7">
+      <input type="text" readonly  id="address" class="border-0 col-7" value="<%=vo.getAddress()%>">
     </div>
-  </div>
+  </div><br>
   <div class="d-flex row">
-    <label for="email" class="label col-2">이메일</label>
-    <div class="inputgroup col-6">
-      <input type="text" readonly  id="email" class="border-0" value=<%=vo.getEmail()%>> 
+    <label for="email" class="label col-1">이메일</label>
+    <div class="inputgroup col-7">
+      <input type="text" readonly  id="email" class="border-0 col-7" value=<%=vo.getEmail()%>> 
     </div>
   </div>
 </form>
@@ -75,7 +80,7 @@
         <h5 class="modal-title" id="exampleModalLabel">비밀번호 확인</h5>
       </div>
       <div class="modal-body">
-        <input type="password" id="pwdcheck" name="pwdcheck" placeholder="비밀번호를 입력하세요">
+        <input type="password" id="pwdcheck" class="form-control" name="pwdcheck" placeholder="비밀번호를 입력하세요">
       </div>
       <div class="modal-footer">
         <button type="button" id="submit" class="btn btn-primary submit">확인</button>
@@ -88,11 +93,11 @@
 <script>
 
 $("#lms").click(function(){
-	location.href = "stdlist"; // lms 바로가기
+	location.href = "<%=request.getContextPath()%>/st/dlist"; // lms 바로가기
 });
 	
 $("#stmain").click(function(){
-	location.href = "stmain"; // 메인페이지
+	location.href = "<%=request.getContextPath()%>/st/main"; // 메인페이지
 });
 
 
@@ -119,13 +124,13 @@ $(function(){
 }); 
 
 // 정보 수정하기
-/* $(function() {
+ $(function() {
 	
 	 $("#submit").on('click', function() {
 		 
 	 $.ajax({ // JQuery 를 통한 ajax 호출 방식 사용
 	 type : "POST",
-	 url : "pwdcheck.do",
+	 url : "<%=request.getContextPath()%>/stpwdcheck.do",
 	 data : {
 	 pwdcheck : $("#pwdcheck").val().trim(),
 	 },
@@ -133,15 +138,16 @@ $(function(){
 	 if(result == "성공"){
 		 console.log(result);
 		alert("비밀번호가 확인되었습니다"); 
-		location.href = "stmypagem"; 
+		location.href = "<%=request.getContextPath()%>/st/mypagem"; 
 		
 	 } else if(result == "실패"){
 		alert("비밀번호가 일치하지 않습니다. 다시 시도해");
+		$("#pwdcheck").focus();
 	 }
 	 }
 	 });
 	 })
-}); */
+}); 
 
 </script>
 </body>

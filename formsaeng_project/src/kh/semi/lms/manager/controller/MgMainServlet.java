@@ -12,7 +12,7 @@ import org.apache.catalina.Session;
 /**
  * Servlet implementation class MgMainServlet
  */
-@WebServlet("/mgmain")
+@WebServlet("/mg/main")
 public class MgMainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

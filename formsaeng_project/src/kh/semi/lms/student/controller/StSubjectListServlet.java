@@ -37,9 +37,7 @@ public class StSubjectListServlet extends HttpServlet {
 		System.out.println("학생 수강신청 페이지 넘어갈떄 들어온 세션값" + vo);
 		ArrayList<SubjectVo> result = new SubjectService().stSubjectList(vo);
 		System.out.println("서블릿으로 돌아온 result : " + result);
-		
-		
-		
+	
 		request.setAttribute("subjects", result);
 		request.getRequestDispatcher("/WEB-INF/view/student/stSubjectsList.jsp").forward(request, response);
 	}

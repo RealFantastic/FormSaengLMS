@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class PfMainServlet
  */
-@WebServlet("/pfmain")
+@WebServlet("/pf/main")
 public class PfMainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

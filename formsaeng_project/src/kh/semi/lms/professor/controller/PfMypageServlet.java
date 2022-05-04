@@ -13,7 +13,7 @@ import kh.semi.member.model.vo.MemberVo;
 /**
  * Servlet implementation class PfMypageServlet
  */
-@WebServlet("/pfmypage")
+@WebServlet("/pf/mypage")
 public class PfMypageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -43,7 +43,7 @@ public class PfMypageServlet extends HttpServlet {
 		
 		try {
 			if (result == null) {
-				response.sendRedirect("pfmain");
+				response.sendRedirect(request.getContextPath()+"/pf/main");
 			} else {
 				request.setAttribute("MyPageVo", result);
 				request.getRequestDispatcher("/WEB-INF/view/professor/pfMyPage.jsp").forward(request, response);

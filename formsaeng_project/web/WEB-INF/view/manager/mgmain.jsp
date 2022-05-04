@@ -14,7 +14,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <style>
 #container {
-	background-image: url('./resources/images/mglogin.jpg');
+	background-image: url('<%=request.getContextPath()%>/resources/images/mglogin.jpg');
 	background-size: cover;
 	background-repeat: no-repeat;
 	height: 100vh;
@@ -49,18 +49,18 @@
  	
    
    $("#lms").click(function(){
-		location.href = "mgdlist"; // lms 바로가기
+		location.href = "<%=request.getContextPath()%>/mg/dlist"; // lms 바로가기
 	});
    $("#notice").click(function(){
-		location.href = "mgblist"; // 공지사항 관리
+		location.href = "<%=request.getContextPath()%>/mg/blist"; // 공지사항 관리
 	});
    
    $("#enroll").click(function(){
-		location.href = "mg/mgSubjects"; // 수강신청
+		location.href = "<%=request.getContextPath()%>/mg/Subjects"; // 수강신청 관리
 	});
    
    $("#logout").click(function(){
-		location.href = "mglogout"; // 로그아웃
+		location.href = "<%=request.getContextPath()%>/mglogout"; // 로그아웃
 	});
 
    </script>

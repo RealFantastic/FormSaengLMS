@@ -1,4 +1,5 @@
- <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/reset.css">
+ <%@page import="kh.semi.member.model.vo.MemberVo"%>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/reset.css">
  <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/slogin.css">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -71,7 +72,7 @@
 		 if(result == "성공"){
 			 console.log(result);
 			alert("반갑습니다");
-	 		location.href = "stmain";
+	 		location.href = "<%=request.getContextPath()%>/st/main";
 			
 		 } else if(result == "실패"){
 			alert("잘못된 학번 또는 비밀번호입니다");

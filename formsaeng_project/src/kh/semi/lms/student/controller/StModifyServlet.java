@@ -13,7 +13,7 @@ import kh.semi.member.model.vo.MemberVo;
 /**
  * Servlet implementation class StModifyServlet
  */
-@WebServlet("/stmypagem")
+@WebServlet("/st/mypagem")
 public class StModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -43,7 +43,7 @@ public class StModifyServlet extends HttpServlet {
 		
 		try {
 		if(result == null) {
-		response.sendRedirect("stmain");
+		response.sendRedirect(request.getContextPath()+"/st/main");
 	}	else {
 		request.setAttribute("MyPageVo", result);
 		request.getRequestDispatcher("/WEB-INF/view/student/stMyPageM.jsp").forward(request, response);

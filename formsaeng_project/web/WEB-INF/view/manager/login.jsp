@@ -13,7 +13,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <style>
 #container {
-	background-image: url('./resources/images/mglogin.jpg');
+	background-image: url('<%=request.getContextPath()%>/resources/images/mglogin.jpg');
 	background-size: cover;
 	background-repeat: no-repeat;
 	height: 100vh;
@@ -71,7 +71,7 @@
 		 if(result == "성공"){
 			 console.log(result);
 			alert("반갑습니다");
-	 		location.href = "mgmain"; // 메인으로 이동
+	 		location.href = "<%=request.getContextPath()%>/mg/main"; // 메인으로 이동
 			
 		 } else if(result == "실패"){
 			alert("잘못된 사번 또는 비밀번호입니다");

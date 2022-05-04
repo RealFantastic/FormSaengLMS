@@ -1,6 +1,6 @@
 <%@page import="kh.semi.member.model.vo.MemberVo"%>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/reset.css">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/stMyPage.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/myPageM.css">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,7 +17,8 @@
 </head>
 <body>
 <%MemberVo vo = (MemberVo)request.getAttribute("MyPageVo"); %>
-<header>
+<div class="container justify-content-center">
+<header class="d-flex">
 <div class="font5">마이페이지 수정하기</div>
 <div class="font3">
 <button type="button" id="lms" name="lms" class="btn btn-success">LMS 바로가기</button>
@@ -25,55 +26,56 @@
 </div>
 </header>
 <form> 
-  <div class="form-group row">
-    <label for="name" class="col-sm-2 col-form-label">이름</label>
-    <div class="col-sm-10">
-      <input type="text" readonly class="form-control-plaintext" id="name" value=<%=vo.getName()%>>
+  <div class="d-flex">
+    <label for="name" class="label col-1">이름</label>
+    <div class="inputgroup col-2">
+      <input type="text" readonly class="border-0" id="name" value=<%=vo.getName()%>>
     </div>
-  </div>
-    <div class="form-group row">
-    <label for="id" class="col-sm-2 col-form-label">학번</label>
-    <div class="col-sm-10">
-      <input type="text" readonly class="form-control-plaintext" id="id" value=<%=vo.getId()%>>
+  </div><br>
+    <div class="d-flex">
+    <label for="id" class="label col-1">학번</label>
+    <div class="inputgroup col-2">
+      <input type="text" readonly class="border-0" id="id" value=<%=vo.getId()%>>
     </div>
-  </div>
-     <div class="form-group row">
-	<label for="deptName" class="col-sm-2 col-form-label">학과</label>
-    <div class="col-sm-10">
-      <input type="text" readonly class="form-control-plaintext" id="deptName" value=<%=vo.getDeptName()%>>
+  </div><br>
+     <div class="d-flex">
+	<label for="deptName" class="label col-1">학과</label>
+    <div class="inputgroup col-2">
+      <input type="text" readonly class="border-0" id="deptName" value=<%=vo.getDeptName()%>>
     </div>
-  </div>
+  </div><br>
+  
   <!-- 연락처 -->
   <div class="pnumgroup">
-   <div class="form-group row">
-  	<label for="pnum" class="col-sm-2 col-form-label">연락처</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control-plaintext" id="oldpnum" value=<%=vo.getPnum()%>>
+   <div class="d-flex">
+  	<label for="pnum" class="label col-1">연락처</label>
+    <div class="inputgroup col-2">
+      <input type="text" readonly class="border-0 pnum" id="oldpnum" value=<%=vo.getPnum()%>> <button type=button class="btn btn-secondary btn-sm pnum">수정</button>
     </div>
-  </div>
-  <div class="newNum">
-     <div class="form-group row">
-  	<label for="pnum" class="col-sm-2 col-form-label">새 연락처</label>
+  </div><br>
+  <div id="newNum" style="display:none;">
+     <div class="d-flex">
+  	<label for="pnum" class="label col-1l">새 연락처</label>
     <div class="col-sm-10">
   <input type="text" id="pnum1"> - <input type="text" id="pnum2"> - <input type="text" id="pnum3">
       </div>
   </div>
   </div>
-
 </div>
+
 <!-- 주소 -->
 		<div class="addressgroup">
 			<!-- 기존 주소 -->
-			<div class="form-group row">
-				<label for="address" class="col-sm-2 col-form-label">주소</label>
-				<div class="col-sm-10">
-					<input type="text" readonly class="form-control-plaintext"
-						id="oldaddress" value="<%=vo.getAddress()%>">
+			<div class="d-flex">
+				<label for="address" class="label col-1">주소</label>
+				<div class="inputgroup col-7">
+					<input type="text" readonly class="border-0"
+						id="oldaddress" value="<%=vo.getAddress()%>"> <button type=button class="btn btn-secondary btn-sm">수정</button>
 				</div>
-			</div>
+			</div><br>
 			<!-- 새 주소 -->
-			<div class="form-group row">
-				<label for="address" class="col-sm-2 col-form-label">새 주소</label>
+			<div id="newAddress" class="row" style="display:none;">
+				<label for="address" class="label col-1">새 주소</label>
 				<div class="col-sm-10">
 					<input type="text" id="sample3_postcode" placeholder="우편번호">
 					<input type="button" onclick="sample3_execDaumPostcode()"
@@ -92,32 +94,38 @@
 				</div>
 			</div>
 		</div>
+
 <!-- 이메일 -->
 <div class="emailgroup">
-		<div class="form-group row">
-    <label for="email" class="col-sm-2 col-form-label">이메일</label>
-    <div class="col-sm-10">
-      <input type="text" readonly class="form-control-plaintext" id="oldemail" value=<%=vo.getEmail()%>>
+		<div class="d-flex row">
+    <label for="email" class="label col-1">이메일</label>
+    <div class="inputgroup col-3">
+      <input type="text" readonly class="border-0" id="oldemail" value=<%=vo.getEmail()%>><button type=button class="btn btn-secondary btn-sm">수정</button>
+    </div>
+  </div><br>
+  	<div id="newEmail" class="row" style="display:none;">
+    <label for="email" class="label col-1">새 이메일</label>
+    <div class="col-7">
+      <input type="text" class="form-control-plaintext" id="email"><input type="text" readonly class="form-control-plaintext" value="@gmail.com">
     </div>
   </div>
-  	<div class="form-group row">
-    <label for="email" class="col-sm-2 col-form-label">새 이메일</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control-plaintext" id="email"><input type="text" class="form-control-plaintext" value="@gmail.com">
-    </div>
-  </div>
- </div> 
+ </div> <br>
   
   
   
-<div class="form-group row">
-    <label for="inputPassword" class="col-sm-2 col-form-label">비밀번호</label>
-    <div class="col-sm-10">
-      <input type="password" class="form-control" id="inputPassword" placeholder="">
+<div class="d-flex row">
+    <label for="inputPassword" class="label col-1">비밀번호 변경</label>
+    <div class="col-3">
+      <input type="password" class="form-control" id="inputPassword" placeholder="현재 비밀번호를 입력해주세요"><br>
+      <input type="password" class="form-control" id="inputPassword" placeholder="새 비밀번호를 입력해주세요"><br>
+      <input type="password" class="form-control" id="inputPassword" placeholder="새 비밀번호를 다시 한번 확인해주세요"><br>
+      <button type=button class="font3 btn btn-secondary btn-sm">수정</button>
     </div>
   </div>
 </form>
 
+<button type="button" id="modify" class="font3 btn btn-primary">수정 완료</button>
+</div>
 <script> // 주소 API
     // 우편번호 찾기 찾기 화면을 넣을 element
     var element_wrap = document.getElementById('wrap');
@@ -193,7 +201,6 @@
         element_wrap.style.display = 'block';
     }
 </script>
-<button type="button" id="modify">수정완료</button>
 <script>
 // 유효성 검사
 
