@@ -81,28 +81,70 @@
 						<c:forEach var="subject" items="${subjects}">
 							<tr>
 								<th scope="row"><input type="checkbox" name="checkRow"
-									class="checkRow" value='${subjects.subCode }'></th>
-								<th scope="row">${subjects.deptName }</th>
-								<th scope="row">${subjects.subName }</th>
-								<td>${subjects.courseCredit }</td>
-								<td>${subjects.classType }</td>
-								<td>${subjects.pfName }</td>
-								<td>${subjects.courseClass }</td>
-								<td>${subjects.coursePeriod }</td>
+									class="checkRow" value='${subject.subCode }'></th>
+								<th scope="row">${subject.deptName }</th>
+								<th scope="row">${subject.subName }</th>
+								<td>${subject.courseCredit }</td>
+								<td>${subject.classType }</td>
+								<td>${subject.pfName }</td>
+								<td>${subject.courseClass }</td>
+								<td>${subject.coursePeriod }</td>
 							</tr>
 						</c:forEach>
 				</table>
 			</form>
-			<button type="button" id="addSubject" class="btn btn-primary">과목
+			<button type="button" id="applySubject" class="btn btn-primary">과목
+				신청하기</button>
+			<button type="button" id="delSubject" class="btn btn-primary">선택 과목
+				신청취소하기</button>
+		</div>
+	</section>
+	<section id="subjects">
+		<div class="content_title">
+			<div class="applied_subject">
+				<h2 class="font5">신청 과목 조회</h2>
+			</div>
+		</div>
+		<div class="subject_list_container">
+			<form id= 'frmCheck'>
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col"><input type="checkbox" name="allCheck"
+								id="allCheck"></th>
+							<th scope="col">학과명</th>
+							<th scope="col">과목명</th>
+							<th scope="col">학점</th>
+							<th scope="col">과목 구분</th>
+							<th scope="col">담당 교수</th>
+							<th scope="col">강의실명</th>
+							<th scope="col">강의 교시</th>
+						</tr>
+					</thead>
+					<tbody>
+	
+						<c:forEach var="applied" items="${subjects}">
+							<tr>
+								<th scope="row"><input type="checkbox" name="delist"
+									class="checkRow" value=''></th>
+								<th scope="row">${applied.deptName }</th>
+								<th scope="row">${applied.subName }</th>
+								<td>${applied.courseCredit }</td>
+								<td>${applied.classType }</td>
+								<td>${applied.pfName }</td>
+								<td>${applied.courseClass }</td>
+								<td>${applied.coursePeriod }</td>
+							</tr>
+						</c:forEach>
+				</table>
+			</form>
+			<button type="button" id="applySubject" class="btn btn-primary">과목
 				신청하기</button>
 			<button type="button" id="delSubject" class="btn btn-primary">선택 과목
 				신청취소하기</button>
 		</div>
 	</section>
 	<script>
-		$("#addSubject").click(function() {
-			location.href = "addSubject";
-		});
 		//전체선택 전체선택 해제 설정
 		$("#allCheck").click(function(){
 			if($("#allCheck").prop("checked")){
@@ -126,26 +168,26 @@
 		});
 		
 		//체크박스 값 넘기기
-		$("#delSubject").on("click",function(){
+		$("#applySubject").on("click",function(){
 			let queryString = $("#frmCheck").serialize();
 			console.log(queryString);
 			
-			if(queryString == "" || queryString == null){
-				alert("삭제할 과목을 선택하세요.");
+			 if(queryString == "" || queryString == null){
+				alert("신청할 과목을 선택하세요.");
 			}else{
-				$.ajax({
-					url:"delSubject.ajx",
+				 $.ajax({
+					url:"st/applySubject.ajx",
 					type:"post",
 					data:queryString,
 					dataType:"text",
 					success:function(result){
 						console.log("칸츄롤라 갔다왔지롱");
 						if(result == 0){
-							alert("삭제에 실패했습니다. 다시 시도해주세요.");
+							alert("신청에 실패했습니다. 다시 시도해주세요.");
 						}else if(result != 0){
 							console.log(result);
-							alert(result + "개의 선택 과목을 삭제 완료했습니다.");
-							location.href = "mgSubjects";
+							alert(result + "개의 과목 신청이 완료되었습니다.");
+							location.reload();
 						}
 						
 					}

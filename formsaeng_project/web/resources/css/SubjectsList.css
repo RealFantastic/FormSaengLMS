@@ -62,3 +62,11 @@
     margin-right: 10px;
 }
 
+
+.applied_subject{
+	float:left;
+}
+.subject_list_container{
+	clear:both;
+}
+
