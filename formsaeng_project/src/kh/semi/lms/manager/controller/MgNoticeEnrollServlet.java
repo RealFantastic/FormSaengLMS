@@ -32,7 +32,7 @@ public class MgNoticeEnrollServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		System.out.println("doGet/mgnoticeenroll");
 		
-		request.getRequestDispatcher("WEB-INF/view/manager/mgNoticeEnroll.jsp").forward(request,response);
+		request.getRequestDispatcher("/WEB-INF/view/manager/mgNoticeEnroll.jsp").forward(request,response);
 	}
 
 
@@ -59,7 +59,7 @@ public class MgNoticeEnrollServlet extends HttpServlet {
 		}else {
 			System.out.println("글쓰기 성공!!!!");
 //			등록하기 버튼을 클릭하여 DB에 저장되면 공지사항 리스트페이지로 이동
-			response.sendRedirect("mgblist");
+			response.sendRedirect(request.getContextPath()+"/mg/notice/list");
 		}
 		
 		

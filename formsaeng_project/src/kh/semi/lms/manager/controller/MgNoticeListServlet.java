@@ -71,7 +71,7 @@ public class MgNoticeListServlet extends HttpServlet {
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("pageCnt", pageCnt);
 
-		request.getRequestDispatcher("WEB-INF/view/manager/mgNoticeView.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/manager/mgNoticeView.jsp").forward(request, response);
 	}
 
 	public int countNotice() {

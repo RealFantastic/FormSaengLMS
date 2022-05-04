@@ -1,10 +1,17 @@
 .msg_card{
-	margin:15px;
+	margin: 20px 10px;
+	width: 310px;
 }
 
 .msg_select{
 	width: auto !important;
 
+}
+
+.receive_pp{
+	width: 330px !important;
+	display: inline-block !important;
+	margin: 0 0 0 10px;
 }
 
 .msg_box{
@@ -38,10 +45,13 @@
 }
 .content_line{
 
-    white-space: pre-line;
+	white-space: pre-line;
 }
 #send_box{
 /* 	display:none; */
+	display: flex;
+	flex-wrap: inherit;
+	justify-content: center;
 }
 #receive_box{
 	display:none;

@@ -34,13 +34,13 @@
 
 	<div class="body_div">
 		<div class="logoimg_enroll">
-			<img src="./resources/images/fromsaenglogo.png" class="fromsaenglogo">
-			<img src="./resources/images/logo.png" class="logo">
+			<img src="<%=request.getContextPath()%>/resources/images/fromsaenglogo.png" class="fromsaenglogo">
+			<img src="<%=request.getContextPath()%>/resources/images/name_logo.png" class="logo">
 		</div>
 
 		<!-- 폼태그는 가지고 갈 데이터 바로 앞에서 name이 꼭 필요함-->
 		<form id="mgNoticeFrom"
-			action="<%=request.getContextPath()%>/mgbinsert" method="post">
+			action="<%=request.getContextPath()%>/mg/notice/insert" method="post">
 			<div class=title_search>
 				<div class="title font5">공지사항 등록하기</div>
 				<div class="button_enroll">
@@ -68,7 +68,7 @@
 		<script>
 		/* 공지사항 목록 버튼 클릭 시 발생하는 이벤트 =공지사항 리스트 페이지로 이동 */
 		$("#nt_list_btn").click(function() {
-			location.href = "mgblist";
+			location.href = "<%=request.getContextPath()%>/mg/notice/list";
 		})
 		
 		// 공지사항 등록 버튼을 클릭하면 발생하는 이벤트 = class"enroll_box"경우 제목과 내용 두군데라서 리스트 형식으로 나와서 안됨

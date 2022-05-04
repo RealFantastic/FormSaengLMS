@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>NoticeView</title>
+<title>공지사항 리스트</title>
 <!--부트스트랩-->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -34,29 +34,25 @@
 	<div class="body_div">
 		<header class="logo_button">
 			<div class="logoimg">
-				<img src="./resources/images/fromsaenglogo.png"
-					class="fromsaenglogo"> <img src="./resources/images/logo.png"
+				<img src="<%=request.getContextPath()%>/resources/images/fromsaenglogo.png"
+					class="fromsaenglogo"> <img src="<%=request.getContextPath()%>/resources/images/name_logo.png"
 					class="logo">
 			</div>
 
 			<div class="button">
-				<button type="button" class="btn btn-success">마이페이지</button>
-				<button type="button" class="btn btn-success">LMS바로가기</button>
+<!-- 				<button type="button" class="btn btn-success">마이페이지</button> // 관리자 마이페이지 없음-->
+				<button type="button" class="btn btn-success" id="btn_lms">LMS바로가기</button>
 			</div>
 		</header>
 		<div class=title_search>
 			<div class="title font5">공지사항</div>
 			
 			<div class="dropdown notice_search">
-				<div class=drop_search>
-					<a class="btn btn-secondary dropdown-toggle font3" href="#" role="button"
-						id="dropdownMenuLink" data-bs-toggle="dropdown"	aria-expanded="false"> 전체 </a>
-
-					<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						<li><a class="dropdown-item" href="#">제목</a></li>
-						<li><a class="dropdown-item" href="#">내용</a></li>
-					</ul>
-				</div class=drop_search>
+				<select class="form-select select_box" aria-label="Default select example">
+					<option selected>전체</option>
+					<option value="1">제목</option>
+					<option value="2">내용</option>
+				</select>
 				
 				<div>
 					<input class="form-control font3 notice_input" list="datalistOptions"
@@ -110,14 +106,14 @@
 			<ul class="pagination" id="noticelist_paging">
 				<c:if test="${startPage>1 }">
 					<li class="page-item">
-						<a class="page-link" href="mgblist?pageNum=${startPage-1 }" aria-label="Previous">
+						<a class="page-link" href="<%=request.getContextPath()%>/mg/notice/list?pageNum=${startPage-1 }" aria-label="Previous">
 							<span aria-hidden="true" class="font3 Page_order">&laquo;</span>
 						</a>
 					</li>
 				</c:if>
 				<c:if test="${startPage<=1}">
 					<li class="page-item disabled">
-						<a class="page-link" href="mgblist?pageNum=${startPage-1 }" aria-label="Previous">
+						<a class="page-link" href="<%=request.getContextPath()%>/mg/notice/list?pageNum=${startPage-1 }" aria-label="Previous">
 							<span aria-hidden="true" class="font3 Page_order">&laquo;</span>
 						</a>
 					</li>
@@ -125,23 +121,23 @@
 				
 				<c:forEach step="1" begin="${startPage }" end="${endPage }" var="idx">
 					<c:if test="${idx eq currentPage }">
-						<li class="page-item active"><a class="page-link font3 Page_order" href="mgblist?pageNum=${idx}">${idx }</a></li>
+						<li class="page-item active"><a class="page-link font3 Page_order" href="<%=request.getContextPath()%>/mg/notice/list?pageNum=${idx}">${idx }</a></li>
 					</c:if>
 					<c:if test="${idx ne currentPage }">
-						<li class="page-item"><a class="page-link font3 Page_order" href="mgblist?pageNum=${idx}">${idx }</a></li>
+						<li class="page-item"><a class="page-link font3 Page_order" href="<%=request.getContextPath()%>/mg/notice/list?pageNum=${idx}">${idx }</a></li>
 					</c:if>
 				</c:forEach>
 				
 				<c:if test="${endPage<pageCnt }">
 					<li class="page-item">
-						<a class="page-link" href="mgblist?pageNum=${endPage+1}" aria-label="Next">
+						<a class="page-link" href="<%=request.getContextPath()%>/mg/notice/list?pageNum=${endPage+1}" aria-label="Next">
 							<span aria-hidden="true" class=" font3 Page_order">&raquo;</span>
 						</a>
 					</li>
 				</c:if>
 				<c:if test="${endPage>=pageCnt }">
 					<li class="page-item disabled">
-						<a class="page-link " href="mgblist?pageNum=${endPage+1}" aria-label="Next">
+						<a class="page-link " href="<%=request.getContextPath()%>/mg/notice/list?pageNum=${endPage+1}" aria-label="Next">
 							<span aria-hidden="true" class=" font3 Page_order">&raquo;</span>
 						</a>
 					</li>
@@ -157,9 +153,14 @@
 
 
 	<script>
+// 	LMS 바로가기 버튼 클릭 시 LMS 바로가기 페이지로 이동
+	$("#btn_lms").click(function(){
+		locattion.href="<%=request.getContextPath()%>/mg/dashboard";
+	})
+	
 		/* 공지사항 추가 버튼 클릭 시 공지사항 등록하기 페이지로 이동 */
 		$("#nt_add_btn").click(function() {
-			location.href = "/mg/notice/insert";
+			location.href = "<%=request.getContextPath()%>/mg/notice/insert";
 		})
 
 
@@ -172,7 +173,7 @@
 				
 			}else{
 				var noticeNo =$(this).data("nno");
-				location.href = "mg/notice/detail?nno="+noticeNo;
+				location.href = "<%=request.getContextPath()%>/mg/notice/detail?nno="+noticeNo;
 			}
 // 			debugger
 		})
@@ -222,7 +223,7 @@
 			});
 
 			$.ajax({
-				url:"mg/delete.ax",
+				url:"<%=request.getContextPath()%>/mg/delete.ax",
 // 				MgNoticeDeleteServlet.java에 delete.ax로 URL보냄
 				type: "post",
 // 				타입은 post임
@@ -254,37 +255,6 @@
 			});
 			
 		});
-		
-		// pagin처리
-// 		function 
-// 		$.ajax({
-// 			url:"mgblist",
-// 			type:"post",
-// 			data:{page:page},
-// 			dataType:"json",
-// 			success:function(result){
-// 				tempJson=result;
-// 				console.log(result);
-				
-// 				var pageHtml="";
-// 				$("#noticelist_paging").empty();
-// 				if(result.startPage>1){
-// 					pageHtml +='<a href="MgNoticeListPageServlet?page='+(result.startPage-1)+'"><span>이전</span></a>';
-// 				}for(var i=result.startPage; i<=result.endPage; i++){
-// 					pageHtml +='<a href="TempViewPageController?page='+i+'"><span>'+i+'</span></a>';
-// 				}
-// 				if(result.endPage<result.pageCnt){
-// 					pageHtml +='<a href="MgNoticeListPageServlet?page='+(result.endPage+1)+'"><span>다음</span></a>';
-// 				}
-// 				$("#boardList_paging").append(pageHtml);
-// 				$("body").show();
-				
-// 			},
-// 			error : function(request,status,error) {
-// 				console.log(request);
-// 				alert("code:"+request.status+"\n"+"message:"+request.responseText+
-// 				"\n"+"error:"+error);
-// 		});
 		
 	</script>
 </body>

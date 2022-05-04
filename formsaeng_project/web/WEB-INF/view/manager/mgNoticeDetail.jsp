@@ -32,8 +32,8 @@
 	<form id="mgNoticeFrom" action="mgbupdate" method="post">
 		<div class="body_div">
 			<div class="logoimg_enroll">
-				<img src="./resources/images/fromsaenglogo.png" class="fromsaenglogo">
-				<img src="./resources/images/logo.png" class="logo">
+				<img src="<%=request.getContextPath()%>/resources/images/fromsaenglogo.png" class="fromsaenglogo">
+				<img src="<%=request.getContextPath()%>/resources/images/name_logo.png" class="logo">
 			</div>
 
 			<div class=title_search>
@@ -75,13 +75,13 @@
 	<script>
 		/* 공지사항 목록 버튼 클릭 시 공지사항 리스트 페이지로 이동 */
 		$("#nt_list_btn").click(function() {
-			location.href = "mgblist";
+			location.href = "<%=request.getContextPath()%>/mg/notice/list";
 		})
 		/* 공지사항 수정 버튼 클릭 시 공지사항 수정 페이지로 이동 */
 		$("#updateBtn").click(function() {
 			var nno = $("#nno").val(); /* var nno에 input id=nno에 값(val)을 가져옴 */
 			console.log(nno);
-			location.href = "mgbupdate?nno=" + nno; // mgbupdate로 갈때 위 var nno를 같이 데리고 감
+			location.href = "<%=request.getContextPath()%>/mg/notice/update?nno=" + nno; // mgbupdate로 갈때 위 var nno를 같이 데리고 감
 		})
 	</script>
 </body>

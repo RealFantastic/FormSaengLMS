@@ -59,10 +59,10 @@ public class MgNoticeUpdateDoServlet extends HttpServlet {
 		
 		if(result<1) {
 			System.out.println("글 수정 실패ㅠㅠㅠㅠ");
-			response.sendRedirect("mgbupdate?bNno="+bNno);
+			response.sendRedirect(request.getContextPath()+"/mg/notice/detail?bNno="+bNno);
 		}else {
 			System.out.println("글 수정 완료");
-			response.sendRedirect("mgbdetail?nno="+bNno);
+			response.sendRedirect(request.getContextPath()+"/mg/notice/detail?nno="+bNno);
 			}
 		
 		

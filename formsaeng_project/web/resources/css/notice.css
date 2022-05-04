@@ -36,6 +36,16 @@
 	margin: -3px;
 }
 
+.select_box{
+	width: min-content !important;
+	    height: 38px;
+	color: #fff !important;
+	background-color: #6c757d !important;
+	border-color: #6c757d;
+}
+
+
+
 .title {
 	position: relative;
 	

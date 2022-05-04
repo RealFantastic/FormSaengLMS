@@ -35,12 +35,12 @@
 
 	<div class="body_div">
 		<div class="logoimg_enroll">
-			<img src="./resources/images/fromsaenglogo.png" class="fromsaenglogo">
-			<img src="./resources/images/logo.png" class="logo">
+			<img src="<%=request.getContextPath()%>/resources/images/fromsaenglogo.png" class="fromsaenglogo">
+			<img src="<%=request.getContextPath()%>/resources/images/name_logo.png" class="logo">
 		</div>
 
 		<!-- 폼태그는 가지고 갈 데이터(값) 바로 앞에서 "name"이 꼭 필요함-->
-		<form id="mgNoticeFrom" action="<%=request.getContextPath()%>/mgbupdate.do" method="post"> <%NoticeVo nnvo = (NoticeVo) request.getAttribute("ddvo");%>
+		<form id="mgNoticeFrom" action="<%=request.getContextPath()%>/mg/notice/update.do" method="post"> <%NoticeVo nnvo = (NoticeVo) request.getAttribute("ddvo");%>
 			<!-- //업데이트 서블릿에서 가져온이름 -->
 
 			<div class=title_search>
@@ -73,7 +73,7 @@
 	<script>
 		/* 공지사항 목록 버튼 클릭 시 공지사항 리스트 페이지로 이동 */
 		$("#nt_list_btn").click(function() {
-			location.href = "mgblist";
+			location.href = "<%=request.getContextPath()%>/mg/notice/list";
 		})
 		
 		
