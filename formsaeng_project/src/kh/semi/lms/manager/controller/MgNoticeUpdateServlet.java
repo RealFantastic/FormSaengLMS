@@ -13,7 +13,7 @@ import kh.semi.notice.model.vo.NoticeVo;
 /**
  * Servlet implementation class MgNoticeChange
  */
-@WebServlet("/mgbupdate")
+@WebServlet("/mg/notice/update")
 public class MgNoticeUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

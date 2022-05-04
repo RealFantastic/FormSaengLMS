@@ -14,7 +14,7 @@ import kh.semi.notice.model.vo.NoticeVo;
 /**
  * Servlet implementation class MgBoardEnrollServlet
  */
-@WebServlet("/mgbinsert")
+@WebServlet("/mg/notice/insert")
 public class MgNoticeEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class MgCalenderServlet
  */
-@WebServlet("/mgcal")
+@WebServlet("/mg/calendar")
 public class MgCalendarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,7 +26,7 @@ public class MgCalendarServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doGet : mgcal" );
+		System.out.println("doGet : /mg/calendar" );
 		request.getRequestDispatcher("/WEB-INF/view/manager/mgCalendar.jsp").forward(request, response);
 		// getRequestDispatcher=페이지 이동 getContextPath()=(root : /lms)+경로
 		

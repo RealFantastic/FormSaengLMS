@@ -16,7 +16,7 @@ import kh.semi.notice.model.vo.NoticeVo;
 /**
  * Servlet implementation class MgNoticeSelectSevlet
  */
-@WebServlet("/MgNoticeSelectSevlet")
+@WebServlet("/mg/notice/select")
 public class MgNoticeSelectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

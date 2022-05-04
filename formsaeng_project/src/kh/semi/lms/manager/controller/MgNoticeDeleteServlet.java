@@ -19,7 +19,7 @@ import kh.semi.notice.model.service.NoticeService;
 /**
  * Servlet implementation class MgNoticeDeleteServlet
  */
-@WebServlet("/delete.ax")
+@WebServlet("/mg/delete.ax")
 public class MgNoticeDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

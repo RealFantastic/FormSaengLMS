@@ -29,7 +29,7 @@
 </head>
 
 <body>
-	<form id="boardFrm" action="<%=request.getContextPath()%>/board/insert" method="post"></form>
+	<form id="boardFrm" action="<%=request.getContextPath()%>/mg/notice/insert" method="post"></form>
 
 	<div class="body_div">
 		<header class="logo_button">
@@ -159,7 +159,7 @@
 	<script>
 		/* 공지사항 추가 버튼 클릭 시 공지사항 등록하기 페이지로 이동 */
 		$("#nt_add_btn").click(function() {
-			location.href = "mgbinsert";
+			location.href = "/mg/notice/insert";
 		})
 
 
@@ -172,7 +172,7 @@
 				
 			}else{
 				var noticeNo =$(this).data("nno");
-				location.href = "mgbdetail?nno="+noticeNo;
+				location.href = "mg/notice/detail?nno="+noticeNo;
 			}
 // 			debugger
 		})
@@ -222,7 +222,7 @@
 			});
 
 			$.ajax({
-				url:"delete.ax",
+				url:"mg/delete.ax",
 // 				MgNoticeDeleteServlet.java에 delete.ax로 URL보냄
 				type: "post",
 // 				타입은 post임
