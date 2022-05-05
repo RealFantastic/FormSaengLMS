@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ManagerDashBoard
  */
-@WebServlet("/mgdlist")
+@WebServlet("/mg/dashboard")
 public class MgDashBoard extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,7 +26,7 @@ public class MgDashBoard extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("/mgdlist");
+		System.out.println("/mg/dashboard");
 		request.getRequestDispatcher("/WEB-INF/view/manager/mg_dashboard.jsp").forward(request, response);
 	}
 
