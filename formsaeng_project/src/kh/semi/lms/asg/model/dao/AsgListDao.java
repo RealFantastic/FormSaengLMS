@@ -34,7 +34,6 @@ public class AsgListDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(rs);
 			close(pstmt);
 		}
 		return result;		
