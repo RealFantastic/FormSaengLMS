@@ -33,9 +33,9 @@
 		<div class="header_container">
 			<div class="header_wrapper">
 				<div class="univ_logo">
-					<a href="#"><img class="logo2"
+					<a href="<%=request.getContextPath()%>/st/main"><img class="logo2"
 						src="<%=request.getContextPath()%>/resources/images/fromsaenglogo.png"
-						alt="폼생대로고"></a> <a href=""><img class="logo1"
+						alt="폼생대로고"></a> <a href="<%=request.getContextPath()%>/st/main"><img class="logo1"
 						src="<%=request.getContextPath()%>/resources/images/name_logo.png"
 						alt="폼생대학교"></a>
 				</div>
@@ -66,7 +66,7 @@
 					<thead>
 						<tr>
 							<th scope="col"><input type="checkbox" name="allCheck"
-								id="allCheck"></th>
+								class="allCheck"></th>
 							<th scope="col">학과명</th>
 							<th scope="col">과목명</th>
 							<th scope="col">학점</th>
@@ -109,7 +109,7 @@
 					<thead>
 						<tr>
 							<th scope="col"><input type="checkbox" name="allCheck"
-								id="allCheck"></th>
+								class="allCheck"></th>
 							<th scope="col">학과명</th>
 							<th scope="col">과목명</th>
 							<th scope="col">학점</th>
@@ -141,9 +141,13 @@
 		</div>
 	</section>
 	<script>
+		//마이페이지 이동
+		$("#myPage").click(function(){
+			location.href = '<%=request.getContextPath()%>/st/mypage';
+		});
 		//전체선택 전체선택 해제 설정
-		$("#allCheck").click(function(){
-			if($("#allCheck").prop("checked")){
+		$(".allCheck").click(function(){
+			if($(".allCheck").prop("checked")){
 				console.log("전체 누름");
 				$(".checkRow").prop("checked",true);
 				var checkedVal= new Array();
@@ -158,8 +162,8 @@
 		});
 		//하나라도 선택 해제시 전체선택 해제
 		$(".checkRow").click(function(){
-			if($("#allCheck").prop("checked")){
-				$("#allCheck").prop("checked",false)
+			if($(".allCheck").prop("checked")){
+				$(".allCheck").prop("checked",false)
 			}
 		});
 		

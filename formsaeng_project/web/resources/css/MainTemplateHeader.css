@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+/* header css start */
+.header_container{
+    margin: 0 auto;
+    max-width: 1250px;
+}
+.header_wrapper{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+.univ_logo{
+    display: flex;
+}
+
+.univ_logo a{
+    display: block;
+    margin-right: 10px;
+}
+.univ_logo a .logo1{
+    height: 100px;
+    width: 170px;
+}
+
+.univ_logo a .logo2{
+    width: 100px;
+    height: 94px;
+}
+/* header css end */

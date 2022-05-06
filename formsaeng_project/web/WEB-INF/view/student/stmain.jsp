@@ -30,7 +30,7 @@
 	<div id="container">
             <div class="minilogo"><img src="<%= request.getContextPath() %>/resources/images/fromsaenglogo.png" alt="logo"></div>
             <div id="maincenter">
-                <div class="logo"><img src="<%= request.getContextPath() %>/resources/images/logo.png" alt="폼생대학교"></div>
+                <div class="logo"><img src="<%= request.getContextPath() %>/resources/images/name_logo.png" alt="폼생대학교"></div>
                       <form>
                         <h4><%=vo.getName()%>님 반갑습니다</h4>
                         <button type="button" id="lms" name="lms" class="btn btn-primary">LMS 바로가기</button>

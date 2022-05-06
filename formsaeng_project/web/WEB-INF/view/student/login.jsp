@@ -27,7 +27,7 @@
   <div id="slogin">
             <div class="minilogo"><img src="<%= request.getContextPath() %>/resources/images/fromsaenglogo.png" alt="logo"></div>
             <div class="logincenter">
-                <div class="logo"><img src="<%= request.getContextPath() %>/resources/images/logo.png" alt="폼생대학교"></div>
+                <div class="logo"><img src="<%= request.getContextPath() %>/resources/images/name_logo.png" alt="폼생대학교"></div>
                     <div id="login">
                             <form id="loginform" action="stlogin.do" method="post">
                                 <h3>로그인</h3>
