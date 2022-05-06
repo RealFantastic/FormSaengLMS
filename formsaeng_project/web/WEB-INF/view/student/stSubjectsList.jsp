@@ -88,15 +88,13 @@
 								<td>${subject.classType }</td>
 								<td>${subject.pfName }</td>
 								<td>${subject.courseClass }</td>
-								<td>${subject.coursePeriod }</td>
+								<td>${subject.courseDay} / ${subject.coursePeriod }</td>
 							</tr>
 						</c:forEach>
 				</table>
 			</form>
 			<button type="button" id="applySubject" class="btn btn-primary">과목
 				신청하기</button>
-			<button type="button" id="delSubject" class="btn btn-primary">선택 과목
-				신청취소하기</button>
 		</div>
 	</section>
 	<section id="subjects">
@@ -106,7 +104,7 @@
 			</div>
 		</div>
 		<div class="subject_list_container">
-			<form id= 'frmCheck'>
+			<form id= 'cancel_apply'>
 				<table class="table">
 					<thead>
 						<tr>
@@ -123,24 +121,22 @@
 					</thead>
 					<tbody>
 	
-						<c:forEach var="applied" items="${subjects}">
+						<c:forEach var="applied" items="${aplist}">
 							<tr>
-								<th scope="row"><input type="checkbox" name="delist"
-									class="checkRow" value=''></th>
+								<th scope="row"><input type="checkbox" name="cancelList"
+									class="checkRow" value='${applied.subCode }'></th>
 								<th scope="row">${applied.deptName }</th>
 								<th scope="row">${applied.subName }</th>
 								<td>${applied.courseCredit }</td>
 								<td>${applied.classType }</td>
 								<td>${applied.pfName }</td>
 								<td>${applied.courseClass }</td>
-								<td>${applied.coursePeriod }</td>
+								<td>${applied.courseDay} / ${applied.coursePeriod }</td>
 							</tr>
 						</c:forEach>
 				</table>
 			</form>
-			<button type="button" id="applySubject" class="btn btn-primary">과목
-				신청하기</button>
-			<button type="button" id="delSubject" class="btn btn-primary">선택 과목
+			<button type="button" id="cancel" class="btn btn-primary">선택 과목
 				신청취소하기</button>
 		</div>
 	</section>
@@ -176,7 +172,7 @@
 				alert("신청할 과목을 선택하세요.");
 			}else{
 				 $.ajax({
-					url:"st/applySubject.ajx",
+					url:"<%=request.getContextPath()%>/st/applySubject.ajx",
 					type:"post",
 					data:queryString,
 					dataType:"text",
@@ -194,6 +190,32 @@
 					
 				});
 			}
+		});
+		$("#cancel").on("click",function(){
+			let queryString = $("#cancel_apply").serialize();
+			console.log(queryString);
+			
+			 if(queryString == "" || queryString == null){
+				alert("취소할 과목을 선택하세요.");
+			}else{
+				 $.ajax({
+					url:"<%=request.getContextPath()%>/st/cancelSubject.ajx",
+					type:"post",
+					data:queryString,
+					dataType:"text",
+					success:function(result){
+						console.log("칸츄롤라 갔다왔지롱");
+						//TODO 삭제 컨트롤러 작성
+						if(result == 0){
+							alert("삭제에 실패했습니다. 다시 시도해주세요.");
+							location.reload();
+						}else{							
+						alert(result + "개의 신청과목을 취소했습니다.");
+						location.reload();
+						}
+					}
+				});
+			} 
 		});
 	</script>
 </body>

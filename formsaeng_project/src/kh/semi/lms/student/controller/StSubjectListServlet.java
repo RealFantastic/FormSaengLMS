@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.lms.enrolment.model.service.EnrolmentService;
 import kh.semi.member.model.vo.MemberVo;
 import kh.semi.subject.model.service.SubjectService;
 import kh.semi.subject.model.vo.SubjectVo;
@@ -37,8 +38,13 @@ public class StSubjectListServlet extends HttpServlet {
 		System.out.println("학생 수강신청 페이지 넘어갈떄 들어온 세션값" + vo);
 		ArrayList<SubjectVo> result = new SubjectService().stSubjectList(vo);
 		System.out.println("서블릿으로 돌아온 result : " + result);
-	
 		request.setAttribute("subjects", result);
+		
+		ArrayList<SubjectVo> aplist = new EnrolmentService().appliedList(vo);
+		System.out.println("서블릿에 돌아온 aplist : " + aplist);
+		
+		request.setAttribute("aplist", aplist);
+		
 		request.getRequestDispatcher("/WEB-INF/view/student/stSubjectsList.jsp").forward(request, response);
 	}
 
