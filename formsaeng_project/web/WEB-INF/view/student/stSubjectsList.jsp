@@ -145,6 +145,9 @@
 		$("#myPage").click(function(){
 			location.href = '<%=request.getContextPath()%>/st/mypage';
 		});
+		$("#move_lms").click(function(){
+			location.href = '<%=request.getContextPath()%>/st/DashBoard';
+		});
 		//전체선택 전체선택 해제 설정
 		$(".allCheck").click(function(){
 			if($(".allCheck").prop("checked")){

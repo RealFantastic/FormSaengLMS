@@ -84,6 +84,9 @@ public class EnrolmentDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
 		}
 		
 		
@@ -107,6 +110,9 @@ public class EnrolmentDao {
 			System.out.println("dao에서 삭제된 과목 수 : " + result);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
 		}
 		
 		

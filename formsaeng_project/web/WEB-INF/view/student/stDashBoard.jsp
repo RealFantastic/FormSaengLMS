@@ -1,7 +1,8 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/reset.css">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/template.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/dashBoard.css">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src=" https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <title>템플릿만들기</title>
+    <title>대시보드 - 학생</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <link href="https://hangeul.pstatic.net/hangeul_static/css/NanumBarunGothicYetHangul.css" rel="stylesheet">
@@ -26,7 +27,7 @@
       <hr>
       <ul class="list_button">
         <li>
-          <a href="#">
+          <a href="<%=request.getContextPath()%>/st/DashBoard">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-grid-3x2-gap-fill" viewBox="0 0 16 16">
               <path d="M1 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V4zM1 9a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V9zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V9z"/>
             </svg>
@@ -72,51 +73,44 @@
   </header>
   <section id="template_content">
     <div class="template_container">
-      <div class="template-title">
-        <h1>공지사항</h1>
-        <hr>
-      </div>
-      <div class="content_container">
-        <!-- 템플릿 -->
-        <div class="row">
-          <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-          <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-          <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-          <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-      </div>
+		<div class="template-title">
+		  <h1>대시보드</h1>
+		  <hr>
+		</div>
+		<div class="content_container">
+			<div class="dashboard_box">
+				<c:forEach var="subject" items="${appliedList }">
+					<div class="card subject_card" style="width: 16rem;">
+						<a href = "<%=request.getContextPath()%>#?subCode='${subject.subCode }'">
+							<p class="random_color"></p>
+							<div class="card-body">
+								<h5 class="card-title">${subject.subName }</h5>
+								<p class="card-text">${subject.deptName }</p>
+							</div>
+						</a>
+					</div>
+				</c:forEach>
+			</div>
+		</div>
+	</div>
   </section>
+  
+  
+  <script>
+  window.onload = function(){
+	  colorChange();	
+  }
+  
+  function colorChange(){
+		let colorDiv = document.getElementsByClassName("random_color"); 
+		console.log(colorDiv);
+		
+		for(var i =0; i <colorDiv.length; i++){
+			var colorCode = "#" + Math.round(Math.random() * 0xffffff).toString(16);
+			colorDiv[i].style.backgroundColor = colorCode;
+		}
+  }
+  		
+  </script>
 </body>
 </html>

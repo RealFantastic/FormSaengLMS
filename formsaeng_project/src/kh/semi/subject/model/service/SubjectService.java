@@ -61,7 +61,18 @@ public class SubjectService {
 		
 		result = new SubjectDao().deleteSubejct(conn, delist);
 		
+		close(conn);
+		return result;
+	}
+	//각각 교수의 과목 목록
+	public ArrayList<SubjectVo> teachList(MemberVo vo){
+		ArrayList<SubjectVo> result = null;
+		Connection conn = getConnection();
+		result = new SubjectDao().teachList(conn, vo);
 		
+		System.out.println("service 교수의 과목 목록 : " + result);
+		
+		close(conn);
 		return result;
 	}
 }

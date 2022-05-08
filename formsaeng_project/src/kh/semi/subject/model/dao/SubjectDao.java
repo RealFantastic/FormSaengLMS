@@ -150,7 +150,7 @@ public class SubjectDao {
 
 		return result;
 	}
-	
+	//관리자 수강신청 삭제
 	public int deleteSubejct(Connection conn, String [] delist) {
 		int result = 0;
 		
@@ -171,7 +171,6 @@ public class SubjectDao {
 		
 		return result;
 	}
-	
 	
 	//학생 수강신청 교과목 리스트용
 	public ArrayList<SubjectVo> stSubjectList(Connection conn, MemberVo vo) {
@@ -220,4 +219,42 @@ public class SubjectDao {
 		
 		return result;
 	}
+	//각각 교수가 가르치는 과목 목록
+	public ArrayList<SubjectVo> teachList(Connection conn, MemberVo vo){
+		ArrayList<SubjectVo> result = null;
+		
+		String sql = "SELECT SUBJECT_CODE, SUBJECT_NAME, COURSE_DAY, COURSE_PERIOD, COURSE_CAPACITY "
+					+ "FROM SUBJECT WHERE PF_ID = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getId());
+			
+			rs = pstmt.executeQuery();
+			result = new ArrayList<SubjectVo>();
+			
+			if(rs.next()) {
+				do {
+					SubjectVo svo = new SubjectVo();
+					svo.setSubCode(rs.getString("subject_Code"));
+					svo.setSubName(rs.getString("subject_Name"));
+					svo.setCourseDay(rs.getString("course_Day"));
+					svo.setCoursePeriod(rs.getString("course_Period"));
+					svo.setCourseCapacity(rs.getInt("course_Capacity"));
+					
+					result.add(svo);
+				}while(rs.next());
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		}
+		System.out.println("dao 교수의 과목 목록 : " + result);
+		return result;
+	}
+	
 }
