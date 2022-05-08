@@ -226,50 +226,23 @@ public class NoticeDao {
 
 
 		// 공지사항 검색
-		public List<NoticeVo> selecNotice(Connection conn, String searchCondition, String searchValue){
-			List<NoticeVo> noticeList=new ArrayList<>();
-			//TODO-sb
-//			String sql= query.getProperty("selectNotice");
+		public ArrayList<NoticeVo> selecNotice(Connection conn, String reqSearch){
+			ArrayList<NoticeVo> volist=new ArrayList<NoticeVo>();
 //			
-//			if(searchCondition.equals("title")) {
-//				//검색조건이 제목인 경우
-//				sql=query.getProperty("selectTitleNotice");
-//			}else if(searchCondition.equals("content")) {
-//				//검색 조건이 내용인 경우
-//				sql=query.getProperty("selectContentNotice");
-//			}
+//			String Sql="";
 //			
-//			try {
-//				pstmt=conn.prepareStatement(sql);
-//				if(searchCondition.equals("title")||searchCondition.equals("content")) {
-//					pstmt.setString(1, searchValue);
-//				}
-//				rset=pstmt.executeQuery();
-//				while(rset.next()) {
-//					noticeList.add(new Notice(
-//							NoticeVo vo = new NoticeVo();
-//							vo.getBoardNoticeNo(rs.getInt("board_Notice_No"));
-//							vo.getBoardNoticeTitle(rs.getString("board_Notice_Title"));
-//							vo.getBoardNoticeContent(rs.getString("board_Notice_Content"));
-//							vo.getBoardNoticeWriter(rs.getString("board_Notice_Writer"));
-//							vo.getBoardNoticeDate(rs.getString("board_Notice_Date"));
-//							System.out.println(vo); // Console - sql값 확인용
-//
-//							));
-//				}
-//			}catch(SQLException e) {
-//				e.printStackTrace();
-//			}finally {
-//				close(rs);
-//				clone(pstmt);
-//			}
-			return noticeList;
-		}
-		public List<NoticeVo> selecNotice(Connection conn){
-			List<NoticeVo> noticeList=new ArrayList<>();
-			// TODO-sb
-			return noticeList;
-		}
+//			pstmt=conn.prepareStatement(sql);
+//			pstmt.setString(parameterIndex, x);
+//			rs=pstmt.executeQuery();
+//			
+//			while(rs.next()) {
+//				NoticeVo vo=new NoticeVo();
+//				
+				return volist;
+			}
+					
+
+
 
 
 		//공지사항 수정

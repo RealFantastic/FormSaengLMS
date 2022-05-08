@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import kh.semi.member.model.vo.MemberVo;
 import kh.semi.message.model.vo.MessageVo;
 
 public class MessageDao {
@@ -22,11 +23,12 @@ public class MessageDao {
 	public ArrayList<MessageVo> receive(Connection conn, String loginId){
 		ArrayList<MessageVo> result=null;
 		
-		String sql="select * from message where recevler =? order by msg_date desc";
+		String sql="select * from message where recevier =? order by msg_date desc";
 //		recevier=세션에 저장된 id
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, loginId);
 			rs=pstmt.executeQuery();
 			result=new ArrayList<MessageVo>();
 			
@@ -116,7 +118,35 @@ public class MessageDao {
 		return result;
 	}
 	
-	
-	
+	// 받는사람 찾기
+	public ArrayList<MemberVo> reciplent(Connection conn, String reqName){
+		ArrayList<MemberVo> volist=new ArrayList<MemberVo>();
+		System.out.println("DAOreqName : "+reqName);
+		
+		String sql="select name, id from member where name like '%'||?||'%'";
+		//이름, 학번
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, reqName);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				MemberVo vo=new MemberVo();
+				
+				vo.setName(rs.getString("name"));
+				vo.setId(rs.getString("id"));
+				
+				volist.add(vo);
+			}
+			System.out.println("volist DAO: "+volist);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return volist;
+	}
 	
 }

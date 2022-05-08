@@ -17,8 +17,7 @@ import kh.semi.notice.model.vo.NoticeVo;
 @WebServlet("/mg/notice/list")
 public class MgNoticeListServlet extends HttpServlet {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doGet /mgblist");
 
 		// 페이징
@@ -79,9 +78,9 @@ public class MgNoticeListServlet extends HttpServlet {
 		return result;
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
 	}
 
 }

@@ -49,10 +49,10 @@
  	
    
    $("#lms").click(function(){
-		location.href = "<%=request.getContextPath()%>/mg/dlist"; // lms 바로가기
+		location.href = "<%=request.getContextPath()%>/mg/message"; // lms 바로가기
 	});
    $("#notice").click(function(){
-		location.href = "<%=request.getContextPath()%>/mg/blist"; // 공지사항 관리
+		location.href = "<%=request.getContextPath()%>/mg/notice/list"; // 공지사항 관리
 	});
    
    $("#enroll").click(function(){

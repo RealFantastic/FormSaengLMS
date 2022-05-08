@@ -43,8 +43,10 @@ public class MgMessageWriteServlet extends HttpServlet {
 //		로그인정보->혜린->ssMemberVo
 		MemberVo mbvo=(MemberVo)request.getSession().getAttribute("ssMemberVo");
 
-		
-		String recevier=request.getParameter("recevier");
+		//TODO : recevier 가 null인 이유 찾아야함. 화면에선 잘 들어가있음. conosle 200만번찍어봄 개같은거
+		String recevier=request.getParameter("sender_name");
+		System.out.println("recevier : "+recevier);
+//		String recevier=request.getParameter("recevier");
 		String title=request.getParameter("title");
 		String content=request.getParameter("content");
 		String sender=mbvo.getId();

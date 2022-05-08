@@ -38,6 +38,16 @@ public class NoticeService {
 			return result;
 		}
 		
+		public int updateBoard(NoticeVo vo) {
+			int result=0;
+			
+			Connection conn=getConnection();
+			
+			result=new NoticeDao().updateBoard(conn, vo);
+			
+			return result;
+		}
+		
 		
 		// 공지사항 상세
 		public NoticeVo detailBoardView(int nno) {
@@ -73,27 +83,13 @@ public class NoticeService {
 		
 		
 		// 공지사항 검색
-		public List<NoticeVo> selectNotice(String searchCondition, String searchValue) {
+		public List<NoticeVo> selectNotice(String reqSearch) {
 			Connection conn=getConnection();
-			List<NoticeVo> listNotice=new NoticeDao().selecNotice(conn, searchCondition, searchValue);
-			close(conn);
-			
-			return listNotice;
-		}
-		public List<NoticeVo> selectNotice() {
-			Connection conn=getConnection();
-			List<NoticeVo> listNotice=new NoticeDao().selecNotice(conn);
+			List<NoticeVo> listNotice=new NoticeDao().selecNotice(conn, reqSearch);
 			close(conn);
 			
 			return listNotice;
 		}
 
-
-		//공지사항 수정
-		public int updateBoard(NoticeVo vo) {
-			Connection conn=getConnection();
-			int result=new NoticeDao().updateBoard(conn, vo);
-			return result;
-		}
 	
 }

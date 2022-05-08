@@ -48,10 +48,10 @@
 			<div class="title font5">공지사항</div>
 			
 			<div class="dropdown notice_search">
-				<select class="form-select select_box" aria-label="Default select example">
-					<option selected>전체</option>
-					<option value="1">제목</option>
-					<option value="2">내용</option>
+				<select class="form-select select_box" aria-label="Default select example" id="search_option">
+					<option selected value="">선택</option>
+					<option value="search_title">제목</option>
+					<option value="search_content">내용</option>
 				</select>
 				
 				<div>
@@ -59,7 +59,7 @@
 						id="exampleDataList" placeholder="공지사항 검색">
 				</div>
 				<div class=drop_search>
-					<button type="button" class="btn btn-secondary">검색</button>
+					<button type="button" class="btn btn-secondary" id="searching">검색</button>
 				</div>
 			</div>
 		</div>
@@ -158,6 +158,27 @@
 		locattion.href="<%=request.getContextPath()%>/mg/dashboard";
 	})
 	
+	//공지사항 검색기능
+	$("#searching").click(function(){
+		console.log("검색기능");
+		var search=$("#exampleDataList").val();
+		
+		$.ajax({
+			url:"<%=request.getContextPath()%>/mg/notice/list.ax",
+			type:"get",
+			dataType:"json",
+			data:{"search":search},
+			//제이슨 타입인데 (앞)키랑 (뒤)벨류 형식으로 만듬
+			success:function(data){
+				console.log("검색 컨트롤러"+data)
+
+			}
+		})
+	});
+
+	
+	
+
 		/* 공지사항 추가 버튼 클릭 시 공지사항 등록하기 페이지로 이동 */
 		$("#nt_add_btn").click(function() {
 			location.href = "<%=request.getContextPath()%>/mg/notice/insert";

@@ -1,23 +1,28 @@
 package kh.semi.lms.manager.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.notice.model.service.NoticeService;
+import kh.semi.notice.model.vo.NoticeVo;
+
 /**
- * Servlet implementation class MgCalenderServlet
+ * Servlet implementation class MgNoticeSearchServlet
  */
-@WebServlet("/mg/calendar")
-public class MgCalendarServlet extends HttpServlet {
+@WebServlet("/mg/notice/list.ax")
+public class MgNoticeSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MgCalendarServlet() {
+    public MgNoticeSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,19 +31,21 @@ public class MgCalendarServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// getRequestDispatcher=페이지 이동 getContextPath()=(root : /lms)+경로
-		System.out.println("doGet : /mg/calendar" );
-		request.getRequestDispatcher("/WEB-INF/view/manager/mgCalendar.jsp").forward(request, response);
+		System.out.println("검색할꺼야"+request.getParameter("search"));
 		
+		String reqSearch=request.getParameter("search");
+		
+		ArrayList<NoticeVo> selectNotice=new NoticeService().selectNotice(reqSearch);
+		
+	
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	
-	
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

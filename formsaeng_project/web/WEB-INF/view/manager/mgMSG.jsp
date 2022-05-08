@@ -91,7 +91,7 @@
 <!-- 				메시지 보내기 모달창 -->
 					<div>
 					
-					<form id="mgMessageFrom"action="<%=request.getContextPath()%>/mg/msgwrite" method="post">
+- 					<form id="mgMessageFrom"action="<%=request.getContextPath()%>/mg/msgwrite" method="post">
 					
 						<button type="button" class="btn btn-primary msg_write_btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">메시지 보내기</button>
 						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -102,10 +102,11 @@
 										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
 									<div class="modal-body">
-										<form>
 											<div class="mb-3">
 												<label for="recipient-name" class="col-form-label">받는 사람</label>
-												<input type="text" class="form-control" id="recipient-name" name="recevier">
+												<input type="text" class="form-control receive_pp" id="recipient-name" name="recevier">
+												<button type="button" class="btn btn-primary" id="pp_select">찾기</button>
+												<select id="select_select" name="sender_name"></select>
 											</div>
 											<div class="mb-3">
 												<label for="message-text" class="col-form-label">제목</label>
@@ -115,15 +116,15 @@
 												<label for="message-text" class="col-form-label">내용</label>
 												<textarea class="form-control modal_content" id="message-text" name="content"></textarea>
 											</div>
-										</form>
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-										<button type="submit" class="btn btn-primary">전송</button>
+										<button type="submit" class="btn btn-primary" onclick="check()">전송</button>
 									</div>
 								</div>
 							</div>
 						</div>
+					</form>
 					</div>
 				</div>
 
@@ -138,7 +139,7 @@
 					<div id="receive_box">
 						<c:forEach var="msgreceive" items="${msgreceive}"> 
 		<!-- 				받은메시지함 -->
-						<div class="card border-success mb-3 msg_card" ">
+						<div class="card border-success mb-3 msg_card receive_card">
 							<div class="card-header bg-transparent border-success">
 								${msgreceive.SENDER}
 							</div>
@@ -154,7 +155,7 @@
 					<div id="send_box">
 						<c:forEach var ="mgmsgsend" items="${msgsend}">
 		<!-- 				보낸메시지함 -->
-						<div class="card border-success mb-3 msg_card" style="max-width: 18rem;">
+						<div class="card border-success mb-3 msg_card">
 							<div class="card-header bg-transparent border-success">
 								${mgmsgsend.recevier}
 							</div>
@@ -200,7 +201,56 @@
 		}
 		
 	});
+	
+	$(document).ready(function(){
+		
+		$("#pp_select").click(function(e){
+			console.log("사람을 찾습니다.");
+			var name= $("#recipient-name").val();
+			
+			$.ajax({
+				url:"<%=request.getContextPath()%>/mg/recipient.ax",
+				type:"get",
+				dataType:"json",
+				data:{"name":name},
+				//제이슨 타입인데 (앞)키랑 (뒤)벨류 형식으로 만듬
+				success:function(data){
+					console.log("컨트롤러 가따옴");
+					var html="<option value=''>받는사람</option>";
+					for(var i=0; i<data.length; i++){
+						html+="<option value="+data[i].id+" id='option_select'>"+data[i].name+data[i].id+"</option>";
+					}
+					$("#select_select").empty();
+					//비워주는거
+					$("#select_select").append(html);
+					//값 밑에다가 (자식태그) 붙여준다.
+				}
+			})
+		})
+		/*$("#select_select").on('change',function(){
+			var name=$("#recipient-name").val();
+			console.log("recipient-name : "+name+id);
+			
+			var choice = $("#select_select").val();
+			console.log(choice);
+			
+			//TODO : select 값 선택하면 input text에 출력되도록.
+// 			$("#recipient-name").text($("#select_select").val());
+// 			document.getElementbyId("recipient-name").innerText(choice);
+		})*/
+		$("#select_select").change(function(){
+ 				//input박스 value를 선택된 옵션에 text를 집어넣어준다.
+				$("#recipient-name").val($("#select_select option:selected").text());
+				//input박스 비활성화 
+				$("#recipient-name").attr("disabled",true);
+		});
+	});
 
+	function check(){
+		console.log($("input[name='recevier']").val());
+		
+	}
+	
 	</script>
 </body>
 </html>

@@ -5,6 +5,8 @@ import static kh.semi.lms.common.jdbc.JdbcDbcp.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+
+import kh.semi.member.model.vo.MemberVo;
 import kh.semi.message.model.dao.MessageDao;
 import kh.semi.message.model.vo.MessageVo;
 
@@ -43,4 +45,15 @@ public class MessageService {
 		
 		return result;
 	}
+	
+	//받는사람 찾기
+	public ArrayList<MemberVo> reciplent(String reqName){
+		System.out.println("DAOreqName : "+reqName);
+		Connection conn=getConnection();
+		ArrayList<MemberVo> volist=new MessageDao().reciplent(conn, reqName);
+		close(conn);
+		System.out.println("volist DAO: "+volist);
+		return volist;
+	}
+	
 }

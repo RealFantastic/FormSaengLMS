@@ -44,7 +44,6 @@
 	height: 120px;
 }
 .content_line{
-
 	white-space: pre-line;
 }
 #send_box{
@@ -55,4 +54,11 @@
 }
 #receive_box{
 	display:none;
+}
+#select_select{
+	margin-left: 75px;
+}
+
+.receive_card{
+	border-color: #192a87 !important;
 }
