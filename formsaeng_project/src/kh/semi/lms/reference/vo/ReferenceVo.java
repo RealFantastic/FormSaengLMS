@@ -11,20 +11,15 @@ public class ReferenceVo {
 	public ReferenceVo() {
 		super();
 	}
-	public ReferenceVo(int lbAno, String lbATitle, String lbAContent, String lbAWriter, String lbADate, String lbAcode, String lbACode) {
+	public ReferenceVo(int lbAno, String lbATitle, String lbAcontent, String lbAWriter, String lbADate, String lbAcode, String lbACode) {
 		super();
 		this.lbAno = lbAno;
 		this.lbATitle = lbATitle;
-		this.lbAContent = lbAContent;
+		this.lbAContent = lbAcontent;
 		this.lbAWriter = lbAWriter;
 		this.lbADate = lbADate;
 		this.lbACode = lbACode;
 		
-	}
-	@Override
-	public String toString() {
-		return "ReferenceVo [lbAno=" + lbAno + ", lbATitle=" + lbATitle + ", lbAContent=" + lbAContent + ", lbAWriter="
-				+ lbAWriter + ", lbADate=" + lbADate + ", lbACode=" + lbACode + "]";
 	}
 	public int getLbAno() {
 		return lbAno;
@@ -41,7 +36,7 @@ public class ReferenceVo {
 	public String getLbAContent() {
 		return lbAContent;
 	}
-	public void setLbAContent(String lbACotent) {
+	public void setLbAContent(String lbAContent) {
 		this.lbAContent = lbAContent;
 	}
 	public String getLbAWriter() {
@@ -62,8 +57,12 @@ public class ReferenceVo {
 	public void setLbACode(String lbACode) {
 		this.lbACode = lbACode;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "ReferenceVo [lbAno=" + lbAno + ", lbATitle=" + lbATitle + ", lbAContent=" + lbAContent + ", lbAWriter="
+				+ lbAWriter + ", lbADate=" + lbADate + ", lbACode=" + lbACode + "]";
+	}
+
 	
 	
 

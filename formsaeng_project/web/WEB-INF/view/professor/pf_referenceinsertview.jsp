@@ -94,7 +94,7 @@
 			<div class="button_enroll">
 					<button type="submit" class="btn btn-primary" id="insertBtn">공지사항
 						등록</button>
-					<button type="button" id="nt_list_btn" class="btn btn-primary">공지사항 목록</button>
+					<button type="button" id="ref_list_btn" class="btn btn-primary">공지사항 목록</button>
 					
 				</div>
 		</form>
