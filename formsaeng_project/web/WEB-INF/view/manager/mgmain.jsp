@@ -49,7 +49,7 @@
  	
    
    $("#lms").click(function(){
-		location.href = "<%=request.getContextPath()%>/mg/message"; // lms 바로가기
+		location.href = "<%=request.getContextPath()%>/mg/dashboard"; // lms 바로가기
 	});
    $("#notice").click(function(){
 		location.href = "<%=request.getContextPath()%>/mg/notice/list"; // 공지사항 관리

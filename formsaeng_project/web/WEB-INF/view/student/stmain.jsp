@@ -48,7 +48,7 @@
  	} // 로그인 성공 시 메시지
  
     $("#lms").click(function(){
-		location.href = "<%=request.getContextPath()%>/st/dlist"; // lms 바로가기
+		location.href = "<%=request.getContextPath()%>/st/dashboard"; // lms 바로가기
 	});
  	
 	$("#myPage").click(function(){

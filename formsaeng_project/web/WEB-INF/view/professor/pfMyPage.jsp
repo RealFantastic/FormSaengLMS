@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>학생 마이페이지</title>
+<title>교수 마이페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <link href="https://hangeul.pstatic.net/hangeul_static/css/NanumBarunGothicYetHangul.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -17,7 +17,7 @@
 <body>
 <%MemberVo vo = (MemberVo)request.getAttribute("MyPageVo"); %>
 <div class="container justify-content-center">
-<jsp:include page="/WEB-INF/view/student/MainTemplateHeader.jsp"/>
+<jsp:include page="/WEB-INF/view/professor/MainTemplateHeader.jsp"/>
 <form> 
   <div class="d-flex row">
     <label for="name" class="label col-1">이름</label>
@@ -26,7 +26,7 @@
     </div>
   </div><br>
     <div class="d-flex row">
-    <label for="id" class="label col-1">학번</label>
+    <label for="id" class="label col-1">사번</label>
     <div class="inputgroup col-6">
       <input type="text" readonly  id="id" class="border-0" value=<%=vo.getId()%>>
     </div>
@@ -82,8 +82,12 @@
 
 <script>
 
-$("#move_lms").click(function(){
-	location.href = "<%=request.getContextPath()%>/st/dashboard"; // lms 바로가기
+$("#lms").click(function(){
+	location.href = "<%=request.getContextPath()%>/pf/dlist"; // lms 바로가기
+});
+	
+$("#stmain").click(function(){
+	location.href = "<%=request.getContextPath()%>/pf/main"; // 메인페이지
 });
 
 
@@ -127,7 +131,7 @@ $("#myPage").hide();
 		alert("비밀번호가 확인되었습니다"); 
 		$(".modal").hide();
 		$("#pwdcheck").val(""); // 비번 삭제해주기
-		location.href = "<%=request.getContextPath()%>/st/mypagem";
+		location.href = "<%=request.getContextPath()%>/pf/mypagem";
 <%-- location.replace('<%=request.getContextPath()%>/st/mypagem') ; --%>
 	 } else if(result == "실패"){
 		alert("비밀번호가 일치하지 않습니다. 다시 시도해주세요");

@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>학생 마이페이지 수정</title>
+<title>교수 마이페이지 수정</title>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <link href="https://hangeul.pstatic.net/hangeul_static/css/NanumBarunGothicYetHangul.css" rel="stylesheet">
@@ -18,7 +18,7 @@
 </head>
 <body>
 <%MemberVo vo = (MemberVo)request.getAttribute("MyPageVo"); %>
-<jsp:include page="/WEB-INF/view/student/MainTemplateHeader.jsp"/>
+<jsp:include page="/WEB-INF/view/professor/MainTemplateHeader.jsp"/>
 <form> 
   <div class="d-flex">
     <label for="name" class="label col-1">이름</label>
@@ -27,7 +27,7 @@
     </div>
   </div><br>
     <div class="d-flex">
-    <label for="id" class="label col-1">학번</label>
+    <label for="id" class="label col-1">사번</label>
     <div class="inputgroup col-2">
       <input type="text" readonly class="border-0" id="id" value=<%=vo.getId()%>>
     </div>
@@ -109,7 +109,7 @@
    		 
    	 $.ajax({ // JQuery 를 통한 ajax 호출 방식 사용
    	 type : "POST",
-   	 url : "<%=request.getContextPath()%>/st/mypagem.do",
+   	 url : "<%=request.getContextPath()%>/pf/mypagem.do",
    	 data : {
 		pnum:pnum
    	 },
@@ -199,7 +199,7 @@
  	  
    	 $.ajax({ // JQuery 를 통한 ajax 호출 방식 사용
    	 type : "POST",
-   	 url : "<%=request.getContextPath()%>/st/mypagem.do",
+   	 url : "<%=request.getContextPath()%>/pf/mypagem.do",
    	 data : {
    	 address : address
    	 },
@@ -274,7 +274,7 @@
    	 
    	 $.ajax({ // JQuery 를 통한 ajax 호출 방식 사용
    	 type : "POST",
-   	 url : "<%=request.getContextPath()%>/st/mypagem.do",
+   	 url : "<%=request.getContextPath()%>/pf/mypagem.do",
    	 data : {
    	 email : email
    	 },
@@ -397,7 +397,7 @@
    	 
    		 $.ajax({ // 비밀번호 확인 ajax
    			 type : "POST",
-   			 url : "<%=request.getContextPath()%>/stpwdcheck.do",
+   			 url : "<%=request.getContextPath()%>/pfpwdcheck.do",
    			async: true,
    			 data : {
    				pwdcheck : oldpwd,
@@ -417,7 +417,7 @@
 				   		  
    		 $.ajax({ // 비밀번호 일치시 비밀번호 변경 ajax
    			 type : "POST",
-   			 url : "<%=request.getContextPath()%>/st/modifypwd.do",
+   			 url : "<%=request.getContextPath()%>/pf/modifypwd.do",
    			async: true,
    			 data : {
    				newpwd : newpwd,
@@ -445,36 +445,13 @@
    			 });
    	 });
 
-/* var pwd = $("#pwd").val().trim();
-var repwd = $("#repwd").val().trim();
-  if ( $("#pwd").val() == "") {
-    alert("비밀번호를 입력하세요.");
-    pwd.focus();
-    return false;
-  };
-
-  //비밀번호 영문자+숫자+특수조합(8~25자리 입력) 정규식
-  var pwdCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
-
-  if (!pwdCheck.test(pwd.value)) {
-    alert("비밀번호는 영문자+숫자+특수문자 조합으로 8~25자리 사용해야 합니다.");
-    pwd.focus();
-    return false;
-  };
-
-  if (pwd !== repwd) {
-    alert("비밀번호가 일치하지 않습니다..");
-    repwd.focus();
-    return false;
-  }; */
-
-  $("#move_lms").click(function(){
-		location.href = "<%=request.getContextPath()%>/st/dashboard"; // lms 바로가기
-	});
-		
-	$("#myPage").click(function(){
-		location.href = "<%=request.getContextPath()%>/st/mypage"; // 마이페이지
-	});
+$("#move_lms").click(function(){
+	location.href = "<%=request.getContextPath()%>/pf/dashboard"; // lms 바로가기
+});
+	
+$("#myPage").click(function(){
+	location.href = "<%=request.getContextPath()%>/pf/mypage"; // 마이페이지
+});
 
 
 </script>
