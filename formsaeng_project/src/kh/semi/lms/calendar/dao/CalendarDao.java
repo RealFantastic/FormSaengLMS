@@ -22,8 +22,7 @@ public class CalendarDao {
 		
 		int result=0;
 		
-		String sql="insert into academic_calendar ACADEMIC_NO, ACADEMIC_NAME, START_DATE, END_DATE)"
-				+ "values(SEQ_ACADEMIC_NO.nextval,?,?,?)";
+		String sql="insert into ACADEMIC_CALENDAR (ACADEMIC_NO, ACADEMIC_NAME, START_DATE, END_DATE) values (SEQ_ACADEMIC_NO.nextval, ?, ?, ?)";
 		
 		try {
 			pstmt=conn.prepareStatement(sql);

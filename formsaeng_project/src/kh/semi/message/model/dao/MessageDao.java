@@ -23,7 +23,12 @@ public class MessageDao {
 	public ArrayList<MessageVo> receive(Connection conn, String loginId){
 		ArrayList<MessageVo> result=null;
 		
-		String sql="select * from message where recevier =? order by msg_date desc";
+		String sql="select MSG_NO, MSG_TITLE, MSG_CONTENT, TO_CHAR(MSG_DATE, 'YYYY-MM-DD HH24:MI:SS') MSG_DATE, RECEVIER, SENDER, name "
+//				select MSG_NO, MSG_TITLE, MSG_CONTENT, TO_CHAR(MSG_DATE, 'YYYY-MM-DD HH24:MI:SS') MSG_DATE, RECEVIER, SENDER 
+			+	"from message join member on message.SENDER = member.id where recevier= ? order by msg_date desc";
+			//	 from message join member on message.recevier = member.id where SENDER= ? order by msg_date desc;
+		
+		
 //		recevier=세션에 저장된 id
 		
 		try {
@@ -41,6 +46,7 @@ public class MessageDao {
 				vo.setMsgDate(rs.getString("mSG_DATE"));
 				vo.setRecevier(rs.getString("rECEVIER"));
 				vo.setSender(rs.getString("sENDER"));
+				vo.setSenderName(rs.getString("name"));
 
 				System.out.println("msgVO : "+vo);
 				
@@ -61,7 +67,12 @@ public class MessageDao {
 	public ArrayList<MessageVo> send(Connection conn, String loginId){
 		ArrayList<MessageVo> result=null;
 		
-		String sql="SELECT  * FROM MESSAGE WHERE SENDER = ? order by msg_date desc";
+		String sql="select MSG_NO, MSG_TITLE, MSG_CONTENT, TO_CHAR(MSG_DATE, 'YYYY-MM-DD HH24:MI:SS') MSG_DATE, RECEVIER, SENDER, name "
+//					select MSG_NO, MSG_TITLE, MSG_CONTENT, TO_CHAR(MSG_DATE, 'YYYY-MM-DD HH24:MI:SS') MSG_DATE, RECEVIER, SENDER 
+				+	"from message join member on message.recevier = member.id where SENDER= ? order by msg_date desc";
+				//	 from message join member on message.recevier = member.id where SENDER= ? order by msg_date desc;
+		
+		
 //		 SENDER 세션에 저장된  ID
 		
 		try {
@@ -79,6 +90,8 @@ public class MessageDao {
 				vo.setMsgDate(rs.getString("mSG_DATE"));
 				vo.setRecevier(rs.getString("rECEVIER"));
 				vo.setSender(rs.getString("sENDER"));
+				vo.setRecevierName(rs.getString("name"));
+				System.out.println("dao recevier"+vo.getRecevierName());
 				
 				result.add(vo);
 			}

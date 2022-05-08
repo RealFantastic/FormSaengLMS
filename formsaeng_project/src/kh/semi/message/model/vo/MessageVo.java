@@ -10,12 +10,9 @@ public class MessageVo {
 	private String recevier; //메시지 받은사람
 	private String sender; //메시지 보낸사람
 	
+	private String recevierName; //메시지 받은사람
+	private String senderName; // 메시지 보낸사람
 	
-	@Override
-	public String toString() {
-		return "MessageVo [msgNo=" + msgNo + ", msgTitle=" + msgTitle + ", msgContent=" + msgContent + ", msgDate="
-				+ msgDate + ", recevier=" + recevier + ", sender=" + sender + "]";
-	}
 
 	
 	// 생성자
@@ -24,10 +21,20 @@ public class MessageVo {
 	}
 
 
+	@Override
+	public String toString() {
+		return "MessageVo [msgNo=" + msgNo + ", msgTitle=" + msgTitle + ", msgContent=" + msgContent + ", msgDate="
+				+ msgDate + ", recevier=" + recevier + ", sender=" + sender + ", recevierName=" + recevierName
+				+ ", senderName=" + senderName + "]";
+	}
+
+
 	//게터 세터
 	public int getMsgNo() {
 		return msgNo;
 	}
+
+
 
 
 	public void setMsgNo(int msgNo) {
@@ -85,6 +92,24 @@ public class MessageVo {
 	}
 
 	
+	public String getRecevierName() {
+		return recevierName;
+	}
+	
+	
+	public void setRecevierName(String recevierName) {
+		this.recevierName = recevierName;
+	}
+	
+	
+	public String getSenderName() {
+		return senderName;
+	}
+	
+	
+	public void setSenderName(String senderName) {
+		this.senderName = senderName;
+	}
 
 }
 	

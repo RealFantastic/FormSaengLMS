@@ -1,4 +1,4 @@
-package kh.semi.lms.manager.controller;
+package kh.semi.lms.student.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -12,16 +12,16 @@ import kh.semi.message.model.service.MessageService;
 import kh.semi.message.model.vo.MessageVo;
 
 /**
- * Servlet implementation class MgMessageWriteServlet
+ * Servlet implementation class StMessageWriteServlet
  */
-@WebServlet("/mg/msgwrite")
-public class MgMessageWriteServlet extends HttpServlet {
+@WebServlet("/st/msgwrite")
+public class StMessageWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MgMessageWriteServlet() {
+    public StMessageWriteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,15 +30,15 @@ public class MgMessageWriteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doGet/mgmsgwrite");
-		request.getRequestDispatcher("/WEB-INF/view/manager/mgMSG.jsp").forward(request, response);
-
+		System.out.println("doGet/stmsgwrite");
+		request.getRequestDispatcher("/WEB-INF/view/manager/stMSG.jsp").forward(request, response);
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doPost/mgmsgwrite");
+		System.out.println("doPost/stmsgwrite");
 		
 //		로그인정보->혜린->ssMemberVo
 		MemberVo mbvo=(MemberVo)request.getSession().getAttribute("ssMemberVo");
@@ -64,9 +64,8 @@ public class MgMessageWriteServlet extends HttpServlet {
 			System.out.println("메시지 글쓰기 실패ㅜㅜㅜㅜㅜㅜ");
 		}else {
 			System.out.println("메시지 보내기 성공!!!!!");
-			response.sendRedirect(request.getContextPath()+"/mg/message");
+			response.sendRedirect(request.getContextPath()+"/st/message");
 		}
-
 	}
 
 }

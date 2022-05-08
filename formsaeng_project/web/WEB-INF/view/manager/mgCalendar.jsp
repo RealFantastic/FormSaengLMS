@@ -148,31 +148,17 @@
 
 				<!-- 템플릿 -->
 				<div class="row">
-					<!-- <button type="button" id="cal_add_btn" class="btn btn-primary">학사일정 등록</button> -->
 					<div id="calendar" class="cal"></div>
 
-					<div class="modal fade bs-example-modal-sm" tabindex="-1"
-						role="dialog" aria-labelledby="mySmallModalLabel"
-						aria-hidden="true">
-						<div class="modal-dialog modal-sm">
-							<div class="modal-content">...</div>
-						</div>
-					</div>
-
 					<!-- modal 추가 -->
-					<div class="modal fade" id="calendarModal" tabindex="-1"
-						role="dialog" aria-labelledby="exampleModalLabel"
-						aria-hidden="true">
+					<div class="modal fade" id="calendarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
 									<h5 class="modal-title" id="exampleModalLabel">일정을 입력하세요.</h5>
-<!-- 									<BUTTON TYPE="BUTTON" CLASS="CLOSE" DATA-DISMISS="MODAL" ARIA-LABEL="CLOSE"> -->
-										<span aria-hidden="true">&times;</span>
-									</button>
 								</div>
-									<form id="mgCalendar" action="<%=request.getContextPath()%>/mg/calendar/enroll" method="post">
-								<div class="modal-body">
+								<form id="mgCalendar" action="<%=request.getContextPath()%>/mg/calendar/enroll" method="post">
+									<div class="modal-body">
 										<div class="form-group">
 											<label for="taskId" class="col-form-label">일정 내용</label> 
 											<input type="text" class="form-control" id="calendar_content" name="calendar_content"> 
@@ -181,10 +167,10 @@
 											<label for="taskId" class="col-form-label">종료 날짜</label> 
 											<input type="date" class="form-control" id="calendar_end_date" name="calendar_end_date">
 										</div>
-								</div>
+									</div>
 								<div class="modal-footer">
-									<button type="submit" class="btn btn-warning" id="addCalendar">추가</button>
-									<button type="button" class="btn btn-secondary" data-dismiss="modal" id="sprintSettingModalClose">취소</button>
+									<button type="submit" class="btn btn-warning" id="addCalendar">완료</button>
+									<button type="button" class="btn btn-secondary" data-dismiss="modal" id="sprintSettingModalClose modalclose">취소</button>
 								</div>
 									</form>
 							</div>
@@ -193,6 +179,23 @@
 				</div>
 			</div>
 		</div>
+		
+	<script type="text/javascript">
+			
+			
+			
+			
+	<!-- 	 // 모달 종료 시,  -->
+	$("#modalclose").on("click", function(){
+		$("#modal_modal").modal("hide");
+	});
+	</script>
+		
+		
 	</section>
+	
+
+
+
 </body>
 </html>

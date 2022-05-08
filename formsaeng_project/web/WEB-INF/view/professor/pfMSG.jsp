@@ -91,7 +91,7 @@
 <!-- 				메시지 보내기 모달창 -->
 					<div>
 					
-					<form id="mgMessageFrom"action="<%=request.getContextPath()%>/mg/msgwrite" method="post">
+					<form id="pfMessageFrom"action="<%=request.getContextPath()%>/pf/msgwrite" method="post">
 					
 						<button type="button" class="btn btn-primary msg_write_btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">메시지 보내기</button>
 						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -155,19 +155,19 @@
 						</c:forEach>
 					</div>
 					<div id="send_box">
-						<c:forEach var ="mgmsgsend" items="${msgsend}">
+						<c:forEach var ="msgsend" items="${msgsend}">
 		<!-- 				보낸메시지함 -->
 						<div class="card border-success mb-3 msg_card">
 							<div class="card-header bg-transparent border-success">
-								${mgmsgsend.recevierName}
+								${msgsend.recevierName}
 							</div>
 							<div class="card-body text-success">
-								<h5 class="card-title">${mgmsgsend.msgTitle}</h5>
+								<h5 class="card-title">${msgsend.msgTitle}</h5>
 								<div class=scroll_content>
-									<p class="card-text content_line"> ${mgmsgsend.msgContent}</p>
+									<p class="card-text content_line"> ${msgsend.msgContent}</p>
 								</div>
 							</div>
-							<div class="card-footer bg-transparent border-success">${mgmsgsend.msgDate}</div>
+							<div class="card-footer bg-transparent border-success">${msgsend.msgDate}</div>
 						</div>
 						
 						</c:forEach>
@@ -211,7 +211,7 @@
 			var name= $("#recipient-name").val();
 			
 			$.ajax({
-				url:"<%=request.getContextPath()%>/mg/recipient.ax",
+				url:"<%=request.getContextPath()%>/pf/recipient.ax",
 				type:"get",
 				dataType:"json",
 				data:{"name":name},

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.lms.calendar.service.CalendarService;
 import kh.semi.lms.calendar.vo.CalendarVo;
 
 /**
@@ -74,6 +75,10 @@ public class MgCalendarEnrollServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		vo.setEndDate( result );
+		
+		int rst=new CalendarService().insertcalendar(vo);
+		
+		response.sendRedirect(request.getContextPath()+"/mg/calendar");
 	}
 
 }
