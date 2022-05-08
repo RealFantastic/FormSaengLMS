@@ -20,17 +20,18 @@ import kh.semi.member.model.vo.MemberVo;
 @WebServlet("/st/mypagem.do")
 public class StModifyDoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public StModifyDoServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public StModifyDoServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 //	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		// TODO Auto-generated method stub
@@ -38,46 +39,82 @@ public class StModifyDoServlet extends HttpServlet {
 //	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 기존의 생성된 세션과 세션에 담겨있던 “member” 객체를 불러온다.
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// 세션 불러오기
 		MemberVo ssvo = (MemberVo) request.getSession().getAttribute("ssMemberVo");
-		
+
 		MemberVo vo = new MemberVo();
 		vo.setId(ssvo.getId());
 		vo.setPwd(ssvo.getPwd());
-		
-		
+
 		PrintWriter out = response.getWriter();
-		
-		
-		 String pnum1 = request.getParameter("pnum1");
-		 String pnum2 = request.getParameter("pnum2");
-		 String pnum3 = request.getParameter("pnum3");
-		 String email = request.getParameter("email");
-		 String address = request.getParameter("address");
-		 String detailAddress = request.getParameter("detailAddress");
-		 String extraAddress = request.getParameter("extraAddress");
-	
-		 vo.setPnum(pnum1+"-"+pnum2+"-"+pnum3);
-		 vo.setEmail(email+"@gmail.com");
-		 vo.setAddress(address+""+detailAddress+""+extraAddress);
-		 
-		 int result = new MemberService().updateMember(vo);
 
-		 System.out.println(vo);
-		 
-		 if(result > 0) {
-		 System.out.println("수정 성공");
-		 out.print("성공");
-		 out.flush();
-		 out.close();
-		 } else {
-			 out.print("실패");
-			 System.out.println("수정 실패");
-		 }
+
+		String pnum = request.getParameter("pnum");
+		String address = request.getParameter("address");
+		String email = request.getParameter("email");
+		System.out.println(email);
+		System.out.println(pnum);
+		System.out.println(address);
+
+		
+		// 연락처 수정
+		if(pnum != null ) {
+		vo.setPnum(pnum);
+		int result = new MemberService().updatePnum(vo);
+		if (result > 0) {
+			System.out.println("수정 성공");
+			out.print("성공");
+			System.out.println(vo);
+			out.flush();
+			out.close();
+			return;
+		} else {
+			out.print("실패");
+			System.out.println("수정 실패");
+			System.out.println(vo);
+			return;
+		}
+		} else if (address != null) {
+		
+		// 주소 수정
+		vo.setAddress(address);
+		int resulta = new MemberService().updateAddress(vo);
+		if (resulta > 0) {
+			System.out.println("수정 성공");
+			out.print("성공");
+			System.out.println(vo);
+			out.flush();
+			out.close();
+			return;
+		} else {
+			out.print("실패");
+			System.out.println("수정 실패");
+			System.out.println(vo);
+			return;
+		}
+		} else if(email != null) {
+		// 이메일 수정
+		vo.setEmail(email);
+		int resulte = new MemberService().updateEmail(vo);
+		if (resulte > 0) {
+			System.out.println("수정 성공");
+			out.print("성공");
+			System.out.println(vo);
+			out.flush();
+			out.close();
+			return;
+		} else {
+			out.print("실패");
+			System.out.println("수정 실패");
+			System.out.println(vo);
+			
+		}
+
 	}
-	
+	}
 }
-

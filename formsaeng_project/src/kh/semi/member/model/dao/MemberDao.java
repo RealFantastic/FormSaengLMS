@@ -78,19 +78,61 @@ public class MemberDao {
 		
 	}
 	
-	// 멤버 정보 수정 (마이페이지) 교수/학생
-	public int updateMember(Connection conn, MemberVo vo) {
+	// 연락처 수정 (마이페이지) 교수/학생
+	public int updatePnum(Connection conn, MemberVo vo) {
 		int result = 0;
 		
-		String sql = "update member set address=?, pnum=?, email=? where id=? and pwd=?";
+		String sql = "update member set pnum=? where id=? and pwd=?";
+		try { 
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getPnum());
+			pstmt.setString(2, vo.getId());
+			pstmt.setString(3, vo.getPwd());
+			System.out.println("dao:"+vo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally { 
+			close(pstmt);
+		}
+		return result;
+	}
+	// 주소 수정 (마이페이지) 교수/학생
+	public int updateAddress(Connection conn, MemberVo vo) {
+		int result = 0;
+		
+		String sql = "update member set address=? where id=? and pwd=?";
 		try { 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getAddress());
-			pstmt.setString(2, vo.getPnum());
-			pstmt.setString(3, vo.getEmail());
-			pstmt.setString(4, vo.getId());
-			pstmt.setString(5, vo.getPwd());
-			System.out.println(vo);
+			pstmt.setString(2, vo.getId());
+			pstmt.setString(3, vo.getPwd());
+			System.out.println("dao:"+vo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally { 
+			close(pstmt);
+		}
+		return result;
+	}
+	// 이메일 수정 (마이페이지) 교수/학생
+	public int updateEmail(Connection conn, MemberVo vo) {
+		int result = 0;
+		
+		String sql = "update member set email=? where id=? and pwd=?";
+		try { 
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getEmail());
+			pstmt.setString(2, vo.getId());
+			pstmt.setString(3, vo.getPwd());
+			System.out.println("dao:"+vo);
 			
 			result = pstmt.executeUpdate();
 			
@@ -107,14 +149,13 @@ public class MemberDao {
 	public int updatePwd(Connection conn, MemberVo vo) {
 		int result = 0;
 		
-		String sql = "update member set pwd=? where id=? and pwd=?";
+		String sql = "update member set pwd=? where id=?";
 		try { 
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, vo.getPwd());
 			pstmt.setString(2, vo.getId());
-			pstmt.setString(3, vo.getPwd());
-			
+
 			result = pstmt.executeUpdate();
 			
 			

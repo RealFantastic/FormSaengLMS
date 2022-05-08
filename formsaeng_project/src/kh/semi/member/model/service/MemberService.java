@@ -31,11 +31,30 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+
 	
-	public int updateMember(MemberVo vo) {
+	public int updatePnum(MemberVo vo) {
 		int result = 0;
 		Connection conn = getConnection();
-		result = dao.updateMember(conn, vo);
+		result = dao.updatePnum(conn, vo);
+		
+		close(conn);
+		return result;
+	}
+	
+	public int updateAddress(MemberVo vo) {
+		int result = 0;
+		Connection conn = getConnection();
+		result = dao.updateAddress(conn, vo);
+		
+		close(conn);
+		return result;
+	}
+	
+	public int updateEmail(MemberVo vo) {
+		int result = 0;
+		Connection conn = getConnection();
+		result = dao.updateEmail(conn, vo);
 		
 		close(conn);
 		return result;

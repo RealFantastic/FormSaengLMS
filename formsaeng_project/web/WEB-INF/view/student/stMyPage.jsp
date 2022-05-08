@@ -1,6 +1,7 @@
 <%@page import="kh.semi.member.model.vo.MemberVo"%>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/reset.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/stMyPage.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/MainTemplateHeader.css">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,22 +13,11 @@
 <link href="https://hangeul.pstatic.net/hangeul_static/css/NanumBarunGothicYetHangul.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-<style>
-input:focus{outline:none;} /* 인풋박스 클릭시 테두리 효과 없애기 */
-</style>
-
 </head>
 <body>
 <%MemberVo vo = (MemberVo)request.getAttribute("MyPageVo"); %>
 <div class="container justify-content-center">
-<header class="d-flex">
-<div class="font5">마이페이지</div>
-<div class="font3">
-<button type="button" id="lms" name="lms" class="btn btn-success">LMS 바로가기</button>
-<button type="button" id="stmain" name="stmain" class="btn btn-success">메인페이지</button>
-</div>
-</header>
+<jsp:include page="/WEB-INF/view/student/MainTemplateHeader.jsp"/>
 <form> 
   <div class="d-flex row">
     <label for="name" class="label col-1">이름</label>
@@ -123,6 +113,7 @@ $(function(){
     }
 }); 
 
+$("#myPage").hide();
 // 정보 수정하기
  $(function() {
 	
@@ -138,8 +129,10 @@ $(function(){
 	 if(result == "성공"){
 		 console.log(result);
 		alert("비밀번호가 확인되었습니다"); 
-		location.href = "<%=request.getContextPath()%>/st/mypagem"; 
-		
+		$(".modal").hide();
+		$("#pwdcheck").val(""); // 비번 삭제해주기
+		location.href = "<%=request.getContextPath()%>/st/mypagem";
+<%-- location.replace('<%=request.getContextPath()%>/st/mypagem') ; --%>
 	 } else if(result == "실패"){
 		alert("비밀번호가 일치하지 않습니다. 다시 시도해");
 		$("#pwdcheck").focus();
