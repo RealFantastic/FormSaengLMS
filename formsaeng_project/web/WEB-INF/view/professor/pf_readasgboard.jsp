@@ -4,6 +4,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -81,8 +82,8 @@
       <div class="content_container">
         <!-- 템플릿 -->
 
-		<%-- <form id="pf_readform"'
-		action="<%=request.getContextPath()%>/pf/asgboard" method="post"> --%>
+<!-- 		<form id="pf_readform"' -->
+<%-- 		action="<%=request.getContextPath()%>/pf/asgboard" method="post"> --%>
 		<div class="body_div">
 			
 			<div class=title_search>
@@ -111,9 +112,33 @@
 				</div>
 			</div>
 	</div>
-	<button type=button id="asg_modify" class="btn_modify">수정</button>
-	<button type=button id="asg_list" class="btn_list">목록</button>
-	<!-- </form> -->
+	<button type="button" id="asg_modify" class="btn_modify">수정</button>
+	<button type="button" id="asg_list" class="btn_list">목록</button>
+	<br><br><br>
+	
+	<div>
+		<div class="comment-txt">
+			<textarea id="cmtCnt" name="cmtCnt" placeholder="여러분의 소중한 댓글을 입력해주세요."></textarea>
+		</div>
+		<div>
+			<button type="button" id="cmtCnt-btn">댓글달기</button>
+		</div>
+	</div>
+	
+	<div>
+	<table border="1">
+		
+		 <c:forEach items="${commentList}" var="avo">
+		<tr>
+			<td>${avo.cWriter }</td>
+			<td>${avo.cContent }</td>
+		</tr>
+		</c:forEach>
+	</table>
+	</div>
+
+
+<!-- 				 </form>  -->
       </div>
   </section>
    
@@ -133,14 +158,28 @@
   		 var bANo = $("#bANo").val();
 	  	console.log(bANo);
 	    location.href = "<%=request.getContextPath()%>/pf/asgboard/modify?bANo="+bANo;
-	  
   }); 
   	 
-
-/*   function fn_click(){
-	 var no = $("#bANo").val();
-	 location.href = "board/asgmodify?bANo="+no;
-  } */
+  
+  $("#cmtCnt-btn").click(function(){
+	  	var content = $("#cmtCnt").val();
+	  	var bANo = $("#bANo").val();
+	  	console.log(content);
+	  	console.log(bANo);
+	  $.ajax({
+		  type: "post",
+		  url: "<%=request.getContextPath()%>/pf/asgboard/read/comment",
+		  data: {content : $("#cmtCnt").val(),
+			       bANo : $("#bANo").val()},
+ 		  dataType : "JSON",
+		  success : function(result){
+			  console.log("보내기 성공");
+			  location.reload();
+		  }
+	  });
+	  
+  });
+  
   </script>
   <% session.removeAttribute("msg"); %>
 </body>

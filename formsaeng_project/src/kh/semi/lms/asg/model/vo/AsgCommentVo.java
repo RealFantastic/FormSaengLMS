@@ -1,21 +1,31 @@
 package kh.semi.lms.asg.model.vo;
 
-import java.sql.Timestamp;
 
 public class AsgCommentVo {
 	public int cNo;
 	public String cWriter;
-	public Timestamp cDate;
+	public String cDate;
 	public String cContent;
 	public String id;
 	public int bANo;
 	
-	@Override
-	public String toString() {
-		return "CommentVo [cNo=" + cNo + ", cWriter=" + cWriter + ", cDate=" + cDate + ", cContent=" + cContent
-				+ ", id=" + id + ", bANo=" + bANo + "]";
+	//생성자
+	public AsgCommentVo() {
+		super();
 	}
-
+	
+	//전체 생성자
+	public AsgCommentVo(int cNo, String cWriter, String cDate, String cContent, String id, int bANo) {
+		super();
+		this.cNo = cNo;
+		this.cWriter = cWriter;
+		this.cDate = cDate;
+		this.cContent = cContent;
+		this.id = id;
+		this.bANo = bANo;
+	}
+	
+	//게터&세터
 	public int getcNo() {
 		return cNo;
 	}
@@ -32,11 +42,11 @@ public class AsgCommentVo {
 		this.cWriter = cWriter;
 	}
 
-	public Timestamp getcDate() {
+	public String getcDate() {
 		return cDate;
 	}
 
-	public void setcDate(Timestamp cDate) {
+	public void setcDate(String cDate) {
 		this.cDate = cDate;
 	}
 
@@ -63,6 +73,8 @@ public class AsgCommentVo {
 	public void setbANo(int bANo) {
 		this.bANo = bANo;
 	}
+	
+	
 	
 	
 	

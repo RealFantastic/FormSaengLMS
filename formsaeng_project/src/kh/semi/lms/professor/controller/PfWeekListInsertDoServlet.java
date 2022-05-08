@@ -20,7 +20,7 @@ import kh.semi.lms.lecture.model.vo.LectureVo;
  */
 @WebServlet("/pf/week/insert.do")
 //Annotation을 통한 파일 크기 및 업로드 위치 지정
-@MultipartConfig(maxFileSize = 1024 * 1024 * 1024, location = "c:\\exDownload")
+@MultipartConfig(maxFileSize = 1024 * 1024 * 1024, location = "C:\\z_workspace\\z_java\\formsaeng_semi_project\\web\\upload")
 public class PfWeekListInsertDoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -60,7 +60,7 @@ public class PfWeekListInsertDoServlet extends HttpServlet {
 		int week = Integer.parseInt(weekNo);
 		String lName = request.getParameter("lectureName");
 		String fName =  fileName1;
-		String fPath = "c:\\exDownload";
+		String fPath = "/pf/week/view"; // 논리적 주소 -> ex ) /pf/week/view
 		// "c:\\exDownload"
 		part.write(fileName1); //폴더에 업로드 완료
 		// 1. 해당 동영상 파일이름 또는 경로 db

@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reset.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/template.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/pfAsgBoard.css">
 <%@page import="kh.semi.lms.asg.model.vo.AsgListVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -76,72 +77,84 @@
       </ul>
     </div>
   </header>
-  <section id="template_content">
-    <div class="template_container">
-      <div class="template-title">
-        <h1>과제게시판</h1>
-        <hr>
-      </div>
-      <div class="content_container">
-        <!-- 템플릿 -->
+	<section id="template_content">
+		<div class="template_container">
+			<div class="template-title">
+				<h1>과제게시판</h1>
+				<hr>
+			</div>
+			<div class="content_container">
+				<!-- 템플릿 -->
 
-	<div>
-	<form id="multiDelete">
-	<input type="button" id="insertBoard" name="insertBoard" value="글쓰기">
-	<input type="button" id="deleteBoard" value="삭제">
-		<table border="1">
-			<tr>
-				<td><input id="allCheck" name="all" type="checkbox" onclick="allChk(this.checked);"></td>
-				<td>번호</td>
-				<td>제목 [댓글수]</td>
-				<td>작성자</td>
-				<td>작성일</td>
-			</tr>
-	<c:if test="${not empty boardVolist }">
-		<c:forEach items="${boardVolist}" var="vo">
-			<tr style="cursor: pointer;">
-				<td><input id="rowCheck" name="chk" type="checkbox" value="${vo.bANo }"></td>
-				<td class="bANo">${vo.bANo }</td>
-				<td class="read_list">${vo.bATitle }</td>
-				<td>${vo.bAWriter }</td>
-				<td>${vo.bADate }</td>
-			</tr>
-		</c:forEach>
-	</form>
-	</c:if>
-		</table>
-			<%-- [[ ${startPage } ]] [[ ${endPage } ]] [[ ${pageCnt } ]] [[ ${pageNum } ]] --%>
-		<div id="pagingBox">
-			<ul class="pagination">
-			<!-- startPage에서 -1일 때 -->
-			<c:if test="${ startPage > 1 }">
-				<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/pf/asgboard?pageNum=${startPage-1}">Previous</a></li>
-			</c:if>
-			<c:if test="${ startPage <= 1 }">
-				<li class="page-item disabled"><a class="page-link" href="<%=request.getContextPath()%>/pf/asgboard?pageNum=${startPage-1}">Previous</a></li>
-			</c:if>
-			<c:forEach step="1" begin="${startPage }" end="${ endPage}" var="idx">
-				<c:if test="${idx eq currentPage }">
-					<li class="page-item active"><a class="page-link" href="<%=request.getContextPath()%>/pf/asgboard?pageNum=${idx }">${idx } </a></li>
-				</c:if>
-				<c:if test="${idx ne currentPage }">
-					<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/pf/asgboard?pageNum=${idx }">${idx } </a></li>
-				</c:if>
-			</c:forEach>
-			<!-- endPage에서 +1일 때 -->
-			<c:if test="${endPage < pageCnt }">
-				<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/pf/asgboard?pageNum=${endPage+1}">next</a></li>
-			</c:if>
-			<c:if test="${endPage >= pageCnt }">
-				<li class="page-item disabled"><a class="page-link" href="<%=request.getContextPath()%>/pf/asgboard?pageNum=${endPage+1}">next</a></li>
-			</c:if>
-			</ul>
-		</div>
-	</div>
-      </div>
-  </section>
+				<div class="board_div">
+					<form id="multiDelete">
+						<div class="board_button">
+							<input type="button" class="btn btn-secondary" id="insertBoard" name="insertBoard" value="글쓰기"> 
+							<input type="button" class="btn btn-secondary" id="deleteBoard" value="삭제">
+						</div>
+						<table class="table table-striped">
+							<tr>
+								<td><input id="allCheck" name="all" type="checkbox"
+									onclick="allChk(this.checked);"></td>
+								<td>번호</td>
+								<td>제목</td>
+								<td>작성자</td>
+								<td>작성일</td>
+							</tr>
+							<c:if test="${not empty boardVolist }">
+								<c:forEach items="${boardVolist}" var="vo">
+									<tr style="cursor: pointer;">
+										<td><input id="rowCheck" name="chk" type="checkbox"
+											value="${vo.bANo }"></td>
+										<td class="bANo">${vo.bANo }</td>
+										<td class="read_list">${vo.bATitle }</td>
+										<td>${vo.bAWriter }</td>
+										<td>${vo.bADate }</td>
+									</tr>
+								</c:forEach>
+								</form>
+							</c:if>
+						</table>
+						<div id="pagingBox">
+							<ul class="pagination">
+								<!-- startPage에서 -1일 때 -->
+								<c:if test="${ startPage > 1 }">
+									<li class="page-item"><a class="page-link"
+										href="<%=request.getContextPath()%>/pf/asgboard?pageNum=${startPage-1}">Previous</a></li>
+								</c:if>
+								<c:if test="${ startPage <= 1 }">
+									<li class="page-item disabled"><a class="page-link"
+										href="<%=request.getContextPath()%>/pf/asgboard?pageNum=${startPage-1}">Previous</a></li>
+								</c:if>
+								<c:forEach step="1" begin="${startPage }" end="${ endPage}"
+									var="idx">
+									<c:if test="${idx eq currentPage }">
+										<li class="page-item active"><a class="page-link"
+											href="<%=request.getContextPath()%>/pf/asgboard?pageNum=${idx }">${idx }
+										</a></li>
+									</c:if>
+									<c:if test="${idx ne currentPage }">
+										<li class="page-item"><a class="page-link"
+											href="<%=request.getContextPath()%>/pf/asgboard?pageNum=${idx }">${idx }
+										</a></li>
+									</c:if>
+								</c:forEach>
+								<!-- endPage에서 +1일 때 -->
+								<c:if test="${endPage < pageCnt }">
+									<li class="page-item"><a class="page-link"
+										href="<%=request.getContextPath()%>/pf/asgboard?pageNum=${endPage+1}">next</a></li>
+								</c:if>
+								<c:if test="${endPage >= pageCnt }">
+									<li class="page-item disabled"><a class="page-link"
+										href="<%=request.getContextPath()%>/pf/asgboard?pageNum=${endPage+1}">next</a></li>
+								</c:if>
+							</ul>
+						</div>
+				</div>
+			</div>
+	</section>
 
-  <script>
+	<script>
   
   var msgVal = '${emsg}';
   if(msgVal != '' || msgVal != false){

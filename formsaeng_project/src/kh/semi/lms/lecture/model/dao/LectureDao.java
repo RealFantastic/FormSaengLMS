@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 //import java.sql.Statement;
+import java.util.ArrayList;
 
 import kh.semi.lms.lecture.model.vo.LectureVo;
 
@@ -45,5 +46,47 @@ public class LectureDao {
 			close(pstmt);
 		} 
 		return result;		
+	}
+	
+	public ArrayList<LectureVo> lectureBoardList(Connection conn, String id, String subCode){
+		ArrayList<LectureVo> volist = null;
+		
+//		String id = "S2022954112";
+//		String subCode = "C0101";
+				
+		String sql = "select * "
+				+ " from week_lecture w join enrollment_student e"
+				+ " on w.subject_code = e.subject_code"
+				+ " where e.id = ? and w.subject_code=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, subCode);
+			
+			rs =pstmt.executeQuery();
+			
+			volist = new ArrayList<LectureVo>();
+			while(rs.next()) {
+				LectureVo vo = new LectureVo();
+				vo.setLecNo(rs.getInt("LECTURE_NO"));
+				vo.setWeekNo(rs.getInt("WEEK_NO"));
+				vo.setvTitle(rs.getString("VIDEO_TITLE"));
+				vo.setvLength(rs.getInt("VIDEO_LENGTH"));
+				vo.setUploadDate(rs.getString("UPLOAD_DATE"));
+				vo.setSubCode(rs.getString("SUBJECT_CODE"));
+				vo.setfName(rs.getString("FILE_NAME"));
+				vo.setfPath(rs.getString("FILE_PATH"));
+				
+				volist.add(vo);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return volist;
 	}
 }

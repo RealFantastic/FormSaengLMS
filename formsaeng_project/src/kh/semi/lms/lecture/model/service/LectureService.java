@@ -1,6 +1,7 @@
 package kh.semi.lms.lecture.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import kh.semi.lms.lecture.model.dao.LectureDao;
 import kh.semi.lms.lecture.model.vo.LectureVo;
@@ -14,5 +15,12 @@ public class LectureService {
 		System.out.println("vo : "+vo);
 		close(conn);
 		return result;
+	}
+	
+	public ArrayList<LectureVo> lectureBoardList(String id, String subCode){
+		Connection conn = getConnection();
+		ArrayList<LectureVo> volist = new LectureDao().lectureBoardList(conn,id,subCode);
+		close(conn);
+		return volist;
 	}
 }

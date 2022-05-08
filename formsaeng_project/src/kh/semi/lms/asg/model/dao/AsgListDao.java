@@ -17,6 +17,7 @@ public class AsgListDao {
 	private Statement stmt = null;
 	private ResultSet rs = null;
 	
+	//게시글 추가하기
 	public int insertBoard(Connection conn,AsgListVo vo) {
 		int result = 0;
 		String Id = "S1111"; //todo : 로그인 세션 정보 받아와야함
@@ -37,6 +38,36 @@ public class AsgListDao {
 			close(pstmt);
 		}
 		return result;		
+	}
+	
+	//게시글 상세보기
+	public AsgListVo readBoard(Connection conn, AsgCommentVo avo) {
+		AsgListVo vo = null;
+		
+		String sql = "select board_assignment_no, board_assignment_title, board_assignment_content from assignment_list "
+				+ "where board_assignment_no=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, avo.getbANo());
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo= new AsgListVo();
+				vo.setbANo(rs.getInt(1));
+				vo.setbATitle(rs.getString(2));
+				vo.setbAContent(rs.getString(3));
+				System.out.println("뿌려졌니? : " + vo);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return vo;
 	}
 	
 	public AsgListVo readBoard(Connection conn, int bANo) {
@@ -68,7 +99,7 @@ public class AsgListDao {
 		return vo;
 	}
 	
-		
+	//게시글 수정하기	
 	public int updateBoard(Connection conn, AsgListVo vo) {
 		int result = 0;
 		System.out.println(1);
@@ -92,6 +123,7 @@ public class AsgListDao {
 		return result;
 	}
 	
+	//게시글 삭제하기
 	public int deleteBoard(Connection conn, int bANo) {
 		int result = 0;
 		String sql = "DELETE ASSIGNMENT_LIST WHERE BOARD_ASSIGNMENT_NO = ?";
@@ -110,6 +142,7 @@ public class AsgListDao {
 		return result;
 	}
 	
+	//게시글 여러개 삭제하기
 	public int multiDeleteBoard(Connection conn, String[] delNo) {
 		
 		int result = 0;
@@ -143,6 +176,7 @@ public class AsgListDao {
 		return result;
 	}
 	
+	//게시판 목록 띄우기
 	public ArrayList<AsgListVo> AssignmentBoardlist(Connection conn) {
 		ArrayList<AsgListVo> volist = null;
 		
@@ -177,12 +211,13 @@ public class AsgListDao {
 		return volist;
 	}
 	
+	//게시판 목록 띄우기(페이징처리)
 	public ArrayList<AsgListVo> AssignmentBoardlist(Connection conn,int startRnum,int endRnum) {
 		ArrayList<AsgListVo> volist = null;
 		
 		String sql = "select * from"
                 + " (SELECT rownum r, t1.* FROM "
-                + " (SELECT *"
+                + " (SELECT BOARD_ASSIGNMENT_NO,BOARD_ASSIGNMENT_TITLE,BOARD_ASSIGNMENT_WRITER,TO_CHAR(BOARD_ASSIGNMENT_DATE, 'YYYY-MM-DD') board_assignment_date,BOARD_ASSIGNMENT_CONTENT"
                 + " FROM assignment_list a ORDER BY board_assignment_date DESC)t1)"
                 + " where r between ? and ?";
 		
@@ -211,7 +246,7 @@ public class AsgListDao {
 		return volist;
 	}
 	
-	
+	//게시판 갯수 구하기
 	public int countListBoard(Connection conn) {
 		int result = 0;
 		String sql = "select count(*) from assignment_list";
@@ -266,24 +301,56 @@ public class AsgListDao {
 		return volist;
 	}
 	
-	public ArrayList<AsgCommentVo> readBoardAndComments(Connection conn, int bNo) {
-		ArrayList<AsgCommentVo> volist = null;
-
-		String sql = "select * from re_comment where b_no=? order by r_Write_Date desc, b_no desc";
+	//댓글 달기
+	public int insertAsgComment(Connection conn,AsgCommentVo avo) {
+		int result = 0;
+		
+		String sql = "insert into ASSIGNMENT_COMMENT values (SEQ_COMMENT_NO.nextval,?,DEFAULT,?,?,?)";
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, bNo);
+			
+			pstmt.setString(1, avo.getcWriter());
+			pstmt.setString(2, avo.getcContent());
+			pstmt.setString(3, avo.getId());
+			pstmt.setInt(4, avo.getbANo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	//댓글 리스트
+	public ArrayList<AsgCommentVo> readBoardAndComments(Connection conn, AsgCommentVo avo) {
+		ArrayList<AsgCommentVo> reVolist = null;
+
+		String sql = "select COMMENT_NO,COMMENT_WRITER,COMMENT_DATE,COMMENT_CONTENT,ID,BOARD_ASSIGNMENT_NO"
+				+ " from ASSIGNMENT_COMMENT"
+				+ " where BOARD_ASSIGNMENT_NO=?"
+				+ " order by COMMENT_DATE desc, COMMENT_NO desc";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, avo.getbANo());
 			rs = pstmt.executeQuery();
 
-			volist = new ArrayList<AsgCommentVo>();
+			reVolist = new ArrayList<AsgCommentVo>();
 			while (rs.next()){
-//				CommentVo vo = new CommentVo(
-//						rs.getInt("r_no"), rs.getInt("b_no")
-//						,rs.getString("r_Writer"), rs.getTimestamp("r_Write_Date")
-//						, rs.getString("r_Content"), rs.getString("m_Id")
-//						);
-				//(int rNo, int bNo, String rWriter, Timestamp rWriteDate, String rContent, String mId)
-//				volist.add(vo);
+				AsgCommentVo vo = new AsgCommentVo();
+						
+					vo.setcNo(rs.getInt("COMMENT_NO"));
+					vo.setcWriter(rs.getString("COMMENT_WRITER"));
+					vo.setcDate(rs.getString("COMMENT_DATE"));
+					vo.setcContent(rs.getString("COMMENT_CONTENT"));
+					vo.setId(rs.getString("ID"));
+					vo.setbANo(rs.getInt("BOARD_ASSIGNMENT_NO"));
+					
+					reVolist.add(vo);
+					System.out.println("reVolist(DAO) : " + reVolist);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -291,7 +358,7 @@ public class AsgListDao {
 			close(rs);
 			close(pstmt);
 		}		
-		return volist;
+		return reVolist;
 	}	
 	
 }

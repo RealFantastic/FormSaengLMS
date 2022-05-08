@@ -9,6 +9,7 @@ public class LectureVo {
 	private String subCode;
 	private String fName;
 	private String fPath;
+	private String cName;
 	
 	//생성자
 	public LectureVo() {
@@ -18,6 +19,14 @@ public class LectureVo {
 	//게터,세터
 	public int getLecNo() {
 		return lecNo;
+	}
+
+	public String getcName() {
+		return cName;
+	}
+
+	public void setcName(String cName) {
+		this.cName = cName;
 	}
 
 	public void setLecNo(int lecNo) {
