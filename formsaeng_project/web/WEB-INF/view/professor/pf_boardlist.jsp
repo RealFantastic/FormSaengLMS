@@ -80,17 +80,19 @@
 	<section id="template_content">
 		<div class="template_container">
 			<div class="template-title">
-				<h1>과제게시판</h1>
+				<h1>과제 게시판</h1>
 				<hr>
 			</div>
 			<div class="content_container">
 				<!-- 템플릿 -->
 
+				<!-- 과제 게시판 -->
 				<div class="board_div">
 					<form id="multiDelete">
 						<div class="board_button">
-							<input type="button" class="btn btn-secondary" id="insertBoard" name="insertBoard" value="글쓰기"> 
-							<input type="button" class="btn btn-secondary" id="deleteBoard" value="삭제">
+							<input type="button" class="btn btn-secondary" id="insertBoard"
+								name="insertBoard" value="글쓰기"> <input type="button"
+								class="btn btn-secondary" id="deleteBoard" value="삭제">
 						</div>
 						<table class="table table-striped">
 							<tr>
@@ -112,11 +114,13 @@
 										<td>${vo.bADate }</td>
 									</tr>
 								</c:forEach>
-								</form>
 							</c:if>
 						</table>
+					</form>
+						
+						<!-- 페이징 박스 -->
 						<div id="pagingBox">
-							<ul class="pagination">
+							<ul class="pagination justify-content-center">
 								<!-- startPage에서 -1일 때 -->
 								<c:if test="${ startPage > 1 }">
 									<li class="page-item"><a class="page-link"
@@ -151,8 +155,18 @@
 							</ul>
 						</div>
 				</div>
+				<!-- 목록 탭 -->
+						<div class="list-tap">
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">강의 목록</li>
+								<li class="list-group-item">강의 자료실</li>
+								<li class="list-group-item">과제 게시판</li>
+								<li class="list-group-item">사용자 및 그룹</li>
+							</ul>
+						</div>
 			</div>
-	</section>
+			</div>
+</section>
 
 	<script>
   

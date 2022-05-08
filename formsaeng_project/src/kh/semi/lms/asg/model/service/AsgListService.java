@@ -14,7 +14,7 @@ import static kh.semi.lms.common.jdbc.JdbcDbcp.*;
 
 public class AsgListService {
 	
-	//°Ô½Ã±Û Ãß°¡ÇÏ±â
+	//ê²Œì‹œê¸€ ì¶”ê°€í•˜ê¸°
 	public int insertBoard(AsgListVo vo) {
 		Connection conn = getConnection();
 		int result =  new AsgListDao().insertBoard(conn, vo);
@@ -22,7 +22,7 @@ public class AsgListService {
 		return result;
 	}
 	
-	//°Ô½Ã±Û »ó¼¼º¸±â
+	//ê²Œì‹œê¸€ ìƒì„¸ë³´ê¸°
 	public AsgListVo readBoard(AsgCommentVo avo) {
 		Connection conn = getConnection();
 		AsgListVo vo = new AsgListDao().readBoard(conn, avo);
@@ -37,7 +37,7 @@ public class AsgListService {
 		return vo;
 	}
 	
-	//°Ô½Ã±Û ¼öÁ¤ÇÏ±â
+	//ê²Œì‹œê¸€ ìˆ˜ì •í•˜ê¸°
 	public int updateBoard(AsgListVo vo) {
 		Connection conn = getConnection();
 		int result = new AsgListDao().updateBoard(conn, vo);
@@ -45,7 +45,7 @@ public class AsgListService {
 		return result;
 	}
 
-	//°Ô½Ã±Û »èÁ¦ÇÏ±â
+	//ê²Œì‹œê¸€ ì‚­ì œí•˜ê¸°
 	public int deleteBoard(int bANo) {
 		Connection conn = getConnection();
 		int result = new AsgListDao().deleteBoard(conn, bANo);
@@ -53,7 +53,7 @@ public class AsgListService {
 		return result;
 	}
 	
-	//°Ô½Ã±Û ¿©·¯°³ »èÁ¦ÇÏ±â
+	//ê²Œì‹œê¸€ ì—¬ëŸ¬ê°œ ì‚­ì œí•˜ê¸°
 	public int multiDeleteBoard(String[] delNo) {
 		Connection conn = getConnection();
 		int result = new AsgListDao().multiDeleteBoard(conn, delNo);
@@ -61,7 +61,7 @@ public class AsgListService {
 		return result;
 	}
 	
-	//°Ô½ÃÆÇ ¸ñ·Ï ¶ç¿ì±â
+	//ê²Œì‹œíŒ ëª©ë¡ ë„ìš°ê¸°
 	public ArrayList<AsgListVo> AssignmentBoardlist() {
 		Connection conn = getConnection();
 		ArrayList<AsgListVo> volist = new AsgListDao().AssignmentBoardlist(conn);
@@ -69,7 +69,7 @@ public class AsgListService {
 		return volist;
 	}
 	
-	//°Ô½ÃÆÇ ¸ñ·Ï ¶ç¿ì±â(ÆäÀÌÂ¡Ã³¸®)
+	//ê²Œì‹œíŒ ëª©ë¡ ë„ìš°ê¸°(í˜ì´ì§•ì²˜ë¦¬)
 	public ArrayList<AsgListVo> AssignmentBoardlist(int startRnum,int endRnum) {
 		Connection conn = getConnection();
 		ArrayList<AsgListVo> volist = new AsgListDao().AssignmentBoardlist(conn,startRnum,endRnum);
@@ -77,7 +77,7 @@ public class AsgListService {
 		return volist;
 	}
 
-	//°Ô½ÃÆÇ °¹¼ö ±¸ÇÏ±â
+	//ê²Œì‹œíŒ ê°¯ìˆ˜ êµ¬í•˜ê¸°
 	public int countListBoard() {
 		Connection conn = getConnection();
 		int result = new AsgListDao().countListBoard(conn);
@@ -85,7 +85,7 @@ public class AsgListService {
 		return result;
 	}
 	
-	//´ñ±Û ´Ş±â
+	//ëŒ“ê¸€ ë‹¬ê¸°
 	public int insertAsgComment(AsgCommentVo avo) {
 		Connection conn = getConnection();
 		int result = new AsgListDao().insertAsgComment(conn,avo);
@@ -93,7 +93,7 @@ public class AsgListService {
 		return result;
 	}
 	
-	//°Ô½Ã±Û ³»¿ë,´ñ±Û 
+	//ê²Œì‹œê¸€ ë‚´ìš©,ëŒ“ê¸€ 
 		public ArrayList<AsgCommentVo> readBoardAndComments(AsgCommentVo avo) {
 			Connection conn = getConnection();
 //			AsgListVo vo = new AsgListDao().readBoard(conn,avo);
@@ -106,7 +106,7 @@ public class AsgListService {
 		}
 		
 		
-		//°Ô½Ã±Û ³»¿ë,´ñ±Û - Map»ç¿ë
+		//ê²Œì‹œê¸€ ë‚´ìš©,ëŒ“ê¸€ - Mapì‚¬ìš©
 //		public Map<String, Object> readBoardAndReCommentMap(int bNo) {
 //			Connection conn = getConnection();
 //			BoardVo vo = dao.readBoard(conn,bNo);

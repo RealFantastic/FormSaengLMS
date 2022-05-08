@@ -3,12 +3,19 @@
 	margin-left: 20px;
 }
 
+/* 버튼 위치 */
 .board_button {
 	text-align: right;
 	margin-bottom: 10px;
 }
 
-#pagingBox {
-	
+/* 컨테이너 플렉스 */
+.content_container{
+	display : flex;
 }
+
+/* 목록 탭 */
+/* .list-tap {
+	
+} */
 

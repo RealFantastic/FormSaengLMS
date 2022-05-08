@@ -73,7 +73,7 @@ public class AsgListDao {
 	public AsgListVo readBoard(Connection conn, int bANo) {
 		AsgListVo vo = null;
 		
-		String sql = "select board_assignment_no, board_assignment_title, board_assignment_content from assignment_list "
+		String sql = "select board_assignment_no, board_assignment_title, BOARD_ASSIGNMENT_WRITER, board_assignment_content from assignment_list "
 				+ "where board_assignment_no=?";
 		
 		try {
@@ -85,7 +85,8 @@ public class AsgListDao {
 				vo= new AsgListVo();
 				vo.setbANo(rs.getInt(1));
 				vo.setbATitle(rs.getString(2));
-				vo.setbAContent(rs.getString(3));
+				vo.setbAWriter(rs.getString(3));
+				vo.setbAContent(rs.getString(4));
 				System.out.println("뿌려졌니? : " + vo);
 			}
 			
@@ -218,7 +219,7 @@ public class AsgListDao {
 		String sql = "select * from"
                 + " (SELECT rownum r, t1.* FROM "
                 + " (SELECT BOARD_ASSIGNMENT_NO,BOARD_ASSIGNMENT_TITLE,BOARD_ASSIGNMENT_WRITER,TO_CHAR(BOARD_ASSIGNMENT_DATE, 'YYYY-MM-DD') board_assignment_date,BOARD_ASSIGNMENT_CONTENT"
-                + " FROM assignment_list a ORDER BY board_assignment_date DESC)t1)"
+                + " FROM assignment_list a ORDER BY BOARD_ASSIGNMENT_NO DESC,board_assignment_date DESC)t1)"
                 + " where r between ? and ?";
 		
 		try {

@@ -9,12 +9,12 @@ public class AsgCommentVo {
 	public String id;
 	public int bANo;
 	
-	//»ı¼ºÀÚ
+	//ìƒì„±ì
 	public AsgCommentVo() {
 		super();
 	}
 	
-	//ÀüÃ¼ »ı¼ºÀÚ
+	//ì „ì²´ ìƒì„±ì
 	public AsgCommentVo(int cNo, String cWriter, String cDate, String cContent, String id, int bANo) {
 		super();
 		this.cNo = cNo;
@@ -25,7 +25,7 @@ public class AsgCommentVo {
 		this.bANo = bANo;
 	}
 	
-	//°ÔÅÍ&¼¼ÅÍ
+	//ê²Œí„°&ì„¸í„°
 	public int getcNo() {
 		return cNo;
 	}

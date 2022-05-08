@@ -1,0 +1,48 @@
+.body_div {
+	width : 1200px;
+}
+
+/* 버튼 오른쪽 정렬 */
+.view-btn {
+	text-align: right;
+}
+
+/* 페이지 플렉스 정렬 */
+.content_container{
+	display: flex;
+}
+
+/* 댓글달기 버튼 */
+#cmtCnt-btn{
+	margin-top: 10px;
+}
+
+/* 내용 박스 */
+#asg_content{
+	resize: none;
+	width : 1200px;
+	height : 400px;
+}
+
+/* 댓글 박스 */
+#cmtCnt {
+	resize: none;
+	width : 1200px;
+	height : 120px;
+}
+
+/* 댓글 목록 */
+.cmt-tb {
+	width : 100%;
+	border-top: 1px solid #444444;
+	border-collapse: collapse;
+}
+
+.row-cmt-tb, .th-cmt-tb {
+	border-bottom: 1px solid #444444;
+    padding: 10px;
+}
+
+/* .row-cmt-tb:first-child, .th-cmt-tb:first-child {
+	border-left: none;
+} */
