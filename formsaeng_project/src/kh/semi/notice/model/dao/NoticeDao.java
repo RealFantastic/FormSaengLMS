@@ -226,10 +226,10 @@ public class NoticeDao {
 
 
 		// 공지사항 검색
-		public ArrayList<NoticeVo> selecNotice(Connection conn, String reqSearch){
+		public ArrayList<NoticeVo> selecNotice(Connection conn, String ff, String qq){
 			ArrayList<NoticeVo> volist=new ArrayList<NoticeVo>();
 //			
-//			String Sql="";
+			String Sql="select*from notice where";
 //			
 //			pstmt=conn.prepareStatement(sql);
 //			pstmt.setString(parameterIndex, x);

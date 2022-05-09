@@ -33,17 +33,18 @@ public class MgNoticeSelectServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		List<NoticeVo> listNotice = null;
-		String searchCondition=request.getParameter("searchCondition");
-		String searchValue=request.getParameter("searchValue");
+		ArrayList<NoticeVo> listNotice = null;
+		String ff=request.getParameter("ff");
+		String qq=request.getParameter("qq");
 		
 //		listNotice=new NoticeService().selectNotice();
-		if(searchCondition != null && searchValue !=null) {
+		if(ff != null && qq !=null) {
 			// 검색 한 결과
-			listNotice =new NoticeService().selectNotice(searchCondition, searchValue);
+			listNotice =new NoticeService().selectNotice(ff, qq);
 		}else {
 			// 검색 안 한 결과
 			listNotice=new NoticeService().selectNotice();
+			
 		}
 		
 		if(listNotice != null) {

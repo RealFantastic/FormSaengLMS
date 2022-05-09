@@ -46,22 +46,22 @@
 		</header>
 		<div class=title_search>
 			<div class="title font5">공지사항</div>
-			
-			<div class="dropdown notice_search">
-				<select class="form-select select_box" aria-label="Default select example" id="search_option">
-					<option selected value="">선택</option>
-					<option value="search_title">제목</option>
-					<option value="search_content">내용</option>
-				</select>
-				
-				<div>
-					<input class="form-control font3 notice_input" list="datalistOptions"
-						id="exampleDataList" placeholder="공지사항 검색">
+			<form id="searchFrm" action="<%=request.getContextPath()%>/mg/notice/select" method="get" >
+				<div class="dropdown notice_search">
+					<select name="ff" class="form-select select_box" aria-label="Default select example" id="search_option">
+						<option selected value="">선택</option>
+						<option value="search_title"  ${field eq 'search_title' ? 'selected' : ''}>제목</option>
+						<option value="search_content" ${field eq 'search_content' ? 'selected':''}>내용</option>
+					</select>
+					
+					<div>
+						<input type="search"  name="qq" class="form-control font3 notice_input" list="datalistOptions" id="exampleDataList" placeholder="공지사항 검색어 입력">
+					</div>
+					<div class=drop_search>
+						<button type="submit" class="btn btn-secondary" id="searching">검색</button>
+					</div>
 				</div>
-				<div class=drop_search>
-					<button type="button" class="btn btn-secondary" id="searching">검색</button>
-				</div>
-			</div>
+			</form>
 		</div>
 		<div class="table_div">
 			<table class="table font2 table-hover">
@@ -158,24 +158,6 @@
 		locattion.href="<%=request.getContextPath()%>/mg/dashboard";
 	})
 	
-	//공지사항 검색기능
-	$("#searching").click(function(){
-		console.log("검색기능");
-		var search=$("#exampleDataList").val();
-		
-		$.ajax({
-			url:"<%=request.getContextPath()%>/mg/notice/list.ax",
-			type:"get",
-			dataType:"json",
-			data:{"search":search},
-			//제이슨 타입인데 (앞)키랑 (뒤)벨류 형식으로 만듬
-			success:function(data){
-				console.log("검색 컨트롤러"+data)
-
-			}
-		})
-	});
-
 	
 	
 

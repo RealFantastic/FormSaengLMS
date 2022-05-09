@@ -43,7 +43,7 @@
 </script>
 
 
-<title>학사일정 달력</title>
+<title>Academic Calendar</title>
 
 
 <link
@@ -170,7 +170,7 @@
 									</div>
 								<div class="modal-footer">
 									<button type="submit" class="btn btn-warning" id="addCalendar">완료</button>
-									<button type="button" class="btn btn-secondary" data-dismiss="modal" id="sprintSettingModalClose modalclose">취소</button>
+									<button type="button" class="btn btn-secondary modalclose" data-dismiss="modal" id="sprintSettingModalClose">취소</button>
 								</div>
 									</form>
 							</div>
@@ -181,13 +181,19 @@
 		</div>
 		
 	<script type="text/javascript">
-			
-			
-			
-			
-	<!-- 	 // 모달 종료 시,  -->
-	$("#modalclose").on("click", function(){
-		$("#modal_modal").modal("hide");
+// 	일정추가
+
+	
+	
+// 	일정삭제
+	
+	
+	
+// 	모달 종료 시
+	$(".modalclose").on("click", function(){
+// 		$("#calendarModal").hide();
+// 		$(".modal-backdrop fade show").hide();
+// 		$(".modal-open").hide();
 	});
 	</script>
 		

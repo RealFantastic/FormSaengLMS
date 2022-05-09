@@ -83,13 +83,14 @@ public class NoticeService {
 		
 		
 		// 공지사항 검색
-		public List<NoticeVo> selectNotice(String reqSearch) {
+		public ArrayList<NoticeVo> selectNotice(String ff, String qq) {
 			Connection conn=getConnection();
-			List<NoticeVo> listNotice=new NoticeDao().selecNotice(conn, reqSearch);
+			ArrayList<NoticeVo> listNotice=new NoticeDao().selecNotice(conn, ff, qq);
 			close(conn);
 			
 			return listNotice;
 		}
+		
 
 	
 }
