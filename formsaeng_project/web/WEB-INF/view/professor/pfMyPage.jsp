@@ -82,13 +82,10 @@
 
 <script>
 
-$("#lms").click(function(){
+$("#move_lms").click(function(){
 	location.href = "<%=request.getContextPath()%>/pf/dlist"; // lms 바로가기
 });
-	
-$("#stmain").click(function(){
-	location.href = "<%=request.getContextPath()%>/pf/main"; // 메인페이지
-});
+
 
 
 // 모달
@@ -121,7 +118,7 @@ $("#myPage").hide();
 		 
 	 $.ajax({ // JQuery 를 통한 ajax 호출 방식 사용
 	 type : "POST",
-	 url : "<%=request.getContextPath()%>/stpwdcheck.do",
+	 url : "<%=request.getContextPath()%>/pfpwdcheck.do",
 	 data : {
 	 pwdcheck : $("#pwdcheck").val().trim(),
 	 },
@@ -132,7 +129,6 @@ $("#myPage").hide();
 		$(".modal").hide();
 		$("#pwdcheck").val(""); // 비번 삭제해주기
 		location.href = "<%=request.getContextPath()%>/pf/mypagem";
-<%-- location.replace('<%=request.getContextPath()%>/st/mypagem') ; --%>
 	 } else if(result == "실패"){
 		alert("비밀번호가 일치하지 않습니다. 다시 시도해주세요");
 		$("#pwdcheck").focus();
