@@ -89,5 +89,12 @@ section hr{
   .subject_card a{
   	text-decoration:none !important;
   	color:black !important;
+  	
+  }
+  .subject_card{
+  transition: width .3s;
+  }
+  .subject_card:hover{
+  	width: 19rem !important;
   }
   /* 대시보드 카드 css 종료*/

@@ -62,7 +62,7 @@ $(function(){
                             </div>
                             <div class="form-group">
                                 <button type="button" name="findid" id="findid" class="btn btn-light">아이디 찾기</button>
-                                <button type="button" name="findpwd" id="findpwd" class="btn btn-light">비밀번호 찾기</button>
+                                <button type="button" name="findpwd" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#findPwd" data-bs-whatever="@mdo">비밀번호 찾기</button>
                                 <input type="button" id="submit" name="submit" class="btn btn-primary" value="로그인">
                             </div>
                         </form>
@@ -91,6 +91,42 @@ $(function(){
 							</form>	
 						</div>
 						<button class="btn_modal_close">닫기</button>
+					</div>
+				</div>
+				<!-- 비밀번호 찾기 모달창 -->
+				<div class="modal fade" id="findPwd" tabindex="-1"
+					aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">비밀번호 찾기</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"
+									aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<div class="mb-3">
+									<label for="user_name" class="col-form-label">이름</label>
+									<input type="text" class="form-control" id="user_name" name="user_name">
+								</div>
+								<div class="mb-3">
+									<label for="user_id" class="col-form-label">학번</label>
+									<span id = "isRight"></span>
+									<input type="text" class="form-control" id="user_id" name="user_id">
+								</div>
+								<div class="mb-3">
+									<button type="button" class="btn btn-primary" id="checkMember">계정 확인하기</button>
+								</div>
+								<div class="mb-3" id="input_email">
+									<label for="user_email" class="col-form-label">이메일 입력</label>
+									<button type="button" class="btn btn-primary" id="send_mail">메일 전송</button>
+									<input type="email" class="form-control" id="user_email" name="user_email">
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-bs-dismiss="modal">닫기</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -166,6 +202,79 @@ $(function(){
    			   
    		   }
    		   });
+   	   
+   	   
+   	   //비밀번호 찾기
+   	   $("#checkMember").click(function(){
+   		   var userName = $("#user_name").val();
+   		   var userId = $("#user_id").val();
+   		   console.log(userName);
+   		   console.log(userId);
+   		   if(userName != "" && userId !=""){
+   			   $.ajax({
+   				type : "POST",
+   			 	url : "checkPf.ajx",
+   			 	data : {
+   			 			name : userName,
+   			 			id : userId,
+   			 	},
+   			 	success : function(data){
+   			 		console.log("컨트롤러 갔다왔음.");
+   			 		console.log(data);
+   			 		if(data == 0){
+   			 			alert("입력하신 계정은 없는 계정 / 잘못된 이름 입니다.");
+   			 			$("#isRight").empty();
+   			 			$("#isRight").css('color',"red");
+   			 			$("#isRight").text("없는 계정입니다.");
+   			 			$("#user_name").focus();
+   			 			return;
+   			 		}else if(data == 1){
+   			 			$("#isRight").empty();
+			 			$("#isRight").css('color',"green");
+   			 			$("#isRight").text("계정을 확인했습니다.");
+   			 			$("#input_email").show();
+   			 		}
+   			 		
+   			 	}
+   			 		
+   			   });
+   		   }
+   	   });
+   	   			//비밀번호 메일 전송
+   	   $("#send_mail").click(function(){
+   		   var userName = $("#user_name").val();
+ 		   var userId = $("#user_id").val();
+   		   var address = $("#user_email").val();
+   		  if(address == "" || address == null){
+   			  alert("이메일을 입력해주세요.");
+   			  $("#user_email").focus();
+   			  return;
+   		  }else{
+   			  $.ajax({
+   				type : "POST",
+   			 	url : "<%= request.getContextPath()%>/sendEmail.ajx",
+   			 	data : {
+	   			 		name : userName,
+			 			id : userId,
+   			 			email : address
+   			 	},
+   			 	success : function(result){
+   			 		if(result ==-2){
+   			 			alert("이메일 정보가 일치하지 않습니다 다시 시도해주세요.");
+   			 			$("#user_email").focus();
+   			 		}else if(result == -1){
+   			 			alert("이메일 전송에 실패했습니다.");
+   			 			location.reload();
+   			 		}else if(result == 1){
+   			 			alert("이메일을 전송했습니다. 확인해주세요.");
+   			 			location.reload();
+   			 		}
+   			 	}
+   			 	
+   			  });
+   		  }
+   	   });
+   	   
 	});
    </script>
 </body>

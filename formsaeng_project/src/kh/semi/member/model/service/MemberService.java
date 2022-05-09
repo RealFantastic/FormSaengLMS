@@ -92,5 +92,17 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+	//비밀번호 찾기(입력정보 확인)
+	public MemberVo findPassword(String name, String id) {
+		Connection conn = getConnection();
+		
+		MemberVo result = null;
+		
+		result = new MemberDao().findPassword(conn, name, id);
+		
+		close(conn);
+		return result;
+	}
+
 	
 }

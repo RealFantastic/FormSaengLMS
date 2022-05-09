@@ -24,7 +24,7 @@
     <div id="root">
         <header>
             <div class="univlogo">
-                <a href="https://www.naver.com"><img src="<%= request.getContextPath() %>/resources/images/Logo.png" alt="폼생대학교"></a>
+                <a href="https://www.naver.com"><img src="<%= request.getContextPath() %>/resources/images/name_logo.png" alt="폼생대학교"></a>
             </div>
         </header>
         <section id="first">

@@ -32,3 +32,28 @@
     margin-top: 15px;
     padding: 15px;
 }
+
+/* 모달 background  */
+.findid_modal {
+    display: none;
+    /* 필수로 들어가야 되는 부분 시작 */
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .3);
+    /* 필수로 들어가야 되는 부분 끝 */
+}
+
+/* 모달 컨텐츠 */
+.findid_modal>.modal_content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    transform: translate(-50%,-50%);
+    background-color: white;
+    animation: fadein 3s;
+}

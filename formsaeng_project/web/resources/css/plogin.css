@@ -42,7 +42,6 @@
     left: 0;
     background-color: rgba(0, 0, 0, .3);
     /* 필수로 들어가야 되는 부분 끝 */
-    animation:fadein 3s;
 }
 
 /* 모달 컨텐츠 */
@@ -54,7 +53,8 @@
     transform: translate(-50%,-50%);
     background-color: white;
     animation: fadein 3s;
-    
-    
+}
 
+#input_email{
+	display:none;
 }

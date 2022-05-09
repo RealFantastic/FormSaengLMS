@@ -190,6 +190,9 @@ public class MemberDao {
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(stmt);
 			}
 			
 			System.out.println(result);
@@ -232,7 +235,40 @@ public class MemberDao {
 			return result;
 		}
 	
-	
+		//비밀번호 찾기
+			public MemberVo findPassword(Connection conn, String name, String id) {
+				MemberVo result = null;
+				
+				String sql = "SELECT ID,PWD,NAME,EMAIL FROM MEMBER WHERE ID=? AND NAME = ?";
+				
+				System.out.println("dao 도착 직후 파라미터 : " + id + " " + name);
+				
+				try {
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, id);
+					pstmt.setString(2, name);
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()) {
+						result = new MemberVo();
+						result.setId(rs.getString("id"));
+						result.setPwd(rs.getString("pwd"));
+						result.setName(rs.getString("name"));
+						result.setEmail(rs.getString("email"));
+					}
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					close(rs);
+					close(stmt);
+				}
+				
+				System.out.println("dao 쿼리이후 member 정보 확인값 : " + result);
+				
+				return result;
+			}
+			
 	
 	
 	
