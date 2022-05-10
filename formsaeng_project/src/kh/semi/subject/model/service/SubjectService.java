@@ -43,6 +43,17 @@ public class SubjectService {
 		close(conn);
 		return result;
 	}
+	//페이징된 수강신청 관리 목록
+	public ArrayList<SubjectVo> mgSubjectList(int startRnum, int endRnum) {
+		ArrayList<SubjectVo> result = null;
+		Connection conn = getConnection();
+		
+		
+		result = new SubjectDao().mgSubjectList(conn, startRnum, endRnum);
+		
+		close(conn);
+		return result;
+	}
 	
 	//학생 수강신청 목록
 	public ArrayList<SubjectVo> stSubjectList(MemberVo vo) {
@@ -54,6 +65,17 @@ public class SubjectService {
 		close(conn);
 		return result;
 	}
+	//학생 수강신청 목록
+		public ArrayList<SubjectVo> stSubjectList(MemberVo vo,int startRnum, int endRnum) {
+			ArrayList<SubjectVo> result = null;
+			Connection conn = getConnection();
+			
+			result = new SubjectDao().stSubjectList(conn,vo,startRnum,endRnum);
+			
+			close(conn);
+			return result;
+		}
+
 	
 	public int deleteSubejct(String[] delist) {
 		int result = 0;
@@ -75,4 +97,24 @@ public class SubjectService {
 		close(conn);
 		return result;
 	}
+	
+	//수강신청 관리목록 갯수
+	public int countMgSubject() {
+		Connection conn = getConnection();
+		int result = 0;
+		
+		result = new SubjectDao().countMgSubject(conn);
+		close(conn);
+		return result;
+	}
+	
+	//학생 수강신청 가능 갯수
+		public int countStSubject(MemberVo vo) {
+			Connection conn = getConnection();
+			int result = 0;
+			
+			result = new SubjectDao().countStSubject(conn, vo);
+			close(conn);
+			return result;
+		}
 }

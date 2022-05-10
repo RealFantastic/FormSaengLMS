@@ -5,6 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,7 +54,7 @@
 			</div>
 			<div class="search">
 				<select class="select_design font2" name="search" id="requirement">
-					<option class="option_design font2" value="dept">학과 검색</option>
+					<option class="option_design font2" value="dept" selected>학과 검색</option>
 					<option class="option_design font2" value="name">과목 검색</option>
 					<option class="option_design font2" value="type">이수구분 검색</option>
 					<option class="option_design font2" value="grade">학년 검색</option>
@@ -95,10 +96,48 @@
 						</c:forEach>
 				</table>
 			</form>
-			<button type="button" id="addSubject" class="btn btn-primary">과목
-				추가하기</button>
-			<button type="button" id="delSubject" class="btn btn-primary">선택 과목
-				삭제하기</button>
+			<div id= "page_box">
+				<div id = "paging">
+					<nav aria-label="Page navigation example">
+					  <ul class="pagination">
+					  <c:if test="${startPage gt 1 }">
+					   <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/mg/Subjects?p=${startPage-1}">Previous</a></li>
+					  </c:if>
+					  <c:if test="${startPage le 1 }">
+					    <li class="page-item disabled">
+					   		<a class="page-link" href="<%=request.getContextPath()%>/mg/Subjects">Previous</a>
+					   </li>
+					  </c:if>
+					  <c:forEach step="1" begin="${startPage }" end="${endPage }" var="index">
+					  	<c:if test="${index eq currentPage }">
+					  		<li class="page-item active" aria-current="page">
+					  			<a class="page-link" href="<%=request.getContextPath()%>/mg/Subjects?p=${index}">${index }</a>
+					  		</li>
+					  	</c:if>
+					  	<c:if test="${index ne currentPage }">
+					  		<li class="page-item">
+					  			<a class="page-link" href="<%=request.getContextPath()%>/mg/Subjects?p=${index}">${index}</a>
+					  		</li>
+					  	</c:if>
+					  </c:forEach>
+					  <c:if test="${endPage lt pageCnt }">
+					   <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/mg/Subjects?p=${endPage + 1}">Next</a></li>
+					  </c:if>
+					  <c:if test="${endPage ge pageCnt }">
+					   	<li class="page-item disabled">
+					   		<a class="page-link" href="<%=request.getContextPath()%>/mg/Subjects?p=${endPage + 1}">Next</a>
+					   	</li>
+					  </c:if>
+					  </ul>
+					</nav>
+				</div>
+				<div id = button_box>
+					<button type="button" id="addSubject" class="btn btn-primary">과목
+						추가하기</button>
+					<button type="button" id="delSubject" class="btn btn-primary">선택 과목
+						삭제하기</button>
+				</div>
+			</div>
 		</div>
 	</section>
 	<script>

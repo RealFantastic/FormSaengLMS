@@ -150,6 +150,56 @@ public class SubjectDao {
 
 		return result;
 	}
+	
+	//페이징된 관리자 수강신청 리스트용
+		public ArrayList<SubjectVo> mgSubjectList(Connection conn,int startRnum, int endRnum) {
+			ArrayList<SubjectVo> result = null;
+			
+			String sql = "SELECT *"
+					+ " FROM(SELECT ROWNUM RNUM, SUB.*"
+					+ " FROM(SELECT SUBJECT_CODE,DEPT_NAME, SUBJECT_NAME, COURSE_CREDIT,CLASS_TYPE, COURSE_CLASS, COURSE_DAY,COURSE_PERIOD,NAME"
+					+ "        FROM SUBJECT JOIN DEPARTMENT"
+					+ "        USING (DEPT_CODE)"
+					+ "        JOIN MEMBER ON SUBJECT.PF_ID = MEMBER.ID) SUB)"
+					+ "WHERE RNUM BETWEEN ? AND ?" ;
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, startRnum);
+				pstmt.setInt(2, endRnum);
+				rs = pstmt.executeQuery();
+				result = new ArrayList<SubjectVo>();
+				
+				if(rs.next()) {
+					do {
+						SubjectVo vo = new SubjectVo();
+						vo.setSubCode(rs.getString("SUBJECT_CODE"));
+						vo.setDeptName(rs.getString("dept_Name"));
+						vo.setSubName(rs.getString("subject_Name"));
+						vo.setCourseCredit(rs.getInt("course_Credit"));
+						vo.setClassType(rs.getString("class_Type"));
+						vo.setCourseClass(rs.getString("course_Class"));
+						vo.setCourseDay(rs.getString("course_Day"));
+						vo.setCoursePeriod(rs.getString("course_Period"));
+						vo.setPfName(rs.getString("name"));
+						
+						System.out.println("쿼리 직후 vo값 : " + vo);
+						result.add(vo);
+					}while(rs.next());
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(stmt);
+			}
+			
+			System.out.println("dao에서 리턴 전 result값 : " + result);
+			
+
+			return result;
+		}
 	//관리자 수강신청 삭제
 	public int deleteSubejct(Connection conn, String [] delist) {
 		int result = 0;
@@ -219,6 +269,59 @@ public class SubjectDao {
 		
 		return result;
 	}
+	
+	//학생 수강신청 교과목 리스트용
+		public ArrayList<SubjectVo> stSubjectList(Connection conn, MemberVo vo,int startRnum, int endRnum) {
+			ArrayList<SubjectVo> result = null;
+			
+			String sql = "SELECT SUB_ROW.* "
+					+ "FROM(SELECT ROWNUM RNUM, SUB.* "
+					+ "        FROM(SELECT SUBJECT_CODE, SUBJECT.DEPT_CODE, DEPT_NAME, SUBJECT_NAME, COURSE_CREDIT,CLASS_TYPE, COURSE_CLASS, COURSE_DAY,COURSE_PERIOD,NAME "
+					+ "                FROM SUBJECT JOIN DEPARTMENT "
+					+ "                ON SUBJECT.DEPT_CODE = DEPARTMENT.DEPT_CODE "
+					+ "                JOIN MEMBER ON SUBJECT.PF_ID = MEMBER.ID "
+					+ "                WHERE SUBJECT.DEPT_CODE = ?) SUB)SUB_ROW "
+					+" WHERE RNUM BETWEEN ? AND ?";
+			
+			
+			try {
+				pstmt= conn.prepareStatement(sql);
+				pstmt.setString(1, vo.getDeptCode());
+				pstmt.setInt(2, startRnum);
+				pstmt.setInt(3, endRnum);
+				rs = pstmt.executeQuery();
+				
+				result = new ArrayList<SubjectVo>();
+				if(rs.next()) {
+					do {
+						SubjectVo svo = new SubjectVo();
+						svo.setSubCode(rs.getString("subject_Code"));
+						svo.setDeptCode(rs.getString("dept_Code"));
+						svo.setDeptName(rs.getString("dept_Name"));
+						svo.setSubName(rs.getString("subject_Name"));
+						svo.setCourseCredit(rs.getInt("course_Credit"));
+						svo.setClassType(rs.getString("class_Type"));
+						svo.setCourseClass(rs.getString("course_Class"));
+						svo.setCourseDay(rs.getString("course_Day"));
+						svo.setCoursePeriod(rs.getString("course_Period"));
+						svo.setPfName(rs.getString("Name"));
+						
+						result.add(svo);
+					}while(rs.next());
+					
+					System.out.println("dao 쿼리문 직후 result : " + result);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(stmt);
+			}
+			
+			return result;
+		}
+	
+	
 	//각각 교수가 가르치는 과목 목록
 	public ArrayList<SubjectVo> teachList(Connection conn, MemberVo vo){
 		ArrayList<SubjectVo> result = null;
@@ -256,5 +359,53 @@ public class SubjectDao {
 		System.out.println("dao 교수의 과목 목록 : " + result);
 		return result;
 	}
+	//수강신청 목록 개수
+	public int countMgSubject(Connection conn) {
+		int result = 0;
+		
+		String sql = "SELECT COUNT(*) FROM SUBJECT";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
+	//학생 수강신청 가능목록 개수
+		public int countStSubject(Connection conn, MemberVo vo) {
+			int result = 0;
+			
+			String sql = "SELECT COUNT(*) FROM SUBJECT WHERE DEPT_CODE = ?";
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, vo.getDeptCode());
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					result = rs.getInt(1);
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			
+			return result;
+		}
+		
 }
