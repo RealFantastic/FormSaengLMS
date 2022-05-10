@@ -127,7 +127,7 @@ public class NoticeDao {
 
 
 	//공지사항 등록
-	public int insertBoard(Connection conn, NoticeVo vo) {
+	public int insertBoard(Connection conn, NoticeVo vo, String id, String name) {
 //		이름                   널?       유형             
 //		-------------------- -------- -------------- 
 //		BOARD_NOTICE_NO      NOT NULL NUMBER         
@@ -138,8 +138,6 @@ public class NoticeDao {
 //		ID                   NOT NULL VARCHAR2(12) 
 		
 		int result=0;
-		String id = "S1111";
-		String name = "홍샛별";
 		System.out.println("BoardDao vo : " + vo);
 //		private int boardNoticeNo; //공지사항 번호
 //		private String boardNoticeTitle; //공지사항 제목

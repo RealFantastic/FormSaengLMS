@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.member.model.vo.MemberVo;
 import kh.semi.notice.model.service.NoticeService;
 import kh.semi.notice.model.vo.NoticeVo;
 
@@ -45,12 +46,16 @@ public class MgNoticeEnrollServlet extends HttpServlet {
 		String title=request.getParameter("title");
 		String content=request.getParameter("content");
 		
+		MemberVo mvo=(MemberVo) request.getSession().getAttribute("ssMemberVo");
+		String id=mvo.getId();
+		String name=mvo.getName();
+		
 		NoticeVo vo=new NoticeVo();
 		vo.setBoardNoticeTitle(title);
 		vo.setBoardNoticeContent(content);
 		System.out.println("controller vo : " + vo); //vo에 담겼는지 확인
 		
-		int result=new NoticeService().insertBoard(vo);
+		int result=new NoticeService().insertBoard(vo, id, name);
 		
 		System.out.println("controller result : "+result);
 		

@@ -62,12 +62,12 @@ public class NoticeService {
 		
 		
 		// 공지사항 등록(Enroll)
-		public int insertBoard(NoticeVo vo) {
+		public int insertBoard(NoticeVo vo, String id, String name) {
 			int result=0;
 			
 			Connection conn=getConnection();
 			
-			result=new NoticeDao().insertBoard(conn, vo);
+			result=new NoticeDao().insertBoard(conn, vo, id, name);
 			
 			close(conn);
 			return result;
