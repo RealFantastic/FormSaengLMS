@@ -76,3 +76,22 @@ section hr{
   svg{
     margin-right: 5px;
   }
+  #info_title{
+  	margin-bottom:40px;
+  }
+/*   #info_title > img{ */
+/*   	height: 600px; */
+/*   } */
+  #info_content{
+  	margin-top:40px;
+  }
+  
+  .sub_title1{
+  	font-size: 1.567rem;
+  }
+  
+  .explain_use{
+  	display:block;
+  	padding-top:10px;
+  }
+  
