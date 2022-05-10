@@ -1,0 +1,36 @@
+/* .list_button{
+	width:150px;
+	text-align:center;
+}  */
+
+.menu-v2{
+	line-height:2;
+	border:1px solid #222;
+	position:relative; 
+} 
+	 
+.menu-v2 .submenu{ 
+	position:fixed; 
+	width:150px; 
+	height:100%;
+	left:200px; 
+	border:1px solid #222; 
+	background-color:#222; 
+	color:white; 
+	top:0px; 
+	display:none;
+} 
+	 
+.menu-v2 .submenu li{
+	margin-right : 25px;
+}	
+
+.menu-v2:hover{ 
+	background-color:#222;
+	color:white;
+} 
+	
+.menu-v2 .submenu>li:hover{ 
+	background-color: rgba(0, 88, 204, 0.836);
+	color:#222;
+}

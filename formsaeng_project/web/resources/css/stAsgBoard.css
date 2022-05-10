@@ -16,8 +16,9 @@
 	height: 200px;
 }
 
+
 /* 목록 탭 */
- .list-tap {
+.list-tap {
 	position : fixed;
 	right: 200px;
 }
