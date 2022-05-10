@@ -45,7 +45,7 @@
 			</div>
 		</header>
 		<div class=title_search>
-			<div class="title font5">공지사항</div>
+			<div class="title font5"><a href=<%=request.getContextPath()%>/mg/notice/list>공지사항</a></div>
 			<form id="searchFrm">
 				<div class="dropdown notice_search">
 					<select name="ff" class="form-select select_box" aria-label="Default select example" id="search_option">
