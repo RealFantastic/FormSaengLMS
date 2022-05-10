@@ -41,10 +41,6 @@
                                 </div>
                             </form>
                         </div>
-                    <div class="loginmenu">
-                  		<input type="button" id="notice" name="notice" class="btn btn-success" value="공지사항">
-                        <input type="button" id="enroll" name="enroll" class="btn btn-success" value="수강신청">
-                    </div>
                     </div>
             <div></div>
 		</div>
@@ -52,6 +48,7 @@
 
    	   <script> // ajax
    $(function() {
+
    $("#submit").click(function(){
    var id = $("#id").val().trim();
    var checkId = /^[M][0-9]{10}$/;

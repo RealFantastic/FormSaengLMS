@@ -67,10 +67,6 @@ $(function(){
                              </div>
                          </form>
                      </div>
-                     <div class="loginmenu">
-                         <input type="button" name="notice" class="btn btn-success" value="공지사항">
-                         <input type="button" name="enroll" class="btn btn-success" value="수강신청">
-                     </div>
                                      <!-- 아이디 찾기 모달창 -->
 				<div class="findid_modal">
 					<div class="modal_content">
@@ -134,6 +130,7 @@ $(function(){
    </div>
    <script> // ajax
    $(function() {
+	   
 	  	 $("#submit").click(function(){
 		   var id = $("#id").val().trim();
 		   var checkId = /^[S][0-9]{10}$/;

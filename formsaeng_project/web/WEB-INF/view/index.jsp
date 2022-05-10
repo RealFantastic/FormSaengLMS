@@ -37,6 +37,9 @@
                         <button id="std_login" class="move_button">학생 로그인</button>
                         <button id="pf_login" class="move_button">교수자 로그인</button>
                         <button id="mgr_login" class="move_button">관리자 로그인</button>
+                    </div><br>
+                    <div>
+                    <button id="notice" class="move_button">공지사항</button>
                     </div>
                 </div>
             </div>
@@ -55,6 +58,10 @@
             $('#mgr_login').click(function(){
                 console.log("관리자 로그인 이동");
                 location.href = "mglogin";
+            });
+            $('#notice').click(function(){
+                console.log("공지사항 이동");
+                location.href = "<%=request.getContextPath()%>/notice/list";
             });
       });
     </script>

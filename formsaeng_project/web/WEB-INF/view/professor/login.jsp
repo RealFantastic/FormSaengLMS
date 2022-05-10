@@ -67,9 +67,6 @@ $(function(){
                             </div>
                         </form>
                     </div>
-                    <div class="loginmenu">
-                        <input type="button" id="notice" name="notice" class="btn btn-success"  value="공지사항">
-                    </div>
                     
                     <!-- 아이디 찾기 모달창 -->
 				<div class="findid_modal">
@@ -162,10 +159,6 @@ $(function(){
 			
 		});
 		
-		$("#notice").click(function() {
-			location.href = "";
-		});
-
 		
    	 	
 	</script>

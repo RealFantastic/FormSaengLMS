@@ -28,9 +28,15 @@ public class StModifyServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("do get: /stModifyPage");
-		
+//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		System.out.println("do get: /stModifyPage");
+//	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("do POST: /stModifyPage");
 		MemberVo ss = (MemberVo)request.getSession().getAttribute("ssMemberVo");
 		String id = ss.getId();
 		String pwd = ss.getPwd();
@@ -44,7 +50,8 @@ public class StModifyServlet extends HttpServlet {
 		try {
 		if(result == null) {
 		response.sendRedirect(request.getContextPath()+"/st/main");
-	}	else {
+	}
+		else {
 		request.setAttribute("MyPageVo", result);
 		request.getRequestDispatcher("/WEB-INF/view/student/stMyPageM.jsp").forward(request, response);
 	}
@@ -52,13 +59,5 @@ public class StModifyServlet extends HttpServlet {
 		e.printStackTrace();
 	}
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		// TODO Auto-generated method stub
-//		doGet(request, response);
-//	}
 
 }
