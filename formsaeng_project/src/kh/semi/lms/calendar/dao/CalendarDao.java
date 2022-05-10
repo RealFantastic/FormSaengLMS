@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import kh.semi.lms.calendar.vo.CalendarVo;
 
@@ -42,4 +43,48 @@ public class CalendarDao {
 		
 		return result;
 	}
+	
+	
+	public ArrayList<CalendarVo> selectcalendar(Connection conn) {
+		ArrayList<CalendarVo> result=null;
+		String sql="select ACADEMIC_NO, ACADEMIC_NAME, START_DATE, END_DATE from ACADEMIC_CALENDAR";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result = new ArrayList<CalendarVo>();
+				do {
+					CalendarVo vo = new CalendarVo();
+					vo.setAcademicNo(rs.getInt("ACADEMIC_NO"));
+					vo.setAcademicName(rs.getString("ACADEMIC_NAME"));
+					vo.setStartDate(rs.getDate("START_DATE"));
+					vo.setEndDate(rs.getDate("END_DATE"));
+					result.add(vo);
+				}while(rs.next());				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		
+		return result;
+	}
+	
+	
+	public int deleteCalendar(Connection conn) {
+		int result=0;
+		
+		String sql="Delete from ACADEMIC_CALENDAR where ACADEMIC_NO=?";
+		
+//		pstmt=conn.prepareStatement(sql);
+//		pstmt.setInt(1, x);
+		
+		return result;
+	}
+	
 }

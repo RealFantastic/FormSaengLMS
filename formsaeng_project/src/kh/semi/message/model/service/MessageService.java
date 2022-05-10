@@ -43,6 +43,7 @@ public class MessageService {
 		Connection conn=getConnection();
 		result=new MessageDao().write(conn, vo);
 		
+		close(conn);
 		return result;
 	}
 	
@@ -53,6 +54,7 @@ public class MessageService {
 		ArrayList<MemberVo> volist=new MessageDao().reciplent(conn, reqName);
 		close(conn);
 		System.out.println("volist DAO: "+volist);
+		
 		return volist;
 	}
 	

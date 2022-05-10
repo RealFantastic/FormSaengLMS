@@ -1,28 +1,25 @@
 package kh.semi.lms.manager.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kh.semi.notice.model.service.NoticeService;
-import kh.semi.notice.model.vo.NoticeVo;
+import kh.semi.lms.calendar.service.CalendarService;
 
 /**
- * Servlet implementation class MgNoticeSearchServlet
+ * Servlet implementation class MgCalendarDeleteServlet
  */
-@WebServlet("/mg/notice/list.ax")
-public class MgNoticeSearchServlet extends HttpServlet {
+@WebServlet("/mg/cal/delete.ax")
+public class MgCalendarDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MgNoticeSearchServlet() {
+    public MgCalendarDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,21 +28,19 @@ public class MgNoticeSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("검색할꺼야"+request.getParameter("search"));
-		
-		String reqSearch=request.getParameter("search");
-		
-		ArrayList<NoticeVo> selectNotice=new NoticeService().selectNotice(reqSearch);
-		
-	
+		// TODO Auto-generated method stub
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		System.out.println("doPost/mg/cal/delete.ax");
+		System.out.println("delId"+request.getParameter("delId"));
+
+		int result=new CalendarService().deletecalendar();
+		
 	}
 
 }

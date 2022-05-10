@@ -229,18 +229,42 @@ public class NoticeDao {
 		public ArrayList<NoticeVo> selecNotice(Connection conn, String ff, String qq){
 			ArrayList<NoticeVo> volist=new ArrayList<NoticeVo>();
 //			
-			String Sql="select*from notice where";
-//			
-//			pstmt=conn.prepareStatement(sql);
-//			pstmt.setString(parameterIndex, x);
-//			rs=pstmt.executeQuery();
-//			
-//			while(rs.next()) {
-//				NoticeVo vo=new NoticeVo();
-//				
-				return volist;
+			qq = "%"+qq.trim()+"%";
+			System.out.println(qq);
+			
+			String sql = "select board_notice_no, board_notice_title, board_notice_content, "
+						+ "board_notice_writer, TO_CHAR(board_notice_date, 'YYYY-MM-DD') board_notice_date"
+						+ " from notice where 1=1 and "+ff+" like ? order by board_notice_no desc";
+			
+			try {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, qq);
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					do {
+						NoticeVo nvo = new NoticeVo();
+						nvo.setBoardNoticeNo(rs.getInt("board_Notice_No"));
+						nvo.setBoardNoticeTitle(rs.getString("board_Notice_Title"));
+						nvo.setBoardNoticeContent(rs.getString("board_Notice_Content"));
+						nvo.setBoardNoticeWriter(rs.getString("board_Notice_Writer"));
+						nvo.setBoardNoticeDate(rs.getString("board_Notice_Date"));
+						
+						volist.add(nvo);
+					}while(rs.next());
+				}
+				
+				System.out.println("dao 검색결과 : " + volist);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally{
+				close(rs);
+				close(stmt);
 			}
-					
+		
+			return volist;
+		}			
 
 
 

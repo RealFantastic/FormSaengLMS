@@ -45,6 +45,7 @@ public class NoticeService {
 			
 			result=new NoticeDao().updateBoard(conn, vo);
 			
+			close(conn);
 			return result;
 		}
 		
@@ -68,6 +69,7 @@ public class NoticeService {
 			
 			result=new NoticeDao().insertBoard(conn, vo);
 			
+			close(conn);
 			return result;
 		}
 		

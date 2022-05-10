@@ -1,14 +1,17 @@
 package kh.semi.lms.manager.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import kh.semi.notice.model.service.NoticeService;
 import kh.semi.notice.model.vo.NoticeVo;
@@ -36,24 +39,37 @@ public class MgNoticeSelectServlet extends HttpServlet {
 		ArrayList<NoticeVo> listNotice = null;
 		String ff=request.getParameter("ff");
 		String qq=request.getParameter("qq");
+		System.out.println("ff : " + ff);
+		System.out.println("qq : " + qq);
 		
-//		listNotice=new NoticeService().selectNotice();
 		if(ff != null && qq !=null) {
 			// 검색 한 결과
 			listNotice =new NoticeService().selectNotice(ff, qq);
-		}else {
-			// 검색 안 한 결과
-			listNotice=new NoticeService().selectNotice();
+			System.out.println("서블릿에 돌아온 listNotice : " + listNotice);
+			
+			PrintWriter out = response.getWriter();
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+			
+			String result = gson.toJson(listNotice);
+			if(result == "") {
+				
+				out.print(result);
+				out.flush();
+				out.close();
+			}else {
+				System.out.println(result);
+				out.print(result);
+				out.flush();
+				out.close();
+			}
 			
 		}
+//		
+//		if(listNotice != null) {
+//			request.setAttribute("listNotice", listNotice);
+//			request.getRequestDispatcher("WEB-INF/view/manager/mgNoticeView.jsp").forward(request, response);
+//		}
 		
-		if(listNotice != null) {
-			request.setAttribute("listNotice", listNotice);
-			request.getRequestDispatcher("WEB-INF/view/manager/mgNoticeView.jsp").forward(request, response);
-		}
-		
-		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

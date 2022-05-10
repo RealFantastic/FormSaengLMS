@@ -1,3 +1,5 @@
+<%@page import="kh.semi.lms.calendar.vo.CalendarVo"%>
+<%@page import="java.util.ArrayList"%>
 <link href="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/core/main.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/daygrid/main.css" rel="stylesheet" type="text/css">
 <script src="<%=request.getContextPath()%>/resources/fullcalendar-4.4.0/packages/core/main.js"></script>
@@ -26,20 +28,67 @@
 
 <!-- FullCalendar -->
 <script>
-	//달력띄움
+// 달력띄움
 	document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			plugins : [ 'interaction', 'dayGrid' ],
 			dateClick: function() {
+// 				debugger
 				$('#calendarModal').modal('show');
-			}
+				
+			},
+
+// 달력모달 상세보기
+			eventClick: function(info) {
+// 				debugger
+				$("#del_calendar_content").val(info.event.title);
+				
+				var startyear=info.event.start.getFullYear();
+				var startmonth=Number(info.event.start.getMonth()+1) < 10 ? "0"+Number(info.event.start.getMonth()+1) : Number(info.event.start.getMonth()+1) ;//삼항연산자 10보다 작으면 0을 붙여주고 아니면 그대로사용 
+				var startday=info.event.start.getDate() <10 ? "0"+info.event.start.getDate() : info.event.start.getDate();
+				
+				$("#del_calendar_start_date").val(startyear+"-"+startmonth+"-"+startday);
+			
+				if(info.event.end==null){
+					$("#del_calendar_start_date").val(startyear+"-"+startmonth+"-"+startday);
+				}else
+				var endyear=info.event.end.getFullYear();
+				var endmonth=Number(info.event.end.getMonth()+1) <10 ? "0"+Number(info.event.end.getMonth()+1) : Number(info.event.end.getMonth()+1);
+				var endday=info.event.end.getDate() <10? "0"+info.event.end.getDate() : info.event.end.getDate();
+				$("#del_calendar_end_date").val(endyear+"-"+endmonth+"-"+endday);
+				
+				$("#del_calendar_id").val(info.event.id);
+				
+				$('#delcalendarModal').modal('show');
+			
+			},
+
+
+// 달력 일정추가 건 보기
+			events : [ 
+				<%ArrayList<CalendarVo> calendarList = (ArrayList<CalendarVo>)request.getAttribute("calVoList");%>
+				<%if (calendarList != null) {%>
+					<%for (CalendarVo vo : calendarList) {%>
+					{
+						id : '<%=vo.getAcademicNo()%>',
+						title : '<%=vo.getAcademicName()%>',
+						start : '<%=vo.getStartDate()%>',
+						end : '<%=vo.getEndDate()%>',
+						color : '#' + Math.round(Math.random() * 0xffffff).toString(16),
+						allDay: true
+					},
+					<%}
+				}%>
+			]
+		
 		});
 		
 		calendar.render();
 		
 	});
 	
+
 </script>
 
 
@@ -82,8 +131,8 @@
 
 </head>
 
-
 <body>
+<%-- [[ ${calVoList }]] --%>
 	<header id="sideBar">
 		<div class="side_container">
 			<a href="./semitest.html" id="logo"><img
@@ -150,7 +199,7 @@
 				<div class="row">
 					<div id="calendar" class="cal"></div>
 
-					<!-- modal 추가 -->
+					<!-- modal 일정추가 -->
 					<div class="modal fade" id="calendarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
@@ -176,32 +225,80 @@
 							</div>
 						</div>
 					</div>
+					
+					
+					<!-- modal 일정삭제 -->
+					<div class="modal fade" id="delcalendarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">일정상세보기.</h5>
+								</div>
+								<form id="mgCalendar" action="<%=request.getContextPath()%>/mg/calendar/enroll" method="post">
+									<div class="modal-body">
+										<div class="form-group">
+											<label for="taskId" class="col-form-label">일정 내용</label> 
+											<input type="text" class="form-control" id="del_calendar_content" name="calendar_content"> 
+											<label for="taskId" class="col-form-label">시작 날짜</label> 
+											<input type="date" class="form-control" id="del_calendar_start_date" name="calendar_start_date"> 
+											<label for="taskId" class="col-form-label">종료 날짜</label> 
+											<input type="date" class="form-control" id="del_calendar_end_date" name="calendar_end_date">
+										</div>
+									</div>
+								<div class="modal-footer">
+									<input type="hidden" id="del_calendar_id" name="del_calendar_id"> 
+									<button type="button" class="btn delbtn-warning" id="delCalendar">삭제</button>
+									<button type="button" class="btn btn-secondary delmodalclose" data-dismiss="modal" id="delsprintSettingModalClose">취소</button>
+								</div>
+									</form>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 		
 	<script type="text/javascript">
-// 	일정추가
-
-	
-	
-// 	일정삭제
-	
-	
-	
-// 	모달 종료 시
+// 	모달 취소버튼 클릭 시
 	$(".modalclose").on("click", function(){
-// 		$("#calendarModal").hide();
-// 		$(".modal-backdrop fade show").hide();
-// 		$(".modal-open").hide();
+		$('#calendarModal').modal('hide');
 	});
+	
+	$(".delmodalclose").on("click", function(){
+		$('#delcalendarModal').modal('hide');
+	});
+	
+	
+// 일정삭제TODO
+	$("#delCalendar").click(function(){
+// 		.event.remove();
+		console.log(this);
+		console.log($(this));
+		console.log($(this).prev().val());
+		var delIdVal = $(this).prev().val();
+		
+		console.log(data);
+		$.ajax({
+			type: "post",
+				url: "<%=request.getContextPath()%>/mg/cal/delete.ax",
+			//contentType: "application/json; charset=utf-8",
+			//dataType: "json",
+			data: {delId: delIdVal },
+			success: function (result) {
+				if(result ==0){
+					alert("일정삭제를 실패했습니다.");
+				}else{
+					alert("일정삭제가 완료되었습니다.");
+					location.reload();
+				}
+		},
+		});
+	
+	
+	})
 	</script>
 		
-		
 	</section>
-	
-
-
 
 </body>
 </html>

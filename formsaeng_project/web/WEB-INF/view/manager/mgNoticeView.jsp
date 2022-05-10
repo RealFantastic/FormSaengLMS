@@ -46,19 +46,19 @@
 		</header>
 		<div class=title_search>
 			<div class="title font5">공지사항</div>
-			<form id="searchFrm" action="<%=request.getContextPath()%>/mg/notice/select" method="get" >
+			<form id="searchFrm">
 				<div class="dropdown notice_search">
 					<select name="ff" class="form-select select_box" aria-label="Default select example" id="search_option">
-						<option selected value="">선택</option>
-						<option value="search_title"  ${field eq 'search_title' ? 'selected' : ''}>제목</option>
-						<option value="search_content" ${field eq 'search_content' ? 'selected':''}>내용</option>
+<!-- 						<option selected value="">구분</option> -->
+						<option value="board_notice_title" selected="selected"  ${field eq 'search_title' ? 'selected' : ''}>제목</option>
+						<option value="board_notice_content" ${field eq 'search_content' ? 'selected':''}>내용</option>
 					</select>
 					
 					<div>
 						<input type="search"  name="qq" class="form-control font3 notice_input" list="datalistOptions" id="exampleDataList" placeholder="공지사항 검색어 입력">
 					</div>
 					<div class=drop_search>
-						<button type="submit" class="btn btn-secondary" id="searching">검색</button>
+						<button type="button" class="btn btn-secondary" id="searching">검색</button>
 					</div>
 				</div>
 			</form>
@@ -78,7 +78,7 @@
 						<th scope="col">작성일자</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id='tbody'>
 					<%--<tr onclick="detailview(' no ')" data-속성(넣고싶은 이름) ex(data-boardno = '+<%=noticeList.get(0).getBoardNoticeTitle() %>')> --%>
 					<c:if test="${fn:length(boardVolist) == 0 }">
 						<tr Class="no_list">
@@ -258,6 +258,52 @@
 			});
 			
 		});
+		
+// 		공지사항 검색
+		$("#searching").on("click",function(){
+			var frmdata = $("#searchFrm").serialize();
+			console.log(frmdata);
+			
+			if(frmdata == null || frmdata == ""){
+				alert("뭐라고 검색할껀데 임마");
+			}else{
+				$.ajax({
+					url:"<%=request.getContextPath()%>/mg/notice/select",
+					type: "get",
+					dataType:"json",
+					data: frmdata,
+					success: function(result){
+						console.log("controller 갔다왔어");
+						if(result == null){
+							//검색결과가 없을때
+							$("#tbody").empty();
+							var html = "";
+							html += "<tr Class='no_list'>";
+							html += "<td colspan='6'> 조회된 내용이 없습니다. </td>"
+							html += "</tr>";
+							$("#tbody").append(html);
+						}else{
+// 							검색 결과기 있을때
+							$("#tbody").empty();
+							var html = "";
+							for(var i = 0; i < result.length; i++){
+								html+=	"<tr Class='nt_detail_list' data-nno='" + result[i].boardNoticeNo + "'>";
+								html+=	"<td><input type='checkbox' name='chk' value='" + result[i].boardNoticeNo + "'></td>";
+								html+=	"<th scope='row' class='nno'>"+ result[i].boardNoticeNo +"</th>";
+								html+=	"<td>"+ result[i].boardNoticeTitle +"</td>";
+								html+=	"<td>" + result[i].boardNoticeContent  + "</td>";
+								html+=	"<td>" + result[i].boardNoticeWriter + "</td>";
+								html+=	"<td>" + result[i].boardNoticeDate + "</td>";
+								html += "</tr>";
+							}
+							$("#tbody").append(html);
+						}
+					}
+				});
+			}
+		})
+		
+		
 		
 	</script>
 </body>
