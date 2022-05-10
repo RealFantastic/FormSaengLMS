@@ -30,7 +30,7 @@ public class PfAsgListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doget /pf/asgboard");
+		System.out.println("doget / 교수 과제게시판 입장");
 		// DB에서 StLmsAssignmentboard list의 데이터를 읽어와야함.
 		
 			System.out.println("pageNum 값은?"+request.getParameter("pageNum"));			
