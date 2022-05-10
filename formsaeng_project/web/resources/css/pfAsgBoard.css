@@ -3,18 +3,18 @@
 	margin-left: 20px;
 }
 
-/* ¹öÆ° À§Ä¡ */
+/* ë²„íŠ¼ ìœ„ì¹˜ */
 .board_button {
 	text-align: right;
 	margin-bottom: 10px;
 }
 
-/* ÄÁÅ×ÀÌ³Ê ÇÃ·º½º */
+/* ì»¨í…Œì´ë„ˆ í”Œë ‰ìŠ¤ */
 .content_container{
 	display : flex;
 }
 
-/* ¸ñ·Ï ÅÇ */
+/* ëª©ë¡ íƒ­ */
 /* .list-tap {
 	
 } */

@@ -22,8 +22,8 @@
 <body>
   <header id="sideBar">
     <div class="side_container">
-      <a href="<%=request.getContextPath() %>/pf/main" id="logo"><img src="<%= request.getContextPath() %>/resources/images/fromsaenglogo.png" alt="폼생대로고"></a>
-      <a href="<%=request.getContextPath() %>/pf/main" id="uni_name"><img src="<%= request.getContextPath() %>/resources/images/name_logo.png" alt="폼생대학교"></a>
+      <a href="./semitest.html" id="logo"><img src="<%= request.getContextPath() %>/resources/images/fromsaenglogo.png" alt="폼생대로고"></a>
+      <a href="./semitest.html" id="uni_name"><img src="<%= request.getContextPath() %>/resources/images/name_logo.png" alt="폼생대학교"></a>
       <hr>
       <ul class="list_button">
         <li>

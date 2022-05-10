@@ -1,12 +1,8 @@
+<%@page import="kh.semi.lms.lecture.model.vo.LectureVo"%>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/reset.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/template.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/sideDropdown.css">
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,17 +19,6 @@
         integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 	<script src="https://kit.fontawesome.com/ef09f998fc.js" crossorigin="anonymous"></script>  
   </head>
-  <script>
-  $(document).ready(function(){
-	//menu v2 
-	$(".menu-v2").mouseover(function(){ 
-			$(this).children(".submenu").show(200);
-		});
-/* 		$(".menu-v2").mouseleave(function(){ 
-			$(this).children(".submenu").hide(200); 
-		});  */
-	});
-  </script>
 <body>
   <header id="sideBar">
     <div class="side_container">
@@ -57,21 +42,13 @@
             Message
           </a>
         </li>
-        <li  class="menu-v2">
+        <li>
           <a href="#">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
               <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
             </svg>
             Subject
           </a>
-          
-			<ul class="submenu">
-				<li><a href="#">sub 1-1</a></li>
-				<li><a href="#">sub 1-2</a></li>
-				<li><a href="#">sub 1-3</a></li>
-				<li><a href="#">sub 1-4</a></li>
-			</ul>
-		 
         </li>
         <li>
           <a href="#">
@@ -94,92 +71,27 @@
       </ul>
     </div>
   </header>
-	<section id="template_content">
-		<div class="template_container">
-			<div class="template-title">
-				<h1>강의실</h1>
-				<hr>
-			</div>
-			<div class="content_container">
-				
-				<!-- 템플릿 -->
-
-				<div class="accordion" id="accordionExample">
-					<button class="lc_add_btn">강의 추가</button>
-
-					<c:if test="${not empty lectureVolist }">
-						<c:forEach items="${lectureVolist}" var="vo">
-							<c:set var="i" value="${i+1 }" />
-							<div class="accordion-item">
-								<h2 class="accordion-header" id="heading${vo.cName }">
-									<c:choose>
-										<c:when test="${ i == 0}">
-											<button class="accordion-button collapsed" type="button"
-												data-bs-toggle="collapse"
-												data-bs-target="#collapse${vo.cName }" aria-expanded="true"
-												aria-controls="collapse${vo.cName }"></button>
-										</c:when>
-										<c:otherwise>
-											<button class="accordion-button collapsed" type="button"
-												data-bs-toggle="collapse"
-												data-bs-target="#collapse${vo.cName }" aria-expanded="false"
-												aria-controls="collapse${vo.cName }">
-												${i }주차
-									</button>
-										</c:otherwise>
-									</c:choose>
-									
-								</h2>
-								<div id="collapse${vo.cName }"
-									class="accordion-collapse collapse"
-									aria-labelledby="heading${vo.cName }"
-									data-bs-parent="#accordionExample">
-									<div class="accordion-body">
-										<a href="<%=request.getContextPath()%>/pf/week/video?lecNo=${vo.lecNo}" style="text-decoration: none;"><strong>${vo.vTitle }</strong></a>
-										<input type="hidden" id="video" value="" />
-									</div>
-								</div>
-							</div>
-						</c:forEach>
-					</c:if>
-
-
-
-
-					<%--  <div class="accordion-item">
-    <h2 class="accordion-header" id="headingOne">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-        1주차
-      </button>
-    </h2>
-    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        <strong>This is the first item's accordion body.</strong> 
+  <section id="template_content">
+    <div class="template_container">
+      <div class="template-title">
+        <h1>공지사항</h1>
+        <hr>
       </div>
-    </div>
-  </div>
-  
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="headingTwo">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        2주차
-      </button>
-    </h2>
-    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      <div class="content_container">
+        <!-- 템플릿 -->
+        <% LectureVo vo = (LectureVo)request.getAttribute("lecturePath"); %>
+        
+        <video id="videoPlay" width="700" height="600" controls autoplay>      
+			    <source type="video/ogg" src="<%=request.getContextPath()%><%=vo.getfPath() %><%=vo.getfName() %>"/>      
+			    <source type="video/mp4" src="<%=request.getContextPath()%>${vo.fPath }${vo.fName}"/>
+			    <source type="video/wav" src="<%=request.getContextPath()%>${vo.fPath }${vo.fName}"/>
+			</video>
+        
+        
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div> --%>
-
-
-
-				</div>
-	</section>
+  </section>
 </body>
-<script>
-$(".lc_add_btn").click(function(){
-	location.href = "<%=request.getContextPath()%>/pf/week/insert";
-})
-</script>
 </html>

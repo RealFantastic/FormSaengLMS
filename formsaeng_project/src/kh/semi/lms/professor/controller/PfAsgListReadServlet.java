@@ -57,9 +57,8 @@ public class PfAsgListReadServlet extends HttpServlet {
 		avo.setId(id);
 		
 		AsgListVo readBoard = new AsgListService().readBoard(bANo);
-		ArrayList<AsgCommentVo> commentList = new AsgListService().readBoardAndComments(avo);
+		ArrayList<AsgCommentVo> commentList = new AsgListService().readBoardAndComment(avo);
 		
-		System.out.println("댓글 있냐? : " + commentList);
 		request.setAttribute("commentList", commentList);
 		
 //		ArrayList<AsgCommentVo> readBoardAndComments = new AsgListService().readBoardAndComments(avo);

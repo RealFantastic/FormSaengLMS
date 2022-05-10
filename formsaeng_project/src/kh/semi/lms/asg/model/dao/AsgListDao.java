@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import kh.semi.lms.asg.model.vo.AsgCommentVo;
+import kh.semi.lms.asg.model.vo.AsgFileVo;
 import kh.semi.lms.asg.model.vo.AsgListVo;
 
 public class AsgListDao {
@@ -303,7 +304,7 @@ public class AsgListDao {
 	}
 	
 	//댓글 달기
-	public int insertAsgComment(Connection conn,AsgCommentVo avo) {
+	public int insertAsgComments(Connection conn,AsgCommentVo avo) {
 		int result = 0;
 		
 		String sql = "insert into ASSIGNMENT_COMMENT values (SEQ_COMMENT_NO.nextval,?,DEFAULT,?,?,?)";
@@ -362,4 +363,125 @@ public class AsgListDao {
 		return reVolist;
 	}	
 	
+	//댓글 삭제하기
+		public int deleteComment(Connection conn, int cNo) {
+			int result = 0;
+			String sql = "DELETE ASSIGNMENT_COMMENT WHERE COMMENT_NO=?";
+			
+				try {
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setInt(1, cNo);
+					
+					result = pstmt.executeUpdate();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					close(pstmt);
+				}
+			
+			return result;
+		}
+		
+		public int selectSeqCommentNoNextVal(Connection conn) {
+			int result = 0;
+			String sql = "select SEQ_COMMENT_NO.nextval from dual";
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					result = rs.getInt(1);
+				}				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			return result;
+		}
+	//댓글 달기(파일업로드)
+		public int insertAsgComment(Connection conn, AsgCommentVo avo, int nextVal) {
+			int result = 0;
+			
+			String sql = "INSERT INTO ASSIGNMENT_COMMENT VALUES ("+nextVal+",?,default,?,?,?)";
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, avo.getcWriter());
+				pstmt.setString(2, avo.getcContent());
+				pstmt.setString(3, avo.getId());
+				pstmt.setInt(4, avo.getbANo());
+				
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			return result;
+		}
+	
+	//댓글 파일 추가
+		public int insertAsgFile(Connection conn, AsgFileVo fvo, int nextVal) {
+			int result = 0;
+			
+			String sql = "INSERT INTO ASSIGNMENT_FILE VALUES (SEQ_ASG_FILE_NO.nextval,?,?,?,?)";
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, fvo.getfName());
+				pstmt.setString(2, fvo.getfPath());
+				pstmt.setInt(3, fvo.getbANo());
+				pstmt.setInt(4, nextVal);
+
+				
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
+		}
+		
+		
+		//댓글 리스트 + 파일업로드
+		public ArrayList<AsgCommentVo> readBoardAndComment(Connection conn, AsgCommentVo avo) {
+			ArrayList<AsgCommentVo> reVolist = null;
+
+			String sql = "select * from (select  *  from ASSIGNMENT_COMMENT where board_assignment_no = ?) c  left outer join ASSIGNMENT_FILE f using (comment_no)";
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, avo.getbANo());
+				rs = pstmt.executeQuery();
+
+				reVolist = new ArrayList<AsgCommentVo>();
+				while (rs.next()){
+					AsgCommentVo vo = new AsgCommentVo();
+							
+						vo.setcNo(rs.getInt("COMMENT_NO"));
+						vo.setcWriter(rs.getString("COMMENT_WRITER"));
+						vo.setcDate(rs.getString("COMMENT_DATE"));
+						vo.setcContent(rs.getString("COMMENT_CONTENT"));
+						vo.setId(rs.getString("ID"));
+						vo.setbANo(rs.getInt("BOARD_ASSIGNMENT_NO"));
+						vo.setfName(rs.getString("BOARD_FILE_NAME"));
+						vo.setfPath(rs.getString("BOARD_FILE_PATH"));
+						
+						reVolist.add(vo);
+						System.out.println("reVolist(DAO) : " + reVolist);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}		
+			return reVolist;
+		}	
+		
 }

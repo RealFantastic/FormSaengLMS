@@ -148,11 +148,12 @@
 			success : function(data){
 				console.log(data);
 				console.log("컨트롤러 다녀옴.");
-				if(result == 0){
+				if(data == 0){
 					alert("실패했습니다.");
 				} else {
 					alert(data+"성공했습니다.");
 					location.reload();
+					location.href="<%=request.getContextPath()%>/pf/week";
 				}
 			},
 			error : function(request, status, error){

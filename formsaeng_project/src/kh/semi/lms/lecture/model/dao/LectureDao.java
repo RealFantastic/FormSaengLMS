@@ -89,4 +89,34 @@ public class LectureDao {
 		}
 		return volist;
 	}
+	
+	public LectureVo lecturePath(Connection conn, int lecNo) {
+		LectureVo vo = null;
+		
+		String sql = "select * from WEEK_LECTURE where LECTURE_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, lecNo);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				vo = new LectureVo();
+				vo.setLecNo(rs.getInt("LECTURE_NO"));
+				vo.setWeekNo(rs.getInt("WEEK_NO"));
+				vo.setvTitle(rs.getString("VIDEO_TITLE"));
+				vo.setvLength(rs.getInt("VIDEO_LENGTH"));
+				vo.setUploadDate(rs.getString("UPLOAD_DATE"));
+				vo.setSubCode(rs.getString("SUBJECT_CODE"));
+				vo.setfName(rs.getString("FILE_NAME"));
+				vo.setfPath(rs.getString("FILE_PATH"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return vo;
+	}
 }

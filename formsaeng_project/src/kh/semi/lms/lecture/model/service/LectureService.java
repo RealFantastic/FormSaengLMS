@@ -23,4 +23,11 @@ public class LectureService {
 		close(conn);
 		return volist;
 	}
+	
+	public LectureVo lecturePath(int lecNo) {
+		Connection conn = getConnection();
+		LectureVo vo = new LectureDao().lecturePath(conn, lecNo);
+		close(conn);
+		return vo;
+	}
 }
