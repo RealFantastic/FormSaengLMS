@@ -15,7 +15,7 @@ import kh.semi.member.model.vo.MemberVo;
 /**
  * Servlet implementation class CheckProfessorServlet
  */
-@WebServlet("/checkPf.ajx")
+@WebServlet("/checkSt.ajx")
 public class CheckStudentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
