@@ -14,7 +14,7 @@ import kh.semi.lms.reference.vo.ReferenceVo;
 /**
  * Servlet implementation class pfReferenceInsert
  */
-@WebServlet("/refinsert")
+@WebServlet("/pf/refinsert")
 public class PfReferenceInsert extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,7 +32,7 @@ public class PfReferenceInsert extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		request.getRequestDispatcher("WEB-INF/view/professor/pf_referenceinsertview.jsp").forward(request,response);
+		request.getRequestDispatcher("/WEB-INF/view/professor/pf_referenceinsertview.jsp").forward(request,response);
 	}
 
 	/**
@@ -53,10 +53,10 @@ public class PfReferenceInsert extends HttpServlet {
 		int result=new ReferenceService().insertReferenceBoard(vo);
 		
 		if(result==0) {
-			System.out.println("±ÛÀÌ µî·Ï µÇ¾ú½À´Ï´Ù");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½");
 		}else {
-			System.out.println("±Û µî·ÏÀ» ½ÇÆÐÇÏ¿´½À´Ï´Ù ´Ù½Ã ½ÃµµÇØÁÖ¼¼¿ä");
-			response.sendRedirect("reflist");
+			System.out.println("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ù½ï¿½ ï¿½Ãµï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½");
+			response.sendRedirect(request.getContextPath()+"/pf/reflist");
 		}
 	}
 

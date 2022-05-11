@@ -77,7 +77,7 @@
       </div>
       <div class="content_container">
         <form id="refinsertform"
-			action="<%=request.getContextPath()%>/refinsert" method="post">
+			action="<%=request.getContextPath()%>/pf/refinsert" method="post">
 
 			<div class="mb-3 room">
 				<div class="form-group">

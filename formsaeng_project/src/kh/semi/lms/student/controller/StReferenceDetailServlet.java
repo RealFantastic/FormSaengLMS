@@ -1,7 +1,6 @@
-package kh.semi.lms.professor.controller;
+package kh.semi.lms.student.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,16 +11,16 @@ import kh.semi.lms.reference.service.ReferenceService;
 import kh.semi.lms.reference.vo.ReferenceVo;
 
 /**
- * Servlet implementation class PfReferenceview
+ * Servlet implementation class StReferenceDetailServlet
  */
-@WebServlet("/pf/detailview")
-public class PfReferenceview extends HttpServlet {
+@WebServlet("/st/detail")
+public class StReferenceDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PfReferenceview() {
+    public StReferenceDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,6 +29,7 @@ public class PfReferenceview extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		String lbAnoStr = request.getParameter("lbAno");
 		System.out.println(lbAnoStr);
 
@@ -40,17 +40,16 @@ public class PfReferenceview extends HttpServlet {
 		
 		if(refview != null) {
 			request.setAttribute("refview", refview);
-			request.getRequestDispatcher("/WEB-INF/view/professor/pf_referenceview.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/view/student/stReferenceDetailView.jsp").forward(request, response);
 		}
 	}
-}
 
-//	/**
-//	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-//	 */
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		// TODO Auto-generated method stub
-//		doGet(request, response);
-//	}
-//
-//}
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	//protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//doGet(request, response);
+	}
+
+

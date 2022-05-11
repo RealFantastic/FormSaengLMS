@@ -21,7 +21,7 @@ import kh.semi.lms.reference.service.ReferenceService;
 /**
  * Servlet implementation class PfReferenceDelete
  */
-@WebServlet("/refdelete.ajx")
+@WebServlet("/pf/refdelete.ajx")
 public class PfReferenceDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

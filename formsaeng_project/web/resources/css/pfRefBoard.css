@@ -1,0 +1,28 @@
+.board_div {
+	width : 1200px;
+	margin-left: 20px;
+}
+
+/* 버튼 위치 */
+.insert_delet {
+	text-align: right;
+	margin-bottom: 10px;
+}
+
+/* 컨테이너 플렉스 */
+.content_container{
+	display : flex;
+	margin-right: 150px;
+	height: 200px;
+}
+
+/* 목록 탭 */
+ .list-tap {
+	position : fixed;
+	right: 200px;
+}
+
+.list-tap ul li a{
+	text-decoration: none;
+	cursor: pointer;
+}

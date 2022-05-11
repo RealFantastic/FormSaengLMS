@@ -8,7 +8,8 @@ import static kh.semi.lms.common.jdbc.JdbcDbcp.getConnection;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-
+import kh.semi.lms.asg.model.dao.AsgListDao;
+import kh.semi.lms.asg.model.vo.AsgListVo;
 import kh.semi.lms.reference.dao.ReferenceDao;
 import kh.semi.lms.reference.vo.ReferenceVo;
 
@@ -41,6 +42,7 @@ public class ReferenceService {
 	public ReferenceVo detailReferenceBoardView(int lbAno) {
 		Connection conn = getConnection();
 		ReferenceVo vo = new ReferenceDao().detailBoard(conn, lbAno);
+		close(conn);
 		return vo;
 	}
 	public int multiDeleteBoard(String[] refdelno) {
@@ -49,5 +51,17 @@ public class ReferenceService {
 	close(conn);
 	return result;
 }
+	public int countListBoard() {
+		Connection conn = getConnection();
+		int result = new ReferenceDao().countListBoard(conn);
+		close(conn);
+		return result;
+	}
+	public ArrayList<ReferenceVo> ReferenceBoardlist(int startRnum,int endRnum) {
+		Connection conn = getConnection();
+		ArrayList<ReferenceVo> volist = new ReferenceDao().ReferenceBoardlist(conn, startRnum, endRnum);
+		close(conn);
+		return volist;
+	}
 
 }

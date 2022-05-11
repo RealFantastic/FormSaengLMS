@@ -18,6 +18,9 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
         integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 	<script src="https://kit.fontawesome.com/ef09f998fc.js" crossorigin="anonymous"></script>  
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"></script> 
   </head>
 <body>
   <header id="sideBar">
@@ -108,11 +111,16 @@
 			</div>
 	</div>
 	<button type=button id="ref_list" class="btn_list">목록</button>
-	<!-- <button type=button id="asg_delete" class="btn_delete">삭제</button> -->
 	</form>
 
 	</div>
       </div>
   </section>
+  <script>
+  $("#ref_list").click(function() {
+			location.href = "<%=request.getContextPath()%>/pf/reflist";
+  });
+  
+  </script>
 </body>
 </html>

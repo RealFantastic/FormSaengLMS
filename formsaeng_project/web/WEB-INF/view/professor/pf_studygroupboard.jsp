@@ -1,8 +1,6 @@
-<%@page import="com.sun.tools.javac.util.Context"%>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/reset.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/template.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/pfRefBoard.css">
-<%@page import="kh.semi.lms.reference.*"%>
+<%@page import="kh.semi.lms.group.*"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -26,7 +24,72 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
 	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 	crossorigin="anonymous"></script>
-	<style type="text/css">
+	<style>
+		.stgtop{
+		background: #3498db;
+  		color: #fff;
+  		text-align:center;
+		}
+		.ta{
+		 width: 80%;
+  		 margin: 20px auto 10px;
+  		 border-collapse: collapse;
+		}
+		.tdc{
+		 border: 1px solid #dbdbdb;
+  		 padding: 5px 20px;
+  		 font-size:12px;
+  		 text-align:center;
+		}
+		.th1{
+		border: 1px solid #dbdbdb;
+  		 padding: 5px 20px;
+  		 font-size:12px;
+  		 text-align:center;
+		}
+		.th2{
+		border: 1px solid #dbdbdb;
+  		 padding: 5px 20px;
+  		 font-size:12px;
+  		 text-align:center;
+  		 
+		}
+		.th3{
+		border: 1px solid #dbdbdb;
+  		 padding: 5px 20px;
+  		 font-size:12px;
+  		 text-align:center;
+		}
+		.th4{
+		border: 1px solid #dbdbdb;
+  		 padding: 5px 20px;
+  		 font-size:12px;
+		}
+		.sgp_id{
+		border: 1px solid #dbdbdb;
+  		 padding: 5px 20px;
+  		 font-size:12px;
+  		 text-align:center;
+		}
+		.sgp_code{
+		border: 1px solid #dbdbdb;
+  		 padding: 5px 20px;
+  		 font-size:12px;
+  		 text-align:center;
+		}
+		.sgp_name{
+		border: 1px solid #dbdbdb;
+  		 padding: 5px 20px;
+  		 font-size:12px;
+  		 text-align:center;
+		}
+		.sgp_sname{
+		border: 1px solid #dbdbdb;
+  		 padding: 5px 20px;
+  		 font-size:12px;
+  		 text-align:center;
+		}
+		
 	</style>
   </head>
 <body>
@@ -84,154 +147,34 @@
   <section id="template_content">
     <div class="template_container">
       <div class="template-title">
-        <h1>강의자료실</h1>
+        <h1>사용자 및 그룹</h1>
         <hr>
       </div>
       <div class="content_container">
-      <div class="board_div">
-      <form id = "multidelete" >
-        <table class="table table-striped">
+      <table class = "ta">
         	<thead>
-				<tr class = "tcl">
-					<th class="bth">
-						<input type="checkbox" name="allCheck" onclick="allChk(event);"/>
-					</th>
-						<th class = "bht2" scope="col">NO</th>
-						<th class = "bht3" scope="col">제목</th>
-						<th class = "bht4"scope="col">작성자</th>
-						<th class = "bht5"scope="col">작성일자</th>
-						<th class = "bht6"scope="col">코드</th>
+				<tr Class = "stgtop">
+					<th class = "th1" scope="col">학번</th>
+					<th class = "th2"scope="col">코드</th>
+					<th class = "th3"scope="col">이름</th>
+					<th class = "th4"scope="col">과목이름</th>
 				</tr>
 			</thead>
-				<tbody>
-					<c:forEach var="reference" items="${boardVolist}">
-						<tr style="cursor: pointer" data-refno="${refrence.lbAbo}">
-							<td><input class = "ick"id="rowCheck" name="chk" type="checkbox" value="${reference.lbAno}"></td>
-							<th scope="row" id ="refno">${reference.lbAno}</th>
-							<td id="reflist" class="ref_list">${reference.lbATitle }</td>
-							<td class="ref_wr">${reference.lbAWriter}</td>
-							<td class="ref_da">${reference.lbADate }</td>
-							<td class="ref_co">${reference.lbACode }</td>
-						</tr>
+				<tbody class = "tbc">
+					<c:forEach var="StudyGroup" items="${StudyGrouplist}">
+				 		<tr class = "rowtr">
+						<td Class="sgp_id">${StudyGroup.eId}</td>
+							<th  class = "sgp_code "scope="row" id ="">${StudyGroup.sCode}</th>
+							<td id="sgplist" class="sgp_name">${StudyGroup.mName}</td>
+							<td class="sgp_sname">${StudyGroup.sName}</td>
+							</tr>
 					</c:forEach>
 				</tbody>
         </table>
-        <div class="insert_delet">
-			<button type="button" id="ref_in_btn" class="btn btn-secondary">등록</button>
-			<input type="button" id="ref_del_btn" class="btn btn-secondary" value="삭제">
-		</div>
-        </form>
-        <!-- 페이징 박스 -->
-						<div id="pagingBox">
-							<ul class="pagination justify-content-center">
-								<!-- startPage에서 -1일 때 -->
-								<c:if test="${ startPage > 1 }">
-									<li class="page-item"><a class="page-link"
-										href="<%=request.getContextPath()%>/reflist?pageNum=${startPage-1}">Previous</a></li>
-								</c:if>
-								<c:if test="${ startPage <= 1 }">
-									<li class="page-item disabled"><a class="page-link"
-										href="<%=request.getContextPath()%>/reflist?pageNum=${startPage-1}">Previous</a></li>
-								</c:if>
-								<c:forEach step="1" begin="${startPage }" end="${ endPage}"
-									var="idx">
-									<c:if test="${idx eq currentPage }">
-										<li class="page-item active"><a class="page-link"
-											href="<%=request.getContextPath()%>/reflist?pageNum=${idx }">${idx }
-										</a></li>
-									</c:if>
-									<c:if test="${idx ne currentPage }">
-										<li class="page-item"><a class="page-link"
-											href="<%=request.getContextPath()%>/reflist?pageNum=${idx }">${idx }
-										</a></li>
-									</c:if>
-								</c:forEach>
-								<!-- endPage에서 +1일 때 -->
-								<c:if test="${endPage < pageCnt }">
-									<li class="page-item"><a class="page-link"
-										href="<%=request.getContextPath()%>/reflist?pageNum=${endPage+1}">next</a></li>
-								</c:if>
-								<c:if test="${endPage >= pageCnt }">
-									<li class="page-item disabled"><a class="page-link"
-										href="<%=request.getContextPath()%>/reflist?pageNum=${endPage+1}">next</a></li>
-								</c:if>
-							</ul>
-						</div>
-						<div class="list-tap">
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item"><a href="">강의 목록</a></li>
-							<li class="list-group-item"><a href="">강의 자료실</a></li>
-							<li class="list-group-item"><a href="">과제 게시판</a></li>
-							<li class="list-group-item"><a href="">사용자 및 그룹</a></li>
-					    </ul>
-					</div>
-						</div>
         
         
       </div>
   </section>
-  <script>
-  		//게시판 insert
-		$("#ref_in_btn").click(function() {
-			location.href = "<%=request.getContextPath()%>/pf/refinsert";
-		})
-		//게시판 view
-		$(".ref_list").click(function() {		
-				var trArr = new Array();
-				var ta = document.getElementById("refno");
-				var td = ta.innerText;
-				console.log(ta,td);
-				//<th scope="row" class="refno">${reference.lbAno}</th>
-				location.href = "<%=request.getContextPath()%>/pf/detailview?lbAno=" + td;
-		});
 
-		function allChk(e){
-			if(e.target.checked){
-				$("input:checkbox[name=chk]").each(function(i,iVal) {
-					if(iVal.checked){
-						return;
-					}else{
-						iVal.click()
-					}
-				});
-				
-			}else{
-				$("input:checkbox[name=chk]").each(function(i,iVal) {
-					if(iVal.checked){
-						iVal.click()
-					}else{
-						return;
-					}
-				});
-			}
-		}
-//		게시판 삭제 ajax
-		$(function() {
-			$("#ref_del_btn").click(function() {
-				var queryStr = $("#multidelete").serialize();
-				if(queryStr == ""){
-					alert("삭제할 게시물을 선택하세요.");
-				} else {
-					$.ajax({
-						url : "<%=request.getContextPath()%>/refdelete.ajx",
-						type : "post",
-						data : queryStr,
-						dataType : "text",
-						success : function(result){
-							if(result == 0){
-								alert("삭제 실패했습니다.");
-							} else {
-								alert(result+"건을 삭제에 성공했습니다.");
-								location.reload();
-							}
-						}
-						
-						
-					});
-				}
-			});
-		});
-		
-	</script>
 </body>
 </html>

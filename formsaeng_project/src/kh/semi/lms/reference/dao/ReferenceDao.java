@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import kh.semi.lms.asg.model.vo.AsgListVo;
 import kh.semi.lms.reference.vo.ReferenceVo;
 
 
@@ -62,6 +63,7 @@ public class ReferenceDao {
 //				"select REF_NO,"
 //				+"REF_TITLE,"
 //				+"REF_WRITER,"
+//				+"REF_CONTENT,"
 //				+"TO_CHAR(REF_WRITE_DATE,'YYYY_MM_DD') REF_WRITE_DATE,"
 //				+"SUBJECT_CODE"
 //				+"FROM REFERENCE";
@@ -196,5 +198,60 @@ public class ReferenceDao {
 //		}
 //		return volist;
 //	}
+	public ArrayList<ReferenceVo> ReferenceBoardlist(Connection conn,int startRnum,int endRnum) {
+		ArrayList<ReferenceVo> volist = null;
+		
+		String sql = "select * from"
+                + " (SELECT rownum r, t1.* FROM "
+                + " (SELECT REF_NO,REF_TITLE,REF_WRITER,TO_CHAR(REF_WRITE_DATE, 'YYYY-MM-DD') REF_WRITE_DATE,REF_CONTENT,SUBJECT_CODE "
+                + " FROM REFERENCE a ORDER BY REF_NO DESC,REF_WRITE_DATE DESC)t1)"
+                + " where r between ? and ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRnum);
+			pstmt.setInt(2, endRnum);
+			rs = pstmt.executeQuery();
+			
+				volist = new ArrayList<ReferenceVo>();
+				while(rs.next()) {
+				ReferenceVo vo = new ReferenceVo();
+				vo.setLbAno(rs.getInt("REF_NO"));
+				vo.setLbATitle(rs.getString("REF_TITLE"));
+				vo.setLbAContent(rs.getString("REF_CONTENT"));
+				vo.setLbAWriter(rs.getString("REF_WRITER"));	
+				vo.setLbADate(rs.getString("REF_WRITE_DATE"));
+				vo.setLbACode(rs.getString("SUBJECT_CODE"));
+				volist.add(vo);		
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return volist;
+	}
+	public int countListBoard(Connection conn) {
+		int result = 0;
+		String sql = "select count(*) from REFERENCE";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+			result = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 	
 }
