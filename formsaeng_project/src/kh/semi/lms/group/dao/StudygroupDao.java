@@ -21,7 +21,7 @@ public class StudygroupDao {
 	private Statement stmt = null;
 	private ResultSet rs = null;
 	
-	public ArrayList<StudyGroupVo> StudyGrouplist(Connection conn, String subcode){
+	public ArrayList<StudyGroupVo> studyGrouplist(Connection conn, String subcode){
 		ArrayList<StudyGroupVo> volist = null;
 		System.out.println(subcode);
 		
