@@ -35,8 +35,12 @@
 
 	<div class="body_div">
 		<div class="logoimg_enroll">
-			<img src="<%=request.getContextPath()%>/resources/images/fromsaenglogo.png" class="fromsaenglogo">
-			<img src="<%=request.getContextPath()%>/resources/images/name_logo.png" class="logo">
+				<a href="<%=request.getContextPath()%>/mg/main">
+					<img src="<%=request.getContextPath()%>/resources/images/fromsaenglogo.png" class="fromsaenglogo"> 
+				</a>
+				<a href="<%=request.getContextPath()%>/mg/main">
+					<img src="<%=request.getContextPath()%>/resources/images/name_logo.png"	class="logo">
+				</a>
 		</div>
 
 		<!-- 폼태그는 가지고 갈 데이터(값) 바로 앞에서 "name"이 꼭 필요함-->

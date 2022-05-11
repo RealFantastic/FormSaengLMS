@@ -33,9 +33,12 @@
 	<div class="body_div">
 		<header class="logo_button">
 			<div class="logoimg">
-				<img src="<%=request.getContextPath()%>/resources/images/fromsaenglogo.png"
-					class="fromsaenglogo"> <img src="<%=request.getContextPath()%>/resources/images/name_logo.png"
-					class="logo">
+				<a href="<%=request.getContextPath()%>/mg/main">
+					<img src="<%=request.getContextPath()%>/resources/images/fromsaenglogo.png" class="fromsaenglogo"> 
+				</a>
+				<a href="<%=request.getContextPath()%>/mg/main">
+					<img src="<%=request.getContextPath()%>/resources/images/name_logo.png"	class="logo">
+				</a>
 			</div>
 
 			<div class="button">

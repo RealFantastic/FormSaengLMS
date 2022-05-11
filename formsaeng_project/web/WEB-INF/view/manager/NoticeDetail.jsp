@@ -32,8 +32,12 @@
 	<form id="mgNoticeFrom" action="mgbupdate" method="post">
 		<div class="body_div">
 			<div class="logoimg_enroll">
-				<img src="<%=request.getContextPath()%>/resources/images/fromsaenglogo.png" class="fromsaenglogo">
-				<img src="<%=request.getContextPath()%>/resources/images/name_logo.png" class="logo">
+				<a href="<%=request.getContextPath()%>">
+					<img src="<%=request.getContextPath()%>/resources/images/fromsaenglogo.png" class="fromsaenglogo"> 
+				</a>
+				<a href="<%=request.getContextPath()%>">
+					<img src="<%=request.getContextPath()%>/resources/images/name_logo.png"	class="logo">
+				</a>	
 			</div>
 
 			<div class=title_search>
