@@ -61,11 +61,11 @@
 											</div>
 											<div class="mb-3">
 												<label for="message-text" class="col-form-label">제목</label>
-												<textarea class="form-control modal_title" id="message-text" name="title"></textarea>
+												<textarea class="form-control modal_title" id="message-text" name="title" maxlength="50"></textarea>
 											</div>
 											<div class="mb-3">
 												<label for="message-text" class="col-form-label">내용</label>
-												<textarea class="form-control modal_content" id="message-text" name="content"></textarea>
+												<textarea class="form-control modal_content" id="message-text" name="content" maxlength="300"></textarea>
 											</div>
 									</div>
 									<div class="modal-footer">
