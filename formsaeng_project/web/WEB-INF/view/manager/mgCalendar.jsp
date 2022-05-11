@@ -35,7 +35,7 @@
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			plugins : [ 'interaction', 'dayGrid' ],
 			dateClick: function(info) {
-				debugger
+// 				debugger
 				$("#calendar_start_date, #calendar_end_date").val(info.dateStr);
 				
 				$('#calendarModal').modal('show');
@@ -99,18 +99,7 @@
 <title>Academic Calendar</title>
 
 
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-	crossorigin="anonymous"></script>
-<link
-	href="https://hangeul.pstatic.net/hangeul_static/css/NanumBarunGothicYetHangul.css"
-	rel="stylesheet">
+
 <!-- 폰트어썸 -->
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
