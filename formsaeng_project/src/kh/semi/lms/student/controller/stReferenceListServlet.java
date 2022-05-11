@@ -16,13 +16,13 @@ import kh.semi.lms.reference.vo.ReferenceVo;
  * Servlet implementation class stReferenceListServlet
  */
 @WebServlet("/st/reflist")
-public class stReferenceListServlet extends HttpServlet {
+public class StReferenceListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public stReferenceListServlet() {
+    public StReferenceListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

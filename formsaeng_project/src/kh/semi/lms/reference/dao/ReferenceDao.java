@@ -20,7 +20,7 @@ public class ReferenceDao {
 	private Statement stmt = null;
 	private ResultSet rs = null;
 	
-	public int ReferenceinsertBoard(Connection conn, ReferenceVo vo, String name, String subjectCode) {
+	public int referenceinsertBoard(Connection conn, ReferenceVo vo, String name, String subjectCode) {
 		int result = 0;
 		String sql = "INSERT INTO REFERENCE(REF_NO, REF_TITLE, REF_CONTENT, REF_WRITER, REF_WRITE_DATE, SUBJECT_CODE)"
 				+ "VALUES(SEQ_REFERENCE_NO.nextval,?, ?, ?, default, ?)"; 
@@ -49,7 +49,7 @@ public class ReferenceDao {
 		}
 				return result;
 	}
-	public ArrayList<ReferenceVo> ReferenceBoardlist(Connection conn){
+	public ArrayList<ReferenceVo> referenceBoardlist(Connection conn){
 		ArrayList<ReferenceVo> volist = null;
 		
 		String sql = "select * from reference";
@@ -196,7 +196,7 @@ public class ReferenceDao {
 //		}
 //		return volist;
 //	}
-	public ArrayList<ReferenceVo> ReferenceBoardlist(Connection conn,int startRnum,int endRnum, String subcode) {
+	public ArrayList<ReferenceVo> referenceBoardlist(Connection conn,int startRnum,int endRnum, String subcode) {
 		ArrayList<ReferenceVo> volist = null;
 		System.out.println(subcode);
 		String sql = "select * from"
