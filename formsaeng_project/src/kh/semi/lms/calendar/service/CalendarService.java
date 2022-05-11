@@ -32,11 +32,11 @@ public class CalendarService {
 	}
 	
 	
-	public int deletecalendar() {
+	public int deletecalendar(int delId) {
 		
 		Connection conn=getConnection();
 		
-		int result=new CalendarDao().deleteCalendar(conn);
+		int result=new CalendarDao().deleteCalendar(conn, delId);
 		
 		close(conn);
 		return result;

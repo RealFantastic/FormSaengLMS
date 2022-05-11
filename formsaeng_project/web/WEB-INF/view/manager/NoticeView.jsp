@@ -63,7 +63,15 @@
 			</form>
 		</div>
 		<div class="table_div">
-			<table class="table font2 table-hover">
+			<table class="table font2 table-hover list_table">
+				<colgroup>
+					<col width="10%">
+					<col width="10%">
+					<col width="20%">
+					<col width="40%">
+					<col width="10%">
+					<col width="20%">
+				</colgroup>
 				<thead>
 					<tr>
 						<th>
@@ -177,7 +185,7 @@
 
 		/* 공지사항 1건 클릭 시 공지사항 상세 페이지로 이동 */
 		/* 강사님 도움 */
-		$(".nt_detail_list").click(function(e) {
+		$(document).on("click", ".nt_detail_list",function(e){
 			if(e.target.type  == 'checkbox'){
 				
 				return;
@@ -186,8 +194,7 @@
 				var noticeNo =$(this).data("nno");
 				location.href = "<%=request.getContextPath()%>/notice/detail?nno="+noticeNo;
 			}
-// 			debugger
-		})
+		});
 
 
 		/* 공지사항 삭제 버튼 클릭 시 공지사항 삭제하기(앞 체크박스 체크) */
@@ -295,7 +302,7 @@
 							$("#tbody").empty();
 							var html = "";
 							for(var i = 0; i < result.length; i++){
-								html+=	"<tr Class='nt_detail_list' data-nno='" + result[i].boardNoticeNo + "'>";
+								html+=	"<tr class='nt_detail_list' data-nno='" + result[i].boardNoticeNo + "'>";
 								html+=	"<td><input type='checkbox' name='chk' value='" + result[i].boardNoticeNo + "'></td>";
 								html+=	"<th scope='row' class='nno'>"+ result[i].boardNoticeNo +"</th>";
 								html+=	"<td>"+ result[i].boardNoticeTitle +"</td>";

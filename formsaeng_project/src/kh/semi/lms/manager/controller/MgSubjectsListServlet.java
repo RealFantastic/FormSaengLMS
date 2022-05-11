@@ -34,6 +34,26 @@ public class MgSubjectsListServlet extends HttpServlet {
 		System.out.println("doGet : /mg/Subjects");
 		
 		String pageNum = request.getParameter("p");
+		String searchType = request.getParameter("search_type");
+		String searchWord = request.getParameter("search_word");
+		
+		System.out.println(searchType);
+		System.out.println(searchWord);
+		
+		System.out.println();
+		//검색조건이 전달되지 않았을 경우 기본 검색조건, 검색어
+		String searchType_ = "dept_name";
+		if(searchType == null) {
+			//기본으로 학과명이 선택되도록함.
+			searchType= searchType_;
+		}
+		String searchWord_ = "";
+		if(searchWord == null) {
+			searchWord = searchWord_;
+		}
+		
+		System.out.println("null 변환 이후 : " +searchType);
+		System.out.println("null 변환 이후 : " +searchWord);
 		
 		System.out.println("pageNum : " + pageNum);
 		
@@ -46,7 +66,13 @@ public class MgSubjectsListServlet extends HttpServlet {
 		final int pageSize = 5;	// 한 페이지당 보여질 게시물의 갯수 : 3개
 		final int pageBlock = 3;  // 1,2,3 블럭>> 4,5,6 블럭 >> ....
 
-		int totalCnt = new SubjectService().countMgSubject(); //과목의 총 갯수
+		int totalCnt = 0; //과목의 총 갯수
+		if(searchType == null || searchWord == null) {
+			//검색 결과가 없을 때
+			totalCnt = new SubjectService().countMgSubject();
+		}else {
+			totalCnt = new SubjectService().countMgSubject(searchType,searchWord);
+		}
 		
 		//paging처리!!!
 		//총 페이지 수 = 전체 게시글 수 / 페이지당 보여질 게시글 수 + (나눈 나머지가 있으면 +1 페이지,없으면 +0)
@@ -88,9 +114,10 @@ public class MgSubjectsListServlet extends HttpServlet {
 			endRnum = totalCnt;
 		}
 		
-		ArrayList<SubjectVo> result = new SubjectService().mgSubjectList(startRnum,endRnum);
+		ArrayList<SubjectVo> result = new SubjectService().mgSubjectList(startRnum,endRnum,searchType,searchWord);
 		System.out.println("서블릿으로 돌아온 result : " + result);
-		
+		request.setAttribute("searchType", searchType);
+		request.setAttribute("searchWord", searchWord);
 		request.setAttribute("subList", result);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);

@@ -25,7 +25,9 @@
 	<script src="https://kit.fontawesome.com/ef09f998fc.js" crossorigin="anonymous"></script>  
   </head>
 <body>
+
 <jsp:include page="/WEB-INF/view/student/stHeader.jsp"/>
+
   <section id="template_content">
     <div class="template_container">
       <div class="template-title">
@@ -98,9 +100,9 @@
 				<!-- 목록 탭 -->
 						<div class="list-tap">
 							<ul class="list-group list-group-flush">
-								<li class="list-group-item"><a href="">강의 목록</a></li>
+							<!-- TODO: 강의 목록 클릭시 강의탭 열기 -->
 								<li class="list-group-item"><a href="">강의 자료실</a></li>
-								<li class="list-group-item"><a href="">과제 게시판</a></li>
+								<li class="list-group-item"><a href="<%=request.getContextPath()%>/st/asgboard"">과제 게시판</a></li>
 								<li class="list-group-item"><a href="">사용자 및 그룹</a></li>
 					   		</ul>
 						</div>
@@ -109,6 +111,7 @@
       </div>
   </section>
   <script>
+  
   //제목 클릭하여 상세페이지 이동
 			$(".read_list").click(function() {
 				console.log(this);
@@ -127,6 +130,7 @@
 				console.log("클릭된 행의 값은?"+tdVal);
 				location.href = "<%=request.getContextPath()%>/st/asgboard/read?bANo=" + tdVal;
 			});
+  
 	</script>
 </body>
 </html>

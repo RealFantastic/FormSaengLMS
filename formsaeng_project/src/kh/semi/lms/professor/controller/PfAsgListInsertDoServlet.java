@@ -41,7 +41,7 @@ public class PfAsgListInsertDoServlet extends HttpServlet {
 
 		String title = request.getParameter("title");
 		MemberVo mvo = (MemberVo)request.getSession().getAttribute("ssMemberVo");
-		String writer = "아무개";
+		String writer = mvo.getName();
 		String content = request.getParameter("content");
 		
 		AsgListVo vo = new AsgListVo(); 

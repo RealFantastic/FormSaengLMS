@@ -76,13 +76,22 @@ public class CalendarDao {
 	}
 	
 	
-	public int deleteCalendar(Connection conn) {
+	public int deleteCalendar(Connection conn, int delId) {
 		int result=0;
 		
 		String sql="Delete from ACADEMIC_CALENDAR where ACADEMIC_NO=?";
 		
-//		pstmt=conn.prepareStatement(sql);
-//		pstmt.setInt(1, x);
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, delId);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
 		
 		return result;
 	}

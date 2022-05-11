@@ -30,7 +30,7 @@
       		<div id="info" class="col-12">
 	      		<div id = "info_title" class="col-8">
       				<h1 class="font5"> 관리자 이용안내에 오신 것을 환영합니다.</h1>
-	        		<img src = "<%=request.getContextPath() %>/resources/images/cute_face.png" class="img-fluid" alt="이용안내1">
+	        		<img src = "<%=request.getContextPath() %>/resources/images/my_cute_face.jpg" class="img-fluid" alt="이용안내1">
 	        		<p class="font3">
 		        		관리자분들이 폼생대 LMS를 이용해 과목의 학습 내용을 구성하고, 다채로운 학습 활동 운영을 지원하고 상호작용하며, 평가와 성적 관리하는
 		        		다양한 활동을 편리하고 효율적으로 운영할 수 있도록 도와드릴 가이드를 확인하실 수 있습니다.

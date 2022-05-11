@@ -30,38 +30,23 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-	<header>
-		<div class="header_container">
-			<div class="header_wrapper">
-				<div class="univ_logo">
-					<a href="/WEB-INF/view/manager/mgmain.jsp"><img class="logo2"
-						src="<%=request.getContextPath()%>/resources/images/fromsaenglogo.png"
-						alt="폼생대로고"></a> <a href="/WEB-INF/view/manager/mgmain.jsp"><img class="logo1"
-						src="<%=request.getContextPath()%>/resources/images/name_logo.png"
-						alt="폼생대학교"></a>
-				</div>
-				<div class="move_page_buttons">
-					<button class="btn btn-success" id="myPage">마이 페이지</button>
-					<button class="btn btn-success" id="move_lms">LMS 바로가기</button>
-				</div>
-			</div>
-		</div>
-	</header>
+	<jsp:include page="/WEB-INF/view/manager/MainTemplateHeader.jsp"/>
 	<section id="subjects">
 		<div class="content_title">
 			<div class="title_name">
 				<h2 class="font5">추가한 과목 목록</h2>
 			</div>
-			<div class="search">
-				<select class="select_design font2" name="search" id="requirement">
-					<option class="option_design font2" value="dept" selected>학과 검색</option>
-					<option class="option_design font2" value="name">과목 검색</option>
-					<option class="option_design font2" value="type">이수구분 검색</option>
-					<option class="option_design font2" value="grade">학년 검색</option>
-				</select> <input type="text" class="form-control search_input"
-					id="search_word" name="search_word" placeholder="검색어를 입력하세요">
-				<button type="button" class="btn btn-secondary">검색</button>
-			</div>
+			<form action="<%=request.getContextPath() %>/mg/Subjects" method="get">
+				<div class="search">
+					<select class="select_design font2" name="search_type" id="search_type">
+						<option class="option_design font2" value="dept_name" selected>학과 검색</option>
+						<option class="option_design font2" value="subject_name">과목 검색</option>
+						<option class="option_design font2" value="class_type">이수구분 검색</option>
+					</select> 
+					<input type="text" class="form-control search_input" id="search_word" name="search_word" placeholder="검색어를 입력하세요">
+					<button type="submit" class="btn btn-secondary" id="search_button">검색</button>
+				</div>
+			</form>	
 		</div>
 		<div class="subject_list_container">
 			<form id= 'frmCheck'>
@@ -80,7 +65,12 @@
 						</tr>
 					</thead>
 					<tbody>
-	
+						<c:if test="${fn:length(subList) < 1 }">
+							<tr Class="no_list">
+								<!-- 보여질 공지사항이 없을 경우 -->
+								<td colspan="8"> 조회된 내용이 없습니다.</td>
+							</tr>
+						</c:if>
 						<c:forEach var="subject" items="${subList}">
 							<tr>
 								<th scope="row"><input type="checkbox" name="checkRow"
@@ -194,6 +184,38 @@
 				});
 			}
 		});
+		
+		
+		//검색어 검색
+// 		$("#search_button").click(function(){
+// 			var type = $("#search_type").val();
+// 			var word = $("#search_word").val();
+// 			console.log(type);
+// 			console.log(word);
+			
+// 			if(word == null){
+// 				alert("검색어를 입력하세요");
+// 				$("#search_word").focus();
+// 			}else{
+// 				$.ajax({
+<%-- 					url:"<%= request.getContextPath()%>/mg/Subjects", --%>
+// 					type:"post",
+// 					data:{
+// 						"type":type,
+// 						"word":word
+// 					},
+// 					dataType:"json",
+// 					success:function(data){
+// 						console.log("컨트롤러 찍먹");
+// 					},
+// 					error:function(request,status,error){
+// 						console.log(request);
+// 						alert("code:"+request.status+"\n"+"message:"+request.responseText+
+// 						"\n"+"error:"+error);
+// 					}
+// 				});
+// 			}
+// 		});
 	</script>
 </body>
 </html>

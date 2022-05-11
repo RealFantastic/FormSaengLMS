@@ -382,6 +382,7 @@ public class AsgListDao {
 			return result;
 		}
 		
+	//시퀀스 숫자 값 불러오기
 		public int selectSeqCommentNoNextVal(Connection conn) {
 			int result = 0;
 			String sql = "select SEQ_COMMENT_NO.nextval from dual";

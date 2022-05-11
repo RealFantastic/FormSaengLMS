@@ -38,6 +38,25 @@ public class StSubjectListServlet extends HttpServlet {
 		System.out.println("학생 수강신청 페이지 넘어갈떄 들어온 세션값" + vo);
 		
 		String pageNum = request.getParameter("p");
+		String searchType = request.getParameter("search_type");
+		String searchWord = request.getParameter("search_word");
+		
+		System.out.println(searchType);
+		System.out.println(searchWord);
+		
+		String searchType_ = "course_day";
+		if(searchType == null) {
+			//기본으로 학과명이 선택되도록함.
+			searchType= searchType_;
+		}
+		String searchWord_ = "";
+		if(searchWord == null) {
+			searchWord = searchWord_;
+		}
+		
+		System.out.println("null 변환 이후 : " +searchType);
+		System.out.println("null 변환 이후 : " +searchWord);
+		
 		
 		System.out.println("pageNum : " + pageNum);
 		
@@ -50,7 +69,13 @@ public class StSubjectListServlet extends HttpServlet {
 		final int pageSize = 5;	// 한 페이지당 보여질 게시물의 갯수 : 3개
 		final int pageBlock = 3;  // 1,2,3 블럭>> 4,5,6 블럭 >> ....
 
-		int totalCnt = new SubjectService().countStSubject(vo); //과목의 총 갯수
+		int totalCnt = 0;
+		
+		if(searchType == null || searchWord ==null) {
+			totalCnt = new SubjectService().countStSubject(vo); //과목의 총 갯수
+		}else {
+			totalCnt = new SubjectService().countStSubject(vo, searchType, searchWord);
+		}
 		
 		//paging처리!!!
 		//총 페이지 수 = 전체 게시글 수 / 페이지당 보여질 게시글 수 + (나눈 나머지가 있으면 +1 페이지,없으면 +0)
@@ -92,13 +117,15 @@ public class StSubjectListServlet extends HttpServlet {
 			endRnum = totalCnt;
 		}
 		
-		ArrayList<SubjectVo> result = new SubjectService().stSubjectList(vo, startRnum, endRnum);
+		ArrayList<SubjectVo> result = new SubjectService().stSubjectList(vo, startRnum, endRnum, searchType, searchWord);
 		System.out.println("서블릿으로 돌아온 result : " + result);
 		request.setAttribute("subjects", result);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("pageCnt", pageCnt);
+		request.setAttribute("searchType", searchType);
+		request.setAttribute("searchWord", searchWord);
 		
 		ArrayList<SubjectVo> aplist = new EnrolmentService().appliedList(vo);
 		System.out.println("서블릿에 돌아온 aplist : " + aplist);

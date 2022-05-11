@@ -54,13 +54,13 @@
 
 			<div class="mb-3 room">
 				<div class="font4">제목</div>
-					<input type="text" class="form-control title_box" id="formGroupExampleInput" name="title" placeholder="제목을 입력하세요.">
+					<input type="text" class="form-control title_box" id="formGroupExampleInput" name="title" placeholder="제목을 입력하세요." maxlength="50">
 			</div>
 
 			<div class="mb-3 room">
 				<div class="form-group">
 					<div class="font4">내용</div>
-					<textarea class="form-control" name="content" rows="20" id="content" name="content" placeholder="내용을 입력하세요."></textarea>
+					<textarea class="form-control" name="content" rows="20" id="content" name="content" placeholder="내용을 입력하세요." maxlength="600"></textarea>
 				</div>
 			</div>
 		</form>

@@ -1,0 +1,22 @@
+/* 컨테이너 플렉스 */
+.content_container{
+	display : flex;
+	margin-right: 150px;
+	height: 200px;
+}
+
+/* 강의 아코디언 */
+.accordion{
+	width: 1200px
+}
+
+/* 목록 탭 */
+ .list-tap {
+	position : fixed;
+	right: 200px;
+}
+
+.list-tap ul li a{
+	text-decoration: none;
+	cursor: pointer;
+}

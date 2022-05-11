@@ -152,8 +152,19 @@
 
 pre {
 	font-family: 'NanumBarunGothicYetHangul' !important;
+	white-space: break-spaces;
 }
 
 .title_update {
 	padding: 0px 0px 0px 0.75rem !important;
+}
+
+.list_table{
+	table-layout: fixed;
+}
+
+.list_table td {
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

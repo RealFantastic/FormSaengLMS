@@ -1,7 +1,8 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/sideDropdown.css">
 <%@page import="kh.semi.member.model.vo.MemberVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>   
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
  
   <header id="sideBar" style="z-index: 4;">
   <% MemberVo ssvo = (MemberVo) request.getSession().getAttribute("ssMemberVo"); %>
@@ -27,14 +28,16 @@
           </a>
         </li>
         <li class="menu-v2">
-          <a class="a">
+          <a class="a" id="sub_menu">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
               <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
             </svg>
             Subject
           </a>
-          	<ul class="submenu">
-				<li><a href="#">sub 1-1</a></li>
+          	<ul class="submenu" id="sub">
+<%--           		<c:forEach items="${lectureVolist}" var="vo"> --%>
+<!-- 				<li><a href="#">sub 1-1</a></li> -->
+<%-- 				</c:forEach> --%>
 				<li><a href="#">sub 1-2</a></li>
 				<li><a href="#">sub 1-3</a></li>
 				<li><a href="#">sub 1-4</a></li>
@@ -61,6 +64,8 @@
       </ul>
     </div>
   </div>
+  <% MemberVo mvo = (MemberVo) request.getSession().getAttribute("ssMemberVo"); %>
+  <% String id = mvo.getId(); %>
        <script>
   $(document).ready(function(){
 	//menu v2 ho
@@ -82,8 +87,52 @@
 			if($(".submenu").css('display') == 'block'){
 				  $(".submenu").hide();
 			};	
+		});
+		$("#sub_menu").click(function(){
+			openSubMenu();
 		})
+		
+		
 	});
+  
+  	function openSubMenu(){
+  		$.ajax({
+  			url:"<%=request.getContextPath()%>/subMenu.ax",
+  			type:"get",
+  			dataType:"json",
+  			success:function(result){
+  				console.log("컨트롤러가 어디냐");
+  				console.log(result[0]);
+  				var temp = '<%=id %>';
+  				console.log(temp);
+  				console.log(temp.charAt(0));
+  				if(result == null){
+  					alert("과목신청부터좀 하고 와라");
+  				}else{
+  					var html = "";
+  					
+  					// 링크에 로그인한 사람이 교수인지 학생인지에 따라 각각 다른 url을 부여해야함.
+  					if(temp.charAt(0) =='P'){
+  						for(var i = 0; i < result.length; i++){
+  							console.log(result[i].subCode);
+  							//TODO result[i].subCode 값을 a태그 쿼리스트링으로 대입
+	  						html+= "<li><a href='<%= request.getContextPath() %>/pf/week?s=" + result[i].subCode +"&n="+ result[i].subName + "'>" + result[i].subName + "</a></li>";
+  						}
+  						$("#sub").empty();
+  						$("#sub").append(html);
+  					}else if(temp.charAt(0) == 'S'){
+  						for(var i = 0; i < result.length; i++){
+  							console.log(result[i].subCode);
+	  						html+= "<li><a href='<%= request.getContextPath() %>/st/week?s=" + result[i].subCode + "'>" + result[i].subName + "</a></li>";
+  						}
+  						$("#sub").empty();
+  						$("#sub").append(html);
+  						
+  					}
+  				}
+  			}
+  		})
+  	}
   
   </script> 
   </header>

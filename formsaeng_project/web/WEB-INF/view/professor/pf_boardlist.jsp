@@ -39,9 +39,8 @@
 				<div class="board_div">
 					<form id="multiDelete">
 						<div class="board_button">
-							<input type="button" class="btn btn-secondary" id="insertBoard"
-								name="insertBoard" value="글쓰기"> <input type="button"
-								class="btn btn-secondary" id="deleteBoard" value="삭제">
+							<input type="button" class="btn btn-secondary" id="insertBoard" name="insertBoard" value="글쓰기">
+							<input type="button" class="btn btn-secondary" id="deleteBoard" value="삭제">
 						</div>
 						<table class="table table-striped">
 							<tr>
@@ -107,9 +106,9 @@
 				<!-- 목록 탭 -->
 					<div class="list-tap">
 						<ul class="list-group list-group-flush">
-							<li class="list-group-item"><a href="">강의 목록</a></li>
+						<!-- TODO: 강의 목록 클릭시 강의탭 열기 -->
 							<li class="list-group-item"><a href="">강의 자료실</a></li>
-							<li class="list-group-item"><a href="">과제 게시판</a></li>
+							<li class="list-group-item"><a href="<%=request.getContextPath()%>/pf/asgboard">과제 게시판</a></li>
 							<li class="list-group-item"><a href="">사용자 및 그룹</a></li>
 					    </ul>
 					</div>

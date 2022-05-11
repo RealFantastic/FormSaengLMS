@@ -28,7 +28,9 @@
 	<script src="https://kit.fontawesome.com/ef09f998fc.js" crossorigin="anonymous"></script>  
   </head>
 <body>
+
 	<jsp:include page="/WEB-INF/view/student/stHeader.jsp"/>
+	
 	<section id="template_content">
 		<div class="template_container">
 			<div class="template-title">

@@ -75,3 +75,9 @@
 	display:flex;
 	justify-content: space-between;
 }
+
+.no_list{
+	text-align:center;
+	color: red;
+	font-weight:700;
+}
