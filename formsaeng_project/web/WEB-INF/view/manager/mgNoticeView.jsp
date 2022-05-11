@@ -65,12 +65,12 @@
 		<div class="table_div">
 			<table class="table font2 table-hover list_table">
 				<colgroup>
+					<col width="5%">
+					<col width="5%">
+					<col width="30%">
+					<col width="50%">
 					<col width="10%">
 					<col width="10%">
-					<col width="20%">
-					<col width="40%">
-					<col width="10%">
-					<col width="20%">
 				</colgroup>
 				<thead>
 					<tr>
@@ -162,7 +162,7 @@
 	<script>
 // 	LMS 바로가기 버튼 클릭 시 LMS 바로가기 페이지로 이동
 	$("#btn_lms").click(function(){
-		location.href="<%=request.getContextPath()%>/mg/Dashboard";
+		location.href="<%=request.getContextPath()%>/mg/DashBoard";
 	})
 	
 	

@@ -30,11 +30,14 @@
 <script>
 // 달력띄움
 	document.addEventListener('DOMContentLoaded', function() {
+		var calendarList = '${calVoList}';
 		var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			plugins : [ 'interaction', 'dayGrid' ],
-			dateClick: function() {
-// 				debugger
+			dateClick: function(info) {
+				debugger
+				$("#calendar_start_date, #calendar_end_date").val(info.dateStr);
+				
 				$('#calendarModal').modal('show');
 				
 			},
@@ -51,13 +54,14 @@
 				$("#del_calendar_start_date").val(startyear+"-"+startmonth+"-"+startday);
 			
 				if(info.event.end==null){
-					$("#del_calendar_start_date").val(startyear+"-"+startmonth+"-"+startday);
-				}else
-				var endyear=info.event.end.getFullYear();
-				var endmonth=Number(info.event.end.getMonth()+1) <10 ? "0"+Number(info.event.end.getMonth()+1) : Number(info.event.end.getMonth()+1);
-				var endday=info.event.end.getDate() <10? "0"+info.event.end.getDate() : info.event.end.getDate();
-				$("#del_calendar_end_date").val(endyear+"-"+endmonth+"-"+endday);
-				
+					$("#del_calendar_end_date").val(startyear+"-"+startmonth+"-"+startday);
+				}else{
+					var endyear=info.event.end.getFullYear();
+					var endmonth=Number(info.event.end.getMonth()+1) <10 ? "0"+Number(info.event.end.getMonth()+1) : Number(info.event.end.getMonth()+1);
+					var endday=info.event.end.getDate() <10? "0"+info.event.end.getDate() : info.event.end.getDate();
+					$("#del_calendar_end_date").val(endyear+"-"+endmonth+"-"+endday);
+					
+				}
 				$("#del_calendar_id").val(info.event.id);
 				
 				$('#delcalendarModal').modal('show');
@@ -71,16 +75,17 @@
 				<%if (calendarList != null) {%>
 					<%for (CalendarVo vo : calendarList) {%>
 					{
-						id : '<%=vo.getAcademicNo()%>',
-						title : '<%=vo.getAcademicName()%>',
-						start : '<%=vo.getStartDate()%>',
-						end : '<%=vo.getEndDate()%>',
+						id : <%=vo.getAcademicNo()%>,
+						title : "<%=vo.getAcademicName()%>",
+						start : new Date ("<%=vo.getStartDate()%>"+" 00:00:00"),
+						end : new Date ("<%=vo.getEndDate()%>"+ " 23:59:59"),
 						color : '#' + Math.round(Math.random() * 0xffffff).toString(16),
-						allDay: true
 					},
 					<%}
-				}%>
+ 				}%> 
 			]
+
+			
 		
 		});
 		
