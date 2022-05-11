@@ -30,18 +30,20 @@
 <script>
 // 달력띄움
 	document.addEventListener('DOMContentLoaded', function() {
+		var calendarList = '${calVoList}';
 		var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			plugins : [ 'interaction', 'dayGrid' ],
-			dateClick: function() {
-// 				debugger
+			dateClick: function(info) {
+				debugger
+				$("#calendar_start_date, #calendar_end_date").val(info.dateStr);
+				
 				$('#calendarModal').modal('show');
 				
 			},
 
 // 달력모달 상세보기
 			eventClick: function(info) {
-// 				debugger
 				$("#del_calendar_content").val(info.event.title);
 				
 				var startyear=info.event.start.getFullYear();
@@ -51,13 +53,14 @@
 				$("#del_calendar_start_date").val(startyear+"-"+startmonth+"-"+startday);
 			
 				if(info.event.end==null){
-					$("#del_calendar_start_date").val(startyear+"-"+startmonth+"-"+startday);
-				}else
-				var endyear=info.event.end.getFullYear();
-				var endmonth=Number(info.event.end.getMonth()+1) <10 ? "0"+Number(info.event.end.getMonth()+1) : Number(info.event.end.getMonth()+1);
-				var endday=info.event.end.getDate() <10? "0"+info.event.end.getDate() : info.event.end.getDate();
-				$("#del_calendar_end_date").val(endyear+"-"+endmonth+"-"+endday);
-				
+					$("#del_calendar_end_date").val(startyear+"-"+startmonth+"-"+startday);
+				}else{
+					var endyear=info.event.end.getFullYear();
+					var endmonth=Number(info.event.end.getMonth()+1) <10 ? "0"+Number(info.event.end.getMonth()+1) : Number(info.event.end.getMonth()+1);
+					var endday=info.event.end.getDate() <10? "0"+info.event.end.getDate() : info.event.end.getDate();
+					$("#del_calendar_end_date").val(endyear+"-"+endmonth+"-"+endday);
+					
+				}
 				$("#del_calendar_id").val(info.event.id);
 				
 				$('#delcalendarModal').modal('show');
@@ -71,16 +74,17 @@
 				<%if (calendarList != null) {%>
 					<%for (CalendarVo vo : calendarList) {%>
 					{
-						id : '<%=vo.getAcademicNo()%>',
-						title : '<%=vo.getAcademicName()%>',
-						start : '<%=vo.getStartDate()%>',
-						end : '<%=vo.getEndDate()%>',
+						id : <%=vo.getAcademicNo()%>,
+						title : "<%=vo.getAcademicName()%>",
+						start : new Date ("<%=vo.getStartDate()%>"+" 00:00:00"),
+						end : new Date ("<%=vo.getEndDate()%>"+ " 23:59:59"),
 						color : '#' + Math.round(Math.random() * 0xffffff).toString(16),
-						allDay: true
 					},
 					<%}
-				}%>
+ 				}%> 
 			]
+
+			
 		
 		});
 		
@@ -183,7 +187,6 @@
 								<div class="modal-header">
 									<h5 class="modal-title" id="exampleModalLabel">일정상세보기.</h5>
 								</div>
-								<form id="mgCalendar" action="<%=request.getContextPath()%>/mg/calendar/enroll" method="post">
 									<div class="modal-body">
 										<div class="form-group">
 											<label for="taskId" class="col-form-label">일정 내용</label> 
@@ -196,10 +199,9 @@
 									</div>
 								<div class="modal-footer">
 									<input type="hidden" id="del_calendar_id" name="del_calendar_id"> 
-									<button type="button" class="btn delbtn-warning" id="delCalendar">삭제</button>
+									<button type="button" class="btn btn-warning" id="delCalendar">삭제</button>
 									<button type="button" class="btn btn-secondary delmodalclose" data-dismiss="modal" id="delsprintSettingModalClose">취소</button>
 								</div>
-									</form>
 							</div>
 						</div>
 					</div>
@@ -220,16 +222,12 @@
 	
 // 일정삭제TODO
 	$("#delCalendar").click(function(){
-// 		.event.remove();
-		console.log(this);
-		console.log($(this));
-		console.log($(this).prev().val());
-		var delIdVal = $(this).prev().val();
-		
-		console.log(data);
+		var delIdVal = $("#del_calendar_id").val();
+		console.log("delIdVal:" +delIdVal);
 		$.ajax({
 			type: "post",
-				url: "<%=request.getContextPath()%>/mg/cal/delete.ax",
+			url: "<%=request.getContextPath()%>/mg/cal/delete.ajx",
+			
 			//contentType: "application/json; charset=utf-8",
 			//dataType: "json",
 			data: {delId: delIdVal },

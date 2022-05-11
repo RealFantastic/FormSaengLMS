@@ -1,6 +1,8 @@
 package kh.semi.lms.manager.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +14,7 @@ import kh.semi.lms.calendar.service.CalendarService;
 /**
  * Servlet implementation class MgCalendarDeleteServlet
  */
-@WebServlet("/mg/cal/delete.ax")
+@WebServlet("/mg/cal/delete.ajx")
 public class MgCalendarDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -36,11 +38,22 @@ public class MgCalendarDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doPost/mg/cal/delete.ax");
+		System.out.println("doPost/mg/cal/delete.ajx");
 		System.out.println("delId"+request.getParameter("delId"));
-
-		int result=new CalendarService().deletecalendar();
+		int delId = Integer.parseInt(request.getParameter("delId"));
+		int result=new CalendarService().deletecalendar(delId);
+		PrintWriter out = response.getWriter();		
 		
+		if(result < 1) {
+			out.print(0);
+			out.flush();
+			out.close();
+			return;
+		}else {
+			out.print(1);
+			out.flush();
+			out.close();
+		}
 	}
 
 }

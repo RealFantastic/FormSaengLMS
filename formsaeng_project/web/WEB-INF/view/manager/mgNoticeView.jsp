@@ -27,7 +27,6 @@
 <!-- 글자 -->
 <link href="https://hangeul.pstatic.net/hangeul_static/css/NanumBarunGothicYetHangul.css" rel="stylesheet">
 </head>
-
 <body>
 	<form id="boardFrm" action="<%=request.getContextPath()%>/mg/notice/insert" method="post"></form>
 
@@ -64,7 +63,15 @@
 			</form>
 		</div>
 		<div class="table_div">
-			<table class="table font2 table-hover">
+			<table class="table font2 table-hover list_table">
+				<colgroup>
+					<col width="10%">
+					<col width="10%">
+					<col width="20%">
+					<col width="40%">
+					<col width="10%">
+					<col width="20%">
+				</colgroup>
 				<thead>
 					<tr>
 						<th>
@@ -87,9 +94,9 @@
 						</tr>
 					</c:if>
 					<c:forEach var="notice" items="${boardVolist}">
-						<tr Class="nt_detail_list" data-nno="${notice.boardNoticeNo}">
+						<tr class="nt_detail_list" data-nno="${notice.boardNoticeNo}">
 							<td><input type="checkbox" name="chk" value=${notice.boardNoticeNo}></td>
-							<th scope="row" class="nno">${notice.boardNoticeNo }</th>
+							<td scope="row" class="nno">${notice.boardNoticeNo }</td>
 							<td>${notice.boardNoticeTitle }</td>
 							<td>${notice.boardNoticeContent }</td>
 							<td>${notice.boardNoticeWriter }</td>
@@ -169,7 +176,7 @@
 
 		/* 공지사항 1건 클릭 시 공지사항 상세 페이지로 이동 */
 		/* 강사님 도움 */
-		$(".nt_detail_list").click(function(e) {
+		$(document).on("click", ".nt_detail_list", function(e){
 			if(e.target.type  == 'checkbox'){
 				
 				return;
@@ -178,8 +185,19 @@
 				var noticeNo =$(this).data("nno");
 				location.href = "<%=request.getContextPath()%>/mg/notice/detail?nno="+noticeNo;
 			}
+		});
+		
+// 		$(".nt_detail_list").click(function(e) {
+// 			if(e.target.type  == 'checkbox'){
+				
+// 				return;
+				
+// 			}else{
+// 				var noticeNo =$(this).data("nno");
+<%-- 				location.href = "<%=request.getContextPath()%>/mg/notice/detail?nno="+noticeNo; --%>
+// 			}
 // 			debugger
-		})
+// 		})
 
 
 		/* 공지사항 삭제 버튼 클릭 시 공지사항 삭제하기(앞 체크박스 체크) */
