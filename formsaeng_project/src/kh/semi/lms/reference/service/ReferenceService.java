@@ -27,9 +27,9 @@ public class ReferenceService {
 		
 		return result;
 	}
-	public int insertReferenceBoard(ReferenceVo vo) {
+	public int insertReferenceBoard(ReferenceVo vo, String name, String subjectCode) {
 		Connection conn =getConnection();
-		int result = new ReferenceDao().ReferenceinsertBoard(conn, vo);
+		int result = new ReferenceDao().ReferenceinsertBoard(conn, vo, name, subjectCode);
 		close(conn);
 		return result;
 	}
@@ -57,9 +57,9 @@ public class ReferenceService {
 		close(conn);
 		return result;
 	}
-	public ArrayList<ReferenceVo> ReferenceBoardlist(int startRnum,int endRnum) {
+	public ArrayList<ReferenceVo> ReferenceBoardlist(int startRnum,int endRnum, String subcode) {
 		Connection conn = getConnection();
-		ArrayList<ReferenceVo> volist = new ReferenceDao().ReferenceBoardlist(conn, startRnum, endRnum);
+		ArrayList<ReferenceVo> volist = new ReferenceDao().ReferenceBoardlist(conn, startRnum, endRnum, subcode);
 		close(conn);
 		return volist;
 	}

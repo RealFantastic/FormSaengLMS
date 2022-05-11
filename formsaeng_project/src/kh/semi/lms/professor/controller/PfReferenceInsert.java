@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.lms.reference.service.ReferenceService;
 import kh.semi.lms.reference.vo.ReferenceVo;
+import kh.semi.member.model.vo.MemberVo;
 
 /**
  * Servlet implementation class pfReferenceInsert
@@ -32,6 +33,8 @@ public class PfReferenceInsert extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		String subCode = request.getParameter("s");
+		request.setAttribute("s", subCode);
 		request.getRequestDispatcher("/WEB-INF/view/professor/pf_referenceinsertview.jsp").forward(request,response);
 	}
 
@@ -41,23 +44,7 @@ public class PfReferenceInsert extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		System.out.println("ref");
 		
-		String lbAtitle=request.getParameter("title");
-		String lbAcontent=request.getParameter("content");
-		
-		ReferenceVo vo=new ReferenceVo();
-		vo.setLbATitle(lbAtitle);
-		vo.setLbAContent(lbAcontent);
-		
-		int result=new ReferenceService().insertReferenceBoard(vo);
-		
-		if(result==0) {
-			System.out.println("���� ��� �Ǿ����ϴ�");
-		}else {
-			System.out.println("�� ����� �����Ͽ����ϴ� �ٽ� �õ����ּ���");
-			response.sendRedirect(request.getContextPath()+"/pf/reflist");
-		}
 	}
 
 }

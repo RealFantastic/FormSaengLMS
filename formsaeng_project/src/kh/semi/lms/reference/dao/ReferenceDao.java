@@ -20,12 +20,10 @@ public class ReferenceDao {
 	private Statement stmt = null;
 	private ResultSet rs = null;
 	
-	public int ReferenceinsertBoard(Connection conn, ReferenceVo vo) {
+	public int ReferenceinsertBoard(Connection conn, ReferenceVo vo, String name, String subjectCode) {
 		int result = 0;
-		String write = "아무개";
-		String code = "c0101";//vo.getLbACode();
 		String sql = "INSERT INTO REFERENCE(REF_NO, REF_TITLE, REF_CONTENT, REF_WRITER, REF_WRITE_DATE, SUBJECT_CODE)"
-				+ "VALUES(SEQ_REFERENCE_NO.nextval,?, ?, ?, default, 'M0101')"; 
+				+ "VALUES(SEQ_REFERENCE_NO.nextval,?, ?, ?, default, ?)"; 
 //		Connection conn = JdbcDbcp.getConnection();
 //		try {
 //			stmt = conn.createStatement();
@@ -41,8 +39,8 @@ public class ReferenceDao {
 			
 			pstmt.setString(1, vo.getLbATitle());
 			pstmt.setString(2, vo.getLbAContent());
-			pstmt.setString(3, write);
-			//pstmt.setString(4, code);
+			pstmt.setString(3, name);
+			pstmt.setString(4, subjectCode);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -198,19 +196,20 @@ public class ReferenceDao {
 //		}
 //		return volist;
 //	}
-	public ArrayList<ReferenceVo> ReferenceBoardlist(Connection conn,int startRnum,int endRnum) {
+	public ArrayList<ReferenceVo> ReferenceBoardlist(Connection conn,int startRnum,int endRnum, String subcode) {
 		ArrayList<ReferenceVo> volist = null;
-		
+		System.out.println(subcode);
 		String sql = "select * from"
                 + " (SELECT rownum r, t1.* FROM "
                 + " (SELECT REF_NO,REF_TITLE,REF_WRITER,TO_CHAR(REF_WRITE_DATE, 'YYYY-MM-DD') REF_WRITE_DATE,REF_CONTENT,SUBJECT_CODE "
-                + " FROM REFERENCE a ORDER BY REF_NO DESC,REF_WRITE_DATE DESC)t1)"
+                + " FROM REFERENCE a where SUBJECT_CODE = ? ORDER BY REF_NO DESC,REF_WRITE_DATE DESC)t1)"
                 + " where r between ? and ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, startRnum);
-			pstmt.setInt(2, endRnum);
+			pstmt.setString(1, subcode);
+			pstmt.setInt(2, startRnum);
+			pstmt.setInt(3, endRnum);
 			rs = pstmt.executeQuery();
 			
 				volist = new ArrayList<ReferenceVo>();
@@ -230,6 +229,7 @@ public class ReferenceDao {
 			close(rs);
 			close(pstmt);
 		}
+		System.out.println(volist);
 		return volist;
 	}
 	public int countListBoard(Connection conn) {

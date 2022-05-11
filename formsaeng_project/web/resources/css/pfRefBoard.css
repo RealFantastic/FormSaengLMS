@@ -1,6 +1,7 @@
 .board_div {
 	width : 1200px;
 	margin-left: 20px;
+	float:left;
 }
 
 /* 버튼 위치 */
@@ -20,9 +21,11 @@
  .list-tap {
 	position : fixed;
 	right: 200px;
+	float:left;
 }
 
 .list-tap ul li a{
 	text-decoration: none;
 	cursor: pointer;
+	float:left;
 }

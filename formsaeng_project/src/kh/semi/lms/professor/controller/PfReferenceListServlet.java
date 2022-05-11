@@ -50,6 +50,7 @@ public class PfReferenceListServlet extends HttpServlet {
 		
 			System.out.println("pageNum 값은?"+request.getParameter("pageNum"));			
 			String page = request.getParameter("pageNum");
+			String subcode = request.getParameter("s");
 			System.out.println("page 값은?"+page); 
 			int currentPage = 1;
 			
@@ -86,7 +87,7 @@ public class PfReferenceListServlet extends HttpServlet {
 			if(endRnum > totalCnt) {
 				endRnum = totalCnt;
 			}
-			ArrayList<ReferenceVo> volist = new ReferenceService().ReferenceBoardlist(startRnum, endRnum);
+			ArrayList<ReferenceVo> volist = new ReferenceService().ReferenceBoardlist(startRnum, endRnum, subcode);
 			System.out.println(volist);
 		
 			request.setAttribute("boardVolist", volist);
@@ -94,6 +95,7 @@ public class PfReferenceListServlet extends HttpServlet {
 			request.setAttribute("endPage", endPage);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("pageCnt", pageCnt);
+			request.setAttribute("s", subcode);
 			
 			request.getRequestDispatcher("/WEB-INF/view/professor/pf_referenceboardlist.jsp").forward(request, response);
 	}
