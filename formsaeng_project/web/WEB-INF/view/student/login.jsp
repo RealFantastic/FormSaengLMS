@@ -154,7 +154,7 @@ $(function(){
 
 			
 		 } else if(result == "실패"){
-			alert("잘못된 학번 또는 비밀번호입니다");
+			alert("잘못된 아이디 또는 비밀번호입니다");
 			$("#id").val("").focus();
 			$("#pwd").val("");
 		 }

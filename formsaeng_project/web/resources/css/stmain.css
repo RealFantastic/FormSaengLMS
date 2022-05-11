@@ -1,14 +1,23 @@
+form{
+	margin-right:100px;
+}
+
+
 .minilogo img {
     height: 100px;
-    margin-left: 30px;
+    margin-left: 40px;
 }
+
 .logo img {
     height: 100px;
-    margin-left: 30px;
+    margin-left: 100px;
     margin-top: 50px;
     margin-bottom: 20px;
 }
 
-#maincenter {
-	padding-right:30px;
+.welcome{
+	margin: 10px;
+	padding-bottom: 10px;
+	display:flex;
+	justify-content: center;
 }

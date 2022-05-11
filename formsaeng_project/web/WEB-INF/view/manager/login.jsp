@@ -37,7 +37,7 @@
                                     <input type="password" id="pwd" name="pwd" class="form-control" placeholder="비밀번호를 입력해주세요">
                                 </div>
                                 <div class="form-group">
-                                    <input type="button" id="submit" name="submit" class="btn btn-primary" value="로그인">
+                                    <input type="button" id="submit" style="margin-left:72%;" name="submit" class="btn btn-primary" value="로그인">
                                 </div>
                             </form>
                         </div>

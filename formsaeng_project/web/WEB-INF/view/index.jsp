@@ -26,26 +26,29 @@
 <body>
     <div id="root">
         <header>
-            <div class="univlogo">
-                <a href="https://www.naver.com"><img src="<%= request.getContextPath() %>/resources/images/name_logo.png" alt="폼생대학교"></a>
-            </div>
+        <div class="minilogo">
+        <img src="<%= request.getContextPath() %>/resources/images/fromsaenglogo.png" alt="폼생대학교">
+        </div>
         </header>
         <section id="first">
             <div class="login_container">
-                <div class="login_wrapper">
-                    <div class="welcome font5" style="margin-bottom:30px;" >
-                        안녕하세요 폼생대 LMS 입니다.
-                    </div>
-                    <div class="loginlink">
-                        <button id="std_login" class="btn btn-light move_button">학생 로그인</button>
-                        <button id="pf_login" class="btn btn-light move_button">교수자 로그인</button>
-                        <button id="mgr_login" class="btn btn-light move_button">관리자 로그인</button>
-                    </div><br>
-                    <div>
-                    <button id="notice" class="btn btn-primary move_button">공지사항</button>
-                    </div>
-                </div>
-            </div>
+				<div class="login_wrapper">
+					<div class="welcome" style="margin-bottom: 30px;">
+						<div class="univlogo">
+							<a href="https://www.naver.com"><img src="<%=request.getContextPath()%>/resources/images/name_logo.png" alt="폼생대학교"></a>
+						</div>
+					</div>
+					<div class="loginlink">
+						<button id="std_login" class="btn btn-success move_button btn-lg">STUDENT<br>LOGIN</button>
+						<button id="pf_login" class="btn btn-success move_button btn-lg">PROFESSOR<br>LOGIN</button>
+						<button id="mgr_login" class="btn btn-success move_button btn-lg">MANAGER<br>LOGIN</button>
+					</div>
+					<br>
+					<div>
+						<button id="notice" class="btn btn-secondary move_button btn-lg">공지사항</button>
+					</div>
+				</div>
+			</div>
         </section>
     </div>
     <script>
