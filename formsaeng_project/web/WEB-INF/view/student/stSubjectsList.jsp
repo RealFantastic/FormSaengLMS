@@ -52,14 +52,17 @@
 			<div class="title_name">
 				<h2 class="font5">교과목 조회 및 신청</h2>
 			</div>
-			<div class="search">
-				<select class="select_design font2" name="search" id="requirement">
-					<option class="option_design font2" value="date">요일 검색</option>
-					<option class="option_design font2" value="type">이수구분 검색</option>
-				</select> <input type="text" class="form-control search_input"
-					id="search_word" name="search_word" placeholder="검색어를 입력하세요">
-				<button type="button" class="btn btn-secondary">검색</button>
-			</div>
+			<form action="<%=request.getContextPath() %>/st/SubjectList" method="get">
+				<div class="search">
+					<select class="select_design font2" name="search_type" id="search_type">
+						<option class="option_design font2" value="course_day" selected>요일 검색</option>
+						<option class="option_design font2" value="class_type">이수구분 검색</option>
+						<option class="option_design font2" value="subject_name">과목 검색</option>
+					</select> <input type="text" class="form-control search_input"
+						id="search_word" name="search_word" placeholder="검색어를 입력하세요">
+					<button type="submit" class="btn btn-secondary">검색</button>
+				</div>
+			</form>
 		</div>
 		<div class="subject_list_container">
 			<form id= 'frmCheck'>
@@ -78,6 +81,12 @@
 						</tr>
 					</thead>
 					<tbody>
+						<c:if test="${fn:length(subjects) < 1 }">
+							<tr Class="no_list">
+								<!-- 보여질 공지사항이 없을 경우 -->
+								<td colspan="8"> 조회된 내용이 없습니다.</td>
+							</tr>
+						</c:if>
 	
 						<c:forEach var="subject" items="${subjects}">
 							<tr>

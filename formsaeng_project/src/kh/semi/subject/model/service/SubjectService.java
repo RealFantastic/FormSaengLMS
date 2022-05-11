@@ -44,12 +44,12 @@ public class SubjectService {
 		return result;
 	}
 	//페이징된 수강신청 관리 목록
-	public ArrayList<SubjectVo> mgSubjectList(int startRnum, int endRnum) {
+	public ArrayList<SubjectVo> mgSubjectList(int startRnum, int endRnum,String searchType, String searchWord) {
 		ArrayList<SubjectVo> result = null;
 		Connection conn = getConnection();
 		
 		
-		result = new SubjectDao().mgSubjectList(conn, startRnum, endRnum);
+		result = new SubjectDao().mgSubjectList(conn, startRnum, endRnum, searchType, searchWord);
 		
 		close(conn);
 		return result;
@@ -65,7 +65,7 @@ public class SubjectService {
 		close(conn);
 		return result;
 	}
-	//학생 수강신청 목록
+	//학생 수강신청 목록 페이징
 		public ArrayList<SubjectVo> stSubjectList(MemberVo vo,int startRnum, int endRnum) {
 			ArrayList<SubjectVo> result = null;
 			Connection conn = getConnection();
@@ -75,6 +75,16 @@ public class SubjectService {
 			close(conn);
 			return result;
 		}
+	//학생 수강신청 검색 목록 페이징
+			public ArrayList<SubjectVo> stSubjectList(MemberVo vo,int startRnum, int endRnum,String searchType, String searchWord) {
+				ArrayList<SubjectVo> result = null;
+				Connection conn = getConnection();
+				
+				result = new SubjectDao().stSubjectList(conn, vo, startRnum, endRnum, searchType, searchWord);
+				
+				close(conn);
+				return result;
+			}
 
 	
 	public int deleteSubejct(String[] delist) {
@@ -107,6 +117,15 @@ public class SubjectService {
 		close(conn);
 		return result;
 	}
+	//검색한 과목 목록 개수
+	public int countMgSubject(String searchType, String searchWord) {
+		Connection conn = getConnection();
+		int result = 0;
+		
+		result = new SubjectDao().countMgSubject(conn, searchType,searchWord);
+		close(conn);
+		return result;
+	}
 	
 	//학생 수강신청 가능 갯수
 		public int countStSubject(MemberVo vo) {
@@ -117,4 +136,13 @@ public class SubjectService {
 			close(conn);
 			return result;
 		}
+	//학생 수강신청 가능 갯수
+			public int countStSubject(MemberVo vo, String searchType, String searchWord) {
+				Connection conn = getConnection();
+				int result = 0;
+				
+				result = new SubjectDao().countStSubject(conn, vo, searchType, searchWord);
+				close(conn);
+				return result;
+			}
 }
