@@ -18,47 +18,142 @@
 </head>
 <body>
 <%MemberVo vo = (MemberVo)request.getAttribute("MyPageVo"); %>
+<div class="container justify-content-center">
 <jsp:include page="/WEB-INF/view/student/MainTemplateHeader.jsp"/>
-<form> 
-  <div class="d-flex">
+<div class="title font5">마이페이지 수정하기</div>
+<form class="font3"> 
+<div class="form-content">
+  <div class="d-flex row">
     <label for="name" class="label col-1">이름</label>
-    <div class="inputgroup col-2">
+    <div class="inputgroup col-6">
       <input type="text" readonly class="border-0" id="name" value=<%=vo.getName()%>>
     </div>
   </div><br>
-    <div class="d-flex">
+    <div class="d-flex row">
     <label for="id" class="label col-1">학번</label>
-    <div class="inputgroup col-2">
+    <div class="inputgroup col-6">
       <input type="text" readonly class="border-0" id="id" value=<%=vo.getId()%>>
     </div>
   </div><br>
-     <div class="d-flex">
+     <div class="d-flex row">
 	<label for="deptName" class="label col-1">학과</label>
-    <div class="inputgroup col-2">
+    <div class="inputgroup col-6">
       <input type="text" readonly class="border-0" id="deptName" value=<%=vo.getDeptName()%>>
     </div>
   </div><br>
-  
+
+<!-- 주소 -->
+<div class="addressgroup">
+			<!-- 기존 주소 -->
+			<div class="d-flex row">
+				<label for="address" class="label col-1">주소</label>
+				<div class="inputgroup col">
+					<input type="text" readonly class="border-0 minput" id="oldaddress" style="width:500px;" value="<%=vo.getAddress()%>"> 
+					<button type="button" id="modifyA" class="btn btn-secondary btn-sm">수정</button>
+				</div>
+			</div><br>
+
+<!-- Modal 새 주소 -->
+<div class="modal" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">주소 변경하기</h5>
+      </div>
+      <div class="modal-body">
+				<div class="col-auto">
+				<div class="post d-flex" style="margin-bottom:10px;">
+					<input type="text" id="sample3_postcode" class="form-control" style="width:100px; margin-right:10px;"placeholder="우편번호">
+					<input type="button" onclick="sample3_execDaumPostcode()" class="btn btn-secondary btn-sm" value="우편번호 찾기"><br> 
+				</div>
+					<input type="text" id="sample3_address" style="margin-bottom:10px;"class="form-control " placeholder="주소">
+					<input type="text" id="sample3_detailAddress" style="margin-bottom:10px;" class="form-control" placeholder="상세주소">
+					<input type="text" id="sample3_extraAddress" class="form-control" placeholder="참고항목">
+
+					<div id="wrap"
+						style="display: none; border: 1px solid; width: 500px; height: 300px; margin: 5px 0; position: relative">
+						<img src="//t1.daumcdn.net/postcode/resource/images/close.png"
+							id="btnFoldWrap"
+							style="cursor: pointer; position: absolute; right: 0px; top: -1px; z-index: 1"
+							onclick="foldDaumPostcode()" alt="접기 버튼">
+					</div>
+				</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="submitA" class="btn btn-primary submit">확인</button>
+        <button type="button" class="btn btn-secondary close">취소</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<script> // 주소 변경
+    $(function() {
+    $("#modifyA").on("click",function(){
+       console.log("모달 안녕");
+       $(".modal").eq(0).fadeIn(150);
+       $(".close").on("click",closeModal);
+    });
+    
+    function closeModal(){
+       $(".modal").hide();
+    }
+
+   	 $("#submitA").on('click', function() {
+   	
+   	var oldAddress = $("#oldaddress").val().trim();
+   	var newAddress =  $("#sample3_address").val() +" "+$("#sample3_detailAddress").val()+" "+$("#sample3_extraAddress").val();
+   	var address = (newAddress==null | newAddress== "")? oldAddress:(newAddress);
+   	
+ 	  if ($("#sample3_address").val() == "" |$("#sample3_detailAddress").val() =="" ) {
+ 	    alert("주소를 입력해주세요.");
+ 	   $("#sample3_address").focus();
+ 	    return false;
+ 	  } 
+ 	  
+   	 $.ajax({ // JQuery 를 통한 ajax 호출 방식 사용
+   	 type : "POST",
+   	 url : "<%=request.getContextPath()%>/st/mypagem.do",
+   	 data : {
+   	 address : address
+   	 },
+   	 success : function(resulta) {
+   	 if(resulta == "성공"){
+   		 console.log(resulta);
+   		alert("수정이 완료되었습니다"); 
+   		location.reload(); 
+   		
+   	 } else if(resulta == "실패"){
+   		alert("수정에 실패했습니다. 다시 시도해주세요");
+   	 }
+   	 } 
+   	 });
+   	 })
+   });
+</script>
+
   <!-- 연락처 -->
   <div class="pnumgroup">
-   <div class="d-flex">
+  <!-- 기존 연락처 -->
+   <div class="d-flex row">
   	<label for="pnum" class="label col-1">연락처</label>
-    <div class="inputgroup col-2">
-      <input type="text" readonly class="border-0 pnum" id="oldpnum" value=<%=vo.getPnum()%>> <button type=button id="modifyP" class="btn btn-secondary btn-sm pnum">수정</button>
+    <div class="inputgroup col-6">
+      <input type="text" readonly class="border-0 minput" id="oldpnum" value=<%=vo.getPnum()%>>
+      <button type="button" id="modifyP" class="btn btn-secondary btn-sm">수정</button>
     </div>
   </div><br>
   
 <!-- Modal 새 연락처 -->
-<div class="modal" id="newNum" >
+<div class="modal" id="newNum">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">연락처 변경하기</h5>
+        <h5 class="modal-title" id="exampleModalLabel" style="margin-bottom:10px;">연락처 변경하기</h5>
       </div>
-      <div class="modal-body d-flex col-xs-1">
-        <input type="text" id="pnum1" class="form-control"> <div class="pnumdiv">-</div>       
-        <input type="text" id="pnum2" class="form-control"> <div class="pnumdiv">-</div>
-        <input type="text" id="pnum3" class="form-control">
+      <div class="modal-body d-flex">
+        <input type="text" id="pnum1" class="pnum"> <div class="pnumdiv">-</div>       
+        <input type="text" id="pnum2" class="pnum"> <div class="pnumdiv">-</div>
+        <input type="text" id="pnum3" class="pnum">
       </div>
       <div class="modal-footer">
         <button type="button" id="submitP" class="btn btn-primary submit">확인</button>
@@ -68,13 +163,12 @@
   </div>
 </div>
 </div>
-
 <script> // 연락처 변경
     $(function() {
     	
     $("#modifyP").on("click",function(){
        console.log("모달 안녕");
-       $(".modal").eq(0).fadeIn(150);
+       $(".modal").eq(1).fadeIn(150);
        $(".close").on("click",closeModal);
     });
     
@@ -129,100 +223,13 @@
    });
 </script>
 
-<!-- 주소 -->
-<div class="addressgroup">
-			<!-- 기존 주소 -->
-			<div class="d-flex">
-				<label for="address" class="label col-1">주소</label>
-				<div class="inputgroup col-7">
-					<input type="text" readonly class="border-0"
-						id="oldaddress" value="<%=vo.getAddress()%>"> <button type=button id="modifyA" class="btn btn-secondary btn-sm">수정</button>
-				</div>
-			</div><br>
-
-<!-- Modal 새 주소 -->
-<div class="modal" >
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">주소 변경하기</h5>
-      </div>
-      <div class="modal-body">
-				<div class="col-sm-10">
-					<input type="text" id="sample3_postcode" placeholder="우편번호">
-					<input type="button" onclick="sample3_execDaumPostcode()"
-						value="우편번호 찾기"><br> <input type="text"
-						id="sample3_address" placeholder="주소"><br> <input
-						type="text" id="sample3_detailAddress" placeholder="상세주소">
-					<input type="text" id="sample3_extraAddress" placeholder="참고항목">
-
-					<div id="wrap"
-						style="display: none; border: 1px solid; width: 500px; height: 300px; margin: 5px 0; position: relative">
-						<img src="//t1.daumcdn.net/postcode/resource/images/close.png"
-							id="btnFoldWrap"
-							style="cursor: pointer; position: absolute; right: 0px; top: -1px; z-index: 1"
-							onclick="foldDaumPostcode()" alt="접기 버튼">
-					</div>
-				</div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="submitA" class="btn btn-primary submit">확인</button>
-        <button type="button" class="btn btn-secondary close">취소</button>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-<script> // 주소 변경
-    $(function() {
-    $("#modifyA").on("click",function(){
-       console.log("모달 안녕");
-       $(".modal").eq(1).fadeIn(150);
-       $(".close").on("click",closeModal);
-    });
-    
-    function closeModal(){
-       $(".modal").hide();
-    }
-
-   	 $("#submitA").on('click', function() {
-   	
-   	var oldAddress = $("#oldaddress").val().trim();
-   	var newAddress =  $("#sample3_address").val() +" "+$("#sample3_detailAddress").val()+" "+$("#sample3_extraAddress").val();
-   	var address = (newAddress==null | newAddress== "")? oldAddress:(newAddress);
-   	
- 	  if ($("#sample3_address").val() == "" |$("#sample3_detailAddress").val() =="" ) {
- 	    alert("주소를 입력해주세요.");
- 	   $("#sample3_address").focus();
- 	    return false;
- 	  } 
- 	  
-   	 $.ajax({ // JQuery 를 통한 ajax 호출 방식 사용
-   	 type : "POST",
-   	 url : "<%=request.getContextPath()%>/st/mypagem.do",
-   	 data : {
-   	 address : address
-   	 },
-   	 success : function(resulta) {
-   	 if(resulta == "성공"){
-   		 console.log(resulta);
-   		alert("수정이 완료되었습니다"); 
-   		location.reload(); 
-   		
-   	 } else if(resulta == "실패"){
-   		alert("수정에 실패했습니다. 다시 시도해주세요");
-   	 }
-   	 } 
-   	 });
-   	 })
-   });
-</script>
 <!-- 이메일 -->
 <div class="emailgroup">
 		<div class="d-flex row">
     <label for="email" class="label col-1">이메일</label>
-    <div class="inputgroup col-3">
-      <input type="text" readonly class="border-0" id="oldemail" value=<%=vo.getEmail()%>><button type=button id="modifyE" class="btn btn-secondary btn-sm">수정</button>
+    <div class="inputgroup col-6">
+      <input type="text" readonly class="border-0 minput" id="oldemail" value=<%=vo.getEmail()%>>
+      <button type="button" id="modifyE" class="btn btn-secondary btn-sm">수정</button>
     </div>
   </div><br>
   
@@ -233,8 +240,8 @@
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">이메일 변경하기</h5>
       </div>
-      <div class="modal-body">
-        <input type="text" class="form-control-plaintext" id="newemail"><input type="text" readonly class="form-control-plaintext" value="@gmail.com">
+      <div class="modal-body d-flex">
+        <input type="text" id="newemail" class="mail"><input type="text" class="mail" style="width:120px; border:none;" readonly value="@gmail.com">
       </div>
       <div class="modal-footer">
         <button type="button" id="submitE" class="btn btn-primary submit">확인</button>
@@ -243,7 +250,7 @@
     </div>
   </div>
 </div>
-</div>
+</div><br>
 <script> // 이메일 변경
     $(function() {
     $("#modifyE").on("click",function(){
@@ -295,19 +302,20 @@
 <!-- 비밀번호 -->
 <div class="d-flex row">
     <label for="inputPassword" class="label col-1">비밀번호 변경</label>
-    <div class="col-3">
-      <input type="password" class="form-control" id="oldpwd" placeholder="현재 비밀번호를 입력해주세요">
+    <div class="col-4 inputPwd">
+      <input type="password" class="form-control pwd1" id="oldpwd" placeholder="현재 비밀번호를 입력해주세요">
       <div class="alert" id="alert1" style="color:red; display:none;">비밀번호가 틀렸습니다</div>
-      <input type="password" class="form-control" id="newpwd" placeholder="새 비밀번호를 입력해주세요">
-      <div class="alert" id="alert2" style="color:red; display:none;;">비밀번호를 입력해주세요</div>
-      <input type="password" class="form-control" id="repwd" placeholder="새 비밀번호를 다시 한번 확인해주세요">
-      <div class="alert" id="alert3" style="color:red; display:none;;">비밀번호가 서로 일치하지 않습니다</div>
+      <input type="password" class="form-control pwd2" id="newpwd" placeholder="새 비밀번호를 입력해주세요">
+      <div class="alert" id="alert2" style="color:red; display:none;">비밀번호를 입력해주세요</div>
+      <input type="password" class="form-control pwd3" id="repwd" placeholder="새 비밀번호를 다시 확인해주세요">
+      <div class="alert" id="alert3" style="color:red; display:none;">비밀번호가 서로 일치하지 않습니다</div>
       <button type=button id="modifyPwd" class="font3 btn btn-secondary btn-sm">수정</button>
     </div>
   </div>
+</div>
   
 </form>
-
+</div>
 <script> // 주소 API
     // 우편번호 찾기 찾기 화면을 넣을 element
     var element_wrap = document.getElementById('wrap');
@@ -406,10 +414,12 @@
    			 if(result == "성공"){
    				 console.log("비번 일치");
 				   	 if ( newpwd == "") {
+				   		$(".pwd2").css("margin-bottom","0px");
 				   		$("#alert1").hide(); // 비번 틀림 경고 삭제해주기
 				   		$("#alert2").show();
 				   		$("#newpwd").focus();
 				   	  } else if ( newpwd != repwd){
+				   		$(".pwd3").css("margin-bottom","0px");
 				   		$("#alert1").hide(); // 비번 틀림 경고 삭제해주기
 				   		$("#alert3").show();
 				   		$("#repwd").focus();
@@ -436,6 +446,7 @@
 				   	  }
    			 } else if(result == "실패"){
    				 console.log(result);
+   				$(".pwd1").css("margin","0px");
    				$("#alert1").show();
    				$("#oldpwd").val("").focus(); // 비번 지워주기
    				
@@ -445,31 +456,8 @@
    			 });
    	 });
 
-/* var pwd = $("#pwd").val().trim();
-var repwd = $("#repwd").val().trim();
-  if ( $("#pwd").val() == "") {
-    alert("비밀번호를 입력하세요.");
-    pwd.focus();
-    return false;
-  };
-
-  //비밀번호 영문자+숫자+특수조합(8~25자리 입력) 정규식
-  var pwdCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
-
-  if (!pwdCheck.test(pwd.value)) {
-    alert("비밀번호는 영문자+숫자+특수문자 조합으로 8~25자리 사용해야 합니다.");
-    pwd.focus();
-    return false;
-  };
-
-  if (pwd !== repwd) {
-    alert("비밀번호가 일치하지 않습니다..");
-    repwd.focus();
-    return false;
-  }; */
-
-  $("#move_lms").click(function(){
-		location.href = "<%=request.getContextPath()%>/st/dashboard"; // lms 바로가기
+	$("#move_lms").click(function(){
+		location.href = '<%=request.getContextPath()%>/st/DashBoard';
 	});
 		
 	$("#myPage").click(function(){

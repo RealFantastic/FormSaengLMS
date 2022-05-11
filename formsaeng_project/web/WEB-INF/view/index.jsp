@@ -9,7 +9,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
-    <script type="text/javascript" src=" https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<link href="https://hangeul.pstatic.net/hangeul_static/css/NanumBarunGothicYetHangul.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <style>
         #root{
             background-image: url(./resources/images/semi_main_page.jpg) ;
@@ -30,16 +33,16 @@
         <section id="first">
             <div class="login_container">
                 <div class="login_wrapper">
-                    <div class="welcome">
+                    <div class="welcome font5" style="margin-bottom:30px;" >
                         안녕하세요 폼생대 LMS 입니다.
                     </div>
                     <div class="loginlink">
-                        <button id="std_login" class="move_button">학생 로그인</button>
-                        <button id="pf_login" class="move_button">교수자 로그인</button>
-                        <button id="mgr_login" class="move_button">관리자 로그인</button>
+                        <button id="std_login" class="btn btn-light move_button">학생 로그인</button>
+                        <button id="pf_login" class="btn btn-light move_button">교수자 로그인</button>
+                        <button id="mgr_login" class="btn btn-light move_button">관리자 로그인</button>
                     </div><br>
                     <div>
-                    <button id="notice" class="move_button">공지사항</button>
+                    <button id="notice" class="btn btn-primary move_button">공지사항</button>
                     </div>
                 </div>
             </div>

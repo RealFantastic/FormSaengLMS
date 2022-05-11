@@ -18,49 +18,52 @@
 <%MemberVo vo = (MemberVo)request.getAttribute("MyPageVo"); %>
 <div class="container justify-content-center">
 <jsp:include page="/WEB-INF/view/student/MainTemplateHeader.jsp"/>
-<form> 
+<div class="title font5">마이페이지</div>
+<form class="font3"> 
+<div class="form-content">
   <div class="d-flex row">
-    <label for="name" class="label col-1">이름</label>
+    <label for="name" class="label col-1">이름&emsp;</label>
     <div class="inputgroup col-6">
       <input type="text" readonly id="name" class="border-0" value=<%=vo.getName()%>>
     </div>
   </div><br>
     <div class="d-flex row">
-    <label for="id" class="label col-1">학번</label>
+    <label for="id" class="label col-1">학번&emsp;</label>
     <div class="inputgroup col-6">
       <input type="text" readonly  id="id" class="border-0" value=<%=vo.getId()%>>
     </div>
   </div><br>
      <div class="d-flex row">
-	<label for="deptName" class="label col-1">학과</label>
+	<label for="deptName" class="label col-1">학과&emsp;</label>
     <div class="inputgroup col-6">
       <input type="text" readonly  id="deptName" class="border-0" value=<%=vo.getDeptName()%>>
     </div>
   </div><br>
    <div class="d-flex row">
-  	<label for="pnum" class="label col-1">연락처</label>
+    <label for="address" class="label col-1">주소&emsp;</label>
+    <div class="inputgroup col-7">
+      <input type="text" readonly  id="address" class="border-0" value="<%=vo.getAddress()%>">
+    </div>
+  </div><br>
+     <div class="d-flex row">
+  	<label for="pnum" class="label col-1" style="padding-right:15px;">연락처 </label>
     <div class="inputgroup col-6">
       <input type="text" readonly  id="pnum" class="border-0" value=<%=vo.getPnum()%>>
     </div>
   </div><br>
-     <div class="d-flex row">
-    <label for="address" class="label col-1">주소</label>
-    <div class="inputgroup col-7">
-      <input type="text" readonly  id="address" class="border-0 col-7" value="<%=vo.getAddress()%>">
-    </div>
-  </div><br>
   <div class="d-flex row">
-    <label for="email" class="label col-1">이메일</label>
+    <label for="email" class="label col-1" style="padding-right:15px;">이메일</label>
     <div class="inputgroup col-7">
-      <input type="text" readonly  id="email" class="border-0 col-7" value=<%=vo.getEmail()%>> 
+      <input type="text" readonly  id="email" class="border-0" value=<%=vo.getEmail()%>> 
     </div>
   </div>
+</div>
 </form>
 
 <!-- Button trigger modal -->
-<button type="button" id="myModal" class="btn btn-primary">
-  수정하기
-</button>
+<div class="modifybtn">
+<button type="button" id="myModal" class="btn btn-primary">수정하기</button>
+</div>
 </div>
 <!-- Modal -->
 <div class="modal" id="exampleModal" >
@@ -79,13 +82,13 @@
     </div>
   </div>
 </div>
-
+<form id="frm">
+</form>
 <script>
 
 $("#move_lms").click(function(){
-	location.href = "<%=request.getContextPath()%>/st/dashboard"; // lms 바로가기
+	location.href = '<%=request.getContextPath()%>/st/DashBoard';
 });
-
 
 // 모달
 $(function(){
@@ -127,8 +130,10 @@ $("#myPage").hide();
 		alert("비밀번호가 확인되었습니다"); 
 		$(".modal").hide();
 		$("#pwdcheck").val(""); // 비번 삭제해주기
-		location.href = "<%=request.getContextPath()%>/st/mypagem";
-<%-- location.replace('<%=request.getContextPath()%>/st/mypagem') ; --%>
+		
+		frm.action = "<%=request.getContextPath()%>/st/mypagem";
+		frm.method = "post";
+		frm.submit();
 	 } else if(result == "실패"){
 		alert("비밀번호가 일치하지 않습니다. 다시 시도해주세요");
 		$("#pwdcheck").focus();

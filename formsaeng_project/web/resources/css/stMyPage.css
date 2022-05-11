@@ -1,12 +1,48 @@
-
-form{
-	padding:100px;
+.container>form{
+	display:flex;
+	justify-content:center;
 }
 
-label{min-width: max-content;}
-.col-7 {
-	
+.container>.title{
 	display:flex;
+	justify-content:center;
+	padding-bottom:15px;
+}
+
+.modifybtn{
+	display:flex;
+	justify-content:center;
+	padding-top:30px;
+}
+.form-content{
+	padding: 30px;
+	outline: #adb5bd solid 1px;
+	border-radius: 5px;
+	background-color:#f8f9fa;
+	color:#343a40;
+}
+
+label{
+	min-width: max-content; 
+	width:30px;
+}
+
+#address{
+	min-width:500px;
+}
+.col-7 {
+	display:flex;
+}
+
+.inputgroup>input[type="text"]{
+	width:max-content;
+	background-color:#f8f9fa;
+	color:#212529;
+	
+}
+
+.pnum {
+	width:30px;
 }
 
 input:focus{outline:none;} /* 인풋박스 클릭시 테두리 효과 없애기 */

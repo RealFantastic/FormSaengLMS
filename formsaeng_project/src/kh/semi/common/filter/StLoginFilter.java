@@ -40,13 +40,12 @@ public class StLoginFilter implements Filter {
 		if (check) {
 			chain.doFilter(request, response); // 세션 정보 있어
 		} else { // 로그인 페이지로 이동
-			 PrintWriter out = response.getWriter(); out.println("<script>");
+			 PrintWriter out = response.getWriter(); 
+			 out.println("<script>");
 			 out.println("window.alert('로그인이 필요한 페이지입니다');");
-			 out.println("window.location.href='http://localhost:8090/lms/stlogin';");
+			 out.println("window.location.href='"+request.getServletContext().getContextPath()+"/stlogin';");
 			 out.println("</script>");
 			 
-			// request.getRequestDispatcher("/WEB-INF/view/student/login.jsp").forward(request,
-			// response);
 		}
 	}
 

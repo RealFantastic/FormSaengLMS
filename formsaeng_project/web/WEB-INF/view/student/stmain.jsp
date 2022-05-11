@@ -56,7 +56,7 @@
 	});
 	
    $("#notice").click(function(){
-		location.href = "<%=request.getContextPath()%>/st/blist"; // 공지사항
+		location.href = "<%=request.getContextPath()%>/notice/list"; // 공지사항
 	});
    
    $("#enroll").click(function(){

@@ -48,7 +48,7 @@ $(function(){
 <body>
 <div id="container">
     <div id="plogin">
-            <div class="minilogo"><img src="<%= request.getContextPath() %>/resources/images/fromsaenglogo.png" alt="logo"></div>
+            <div class="minilogo"><a href="<%=request.getContextPath()%>"><img src="<%= request.getContextPath() %>/resources/images/fromsaenglogo.png" alt="logo"></a></div>
             <div class="logincenter">
                 <div class="logo"><img src="<%= request.getContextPath() %>/resources/images/logo.png" alt="폼생대학교"></div>
                     <div id="login">

@@ -48,7 +48,7 @@ public class MgLoginFilter implements Filter {
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
 				out.println("window.alert('로그인이 필요한 페이지입니다');");
-				out.println("window.location.href='http://localhost:8090/lms/mglogin';");
+				out.println("window.location.href='"+request.getServletContext().getContextPath()+"/mglogin';");
 				out.println("</script>");
 
 			}
