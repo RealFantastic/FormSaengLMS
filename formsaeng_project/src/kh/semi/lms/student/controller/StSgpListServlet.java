@@ -1,4 +1,4 @@
-package kh.semi.lms.professor.controller;
+package kh.semi.lms.student.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,18 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 import kh.semi.lms.group.service.StudyGroupService;
 import kh.semi.lms.group.vo.StudyGroupVo;
 
-
 /**
- * Servlet implementation class PfSgpListServlet
+ * Servlet implementation class StSgpListServlet
  */
-@WebServlet("/pf/studygroup")
-public class PfSgpListServlet extends HttpServlet {
+@WebServlet("/st/studygroup")
+public class StSgpListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PfSgpListServlet() {
+    public StSgpListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,15 +37,16 @@ public class PfSgpListServlet extends HttpServlet {
 		System.out.println(volist);	
 		request.setAttribute("StudyGrouplist", volist);
 		request.setAttribute("s", subcode);
-		request.getRequestDispatcher("/WEB-INF/view/professor/pf_studygroupboard.jsp").forward(request, response);
+		System.out.println();
+		request.getRequestDispatcher("/WEB-INF/view/student/st_studygroupboard.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		// TODO Auto-generated method stub
-//		doGet(request, response);
+		// TODO Auto-generated method stub
+		//doGet(request, response);
 	}
 
 }

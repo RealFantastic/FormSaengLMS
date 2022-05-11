@@ -21,17 +21,19 @@ public class StudygroupDao {
 	private Statement stmt = null;
 	private ResultSet rs = null;
 	
-	public ArrayList<StudyGroupVo> StudyGrouplist(Connection conn){
+	public ArrayList<StudyGroupVo> StudyGrouplist(Connection conn, String subcode){
 		ArrayList<StudyGroupVo> volist = null;
+		System.out.println(subcode);
 		
 		String sql = "SELECT TB1.*,SUBJECT_NAME "
 				+ "FROM (SELECT ES.ID, SUBJECT_CODE, NAME FROM ENROLLMENT_STUDENT ES "
 				+ "        JOIN MEMBER ON ES.ID = MEMBER.ID) TB1 "
 				+ "JOIN SUBJECT ON TB1.SUBJECT_CODE = SUBJECT.SUBJECT_CODE "
-				+ "WHERE TB1.SUBJECT_CODE = 'M0101' "; //추후 SUBJECT_CODE = ? 변경
+				+ "WHERE TB1.SUBJECT_CODE = ? "; //추후 SUBJECT_CODE = ? 변경
 				
 		try {		
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, subcode);
 			rs = pstmt.executeQuery();
 			volist	 = new ArrayList<StudyGroupVo>();
 			while(rs.next()) {

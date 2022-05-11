@@ -107,9 +107,9 @@
 					<div class="list-tap">
 						<ul class="list-group list-group-flush">
 						<!-- TODO: 강의 목록 클릭시 강의탭 열기 -->
-							<li class="list-group-item"><a href="">강의 자료실</a></li>
+							<li class="list-group-item"><a href="<%=request.getContextPath()%>/pf/reflist?s=${subCode}">강의 자료실</a></li>
 							<li class="list-group-item"><a href="<%=request.getContextPath()%>/pf/asgboard">과제 게시판</a></li>
-							<li class="list-group-item"><a href="">사용자 및 그룹</a></li>
+							<li class="list-group-item"><a href="<%=request.getContextPath()%>/pf/studygroup?s=${subCode}">사용자 및 그룹</a></li>
 					    </ul>
 					</div>
 			</div>

@@ -23,7 +23,7 @@
 	crossorigin="anonymous"></script> 
   </head>
 <body>
-  <jsp:include page = "/WEB-INF/view/professor/pfHeader.jsp"/>
+ <jsp:include page = "/WEB-INF/view/professor/pfHeader.jsp"/>
   <section id="template_content">
     <div class="template_container">
       <div class="template-title">
@@ -31,7 +31,9 @@
         <hr>
       </div>
       <div class="content_container">
-  			<form id="pf_readform"action="<%=request.getContextPath()%>/pf/detailview" method="post">
+  			<form id="pf_readform"action="<%=request.getContextPath()%>/st/detailview" method="post">
+  			<% String subCode = request.getParameter("s"); %>
+  			<input type="hidden" name = "code" value="<%=subCode %>">
 		<div class="body_div">
 			
 			<div class=title_search>
@@ -60,7 +62,7 @@
 				</div>
 			</div>
 	</div>
-	<button type=button id = "ref_list"class="btn btn-primary">목록</button>
+	<button type=button id="ref_list" class="btn btn-primary">목록</button>
 	</form>
 
 	</div>
@@ -68,7 +70,7 @@
   </section>
   <script>
   $("#ref_list").click(function() {
-	  history.back();
+			history.back();
   });
   
   </script>

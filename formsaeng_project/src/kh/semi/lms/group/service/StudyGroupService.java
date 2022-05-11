@@ -11,12 +11,12 @@ import kh.semi.lms.group.dao.StudygroupDao;
 import kh.semi.lms.group.vo.StudyGroupVo;
 
 public class StudyGroupService {
-	public ArrayList<StudyGroupVo> StudyGrouplist(){
+	public ArrayList<StudyGroupVo> StudyGrouplist(String subcode){
 		
 		ArrayList<StudyGroupVo> result = null;
 		Connection conn = getConnection();
 		
-		result = new StudygroupDao().StudyGrouplist(conn);
+		result = new StudygroupDao().StudyGrouplist(conn, subcode);
 		close(conn);
 		
 		return result;
