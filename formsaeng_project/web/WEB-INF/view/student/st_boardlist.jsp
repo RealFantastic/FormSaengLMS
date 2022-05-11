@@ -31,7 +31,7 @@
   <section id="template_content">
     <div class="template_container">
       <div class="template-title">
-        <h1>공지사항</h1>
+        <h1>과제 게시판</h1>
         <hr>
       </div>
       <div class="content_container">
@@ -102,7 +102,7 @@
 							<ul class="list-group list-group-flush">
 							<!-- TODO: 강의 목록 클릭시 강의탭 열기 -->
 								<li class="list-group-item"><a href="">강의 자료실</a></li>
-								<li class="list-group-item"><a href="<%=request.getContextPath()%>/st/asgboard"">과제 게시판</a></li>
+								<li class="list-group-item"><a href="<%=request.getContextPath()%>/st/asgboard">과제 게시판</a></li>
 								<li class="list-group-item"><a href="">사용자 및 그룹</a></li>
 					   		</ul>
 						</div>

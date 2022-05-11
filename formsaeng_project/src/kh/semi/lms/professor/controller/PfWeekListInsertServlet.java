@@ -26,7 +26,11 @@ public class PfWeekListInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/view/professor/pf_enrolllectureboard.jsp").forward(request, response);
+		String subCode =request.getParameter("s");
+		String subName =request.getParameter("n");
+		request.setAttribute("subCode", subCode);
+		request.setAttribute("subName", subName);
+		request.getRequestDispatcher("/WEB-INF/view/professor/pf_enrolllectureboard.jsp?s="+subCode).forward(request, response);
 	}
 
 	/**

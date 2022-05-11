@@ -29,8 +29,12 @@
 	<section id="template_content">
 		<div class="template_container">
 			<div class="template-title">
-				<h1>강의실</h1>
-				<hr>
+			<% String subName = (String)request.getAttribute("subName"); %>
+ 			<% String subCode = (String)request.getAttribute("subCode"); %> 
+ 		
+				<h1 id="subName"><%= subName %></h1>
+ 			<input id="subCode" name="subCode" type="hidden" value="${subCode }">
+				<hr>	
 			</div>
 			<div class="content_container">
 				
@@ -77,7 +81,7 @@
 				<div class="list-tap">
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item"><a href="">강의 자료실</a></li>
-						<li class="list-group-item"><a href="">과제 게시판</a></li>
+						<li class="list-group-item"><a href="<%=request.getContextPath()%>/st/asgboard">과제 게시판</a></li>
 						<li class="list-group-item"><a href="">사용자 및 그룹</a></li>
 					 </ul>
 				</div>

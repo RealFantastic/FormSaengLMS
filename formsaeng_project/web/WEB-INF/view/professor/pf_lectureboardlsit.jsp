@@ -29,11 +29,14 @@
 	<section id="template_content">
 		<div class="template_container">
 			<div class="template-title">
- 			<% String subName = (String)request.getAttribute("subName"); %> 
-				<h1><%= subName %></h1>
+ 			<% String subName = (String)request.getAttribute("subName"); %>
+ 			<% String subCode = (String)request.getAttribute("subCode"); %> 
+ 		
+				<h1 id="subName"><%= subName %></h1>
+ 			<input id="subCode" name="subCode" type="hidden" value="${subCode }">
 				<hr>
 			</div>
-			<div class="content_container">
+				<div class="content_container">
 				
 				<!-- 템플릿 -->
 
@@ -87,11 +90,17 @@
 								<li class="list-group-item"><a href="">사용자 및 그룹</a></li>
 					   		</ul>
 						</div>
+					
+					
 	</section>
 </body>
 <script>
 $("#lc_add_btn").click(function(){
-	location.href = "<%=request.getContextPath()%>/pf/week/insert";
+	console.log("subCode 값은 ? : "+$("#subCode").val());
+	console.log("subName 값은 ? : "+$("#subName").text());
+	var s = $("#subCode").val();
+	var n = $("#subName").text();
+ 	location.href = "<%=request.getContextPath()%>/pf/week/insert?s="+s+"&n="+n; 
 })
 </script>
 </html>

@@ -97,18 +97,12 @@ public class PfWeekListInsertDoServlet extends HttpServlet {
 //			
 //		}
 		
-
-		// 업로드 된 파일 이름 얻어오기
-//		String fileName2 = multi.getFilesystemName("fileName2");
-//		System.out.println(fileName2);
-//		if(fileName2 == null) {
-//			System.out.println("업로드 실패");
-//		} else {
-//			out.println("<br> 제목 :"+ request.getParameter("lectureName"));
-//			out.println("<br> 첨부파일명 :"+ request.getParameter(fileName1));
-//			out.println("<br> 업로드 성공!!");
-//		}
 		String weekNo = multi.getParameter("week");
+		String subCode = multi.getParameter("subCode");
+		System.out.println("subCode 의 값은 ?"+subCode);
+		
+		System.out.println("week 의 값은 ? "+weekNo);
+		System.out.println("subCode 의 값은 ? "+subCode);
 		
 		int week = Integer.parseInt(weekNo);
 		String lName = multi.getParameter("lectureName");
@@ -124,6 +118,7 @@ public class PfWeekListInsertDoServlet extends HttpServlet {
 		vo.setvTitle(lName);
 		vo.setfName(fName);
 		vo.setfPath(fPath);
+		vo.setSubCode(subCode);
 		
 		System.out.println("서블릿 vo 값은 ? "+vo);
 		

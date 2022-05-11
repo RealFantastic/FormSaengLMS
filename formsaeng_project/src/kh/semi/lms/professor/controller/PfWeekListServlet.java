@@ -41,13 +41,12 @@ public class PfWeekListServlet extends HttpServlet {
 		String user_subCode = request.getParameter("s");
 		String user_subName = request.getParameter("n");
 		
-		ArrayList<LectureVo> volist = new LectureService().lectureBoardList(user_id, user_subCode);
-		
-		/*
-		 * String[] numArray = new String[]
-		 * {"One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten",
-		 * "Eleven","Tweleve","Thirteen","Fourteen","Fifteen"};
-		 */
+		ArrayList<LectureVo> volist = new ArrayList();
+		if(user_id.charAt(0) == 'P') {
+			volist = new LectureService().lectureBoardListP(user_id, user_subCode);
+		}else {
+			volist = new LectureService().lectureBoardListS(user_id, user_subCode);
+		}
 		
 		for(int i = 0; i<volist.size(); i++) {
 			int no = volist.get(i).getWeekNo(); 
@@ -82,6 +81,7 @@ public class PfWeekListServlet extends HttpServlet {
 		
 		request.setAttribute("lectureVolist", volist);
 		request.setAttribute("subName",user_subName);
+		request.setAttribute("subCode", user_subCode);
 		request.getRequestDispatcher("/WEB-INF/view/professor/pf_lectureboardlsit.jsp").forward(request, response);
 	
 	}

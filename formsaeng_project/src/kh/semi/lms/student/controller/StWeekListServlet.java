@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.lms.lecture.model.service.LectureService;
 import kh.semi.lms.lecture.model.vo.LectureVo;
+import kh.semi.member.model.vo.MemberVo;
 
 /**
  * Servlet implementation class StWeekListServlet
@@ -32,20 +33,14 @@ public class StWeekListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String user_id = request.getParameter("id"); 
-		String user_subCode = request.getParameter("subCode");
+		MemberVo vo = (MemberVo) request.getSession().getAttribute("ssMemberVo");
+		String user_id = vo.getId();
+		String user_subCode = request.getParameter("s");
+		String user_subName = request.getParameter("n");
 		//값받아오면 넘겨주기
+
 		
-		String id = "S2022954112";
-		String subCode = "C0101";
-		
-		ArrayList<LectureVo> volist = new LectureService().lectureBoardList(id, subCode);
-		
-		/*
-		 * String[] numArray = new String[]
-		 * {"One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten",
-		 * "Eleven","Tweleve","Thirteen","Fourteen","Fifteen"};
-		 */
+		ArrayList<LectureVo> volist = new LectureService().lectureBoardListS(user_id,user_subCode);
 		
 		for(int i = 0; i<volist.size(); i++) {
 			int no = volist.get(i).getWeekNo(); 
@@ -79,6 +74,8 @@ public class StWeekListServlet extends HttpServlet {
 		}
 		
 		request.setAttribute("lectureVolist", volist);
+		request.setAttribute("subName",user_subName);
+		request.setAttribute("subCode", user_subCode);
 		request.getRequestDispatcher("/WEB-INF/view/student/st_lectureboardlist.jsp").forward(request, response);
 	}
 

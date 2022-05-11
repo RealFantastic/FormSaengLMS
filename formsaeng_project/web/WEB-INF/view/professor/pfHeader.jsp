@@ -35,12 +35,6 @@
             Subject
           </a>
           	<ul class="submenu" id="sub">
-<%--           		<c:forEach items="${lectureVolist}" var="vo"> --%>
-<!-- 				<li><a href="#">sub 1-1</a></li> -->
-<%-- 				</c:forEach> --%>
-				<li><a href="#">sub 1-2</a></li>
-				<li><a href="#">sub 1-3</a></li>
-				<li><a href="#">sub 1-4</a></li>
 			</ul>
         </li>
         <li>
@@ -123,7 +117,7 @@
   					}else if(temp.charAt(0) == 'S'){
   						for(var i = 0; i < result.length; i++){
   							console.log(result[i].subCode);
-	  						html+= "<li><a href='<%= request.getContextPath() %>/st/week?s=" + result[i].subCode + "'>" + result[i].subName + "</a></li>";
+	  						html+= "<li><a href='<%= request.getContextPath() %>/st/week?s=" + result[i].subCode +"&n="+ result[i].subName + "'>" + result[i].subName + "</a></li>";
   						}
   						$("#sub").empty();
   						$("#sub").append(html);

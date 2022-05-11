@@ -32,6 +32,13 @@
       <div class="content_container">
         <!-- 템플릿 -->
         <form id="fileForm" method="post" enctype="multipart/form-data">
+        
+        <% String subCode = (String)request.getAttribute("subCode"); %> 
+ 		<% String subName = (String)request.getAttribute("subName"); %>
+ 		
+ 		<input id="subCode" name="subCode" type="hidden" value="${subCode }">
+ 		<input id="subName" name="subName" type="hidden" value="${subName }">
+        
        <!-- 주차 -->
        <select id="week" name="week" required>
         <option value="" selected>주차선택</option>
@@ -104,8 +111,10 @@
 					alert("실패했습니다.");
 				} else {
 					alert(data+"성공했습니다.");
+					var subCode = $("#subCode").val();
+					var subName = $("#subName").val();
 					location.reload();
-					location.href="<%=request.getContextPath()%>/pf/week";
+					location.href="<%=request.getContextPath()%>/pf/week?s="+subCode+"&n="+subName;
 				}
 			},
 			error : function(request, status, error){
