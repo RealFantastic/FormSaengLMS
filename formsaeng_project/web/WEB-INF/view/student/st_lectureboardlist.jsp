@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/reset.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/template.css">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/pfWeekList.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/stWeekList.css">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -24,13 +24,12 @@
   </head>
 <body>
 
-  <jsp:include page="/WEB-INF/view/professor/pfHeader.jsp"/>
+  <jsp:include page="/WEB-INF/view/student/stHeader.jsp"/>
   
 	<section id="template_content">
 		<div class="template_container">
 			<div class="template-title">
- 			<% String subName = (String)request.getAttribute("subName"); %> 
-				<h1><%= subName %></h1>
+				<h1>강의실</h1>
 				<hr>
 			</div>
 			<div class="content_container">
@@ -38,11 +37,6 @@
 				<!-- 템플릿 -->
 
 				<div class="accordion" id="accordionExample">
-				
-					
-					<button id="lc_add_btn" class="btn btn-secondary">강의 추가</button>
-					<br><br>
-					
 					<c:if test="${not empty lectureVolist }">
 						<c:forEach items="${lectureVolist}" var="vo">
 							<c:set var="i" value="${i+1 }" />
@@ -71,7 +65,7 @@
 									aria-labelledby="heading${vo.cName }"
 									data-bs-parent="#accordionExample">
 									<div class="accordion-body">
-										<a href="<%=request.getContextPath()%>/pf/week/video?lecNo=${vo.lecNo}" style="text-decoration: none;"><strong>${vo.vTitle }</strong></a>
+										<a href="<%=request.getContextPath()%>/st/week/video?lecNo=${vo.lecNo}" style="text-decoration: none;"><strong>${vo.vTitle }</strong></a>
 										<input type="hidden" id="video" value="" />
 									</div>
 								</div>
@@ -81,17 +75,12 @@
 
 				</div>
 				<div class="list-tap">
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item"><a href="">강의 자료실</a></li>
-								<li class="list-group-item"><a href="<%=request.getContextPath()%>/pf/asgboard">과제 게시판</a></li>
-								<li class="list-group-item"><a href="">사용자 및 그룹</a></li>
-					   		</ul>
-						</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item"><a href="">강의 자료실</a></li>
+						<li class="list-group-item"><a href="">과제 게시판</a></li>
+						<li class="list-group-item"><a href="">사용자 및 그룹</a></li>
+					 </ul>
+				</div>
 	</section>
 </body>
-<script>
-$("#lc_add_btn").click(function(){
-	location.href = "<%=request.getContextPath()%>/pf/week/insert";
-})
-</script>
 </html>

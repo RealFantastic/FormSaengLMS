@@ -1,4 +1,4 @@
-package kh.semi.lms.professor.controller;
+package kh.semi.lms.student.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,23 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.taglibs.standard.tag.common.fmt.ParseDateSupport;
-
 import kh.semi.lms.lecture.model.service.LectureService;
 import kh.semi.lms.lecture.model.vo.LectureVo;
-import kh.semi.member.model.vo.MemberVo;
 
 /**
- * Servlet implementation class PfWeekListServlet
+ * Servlet implementation class StWeekListServlet
  */
-@WebServlet("/pf/week")
-public class PfWeekListServlet extends HttpServlet {
+@WebServlet("/st/week")
+public class StWeekListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PfWeekListServlet() {
+    public StWeekListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,13 +32,14 @@ public class PfWeekListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String user_id = request.getParameter("id"); 
+		String user_subCode = request.getParameter("subCode");
+		//값받아오면 넘겨주기
 		
-		MemberVo vo = (MemberVo) request.getSession().getAttribute("ssMemberVo");
-		String user_id = vo.getId();
-		String user_subCode = request.getParameter("s");
-		String user_subName = request.getParameter("n");
+		String id = "S2022954112";
+		String subCode = "C0101";
 		
-		ArrayList<LectureVo> volist = new LectureService().lectureBoardList(user_id, user_subCode);
+		ArrayList<LectureVo> volist = new LectureService().lectureBoardList(id, subCode);
 		
 		/*
 		 * String[] numArray = new String[]
@@ -81,15 +79,15 @@ public class PfWeekListServlet extends HttpServlet {
 		}
 		
 		request.setAttribute("lectureVolist", volist);
-		request.setAttribute("subName",user_subName);
-		request.getRequestDispatcher("/WEB-INF/view/professor/pf_lectureboardlsit.jsp").forward(request, response);
-	
+		request.getRequestDispatcher("/WEB-INF/view/student/st_lectureboardlist.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 //	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		// TODO Auto-generated method stub
+//		doGet(request, response);
 //	}
 
 }

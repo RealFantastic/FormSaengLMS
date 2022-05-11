@@ -48,11 +48,9 @@ public class LectureDao {
 		return result;		
 	}
 	
-	public ArrayList<LectureVo> lectureBoardList(Connection conn, String id, String subCode){
+	public ArrayList<LectureVo> lectureBoardList(Connection conn, String user_id, String user_subCode){
 		ArrayList<LectureVo> volist = null;
 		
-//		String id = "S2022954112";
-//		String subCode = "C0101";
 				
 		String sql = "select * "
 				+ " from week_lecture w join enrollment_student e"
@@ -61,8 +59,8 @@ public class LectureDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			pstmt.setString(2, subCode);
+			pstmt.setString(1, user_id);
+			pstmt.setString(2, user_subCode);
 			
 			rs =pstmt.executeQuery();
 			

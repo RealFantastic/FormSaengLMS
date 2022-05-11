@@ -17,9 +17,9 @@ public class LectureService {
 		return result;
 	}
 	
-	public ArrayList<LectureVo> lectureBoardList(String id, String subCode){
+	public ArrayList<LectureVo> lectureBoardList(String user_id, String user_subCode){
 		Connection conn = getConnection();
-		ArrayList<LectureVo> volist = new LectureDao().lectureBoardList(conn,id,subCode);
+		ArrayList<LectureVo> volist = new LectureDao().lectureBoardList(conn,user_id,user_subCode);
 		close(conn);
 		return volist;
 	}

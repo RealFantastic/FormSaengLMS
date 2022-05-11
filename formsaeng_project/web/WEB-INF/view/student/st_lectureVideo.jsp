@@ -1,6 +1,8 @@
 <%@page import="kh.semi.lms.lecture.model.vo.LectureVo"%>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/reset.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/template.css">
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -20,9 +22,9 @@
 	<script src="https://kit.fontawesome.com/ef09f998fc.js" crossorigin="anonymous"></script>  
   </head>
 <body>
- 
- <jsp:include page="/WEB-INF/view/professor/pfHeader.jsp"/>
- 
+  
+  <jsp:include page="/WEB-INF/view/student/stHeader.jsp"/>
+  
   <section id="template_content">
     <div class="template_container">
       <div class="template-title">
