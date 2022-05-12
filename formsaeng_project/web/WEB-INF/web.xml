@@ -19,6 +19,7 @@
       <url-pattern>*.mp4</url-pattern>
       <url-pattern>*.mkv</url-pattern>
       <url-pattern>*.ogg</url-pattern>
+      <url-pattern>*.gif</url-pattern>
    </servlet-mapping>
 
    <filter>

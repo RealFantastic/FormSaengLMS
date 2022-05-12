@@ -32,13 +32,17 @@ public class StWeekVideoServlet extends HttpServlet {
 		String no = request.getParameter("lecNo");
 		int lecNo = Integer.parseInt(no);
 		
+		String subCode = request.getParameter("s");
+		System.out.println(subCode);
+		String subName = request.getParameter("n");
+		System.out.println(subName);
+		
 		LectureVo vo = new LectureService().lecturePath(lecNo);
 		
 		request.setAttribute("lecturePath", vo);
+		request.setAttribute("subCode", subCode);
+		request.setAttribute("subName", subName);
 	
-		//db
-		//LectureVo vo =
-		//request.setAtti/// 
 		request.getRequestDispatcher("/WEB-INF/view/student/st_lectureVideo.jsp").forward(request, response);
 	}
 

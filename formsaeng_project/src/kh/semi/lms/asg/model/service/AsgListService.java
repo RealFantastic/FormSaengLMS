@@ -57,6 +57,7 @@ public class AsgListService {
 	//게시글 여러개 삭제하기
 	public int multiDeleteBoard(String[] delNo) {
 		Connection conn = getConnection();
+		setAutoCommit(conn, false);
 		int result = new AsgListDao().multiDeleteBoard(conn, delNo);
 		close(conn);
 		return result;
@@ -110,6 +111,7 @@ public class AsgListService {
 			return volist;
 	}
 	
+	//댓글&파일 등록
 	public int insertAsgComment(AsgCommentVo avo, AsgFileVo fvo) {
 		Connection conn = getConnection();
 		setAutoCommit(conn, false);
