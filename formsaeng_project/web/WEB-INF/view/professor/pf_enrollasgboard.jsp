@@ -27,7 +27,7 @@
   <section id="template_content">
     <div class="template_container">
       <div class="template-title">
-        <h1>공지사항</h1>
+        <h1>과제게시판 글쓰기</h1>
         <hr>
       </div>
       <div class="content_container">
@@ -61,7 +61,7 @@
 			</div>
 			<div class="button_enroll">
 					<button type="submit" class="btn btn-primary" id="insertBtn">등록하기</button>
-					<button type="button" class="btn btn-primary" id="backBtn">취소하기</button>
+					<button type="button" class="btn btn-primary" id="backBtn" onclick="location.href='<%=request.getContextPath()%>/pf/asgboard';">취소하기</button>
 				</div>
 		</form>
 	</div>
@@ -72,7 +72,6 @@
 <script>
 window.alert('<%= request.getAttribute("msg") %>');
 
-							
 </script>
 <% } %>
 </html>

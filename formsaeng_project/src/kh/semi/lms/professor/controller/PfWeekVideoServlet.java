@@ -32,13 +32,17 @@ public class PfWeekVideoServlet extends HttpServlet {
 		String no = request.getParameter("lecNo");
 		int lecNo = Integer.parseInt(no);
 		
+		String subCode = request.getParameter("s");
+		System.out.println(subCode);
+		String subName = request.getParameter("n");
+		System.out.println(subName);
+		
 		LectureVo vo = new LectureService().lecturePath(lecNo);
 		
 		request.setAttribute("lecturePath", vo);
-	
-		//db
-		//LectureVo vo =
-		//request.setAtti/// 
+		request.setAttribute("subCode", subCode);
+		request.setAttribute("subName", subName);
+
 		request.getRequestDispatcher("/WEB-INF/view/professor/pf_lectureVideo.jsp").forward(request, response);
 	}
 

@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src=" https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <title>템플릿만들기</title>
+    <title>동영상강의</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <link href="https://hangeul.pstatic.net/hangeul_static/css/NanumBarunGothicYetHangul.css" rel="stylesheet">
@@ -31,7 +31,14 @@
       </div>
       <div class="content_container">
         <!-- 템플릿 -->
+        <% String subCode = (String)request.getAttribute("subCode"); %>
+        <% String subName = (String)request.getAttribute("subName"); %>
+        <input name=subCode id="subCode" type="hidden" value="${subCode}">
+        <input name=subName id="subName" type="hidden" value="${subName}">
+        
         <% LectureVo vo = (LectureVo)request.getAttribute("lecturePath"); %>
+        <input name=subCode id="subCode" type="hidden" value="<%=vo.getSubCode() %>">
+        <div><button type="button" id="list_btn" class="btn btn btn-secondary">목록</button></div>
         
         <video id="videoPlay" width="700" height="600" controls autoplay>      
 			    <source type="video/ogg" src="<%=request.getContextPath()%><%=vo.getfPath() %><%=vo.getfName() %>"/>      
@@ -40,10 +47,17 @@
 			</video>
         
         
-            </div>
-          </div>
-        </div>
+       </div>
       </div>
+        
   </section>
+  <script>
+  $("#list_btn").click(function(){
+	  console.log($("#subCode").val());
+	  var s = $("#subCode").val();
+	  var n = $("#subName").val();
+	  location.href="<%=request.getContextPath()%>/pf/week?s="+s+"&n="+n;
+  }) 
+  </script>;
 </body>
 </html>

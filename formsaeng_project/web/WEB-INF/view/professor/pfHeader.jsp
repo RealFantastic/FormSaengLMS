@@ -62,13 +62,7 @@
   <% String id = mvo.getId(); %>
        <script>
   $(document).ready(function(){
-	//menu v2 ho
-	/* $(".menu-v2").mouseover(function(){ 
-			$(this).children(".submenu").show();
-		}); */
- 		/* $(".menu-v2").mouseleave(function(){ 
-			$(this).children(".submenu").hide(); 
-		}); */
+	  
 		$(".menu-v2").on("click",function(){
 			if($(".submenu").css('display') == 'none'){
 				$(this).children(".submenu").show();	
@@ -105,19 +99,11 @@
   				}else{
   					var html = "";
   					
-  					// 링크에 로그인한 사람이 교수인지 학생인지에 따라 각각 다른 url을 부여해야함.
+  					// 링크에 로그인한 사람이 교수일때 url을 부여해야함.
   					if(temp.charAt(0) =='P'){
   						for(var i = 0; i < result.length; i++){
   							console.log(result[i].subCode);
-  							//TODO result[i].subCode 값을 a태그 쿼리스트링으로 대입
 	  						html+= "<li><a href='<%= request.getContextPath() %>/pf/week?s=" + result[i].subCode +"&n="+ result[i].subName + "'>" + result[i].subName + "</a></li>";
-  						}
-  						$("#sub").empty();
-  						$("#sub").append(html);
-  					}else if(temp.charAt(0) == 'S'){
-  						for(var i = 0; i < result.length; i++){
-  							console.log(result[i].subCode);
-	  						html+= "<li><a href='<%= request.getContextPath() %>/st/week?s=" + result[i].subCode +"&n="+ result[i].subName + "'>" + result[i].subName + "</a></li>";
   						}
   						$("#sub").empty();
   						$("#sub").append(html);
@@ -126,7 +112,7 @@
   				}
   			}
   		})
-  	}
+  	};
   
   </script> 
   </header>
