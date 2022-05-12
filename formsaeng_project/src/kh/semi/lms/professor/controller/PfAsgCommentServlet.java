@@ -83,13 +83,6 @@ public class PfAsgCommentServlet extends HttpServlet {
 		// 업로드 된 파일 이름 얻어오기
 		String fileName1 = multi.getFilesystemName("fileName1");
 		System.out.println(fileName1);
-//		if(fileName1 == null) {
-//			System.out.println("업로드 실패");
-//			out.print(0);
-//			out.flush();
-//			out.close();
-//			return;
-//		} 
 		
 		String cContent = multi.getParameter("cmtCnt");
 		String no = multi.getParameter("bANo");
@@ -114,10 +107,7 @@ public class PfAsgCommentServlet extends HttpServlet {
 		AsgFileVo fvo = new AsgFileVo();
 		fvo.setfName(fileName1);
 		fvo.setfPath(fPath);
-		fvo.setbANo(bANo);
-		
-//		int result1 = new AsgListService().insertAsgComment(avo);
-//		int result2 = new AsgListService().insertAsgFile(fvo);
+		fvo.setbANo(bANo);		
 		
 		int result1 = new AsgListService().insertAsgComment(avo, fvo);
 		

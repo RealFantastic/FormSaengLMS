@@ -36,7 +36,7 @@ public class PfAsgCommentDownloadServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("utf-8");
 		
-		// 파일 저장 경로 (web 경로 밑에 해당 폴더를 생성해줘야함)
+		// 파일 저장 경로 (web 경로 밑에 해당 폴더가 있어야함)
 		String fileSavePath = "fUpload";
 		
 		String readFolder = request.getSession().getServletContext().getRealPath(fileSavePath);
