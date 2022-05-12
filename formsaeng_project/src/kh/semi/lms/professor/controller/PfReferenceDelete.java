@@ -48,9 +48,12 @@ public class PfReferenceDelete extends HttpServlet {
 		System.out.println("doPost/delete");
 		
 		String[] refdelno = request.getParameterValues("chk");
+		String subCode = request.getParameter("code");
+		System.out.println(subCode);
 		System.out.println(refdelno[0]);
 		
-		int result = new ReferenceService().multiDeleteBoard(refdelno);		
+		
+		int result = new ReferenceService().multiDeleteBoard(refdelno, subCode);
 		PrintWriter out = response.getWriter();
 		
 		if(result <= 0) {

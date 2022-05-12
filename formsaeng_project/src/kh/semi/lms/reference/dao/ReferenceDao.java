@@ -137,13 +137,14 @@ public class ReferenceDao {
 		return vo;
 
 	}
-	public int multeDelet(Connection conn, String[] refdelno) {
+	public int multeDelet(Connection conn, String[] refdelno, String subCode) {
 		int result = 0;
 		int cnt = 0;
 		String sql = "DELETE FROM REFERENCE WHERE REF_NO=?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, subCode);
 			
 			for(int i=0; i<refdelno.length; i++) {
 				pstmt.setString(1, refdelno[i]);

@@ -45,9 +45,9 @@ public class ReferenceService {
 		close(conn);
 		return vo;
 	}
-	public int multiDeleteBoard(String[] refdelno) {
+	public int multiDeleteBoard(String[] refdelno,String subCode) {
 	Connection conn = getConnection();
-	int result = new ReferenceDao().multeDelet(conn, refdelno);
+	int result = new ReferenceDao().multeDelet(conn, refdelno, subCode);
 	close(conn);
 	return result;
 }

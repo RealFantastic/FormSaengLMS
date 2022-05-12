@@ -1,4 +1,3 @@
-<%@page import="com.sun.tools.javac.util.Context"%>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/reset.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/template.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/pfRefBoard.css">
@@ -168,7 +167,7 @@
 					alert("삭제할 게시물을 선택하세요.");
 				} else {
 					$.ajax({
-						url : "<%=request.getContextPath()%>/refdelete.ajx",
+						url : "<%=request.getContextPath()%>/pf/refdelete.ajx",
 						type : "post",
 						data : queryStr,
 						dataType : "text",
