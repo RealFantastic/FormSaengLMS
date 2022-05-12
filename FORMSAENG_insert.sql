@@ -491,4 +491,8 @@ INSERT INTO REFERENCE VALUES ((SEQ_REFERENCE_NO.nextval), '강의자료', '하�
 
 --주석주석주석
 
+
+
+
+
 COMMIT;
