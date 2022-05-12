@@ -2,6 +2,7 @@ package kh.semi.lms.professor.controller;
 
 import java.io.IOException;
 
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -87,7 +88,7 @@ public class PfReferenceListServlet extends HttpServlet {
 			if(endRnum > totalCnt) {
 				endRnum = totalCnt;
 			}
-			ArrayList<ReferenceVo> volist = new ReferenceService().ReferenceBoardlist(startRnum, endRnum, subcode);
+			ArrayList<ReferenceVo> volist = new ReferenceService().referenceBoardlist(startRnum, endRnum, subcode);
 			System.out.println(volist);
 		
 			request.setAttribute("boardVolist", volist);

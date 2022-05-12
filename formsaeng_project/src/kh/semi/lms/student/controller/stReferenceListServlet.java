@@ -74,7 +74,7 @@ public class StReferenceListServlet extends HttpServlet {
 			if(endRnum > totalCnt) {
 				endRnum = totalCnt;
 			}
-			ArrayList<ReferenceVo> volist = new ReferenceService().ReferenceBoardlist(startRnum, endRnum, subcode);
+			ArrayList<ReferenceVo> volist = new ReferenceService().referenceBoardlist(startRnum, endRnum, subcode);
 			System.out.println(volist);
 		
 			request.setAttribute("boardVolist", volist);

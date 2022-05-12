@@ -16,7 +16,7 @@ public class StudyGroupService {
 		ArrayList<StudyGroupVo> result = null;
 		Connection conn = getConnection();
 		
-		result = new StudygroupDao().StudyGrouplist(conn, subcode);
+		result = new StudygroupDao().studyGrouplist(conn, subcode);
 		close(conn);
 		
 		return result;
