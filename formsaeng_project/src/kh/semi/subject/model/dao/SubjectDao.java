@@ -59,19 +59,6 @@ public class SubjectDao {
 	public int insertSubject(Connection conn, SubjectVo vo) {
 		int result = 0;
 		
-//		SUBJECT_CODE    NOT NULL VARCHAR2(30) 
-//		SUBJECT_NAME    NOT NULL VARCHAR2(30) 
-//		COURSE_GRADE    NOT NULL NUMBER(1)    
-//		COURSE_SEMESTER NOT NULL NUMBER(4)    
-//		COURSE_CREDIT   NOT NULL NUMBER(1)    
-//		COURSE_CLASS    NOT NULL VARCHAR2(90) 
-//		COURSE_CAPACITY NOT NULL NUMBER       
-//		OPEN_YN         NOT NULL VARCHAR2(3)  
-//		DEPT_CODE       NOT NULL VARCHAR2(20) 
-//		CLASS_TYPE               VARCHAR2(12) 
-//		COURSE_DAY               VARCHAR2(3)  
-//		COURSE_PERIOD            VARCHAR2(20) 
-//		PF_ID                    VARCHAR2(12)
 		String sql = "INSERT INTO subject VALUES (?,?,?,?,?,?,?,default,?,?,?,?,?)";
 		
 		System.out.println("dao에 넘어온 insert용 vo값 : " + vo);
