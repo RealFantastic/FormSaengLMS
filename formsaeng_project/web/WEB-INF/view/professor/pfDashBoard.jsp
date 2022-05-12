@@ -31,7 +31,7 @@
 			<div class="dashboard_box">
 				<c:forEach var="subject" items="${teachList }">
 						<div class="card subject_card" style="width: 16rem;">
-							<a href = "<%=request.getContextPath()%>#?subCode='${subject.subCode }'">
+							<a href = "<%=request.getContextPath()%>/pf/week?s=${subject.subCode }&n=${subject.subName}">
 								<p class="random_color"></p>
 								<div class="card-body">
 									<h5 class="card-title">${subject.subName }</h5><span class=font2>정원 : ${subject.courseCapacity }명</span>

@@ -178,19 +178,6 @@ function deptOption(){
 			var coursePeriod = new Array();
 			var pfName = $("#professor").val();
 			var professor = $("#professor").val();
-			console.log($("input[name='period']:checked")[0]);
-			console.log(deptCode);
-			console.log(subName);
-			console.log(subCode);
-			console.log(courseGrade);
-			console.log(courseSemester);
-			console.log(courseCredit);
-			console.log(courseClass);
-			console.log(courseCapacity);
-			console.log(classType);
-			console.log(courseDay);
-			console.log(coursePeriod);
-			console.log(pfName);
 			
 			console.log($("#frmAdd").serialize());
 			

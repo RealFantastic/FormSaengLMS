@@ -16,9 +16,9 @@ import static kh.semi.lms.common.jdbc.JdbcDbcp.*;
 public class AsgListService {
 	
 	//게시글 추가하기
-	public int insertBoard(AsgListVo vo) {
+	public int insertBoard(AsgListVo vo, String id) {
 		Connection conn = getConnection();
-		int result =  new AsgListDao().insertBoard(conn, vo);
+		int result =  new AsgListDao().insertBoard(conn, vo, id);
 		close(conn);
 		return result;
 	}

@@ -74,7 +74,9 @@
 									aria-labelledby="heading${vo.cName }"
 									data-bs-parent="#accordionExample">
 									<div class="accordion-body">
-										<a href="<%=request.getContextPath()%>/pf/week/video?lecNo=${vo.lecNo}&s=${subCode}&n=${subName}" style="text-decoration: none;"><strong>${vo.vTitle }</strong></a>
+										<a href="<%=request.getContextPath()%>/pf/week/video?lecNo=${vo.lecNo}&s=${subCode}&n=${subName}" 
+										style="text-decoration: none;">
+										<strong>${vo.vTitle }</strong></a>
 										<input type="hidden" id="video" value="" />
 									</div>
 								</div>

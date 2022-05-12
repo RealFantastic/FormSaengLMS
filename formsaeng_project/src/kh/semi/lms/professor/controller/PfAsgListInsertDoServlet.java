@@ -42,6 +42,7 @@ public class PfAsgListInsertDoServlet extends HttpServlet {
 		String title = request.getParameter("title");
 		MemberVo mvo = (MemberVo)request.getSession().getAttribute("ssMemberVo");
 		String writer = mvo.getName();
+		String id = mvo.getId();
 		String content = request.getParameter("content");
 		
 		AsgListVo vo = new AsgListVo(); 
@@ -49,7 +50,7 @@ public class PfAsgListInsertDoServlet extends HttpServlet {
 		vo.setbAWriter(writer);
 		vo.setbAContent(content);
 		
-		int result = new AsgListService().insertBoard(vo);
+		int result = new AsgListService().insertBoard(vo, id);
 		
 		System.out.println("result :"+result);
 		

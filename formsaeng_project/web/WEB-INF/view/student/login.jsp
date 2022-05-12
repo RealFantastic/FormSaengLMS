@@ -211,7 +211,6 @@ $(function(){
 	   			 		console.log("컨트롤러 갔다왔음.");
 	   			 		console.log(data);
 	   			 		if(data == 0){
-	   			 			alert("입력하신 계정은 없는 계정 / 잘못된 이름 입니다.");
 	   			 			$("#isRight").empty();
 	   			 			$("#isRight").css('color',"red");
 	   			 			$("#isRight").text("없는 계정입니다.");

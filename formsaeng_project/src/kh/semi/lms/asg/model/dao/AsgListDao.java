@@ -19,9 +19,8 @@ public class AsgListDao {
 	private ResultSet rs = null;
 	
 	//게시글 추가하기
-	public int insertBoard(Connection conn,AsgListVo vo) {
+	public int insertBoard(Connection conn,AsgListVo vo, String id) {
 		int result = 0;
-		String Id = "S1111"; //todo : 로그인 세션 정보 받아와야함
 
 		String sql = "insert into ASSIGNMENT_LIST values ((select nvl(max(BOARD_ASSIGNMENT_NO),0)+1 from ASSIGNMENT_LIST),?,?,default,?,?)";
 		try {
@@ -29,7 +28,7 @@ public class AsgListDao {
 			pstmt.setString(1, vo.getbATitle());
 			pstmt.setString(2, vo.getbAWriter());
 			pstmt.setString(3, vo.getbAContent());
-			pstmt.setString(4, Id);
+			pstmt.setString(4, id);
 			
 			
 			result = pstmt.executeUpdate();
@@ -154,7 +153,6 @@ public class AsgListDao {
 		
 			try {
 				pstmt = conn.prepareStatement(sql);
-//				pstmt.setString(1, param1);
 				
 				for(int i=0; i<delNo.length; i++) {
 					pstmt.setString(1, delNo[i]);

@@ -90,12 +90,6 @@ public class PfWeekListInsertDoServlet extends HttpServlet {
 			out.close();
 			return;
 		} 
-//		else {
-////			out.println("<br> 제목 :"+ request.getParameter("lectureName"));
-////			out.println("<br> 첨부파일명 :"+ request.getParameter(fileName1));
-////			out.println("<br> 업로드 성공!!");
-//			
-//		}
 		
 		String weekNo = multi.getParameter("week");
 		String subCode = multi.getParameter("subCode");
