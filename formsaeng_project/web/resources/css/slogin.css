@@ -57,3 +57,6 @@
     background-color: white;
     animation: fadein 3s;
 }
+#input_email{
+	display:none;
+}

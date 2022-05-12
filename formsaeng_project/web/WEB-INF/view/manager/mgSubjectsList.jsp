@@ -154,6 +154,12 @@
 			if($("#allCheck").prop("checked")){
 				$("#allCheck").prop("checked",false)
 			}
+			let checkedCnt = $(".checkRow:checked").length;
+			let checkBoxCnt = $(".checkRow").length;
+			
+			if(checkedCnt == checkBoxCnt){
+				$("#allCheck").prop("checked",true);
+			}
 		});
 		
 		//체크박스 값 넘기기
@@ -176,7 +182,7 @@
 						}else if(result != 0){
 							console.log(result);
 							alert(result + "개의 선택 과목을 삭제 완료했습니다.");
-							location.href = "mgSubjects";
+							location.reload();
 						}
 						
 					}

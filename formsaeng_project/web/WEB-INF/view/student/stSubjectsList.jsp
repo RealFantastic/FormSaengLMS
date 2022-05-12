@@ -157,7 +157,7 @@
 					<thead>
 						<tr>
 							<th scope="col"><input type="checkbox" name="allCheck"
-								class="allCheck"></th>
+								class="all_check"></th>
 							<th scope="col">학과명</th>
 							<th scope="col">과목명</th>
 							<th scope="col">학점</th>
@@ -172,7 +172,7 @@
 						<c:forEach var="applied" items="${aplist}">
 							<tr>
 								<th scope="row"><input type="checkbox" name="cancelList"
-									class="checkRow" value='${applied.subCode }'></th>
+									class="row_check" value='${applied.subCode }'></th>
 								<th scope="row">${applied.deptName }</th>
 								<th scope="row">${applied.subName }</th>
 								<td>${applied.courseCredit }</td>
@@ -197,7 +197,7 @@
 		$("#move_lms").click(function(){
 			location.href = '<%=request.getContextPath()%>/st/DashBoard';
 		});
-		//전체선택 전체선택 해제 설정
+		//전체선택 전체선택 해제 설정 - 교과목 조회 및 신청
 		$(".allCheck").click(function(){
 			if($(".allCheck").prop("checked")){
 				console.log("전체 누름");
@@ -212,12 +212,51 @@
 				$(".checkRow").prop("checked",false);
 			}
 		});
-		//하나라도 선택 해제시 전체선택 해제
+		//하나라도 선택 해제시 전체선택 해제 - 교과목 조회 및 신청
 		$(".checkRow").click(function(){
 			if($(".allCheck").prop("checked")){
 				$(".allCheck").prop("checked",false)
 			}
+			let checkedCnt = $(".checkRow:checked").length;
+			let checkBoxCnt = $(".checkRow").length;
+			
+			if(checkedCnt == checkBoxCnt){
+				$(".allCheck").prop("checked",true);
+			}
 		});
+		
+		
+		
+		//전체선택 전체선택 해제 설정 - 신청과목 조회
+		$(".all_check").click(function(){
+			if($(".all_check").prop("checked")){
+				console.log("전체 누름");
+				$(".row_check").prop("checked",true);
+				var checkedVal= new Array();
+				$("input[name='checkRow']:checked").each(function(){
+					checkedVal.push(this.value);
+				});
+				console.log(checkedVal);
+			}else{
+				console.log("전체 지움");
+				$(".row_check").prop("checked",false);
+			}
+		});
+		//하나라도 선택 해제시 전체선택 해제 - 신청과목 조회
+		$(".row_check").click(function(){
+			if($(".all_check").prop("checked")){
+				$(".all_check").prop("checked",false)
+			}
+			let checkedCnt = $(".row_check:checked").length;
+			let checkBoxCnt = $(".row_check").length;
+			
+			if(checkedCnt == checkBoxCnt){
+				$(".all_check").prop("checked",true);
+			}
+		});
+		
+		
+		
 		
 		//체크박스 값 넘기기
 		$("#applySubject").on("click",function(){

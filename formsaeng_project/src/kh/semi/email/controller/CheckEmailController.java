@@ -101,11 +101,6 @@ public class CheckEmailController extends HttpServlet {
 				out.print(1);  // 1: email 보내기 성공
 			} catch (MessagingException e) {
 				out.print(-1);  // -1: email 보내기 실패
-//				PrintWriter script = response.getWriter();
-//				script.println("<script>");
-//				script.println("alert('이메일 전송에 실패했습니다.')");
-//				script.println("history.back();");
-//				script.println("<script>");
 			}
 			out.flush();
 			out.close();

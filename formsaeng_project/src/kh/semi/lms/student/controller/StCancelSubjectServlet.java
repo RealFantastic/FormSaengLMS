@@ -38,7 +38,8 @@ public class StCancelSubjectServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		System.out.println("doPost : /st/cancelSubject.ajx");
 		MemberVo vo = (MemberVo)request.getSession().getAttribute("ssMemberVo");
 		System.out.println("취소 서블릿 / 로그인한 유저 : " + vo);
@@ -60,9 +61,6 @@ public class StCancelSubjectServlet extends HttpServlet {
 			out.close();
 			
 		}
-		
-		
-		
 	}
 
 }
