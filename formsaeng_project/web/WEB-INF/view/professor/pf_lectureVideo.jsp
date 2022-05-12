@@ -26,7 +26,7 @@
   <section id="template_content">
     <div class="template_container">
       <div class="template-title">
-        <h1>공지사항</h1>
+        <h1>동영상강의</h1>
         <hr>
       </div>
       <div class="content_container">
