@@ -24,16 +24,6 @@ public class ReferenceDao {
 		int result = 0;
 		String sql = "INSERT INTO REFERENCE(REF_NO, REF_TITLE, REF_CONTENT, REF_WRITER, REF_WRITE_DATE, SUBJECT_CODE)"
 				+ "VALUES(SEQ_REFERENCE_NO.nextval,?, ?, ?, default, ?)"; 
-//		Connection conn = JdbcDbcp.getConnection();
-//		try {
-//			stmt = conn.createStatement();
-//			result = stmt.executeUpdate(sql);
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}finally {
-//				close(rs);
-//				close(stmt);
-//			}
 		try {
 			pstmt=conn.prepareStatement(sql);
 			

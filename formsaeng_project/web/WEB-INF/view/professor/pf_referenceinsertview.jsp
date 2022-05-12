@@ -72,6 +72,9 @@
       			})
       		}
       	});
+      	$("#ref_list_btn").click(function() {
+      		history.back();
+		})
       </script>
   </section>
 </body>
